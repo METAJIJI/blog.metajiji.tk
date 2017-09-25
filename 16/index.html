@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>For system administrator</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://blog.metajiji.tk/favicon.png" rel="icon">
+
+<link rel="canonical" href="http://blog.metajiji.tk">
+        <meta name="author" content="Denis Kadyshev" />
+
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/bootstrap.custom.min.css" type="text/css"/>
+    <link href="http://blog.metajiji.tk/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://blog.metajiji.tk/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="http://blog.metajiji.tk/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/style.css" type="text/css"/>
+
+
+        <link href="http://blog.metajiji.tk/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator ATOM Feed"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://blog.metajiji.tk/" class="navbar-brand">
+For system administrator            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/">Blog</a></li>
+                         <li><a href="http://blog.metajiji.tk/about/">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="http://blog.metajiji.tk/archives/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <article>
+                <h2><a href="http://blog.metajiji.tk/blog/windows-skype-disable-ad/">Блокирование рекламы в Skype 6.11.66.102 bat,cmd файл.</a></h2>
+                <div class="summary"><p>Для блокировки назойливой рекламы, которая к тому же сделана на *<em>Flash</em>, что сильно мешает нормальной работе за комптютером, был написан простенький <code>bat</code> файл:</p>
+<div class="highlight"><pre><span></span><span class="p">@</span><span class="k">ECHO</span> OFF
+CHCP 866 <span class="p">&gt;</span>nul
+
+<span class="k">FOR</span> <span class="se">%%</span>a <span class="k">IN</span> <span class="p">(</span>rad.msn.com apps.skype.com<span class="p">)</span> <span class="k">DO</span> <span class="p">(</span>
+    <span class="k">TYPE</span> <span class="s2">&quot;</span><span class="nv">%SystemRoot%</span><span class="s2">\system32\drivers\etc\hosts&quot;</span> <span class="p">|</span> FIND /I <span class="s2">&quot;</span><span class="se">%%</span><span class="s2">a&quot;</span> <span class="p">|</span> FIND <span class="s2">&quot;127.0 …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://blog.metajiji.tk/blog/windows-skype-disable-ad/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="http://blog.metajiji.tk/blog/ubuntu-gnome-terminal-enable-system-beep/">Ubuntu Gnome-Terminal - включение beep enable system-beep, audible ping, bell, подавать гудок.</a></h2>
+                <div class="summary"><p>Первым делом необходимо установить утилиту <code>beep</code>:</p>
+<div class="highlight"><pre><span></span>sudo apt-get install beep
+</pre></div>
+
+
+<p>Затем нужно разрешить загрузку модуля <code>pcspkr</code>:</p>
+<div class="highlight"><pre><span></span>sudo sed -i<span class="s1">&#39;&#39;</span> -e <span class="s1">&#39;s/blacklist pcspkr/#blacklist pcspkr/&#39;</span> /etc/modprobe.d/blacklist.conf
+</pre></div>
+
+
+<p>Либо, если Beep поддерживает звуковая карта ноутбука, попробовать активировать эту функцию:</p>
+<div class="highlight"><pre><span></span>cat &gt;&gt;/etc/modprobe.d/alsa-base.conf<span class="s">&lt;&lt;-_EOF</span>
+
+<span class="s">#Enable Beep …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="http://blog.metajiji.tk/blog/ubuntu-gnome-terminal-enable-system-beep/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="http://blog.metajiji.tk/blog/linux-ubuntu-swap-to-file/">Linux Ubuntu создаем файл подкачки Swap</a></h2>
+                <div class="summary"><p>Обычно <strong>swap</strong> создают размером в 2 раза превышающим размер доступной оперативной памяти.</p>
+<p>Шаг первый: Создадим файл с помощью команды низкоуровневого копирования <code>dd</code> Файл забьём нулями из <code>/dev/zero</code> и разметим на <code>256</code> блоков по <code>1Мб</code> каждый:</p>
+<div class="highlight"><pre><span></span>sudo dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>/swap256.swap <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">count</span><span class="o">=</span><span class="m">256</span>
+</pre></div>
+
+
+<p>Шаг второй …</p>
+                    <a class="btn btn-default btn-xs" href="http://blog.metajiji.tk/blog/linux-ubuntu-swap-to-file/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="http://blog.metajiji.tk/blog/freebsd_asterisk-18-snmp-zabbix/">Asterisk 1.8 и статистика по SNMP в zabbix</a></h2>
+                <div class="summary"><p>Прежде чем начинать собирать статистику с <strong>Asterisk</strong> по протоколу <code>snmp</code>, нужно чтобы в нем был модуль <code>res_snmp.so</code>:</p>
+<div class="highlight"><pre><span></span>FreeBSD# asterisk -rvvvv
+...
+pbx*CLI&gt; module show like snmp
+Module           Description                    Use Count
+res_snmp.so      SNMP <span class="o">[</span>Sub<span class="o">]</span>Agent <span class="k">for</span> Asterisk   <span class="m">0</span>
+<span class="m">1</span> modules loaded
+</pre></div>
+
+
+<p>Как видим, все на месте. Для тех, у …</p>
+                    <a class="btn btn-default btn-xs" href="http://blog.metajiji.tk/blog/freebsd_asterisk-18-snmp-zabbix/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="http://blog.metajiji.tk/blog/freebsd-git-gitweb-nginx-fcgiwrap/">Установка git + gitweb + nginx + fcgiwrap на FreeBSD.</a></h2>
+                <div class="summary"><p>Понадобился репозиторий для хранения конфигов серверов и активного сетевого оборудования. Почитав про системы контроля версий и немного поразмыслив выбрал <code>git</code>.
+У меня уже имелся готовый веб хостинг на <strong>nginx</strong> под <strong>FreeBSD</strong> - решил использовать его.</p>
+<p>Итак смотрим что есть в составе порта <code>git</code>:</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> /usr/ports/devel/git/
+make config
+<span class="o">[</span>*<span class="o">]</span> CONTRIB …</pre></div>
+                    <a class="btn btn-default btn-xs" href="http://blog.metajiji.tk/blog/freebsd-git-gitweb-nginx-fcgiwrap/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+        <ul class="pagination">
+                <li class="prev"><a href="http://blog.metajiji.tk/15/">&laquo;</a>
+                </li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/">1</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/2/">2</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/3/">3</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/4/">4</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/5/">5</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/6/">6</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/7/">7</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/8/">8</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/9/">9</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/10/">10</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/11/">11</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/12/">12</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/13/">13</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/14/">14</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/15/">15</a></li>
+                    <li class="active"><a
+                            href="http://blog.metajiji.tk/16/">16</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/17/">17</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/18/">18</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/19/">19</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/20/">20</a></li>
+                    <li class=""><a
+                            href="http://blog.metajiji.tk/21/">21</a></li>
+                <li class="next"><a
+                        href="http://blog.metajiji.tk/17/">&raquo;</a></li>
+        </ul>
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/METAJIJI/"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://stackoverflow.com/users/2020443/metajiji"><i class="fa fa-stack-overflow fa-lg"></i> stackoverflow</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/fedora-chromium-firefox-flashplayer/">Fedora 25 install adobe flashplayer</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/atlassian/"><i class="fa fa-folder-open fa-lg"></i>Atlassian</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bash/"><i class="fa fa-folder-open fa-lg"></i>Bash</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bat-cmd/"><i class="fa fa-folder-open fa-lg"></i>Bat-cmd</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bind/"><i class="fa fa-folder-open fa-lg"></i>Bind</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/blog/"><i class="fa fa-folder-open fa-lg"></i>Blog</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/centos/"><i class="fa fa-folder-open fa-lg"></i>CentOS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/docker/"><i class="fa fa-folder-open fa-lg"></i>Docker</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/fedora/"><i class="fa fa-folder-open fa-lg"></i>Fedora</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/freebsd/"><i class="fa fa-folder-open fa-lg"></i>FreeBSD</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/gitlab/"><i class="fa fa-folder-open fa-lg"></i>Gitlab</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/hardware/"><i class="fa fa-folder-open fa-lg"></i>Hardware</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/javascript/"><i class="fa fa-folder-open fa-lg"></i>JavaScript</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/linux/"><i class="fa fa-folder-open fa-lg"></i>Linux</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/macosx/"><i class="fa fa-folder-open fa-lg"></i>MacOSX</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/mikrotik/"><i class="fa fa-folder-open fa-lg"></i>Mikrotik</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/postgresql/"><i class="fa fa-folder-open fa-lg"></i>PostgreSQL</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/ubuntu/"><i class="fa fa-folder-open fa-lg"></i>Ubuntu</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/vcs/"><i class="fa fa-folder-open fa-lg"></i>VCS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/windows/"><i class="fa fa-folder-open fa-lg"></i>Windows</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zabbix/"><i class="fa fa-folder-open fa-lg"></i>Zabbix</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zimbra/"><i class="fa fa-folder-open fa-lg"></i>Zimbra</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 Denis Kadyshev
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://blog.metajiji.tk/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://blog.metajiji.tk/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://blog.metajiji.tk/theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+    <!-- Google Analytics Universal -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106896103-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics Universal Code -->
+
+
+</body>
+</html>

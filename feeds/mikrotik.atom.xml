@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - Mikrotik</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/mikrotik.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2014-07-11T00:00:00+07:00</updated><entry><title>Mikrotik WPA2-EAP WDS MESH</title><link href="http://blog.metajiji.tk/blog/mikrotik-wpa2-eap-wds-mesh/" rel="alternate"></link><published>2014-07-11T00:00:00+07:00</published><updated>2014-07-11T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-07-11:/blog/mikrotik-wpa2-eap-wds-mesh/</id><summary type="html">&lt;p&gt;Постановка задачи, реализовать &lt;strong&gt;Wi-Fi&lt;/strong&gt; сеть &lt;strong&gt;WPA2-EAP&lt;/strong&gt; с авторизацией через &lt;strong&gt;LDAP&lt;/strong&gt; учетки или сертификаты с бесшовным роумингом,
+ используя &lt;strong&gt;WDS-MESH&lt;/strong&gt;.
+При этом трафик &lt;strong&gt;Wi-Fi&lt;/strong&gt; клиентов завернуть во &lt;code&gt;vlan&lt;/code&gt; (&lt;strong&gt;tagged&lt;/strong&gt;), а трафик самого роутера оставить без тега (&lt;strong&gt;untagged&lt;/strong&gt;).&lt;/p&gt;
+&lt;h1&gt;Подготовка&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Сброс кнопкой &lt;code&gt;Reset&lt;/code&gt; на корпусе.&lt;/li&gt;
+&lt;li&gt;Подключаемся через &lt;code&gt;Windox&lt;/code&gt; по кабелю 2-5 порты или &lt;strong&gt;Wifi …&lt;/strong&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;Постановка задачи, реализовать &lt;strong&gt;Wi-Fi&lt;/strong&gt; сеть &lt;strong&gt;WPA2-EAP&lt;/strong&gt; с авторизацией через &lt;strong&gt;LDAP&lt;/strong&gt; учетки или сертификаты с бесшовным роумингом,
+ используя &lt;strong&gt;WDS-MESH&lt;/strong&gt;.
+При этом трафик &lt;strong&gt;Wi-Fi&lt;/strong&gt; клиентов завернуть во &lt;code&gt;vlan&lt;/code&gt; (&lt;strong&gt;tagged&lt;/strong&gt;), а трафик самого роутера оставить без тега (&lt;strong&gt;untagged&lt;/strong&gt;).&lt;/p&gt;
+&lt;h1&gt;Подготовка&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Сброс кнопкой &lt;code&gt;Reset&lt;/code&gt; на корпусе.&lt;/li&gt;
+&lt;li&gt;Подключаемся через &lt;code&gt;Windox&lt;/code&gt; по кабелю 2-5 порты или &lt;strong&gt;Wifi&lt;/strong&gt;, в открывшемся диалоговом окне сброс пока не нажимаем!&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Прописываем статический &lt;code&gt;ip&lt;/code&gt; на &lt;code&gt;ether1&lt;/code&gt;, основной шлюз, &lt;strong&gt;DNS сервер&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/ip address add address=10.10.0.101/24 interface=ether1 network=10.10.0.0
+/ip dns set servers=10.10.10.254
+/ip route add distance=1 gateway=10.10.0.1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Жмем сброс настроек в диалоговом окне (та самая кнопка, которую не нажимали в начале).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Роутер произведет сброс заводских настроек, но оставит пользовательские.&lt;/li&gt;
+&lt;li&gt;Если роутер, спустя минуту не ушол в ребут - делаем вручную.&lt;/li&gt;
+&lt;li&gt;Подключаемся по статическому &lt;code&gt;ip&lt;/code&gt; и делаем остальные настройки, &lt;code&gt;Identity&lt;/code&gt; (я выбрал простой нейминг точек &lt;code&gt;ap1&lt;/code&gt;, &lt;code&gt;ap2&lt;/code&gt;...), &lt;code&gt;clock&lt;/code&gt;, &lt;code&gt;SNTP&lt;/code&gt;,
+ отключаем ненужные сервисы (&lt;code&gt;telnet&lt;/code&gt;, &lt;code&gt;api&lt;/code&gt;) и т.д...&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/system ntp client set enabled=yes primary-ntp=10.10.10.254
+/system clock set time-zone-name=Asia/Novosibirsk
+/system identity set name=ap1
+/ip service set telnet disabled=yes
+/ip service set ftp disabled=yes
+/ip service set api disabled=yes
+/ip service set api-ssl disabled=yes
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Добавляем интерфейс &lt;code&gt;vlan5&lt;/code&gt; от &lt;code&gt;ether1&lt;/code&gt;.&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/interface vlan add interface=ether1 l2mtu=1594 name=vlan5 vlan-id=5
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Создаем &lt;strong&gt;Bridge&lt;/strong&gt; интерфейс&lt;/h1&gt;
+&lt;p&gt;Называем его например &lt;code&gt;br-vlan5&lt;/code&gt;, добавляем в него порты &lt;code&gt;wlan1&lt;/code&gt;, &lt;code&gt;vlan5&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/interface bridge add name=br-vlan5
+/interface bridge port add bridge=br-vlan5 interface=wlan1
+/interface bridge port add bridge=br-vlan5 interface=vlan5
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Создаем &lt;strong&gt;Mesh&lt;/strong&gt; интерфейс&lt;/h1&gt;
+&lt;p&gt;Называем его например &lt;code&gt;Mesh-Interface&lt;/code&gt;, добавляем в него порт &lt;code&gt;br-vlan5&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/interface mesh add hwmp-rann-propagation-delay=5 name=Mesh-Interface
+/interface mesh port add interface=br-vlan5 mesh=Mesh-Interfacee
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Создаем &lt;strong&gt;Security Profle&lt;/strong&gt;:&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/interface wireless security-profiles add authentication-types=wpa2-eap management-protection=allowed mode=dynamic-keys name=WPA2-EAP-MESH
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Name: &lt;code&gt;WPA2-EAP-MESH&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Mode: &lt;code&gt;dynamic keys&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Authentication Types: [v] &lt;code&gt;WPA2 EAP&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Unicast &amp;amp; Group Ciphers: &lt;code&gt;aes ccm&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Supplicant Identity: &lt;code&gt;ap1&lt;/code&gt; (для каждой точки свой, на всякий случай, если вдруг точка начнет авторизовываться в RADIUS, будет легче найти проблемную).&lt;/li&gt;
+&lt;li&gt;Management Protection: &lt;code&gt;Disabled&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;EAP Methods: &lt;code&gt;passthrough&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;TLS Mode: &lt;code&gt;no certificates&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;TLS Certificate: &lt;code&gt;none&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Настраиваем &lt;code&gt;wlan1&lt;/code&gt; интерфейс:&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/interface wireless set [ find default-name=wlan1 ] band=2ghz-b/g/n disabled=no l2mtu=2290 mode=ap-bridge radio-name=AP1 security-profile=WPA2-EAP-MESH ssid=YOUR_SSID wds-default-bridge=Mesh-Interface wds-mode=dynamic-mesh wireless-protocol=802.11
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Выбираем канал&lt;/h1&gt;
+&lt;p&gt;Частоту &lt;s&gt;канал&lt;/s&gt;, я выбрал &lt;code&gt;2412&lt;/code&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;ВАЖНО&lt;/strong&gt;, для работы WDS необходимо, чтобы канал на ВСЕХ роутерах был один.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Mode: ap bridge&lt;/li&gt;
+&lt;li&gt;Band: 2GHz-B/G/N&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Настройка &lt;strong&gt;SSID&lt;/strong&gt; сети&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Wireless Protocol: &lt;code&gt;802.11&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Security Profile: &lt;code&gt;WPA2-EAP-MESH&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Bridge Mode: &lt;code&gt;Enabled&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;WDS Mode: &lt;code&gt;Dynamic-Mesh&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;WDS Default Bridge: &lt;code&gt;Mesh-Interface&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Настройка &lt;strong&gt;WDS&lt;/strong&gt;:&lt;/h1&gt;
+&lt;p&gt;Создаем &lt;strong&gt;Security-Profile&lt;/strong&gt;, чтобы роутеры могли авторизовывать друг друга:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/interface wireless security-profiles add authentication-types=wpa2-psk eap-methods=&amp;quot;&amp;quot; mode=dynamic-keys name=4WDS supplicant-identity=&amp;quot;&amp;quot; wpa2-pre-shared-key=wpa2password4wds
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Name: &lt;code&gt;4WDS&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Mode: &lt;code&gt;dynamic keys&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Authentication Types: [v] &lt;code&gt;WPA2 PSK&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Unicast &amp;amp; Group Ciphers: &lt;code&gt;aes ccm&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;WPA2 Pre-Shared Key: &lt;code&gt;ОдинаковыйПарольНаВсехРоутерах&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Management Protection: &lt;code&gt;Disabled&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Создаем &lt;strong&gt;Connect-List&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;Добавляем в него &lt;strong&gt;MAC&lt;/strong&gt;-адреса каждого роутера.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/interface wireless connect-list add interface=wlan1 security-profile=4WDS wireless-protocol=802.11 mac-address=4C:5E:0C:XX:XX:01 comment=ap2
+/interface wireless connect-list add interface=wlan1 security-profile=4WDS wireless-protocol=802.11 mac-address=4C:5E:0C:XX:XX:10 comment=ap3
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Interface: &lt;code&gt;Wlan1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Mac Address: &lt;code&gt;XX:XX:XX:XX:XX:XX&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;[V] Connect&lt;/li&gt;
+&lt;li&gt;Wireless Protocol: &lt;code&gt;802.11&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Security Profile: &lt;code&gt;4WDS&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Добавляем информацию о RADIUS сервере:&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/radius add address=10.10.10.254 secret=supersecretpwd service=wireless
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Service: [v] &lt;code&gt;wireless&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Address: &lt;code&gt;10.10.10.254&lt;/code&gt; (у меня RADIUS на этом сервере).&lt;/li&gt;
+&lt;li&gt;Secret: &lt;code&gt;*****&lt;/code&gt; (Пароль от радиус сервера).&lt;/li&gt;
+&lt;li&gt;Authentication Port: &lt;code&gt;1812&lt;/code&gt; (стандартный)&lt;/li&gt;
+&lt;li&gt;Accounting Port: &lt;code&gt;1813&lt;/code&gt; (стандартный)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Настройка RADIUS сервера:&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Продолжение следует...&lt;/p&gt;
+&lt;p&gt;Технология надежд не оправдала, возможно я неправильно что-то сделал, спустя какое-то время вернули обратно в обычный режим WPA2-EAP с разными частотами &lt;s&gt;каналами&lt;/s&gt;
+и заниженой мощьностью передатчика (исходили из расчета ~10-20 активных клиентов на 1 точку доступа).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://wiki.mikrotik.com/wiki/Manual:Interface/Wireless#RADIUS_EAP_pass-through_authentication"&gt;Manual:Interface/Wireless&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://wiki.mikrotik.com/wiki/Wireless_WDS_Mesh"&gt;Wireless WDS Mesh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://habrahabr.ru/post/217657/"&gt;Контроллер Wi-Fi точек доступа на Mikrotik&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Mikrotik"></category><category term="WDS"></category><category term="MESH"></category><category term="WPA2-EAP"></category></entry></feed>

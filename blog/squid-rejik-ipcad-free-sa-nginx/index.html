@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Контент фильтр и статистика посещенных сайтов Squid + rejik + ipcad + Free-SA + nginx - For system administrator</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://blog.metajiji.tk/favicon.png" rel="icon">
+
+<link rel="canonical" href="http://blog.metajiji.tk/blog/squid-rejik-ipcad-free-sa-nginx/">
+
+        <meta name="author" content="Denis Kadyshev" />
+        <meta name="keywords" content="FreeBSD,rejik,squid,ipcad,Free-SA,nginx,content filter" />
+        <meta name="description" content="Для организации логирования, статистики посещенных сайтов и других сетевых соединений я воспользовался связкой Squid + Free-SA + ipcad Squid - Прокси сервер, который работает у меня в прозрачном (transparent или intercept) режиме - пользователям ничего настраивать не придется. Более подробно о нем писать не вижу смысла. Free-SA - Анализатор логов Squid написан на языке Си …" />
+
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/bootstrap.custom.min.css" type="text/css"/>
+    <link href="http://blog.metajiji.tk/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://blog.metajiji.tk/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="http://blog.metajiji.tk/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/style.css" type="text/css"/>
+
+
+        <link href="http://blog.metajiji.tk/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator ATOM Feed"/>
+
+
+
+        <link href="http://blog.metajiji.tk/feeds/freebsd.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator FreeBSD ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://blog.metajiji.tk/" class="navbar-brand">
+For system administrator            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/">Blog</a></li>
+                         <li><a href="http://blog.metajiji.tk/about/">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="http://blog.metajiji.tk/archives/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="http://blog.metajiji.tk" title="For system administrator"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="http://blog.metajiji.tk/category/freebsd/" title="FreeBSD">FreeBSD</a></li>
+                <li class="active">Контент фильтр и статистика посещенных сайтов Squid + rejik + ipcad + Free-SA + nginx</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://blog.metajiji.tk/blog/squid-rejik-ipcad-free-sa-nginx/"
+                       rel="bookmark"
+                       title="Permalink to Контент фильтр и статистика посещенных сайтов Squid + rejik + ipcad + Free-SA + nginx">
+                        Контент фильтр и статистика посещенных сайтов Squid + rejik + ipcad + Free-SA + nginx
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2013-03-21T00:00:00+07:00"> Чт. 21 Март 2013</time>
+    </span>
+          <span class="label label-default">Modified</span>
+            <span class="modified">
+                <i class="fa fa-calendar"></i><time datetime="2013-03-21T00:00:00+07:00"> Чт. 21 Март 2013</time>
+            </span>
+
+
+            <span class="label label-default">By</span>
+            <a href="http://blog.metajiji.tk/author/denis-kadyshev.html"><i class="fa fa-user"></i> Denis Kadyshev</a>
+
+        <span class="label label-default">Category</span>
+        <a href="http://blog.metajiji.tk/category/freebsd/">FreeBSD</a>
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://blog.metajiji.tk/tag/freebsd/">FreeBSD</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/rejik/">rejik</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/squid/">squid</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/ipcad/">ipcad</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/free-sa/">Free-SA</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/nginx/">nginx</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/content-filter/">content filter</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Для организации логирования, статистики посещенных сайтов и других сетевых соединений я воспользовался связкой <strong>Squid</strong> + <strong>Free-SA</strong> + <strong>ipcad</strong></p>
+<ul>
+<li><strong>Squid</strong> - Прокси сервер, который работает у меня в прозрачном (<strong>transparent</strong> или <strong>intercept</strong>) режиме - пользователям ничего настраивать не придется.
+ Более подробно о нем писать не вижу смысла.</li>
+<li><strong>Free-SA</strong> - Анализатор логов <strong>Squid</strong> написан на языке Си, по функциональности и назначению похож на <strong>LightSquid</strong>.
+ Главное отличие - скорость формирования отчетов от 7 до 20 раз выше по сравнению с <strong>LightSquid</strong> (7х - для 50 Мб файла <code>access.log</code>, 20x - для 1 Гб).
+ Присутствуют дополнительные отчеты (в том числе для оценки эффективности сервера), изменяемые "на лету" темы оформления,
+ имеется поддержка различных форматов файлов журналов (<strong>Squid</strong>, <strong>CLF</strong>, <strong>Postfix</strong>, <strong>Qmail</strong>, <strong>CGP</strong>).
+ Имеет мало зависимостей в отличие от того же <strong>LightSquid</strong> и малые требования к веб серверу! В настройках можно много чего интересного покрутить, об этом ниже.
+ Еще хотелось бы отметить полезного из функционала - опционально можно включить в отчеты полные URL - для подробной отчетности, либо наоборот отключить (будет быстрее формироваться статистика).</li>
+<li><strong>Rejik</strong> - <code>redirector</code> для <strong>Squid</strong>, выполняющий функции контент фильтра. Поддерживает регулярные выражения, и просто списки сайтов.
+ Можно добавлять исключения, применять правила по времени или ip адресам. Из плюсов - высокая скорость работы.
+ Из минусов, чтобы скачать базы, нужно либо поработать - проверить несколько сотен сайтов на принадлежность, либо просто купить списки "плохих" сайтов.</li>
+<li><strong>ipcad</strong> - Коллектора для сбора трафика, идущего в обход прокси-сервера. Остается только взять извлечь из него статистику и записать в лог <strong>Squid</strong>. Скрипт для этого есть ниже.</li>
+<li><strong>nginx</strong> - Легковесный и производительный веб-сервер. Для запуска <strong>CGI</strong> скриптов/программ лучше всего использовать <code>fcgiwrap</code>, о настройке ниже. Более подробно расписывать не вижу смысла.</li>
+</ul>
+<p>Весь выбранный софт бесплатный и имеется в портах <strong>FreeBSD</strong> и под <strong>Linux</strong>, думаю тоже все эти пакеты есть.</p>
+<p>Итак по порядку, первым делом обновляем порты и устанавливаем весь перечисленный софт:</p>
+<div class="highlight"><pre><span></span>FreeBSD# <span class="nb">cd</span> /usr/ports
+FreeBSD# portsnap fetch update
+FreeBSD# <span class="nb">cd</span> /usr/ports/www/squid
+FreeBSD# make config <span class="o">&amp;&amp;</span> make config-recursive
+<span class="o">[</span>x<span class="o">]</span> SQUID_IDENT
+<span class="o">[</span>x<span class="o">]</span> SQUID_KQUEUE
+<span class="o">[</span>x<span class="o">]</span> SQUID_LARGEFILE
+FreeBSD# make install clean
+FreeBSD# <span class="nb">cd</span> /usr/ports/www/free-sa
+FreeBSD# make install clean
+FreeBSD# <span class="nb">cd</span> /usr/ports/www/rejik
+FreeBSD# make config <span class="p">&amp;</span>amp<span class="p">;&amp;</span>amp<span class="p">;</span> make config-recursive
+<span class="o">[</span>x<span class="o">]</span> BAN
+<span class="o">[</span>x<span class="o">]</span> DBL
+<span class="o">[</span>x<span class="o">]</span> WWW
+FreeBSD# make install clean
+FreeBSD# <span class="nb">cd</span> /usr/ports/www/nginx
+FreeBSD# make config <span class="p">&amp;</span>amp<span class="p">;&amp;</span>amp<span class="p">;</span> make config-recursive
+<span class="o">[</span>x<span class="o">]</span> HTTP
+<span class="o">[</span>x<span class="o">]</span> HTTP_CACHE
+<span class="o">[</span>x<span class="o">]</span> HTTP_REWRITE
+<span class="o">[</span>x<span class="o">]</span> HTTP_STATUS
+<span class="o">[</span>x<span class="o">]</span> WWW
+FreeBSD# make install clean
+FreeBSD# <span class="nb">cd</span> /usr/ports/www/fcgiwrap
+FreeBSD# make install clean
+FreeBSD# <span class="nb">cd</span> /usr/ports/net-mgmt/ipcad
+FreeBSD# make install clean
+</pre></div>
+
+
+<p>Когда все успешно установится переходим к настройкам:
+Листинг <code>free-sa.conf</code>:</p>
+<div class="highlight"><pre><span></span><span class="c1">#</span>
+<span class="c1"># Sample configuration file for free-sa(1)</span>
+<span class="c1">#</span>
+<span class="c1"># copy to /usr/local/etc/free-sa/free-sa.conf</span>
+<span class="c1">#</span>
+
+
+<span class="c1">#########</span>
+<span class="c1"># FILES #</span>
+<span class="c1">#########</span>
+<span class="nv">log</span><span class="o">=</span><span class="s2">&quot;/var/log/squid/access.log&quot;</span>
+<span class="c1">#usertab=&quot;/usr/local/etc/free-sa/users&quot;</span>
+<span class="nv">downloads</span><span class="o">=</span><span class="s2">&quot;/usr/local/etc/free-sa/downloads.sample&quot;</span>
+<span class="c1">#local_filter=&quot;&quot;</span>
+<span class="c1">#global_filter=&quot;&quot;</span>
+
+
+<span class="c1">###############</span>
+<span class="c1"># DIRECTORIES #</span>
+<span class="c1">###############</span>
+<span class="nv">targetdir</span><span class="o">=</span><span class="s2">&quot;/usr/local/www/data/free-sa&quot;</span>
+<span class="nv">tmpdir</span><span class="o">=</span><span class="s2">&quot;/var/cache/free-sa&quot;</span>
+
+
+<span class="c1">#####################</span>
+<span class="c1"># REPORTS SELECTION #</span>
+<span class="c1">#####################</span>
+<span class="nv">ts</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="nv">paf</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="nv">saf</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="nv">pdn</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="nv">sdn</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="nv">cct</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="nv">pst</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="nv">dld</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="nv">fullurl</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="nv">users</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="c1">#email=&quot;&quot;</span>
+
+
+<span class="c1">##################</span>
+<span class="c1"># REPORTS LIMITS #</span>
+<span class="c1">##################</span>
+<span class="c1">#paf_limit=&quot;50&quot;</span>
+<span class="c1">#saf_limit=&quot;50&quot;</span>
+<span class="c1">#pdn_limit=&quot;50&quot;</span>
+<span class="c1">#sdn_limit=&quot;50&quot;</span>
+<span class="c1">#cct_limit=&quot;50&quot;</span>
+<span class="c1">#pst_limit=&quot;50&quot;</span>
+<span class="c1">#dld_limit=&quot;50&quot;</span>
+<span class="c1">#lcf_limit=&quot;50&quot;</span>
+<span class="c1">#url_limit=&quot;50&quot;</span>
+<span class="c1">#ts_limit=&quot;0&quot;</span>
+<span class="c1">#dld_min=&quot;0&quot;</span>
+<span class="c1">#rtr_timeout=&quot;5000&quot;</span>
+
+
+<span class="c1">####################</span>
+<span class="c1"># OTHER PARAMETERS #</span>
+<span class="c1">####################</span>
+<span class="nv">name</span><span class="o">=</span><span class="s2">&quot;free-sa.conf&quot;</span>
+<span class="nv">logformat</span><span class="o">=</span><span class="s2">&quot;0&quot;</span>
+<span class="c1">#skip_errors=&quot;false&quot;</span>
+<span class="nv">fulltraffic</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="nv">inameuser</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="c1">#user_unescape=&quot;false&quot;</span>
+<span class="nv">indicators</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="nv">overwrite</span><span class="o">=</span><span class="s2">&quot;2&quot;</span>
+<span class="nv">resolveip</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="nv">showinfo</span><span class="o">=</span><span class="s2">&quot;true&quot;</span>
+<span class="c1">#site=&quot;&quot;</span>
+<span class="c1">#logo=&quot;&quot;</span>
+<span class="nv">locale</span><span class="o">=</span><span class="s2">&quot;ru_RU.KOI8-R&quot;</span>
+<span class="c1">#rotate=&quot;&quot;</span>
+<span class="nv">divisor</span><span class="o">=</span><span class="s2">&quot;b&quot;</span>
+<span class="c1">#tz_shift=&quot;0&quot;</span>
+</pre></div>
+
+
+<p>Создаем каталог для скриптов:</p>
+<div class="highlight"><pre><span></span>mkdir /usr/local/etc/squid/scripts
+</pre></div>
+
+
+<p>И создаем в этой папке скрипты:</p>
+<p>Листинг <code>ipcadstat.sh</code>:</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="c1"># Диапазон адресов локальной cети, указываем подсеть.</span>
+<span class="nv">net</span><span class="o">=</span><span class="s2">&quot;192\.168\.[0-9]?[0-9]?[0-9]\.[0-9]?[0-9]?[0-9]</span>$<span class="s2">&quot;</span> <span class="c1"># 192.168.0.0/16</span>
+<span class="c1">#net=&quot;192\.168\.0\.[0-9]?[0-9]?[0-9]$&quot; # 192.168.0.0/24</span>
+
+<span class="c1"># Каталог с логами squid&#39;а</span>
+<span class="nv">squid_DIR</span><span class="o">=</span><span class="s1">&#39;/var/log/squid/&#39;</span>
+
+<span class="nv">ttime</span><span class="o">=</span><span class="sb">`</span>rsh localhost sh ip acco <span class="p">|</span> grep <span class="s1">&#39;Accounting data saved&#39;</span> <span class="p">|</span> awk <span class="s1">&#39;{print ($4)}&#39;</span><span class="sb">`</span>
+rsh localhost clear ip accounting &gt; /dev/null
+rsh localhost show ip accounting checkpoint <span class="p">|</span> awk -v <span class="nv">vtime</span><span class="o">=</span><span class="nv">$ttime</span> <span class="s1">&#39;{</span>
+<span class="s1"> if ( $2 ~ /^&#39;</span><span class="nv">$net</span><span class="s1">&#39;/ )</span>
+<span class="s1">     print (vtime&quot;.000&quot;,1,$2,&quot;TCP_MISS/200&quot;,$4,&quot;CONNECT&quot;,$1&quot;:&quot;$5,&quot;-&quot;,&quot;DIRECT/&quot;$1,&quot;-&quot;)</span>
+<span class="s1"> }&#39;</span> &gt;&gt; <span class="s2">&quot;</span><span class="nv">$squid_DIR</span><span class="s2">/access.log&quot;</span>
+
+<span class="c1">#TODO - если ошибок не было, то продолжаем.</span>
+/usr/local/bin/free-sa
+</pre></div>
+
+
+<p>Листинг <code>rotate_log.sh</code>:</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="c1"># Ротация логов Squid</span>
+/usr/local/sbin/squid -k rotate
+<span class="k">for</span> i in <span class="k">$(</span>ls <span class="nv">$squid_DIR</span> <span class="p">|</span> grep -i <span class="s1">&#39;\.log\.[4-9]&#39;</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+    rm -f <span class="nv">$squid_DIR</span>/<span class="nv">$i</span>
+<span class="k">done</span>
+</pre></div>
+
+
+<p>Добавляем эти скрипты в планировщик заданий <code>/etc/crontab</code>:</p>
+<div class="highlight"><pre><span></span><span class="c1"># rotate squid logs</span>
+<span class="m">0</span>    <span class="m">0</span>  */1  *  *  root  /usr/local/etc/squid/scripts/rotate_log.sh &gt;&gt;/var/log/squid/rotate_log.log <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+
+<span class="c1"># Наполнение лога squid данными из ipcad.</span>
+*/5  *  *    *  *  root  /usr/local/etc/squid/scripts/ipcadstat.sh &gt;&gt;/var/log/squid/ipcadstat.log <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</pre></div>
+
+
+<p>Привожу только те строки, которые изменил в дефолтном конфиге <strong>Squid</strong> - <code>/usr/local/etc/squid/squid.conf</code>:</p>
+<div class="highlight"><pre><span></span>http_port <span class="m">3129</span> transparent
+cache_mem <span class="m">500</span> MB
+maximum_object_size_in_memory <span class="m">64</span> KB
+cache_dir ufs /var/squid/cache <span class="m">20480</span> <span class="m">16</span> <span class="m">256</span>
+maximum_object_size <span class="m">100</span> MB
+access_log /var/log/squid/access.log squid
+cache_log /var/log/squid/cache.log
+logfile_rotate <span class="m">100</span>
+strip_query_terms off
+url_rewrite_program /usr/local/rejik/redirector /usr/local/rejik/redirector.conf
+url_rewrite_children <span class="m">10</span>
+header_access Via deny all
+cache_mgr Тут@Мое.мыло
+visible_hostname имя.сервера.сквида
+error_directory /usr/local/etc/squid/errors/Russian-1251
+dns_nameservers Тут.ip.вашего.DNS.сервера
+append_domain .local
+forwarded_for off
+</pre></div>
+
+
+<p>Страницу блокировки я предпочитаю отдавать самим <strong>Squid</strong>, как это описано в <strong>FAQ</strong> по <strong>rejik</strong>'у - <a href="http://rejik.ru/index_ru_6_0.html">А нельзя ли обойтись без установки локального web сервера?</a></p>
+<p>Добавляем строки в <code>/usr/local/etc/squid/mime.conf</code>:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Для rejik</span>
+dfgxfdgdfg-squid-porno dfgxfdgdfg-squid-deny/dfgxfdgdfg-squid-porno-html rejik/porno.html - ascii
+dfgxfdgdfg-squid-deny dfgxfdgdfg-squid-deny/dfgxfdgdfg-squid-deny-html rejik/deny.html  - ascii
+dfgxfdgdfg-squid-banner dfgxfdgdfg-squid-banner/dfgxfdgdfg-squid-banner-1px rejik/1x1.gif  - image
+dfgxfdgdfg-squid-js dfgxfdgdfg-squid-js/dfgxfdgdfg-squid-js-js  rejik/js.js  - ascii
+</pre></div>
+
+
+<blockquote>
+<p>Файл <code>1x1.gif</code> - это пустая <strong>gif</strong> картинка размером <strong>1x1</strong> пиксель.
+Файл <code>js.js</code> - это пустой текстовый файл.
+Файлы <code>porno.html</code>, <code>deny.html</code> - произвольный <strong>html</strong> документ, который будут видеть те, кто откроет запрещенный сайт.</p>
+</blockquote>
+<p>Например у меня <code>deny.html</code> выглядит так:</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">xmlns</span><span class="o">=</span><span class="s">&quot;http://www.w3.org/1999/xhtml&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;text/html; charset=UTF-8&quot;</span> <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Доступ ограничен<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">style</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text/css&quot;</span><span class="p">&gt;</span>
+            <span class="o">&lt;!</span><span class="nt">--</span>
+            <span class="nt">body</span><span class="o">,</span><span class="nt">td</span><span class="o">,</span><span class="nt">th</span> <span class="p">{</span>
+                <span class="k">font-family</span><span class="p">:</span> <span class="n">Verdana</span><span class="p">,</span> <span class="n">Arial</span><span class="p">,</span> <span class="n">Helvetica</span><span class="p">,</span> <span class="kc">sans-serif</span><span class="p">;</span>
+                <span class="k">font-size</span><span class="p">:</span> <span class="mi">14</span><span class="kt">px</span><span class="p">;</span>
+                <span class="k">color</span><span class="p">:</span> <span class="mh">#FFFFFF</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="nt">body</span> <span class="p">{</span>
+                <span class="k">background-color</span><span class="p">:</span> <span class="mh">#000000</span><span class="p">;</span>
+                <span class="k">margin-top</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>
+                <span class="k">margin-left</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>
+                <span class="k">margin-right</span><span class="p">:</span> <span class="mi">100</span><span class="kt">px</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="p">.</span><span class="nc">style1</span> <span class="p">{</span>
+                <span class="k">color</span><span class="p">:</span> <span class="mh">#FF0000</span><span class="p">;</span>
+                <span class="k">font-size</span><span class="p">:</span> <span class="mi">16</span><span class="kt">px</span><span class="p">;</span>
+                <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="p">.</span><span class="nc">style2</span> <span class="p">{</span><span class="k">font-size</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">}</span>
+            <span class="nt">--</span><span class="o">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">align</span><span class="o">=</span><span class="s">&quot;center&quot;</span><span class="p">&gt;</span>
+            <span class="ni">&amp;nbsp;</span> <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;style1&quot;</span><span class="p">&gt;</span>Содержимое данного сайта заблокировано!<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+            <span class="ni">&amp;nbsp;</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Система контентной фильтрации определила,<span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+            <span class="ni">&amp;nbsp;</span> что материалы запрашиваемого вами ресурса<span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+            <span class="ni">&amp;nbsp;</span> могут противоречить целям и задачам <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+            <span class="ni">&amp;nbsp;</span> образовательного процесса.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+            <span class="ni">&amp;nbsp;</span> <span class="p">&lt;</span><span class="nt">hr</span> <span class="na">width</span><span class="o">=</span><span class="s">&quot;400&quot;</span> <span class="na">size</span><span class="o">=</span><span class="s">&quot;3&quot;</span> <span class="p">/&gt;</span>
+            <span class="ni">&amp;nbsp;</span> <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;style2&quot;</span><span class="p">&gt;</span>Если вы уверены, что сайт не содержит недопустимой информации,<span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+            <span class="ni">&amp;nbsp;</span> обратитесь к системному администратору. После проверки адрес<span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+            <span class="ni">&amp;nbsp;</span> будет добавлен в список разрешенных ресурсов.<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>Листинг <code>/usr/local/rejik/redirector.conf</code>:</p>
+<div class="highlight"><pre><span></span><span class="k">error_log</span> <span class="s">/usr/local/rejik/redirector.err</span>
+<span class="s">change_log</span> <span class="s">/usr/local/rejik/redirector.log</span>
+<span class="s">make-cache</span> <span class="s">/usr/local/rejik/make-cache</span>
+<span class="s">allow_urls</span> <span class="s">/usr/local/rejik/banlists/allow_urls</span>
+
+<span class="c1"># Список ip - исключений. (для кого НЕ будут применяться правила фильтрации)</span>
+<span class="s">allow_ip</span> <span class="s">f:/usr/local/rejik/ip/allow</span>
+
+
+<span class="c1">#&lt;audio-video&gt;</span>
+<span class="c1">#ban_dir  /usr/local/rejik/banlists/audio-video</span>
+<span class="c1">#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="c1">#log off</span>
+
+<span class="c1">#&lt;avto-moto&gt;</span>
+<span class="c1">#ban_dir  /usr/local/rejik/banlists/avto-moto</span>
+<span class="c1">#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="c1">#log off</span>
+
+<span class="s">&lt;banner&gt;</span>
+<span class="s">ban_dir</span> <span class="s">/usr/local/rejik/banlists/banners</span>
+<span class="c1">#файлы смотри в каталоге /usr/local/etc/squid/icons/rejik + mime.conf файл сквида</span>
+<span class="s">url</span> <span class="s">http://127.0.0.1:3126/squid-internal-static/icons/rejik/1x1.gif</span>
+<span class="s">log</span> <span class="no">off</span>
+
+<span class="c1">#&lt;chats&gt;</span>
+<span class="c1">#ban_dir  /usr/local/rejik/banlists/chats</span>
+<span class="c1">#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="c1">#log off</span>
+
+<span class="c1">#&lt;dating&gt;</span>
+<span class="c1">#ban_dir  /usr/local/rejik/banlists/dating</span>
+<span class="c1">#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="c1">#log off</span>
+
+<span class="s">&lt;extremism&gt;</span>
+<span class="s">ban_dir</span>  <span class="s">/usr/local/rejik/banlists/extremism</span>
+<span class="s">url</span> <span class="s">http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="s">log</span> <span class="no">off</span>
+
+<span class="c1">#&lt;icq&gt;</span>
+<span class="c1">#ban_dir  /usr/local/rejik/banlists/icq</span>
+<span class="c1">#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="c1">#log off</span>
+
+<span class="c1">#&lt;jobsearch&gt;</span>
+<span class="c1">#ban_dir  /usr/local/rejik/banlists/jobsearch</span>
+<span class="c1">#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="c1">#log off</span>
+
+<span class="s">&lt;online-games&gt;</span>
+<span class="s">ban_dir</span>  <span class="s">/usr/local/rejik/banlists/online-games</span>
+<span class="s">url</span> <span class="s">http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="s">log</span> <span class="no">off</span>
+
+<span class="s">&lt;phishihg&gt;</span>
+<span class="s">ban_dir</span>  <span class="s">/usr/local/rejik/banlists/phishing</span>
+<span class="s">url</span> <span class="s">http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="s">log</span> <span class="no">off</span>
+
+<span class="c1">#&lt;photogallery&gt;</span>
+<span class="c1">#ban_dir  /usr/local/rejik/banlists/photogallery</span>
+<span class="c1">#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="c1">#log off</span>
+
+<span class="s">&lt;porno&gt;</span>
+<span class="s">ban_dir</span>  <span class="s">/usr/local/rejik/banlists/porno</span>
+<span class="s">url</span> <span class="s">http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="s">log</span> <span class="no">off</span>
+
+<span class="s">&lt;socnet&gt;</span>
+<span class="s">ban_dir</span>  <span class="s">/usr/local/rejik/banlists/socnet</span>
+<span class="s">url</span> <span class="s">http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="s">work_ip</span> <span class="s">f:/usr/local/rejik/ip/deny_socnet</span>
+<span class="s">log</span> <span class="no">off</span>
+
+<span class="s">&lt;spyware&gt;</span>
+<span class="s">ban_dir</span>  <span class="s">/usr/local/rejik/banlists/spyware</span>
+<span class="s">url</span> <span class="s">http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="s">log</span> <span class="no">off</span>
+
+<span class="s">&lt;torrents&gt;</span>
+<span class="s">ban_dir</span>  <span class="s">/usr/local/rejik/banlists/torrents</span>
+<span class="s">url</span> <span class="s">http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="s">log</span> <span class="no">off</span>
+
+<span class="s">&lt;virus-detect&gt;</span>
+<span class="s">ban_dir</span>  <span class="s">/usr/local/rejik/banlists/virus-detect</span>
+<span class="s">url</span> <span class="s">http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="s">log</span> <span class="no">off</span>
+
+<span class="s">&lt;warez&gt;</span>
+<span class="s">ban_dir</span>  <span class="s">/usr/local/rejik/banlists/warez</span>
+<span class="s">url</span> <span class="s">http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="s">log</span> <span class="no">off</span>
+
+<span class="c1">#&lt;web-mail&gt;</span>
+<span class="c1">#ban_dir  /usr/local/rejik/banlists/web-mail</span>
+<span class="c1">#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="c1">#log off</span>
+
+<span class="s">&lt;web-proxy&gt;</span>
+<span class="s">ban_dir</span>  <span class="s">/usr/local/rejik/banlists/web-proxy</span>
+<span class="s">url</span> <span class="s">http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html</span>
+<span class="s">log</span> <span class="no">off</span>
+</pre></div>
+
+
+<p>Так как <strong>rejik</strong> из текстовых файлов со списками плохих сайтов делает файлы бинарные файлы, от после внесения изменений в списки, нужно обновлять <code>*.cache</code> файлы <strong>rejik</strong>'а, для этого я использую скрипт:</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="c1"># Путь  до rejik</span>
+<span class="nv">REJIK_PATH</span><span class="o">=</span>/usr/local/rejik
+
+
+<span class="c1"># Найдем и удалим файлы кеша rejik</span>
+find <span class="nv">$REJIK_PATH</span> -name <span class="s1">&#39;*.cache&#39;</span> -exec rm <span class="o">{}</span> <span class="se">\;</span>
+<span class="c1"># Создадим снова кеш rejik</span>
+<span class="nv">$REJIK_PATH</span>/make-cache
+
+<span class="c1"># говорим squid перечитать новую конфигурацию</span>
+/usr/local/sbin/squid -k reconfigure
+</pre></div>
+
+
+<p>Листинг с описанием виртуального хоста <code>squid.local</code>:</p>
+<div class="highlight"><pre><span></span><span class="k">server</span> <span class="p">{</span>
+<span class="c1">#-------------------------- Options --------------------------#</span>
+    <span class="kn">listen</span> <span class="s">*:80</span><span class="p">;</span>
+    <span class="kn">server_name</span> <span class="s">squid.local</span> <span class="s">squid</span><span class="p">;</span>
+
+    <span class="kn">open_file_cache</span> <span class="s">max=100000</span> <span class="s">inactive=40s</span><span class="p">;</span>
+    <span class="kn">open_file_cache_valid</span> <span class="s">60s</span><span class="p">;</span>
+    <span class="kn">open_file_cache_min_uses</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kn">open_file_cache_errors</span> <span class="no">on</span><span class="p">;</span>
+
+    <span class="c1"># Logs</span>
+    <span class="kn">access_log</span> <span class="s">/var/log/nginx/squid.local_http_access.log</span><span class="p">;</span>
+    <span class="kn">error_log</span> <span class="s">/var/log/nginx/squid.local_http_error.log</span><span class="p">;</span>
+
+
+<span class="c1">#-------------------------- Configs --------------------------#</span>
+    <span class="c1"># redirect server error pages to the static page /50x.html</span>
+    <span class="kn">error_page</span> <span class="mi">500</span> <span class="mi">502</span> <span class="mi">503</span> <span class="mi">504</span> <span class="s">/50x.html</span><span class="p">;</span>
+    <span class="kn">location</span> <span class="p">=</span> <span class="s">/50x.html</span> <span class="p">{</span>
+        <span class="kn">root</span> <span class="s">/usr/local/www/nginx-dist</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1"># deny access to .htaccess files, if Apache&#39;s document root concurs with nginx&#39;s one</span>
+    <span class="kn">location</span> <span class="p">~</span> <span class="sr">/\.ht</span> <span class="p">{</span> <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="kn">index</span> <span class="s">index.html</span> <span class="s">free-sa.cgi</span><span class="p">;</span>
+
+<span class="c1">#-------------------------- Locations ------------------------#</span>
+
+    <span class="kn">location</span> <span class="p">~</span> <span class="sr">^/favicon.ico$</span> <span class="p">{</span>
+        <span class="kn">root</span> <span class="s">/usr/local/www/data/free-sa</span><span class="p">;</span>
+        <span class="kn">log_not_found</span> <span class="no">off</span><span class="p">;</span>
+        <span class="kn">access_log</span> <span class="no">off</span><span class="p">;</span>
+        <span class="kn">expires</span> <span class="s">max</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Main location</span>
+    <span class="kn">location</span> <span class="s">/</span> <span class="p">{</span>
+        <span class="kn">root</span> <span class="s">/usr/local/www/data/free-sa</span><span class="p">;</span>
+
+        <span class="kn">location</span> <span class="p">~</span> <span class="sr">\.cgi$</span> <span class="p">{</span>
+            <span class="kn">gzip</span> <span class="no">off</span><span class="p">;</span> <span class="c1">#gzip makes scripts feel slower since they have to complete before getting gzipped</span>
+            <span class="kn">fastcgi_pass</span> <span class="s">unix:/var/run/fcgiwrap/lightsquid.socket</span><span class="p">;</span>
+            <span class="kn">fastcgi_index</span> <span class="s">free-sa.cgi</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">SCRIPT_FILENAME</span> <span class="s">/usr/local/www/data/free-sa/</span><span class="nv">$fastcgi_script_name</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">QUERY_STRING</span> <span class="nv">$query_string</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">REQUEST_METHOD</span> <span class="nv">$request_method</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">CONTENT_TYPE</span> <span class="nv">$content_type</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">CONTENT_LENGTH</span> <span class="nv">$content_length</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">GATEWAY_INTERFACE</span> <span class="s">CGI/1.1</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">SERVER_SOFTWARE</span> <span class="s">nginx</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">SCRIPT_NAME</span> <span class="nv">$fastcgi_script_name</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">REQUEST_URI</span> <span class="nv">$request_uri</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">DOCUMENT_URI</span> <span class="nv">$document_uri</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">DOCUMENT_ROOT</span> <span class="nv">$document_root</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">SERVER_PROTOCOL</span> <span class="nv">$server_protocol</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">REMOTE_ADDR</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">REMOTE_PORT</span> <span class="nv">$remote_port</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">SERVER_ADDR</span> <span class="nv">$server_addr</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">SERVER_PORT</span> <span class="nv">$server_port</span><span class="p">;</span>
+            <span class="kn">fastcgi_param</span> <span class="s">SERVER_NAME</span> <span class="nv">$server_name</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Конечно же каталог с логами должен существовать и права должны быть такие же как у <strong>nginx</strong>:</p>
+<div class="highlight"><pre><span></span>mkdir /var/log/nginx
+chown www:www /var/log/nginx
+</pre></div>
+
+
+<p>Не забываем про ротацию логов - добавляем в <code>/etc/newsyslog.conf</code>:</p>
+<div class="highlight"><pre><span></span><span class="c1"># nginx</span>
+/var/log/nginx-error.log www:www  <span class="m">644</span>  <span class="m">7</span>    <span class="m">900</span> *     XC /var/run/nginx.pid <span class="m">30</span>
+/var/log/nginx/*.log  www:www  <span class="m">644</span>  <span class="m">7</span>    <span class="m">900</span> *     GXC /var/run/nginx.pid <span class="m">30</span>
+
+<span class="c1"># rejik</span>
+/usr/local/rejik/redirector.err squid:squid <span class="m">644</span>  <span class="m">10</span>    <span class="m">300</span> *     XC
+<span class="c1"># crontab for Squid</span>
+/var/log/squid/rotate_log.log   <span class="m">644</span>  <span class="m">3</span>    <span class="m">100</span> *     XC
+/var/log/squid/ipcadstat.log   <span class="m">644</span>  <span class="m">3</span>    <span class="m">100</span> *     XC
+</pre></div>
+
+
+<p>И перезапускаем демона <code>newsyslog</code>:</p>
+<div class="highlight"><pre><span></span>service newsyslog restart
+</pre></div>
+
+
+<p>В качестве бонуса привожу скрипт для удобной перезагрузки конфига <em>Squid</em>. Так как после внесения изменений в конфигурацию <strong>Squid</strong>, нужно перезапускать сервис,
+ либо из консоли давать команду <code>squid -k reconfigure</code>, что не всегда удобно + если мы допустили ошибку в конфиге ничего хорошего не будет от такой команды
+ и уж темболее от перезагрузки сервиса - он не запустится, а у людей не будет интернета, чтобы всего этого избежать я написал простенький скриптик:</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="c1"># Функция вывода цветных сообщений</span>
+COLOR_STR<span class="o">()</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nv">$2</span> in
+        red<span class="o">)</span> <span class="nb">printf</span> %b <span class="s2">&quot;\033[1;31m</span><span class="nv">$1</span><span class="s2">\033[0m&quot;</span> <span class="p">;;</span>
+        green<span class="o">)</span> <span class="nb">printf</span> %b <span class="s2">&quot;\033[1;32m</span><span class="nv">$1</span><span class="s2">\033[0m&quot;</span> <span class="p">;;</span>
+    <span class="k">esac</span>
+<span class="o">}</span>
+
+squid -k check
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="o">=</span> <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    squid -k reconfigure
+    COLOR_STR <span class="s1">&#39;SUCCESS&#39;</span> green
+    <span class="nb">echo</span> <span class="s1">&#39;: Squid config reloaded.&#39;</span>
+<span class="k">else</span>
+    COLOR_STR <span class="s1">&#39;ERROR&#39;</span> red
+    <span class="nb">echo</span> <span class="s1">&#39;: in Squid config file.&#39;</span>
+<span class="k">fi</span>
+</pre></div>
+
+
+<p>В кратце как это работает - скрипт сперва проверяет синтаксис конфига <code>squid -k check</code>, и если ошибок небыло, то выполняет загрузку нового конфига <code>squid -k reconfigure</code>,
+ если были ошибки, то он выдаст ошибку и <strong>Squid</strong> останется работать со старым конфигом, следовательно у всех будет интернет, а у вас будет время все исправить.</p>
+<p>И последний конфиг - листинг файла конфигурации <strong>IpCad</strong> <code>/usr/local/etc/ipcad.conf</code>:</p>
+<div class="highlight"><pre><span></span>capture-ports enable<span class="p">;</span>
+
+interface lan0 filter <span class="s2">&quot;ip and dst net 192.168.0.0/16 and not src net 192.168.0.0/16 and not src port 80&quot;</span><span class="p">;</span>
+
+aggregate <span class="m">0</span>.0.0.0/0 strip <span class="m">32</span><span class="p">;</span> /* Drop the last octet of all other IPs */
+
+aggregate <span class="m">110</span> into <span class="m">110</span><span class="p">;</span>
+aggregate <span class="m">443</span> into <span class="m">443</span><span class="p">;</span>
+aggregate <span class="m">3129</span> into <span class="m">0</span><span class="p">;</span>
+aggregate <span class="m">3128</span> into <span class="m">0</span><span class="p">;</span>
+aggregate <span class="m">3130</span>-65535 into <span class="m">65535</span><span class="p">;</span>
+
+rsh <span class="nb">enable</span> at <span class="m">127</span>.0.0.1<span class="p">;</span>
+rsh root@127.0.0.1 admin<span class="p">;</span>
+rsh root@127.0.0.1 backup<span class="p">;</span>
+rsh root@127.0.0.1<span class="p">;</span>
+rsh <span class="m">127</span>.0.0.1 view-only<span class="p">;</span>
+rsh <span class="nv">ttl</span> <span class="o">=</span> <span class="m">3</span><span class="p">;</span>
+rsh <span class="nv">timeout</span> <span class="o">=</span> <span class="m">30</span><span class="p">;</span>
+<span class="nv">chroot</span> <span class="o">=</span> /var/log/ipcad<span class="p">;</span>
+<span class="nv">dumpfile</span> <span class="o">=</span> ipcad.dump<span class="p">;</span>
+<span class="nv">pidfile</span> <span class="o">=</span> ipcad.pid<span class="p">;</span>
+</pre></div>
+
+
+<p>Обратите внимание на строку <code>interface lan0 filter "ip and dst net 192.168.0.0/16 and not src net 192.168.0.0/16 and not src port 80";</code>
+ Эта строка предписывает <code>ipcad</code> собирать статистику пакетов попадающих в локальную сеть извне (из интернет) на <strong>LAN</strong>-интерфейсе.
+ При этом в статистику не должны попадать пакеты от <strong>squid</strong> (т.е. те, порт источника которых равен <code>80</code> - у нас же прозрачный прокси) т.к. <strong>squid</strong> сам отразит их статистику в своем логе.
+ Дублирование статистики нам ни к чему.</p>
+<p>Как и чем заворачивать всех клиентов в <strong>Squid</strong> выбирайте сами - в интернете полно информации по этому поводу, я приведу 2 примера заворота при помощи <code>pf</code> и <code>ipfw</code>:</p>
+<h4>Пример для <code>pf</code>:</h4>
+<div class="highlight"><pre><span></span><span class="c1"># редиректим всех, кроме таблицы &lt;no_www_proxy&gt; на наш Proxy сервер, чтобы отфильтровать &quot;Плохие сайты&quot;</span>
+rdr proto tcp from !&lt;no_www_proxy&gt; to !lan0:network port http -&gt; <span class="m">127</span>.0.0.1 port <span class="m">3129</span>
+</pre></div>
+
+
+<h4>Пример для <code>ipfw</code>:</h4>
+<div class="highlight"><pre><span></span><span class="c1"># Squid transparent redirect</span>
+add fwd <span class="m">127</span>.0.0.1,3129 tcp from any to not <span class="m">192</span>.168.0.0/16 http via lan0
+</pre></div>
+
+
+<p>Где <code>lan0</code> - имя локального интерфейса.</p>
+<p>Теперь можно все это добавить в автозагрузку и запустить.</p>
+<p>Вырезка из <code>/etc/rc.conf</code>:</p>
+<div class="highlight"><pre><span></span><span class="c1">#------------------------------ squid ------------------------------------#</span>
+<span class="nv">squid_enable</span><span class="o">=</span><span class="s2">&quot;YES&quot;</span> <span class="c1"># Прозрачный прокси, для ведения статистики посещенных сайтов.</span>
+<span class="nv">ipcad_enable</span><span class="o">=</span><span class="s2">&quot;YES&quot;</span> <span class="c1"># Для записи в статистику squid&#39;а, всего остального трафика.</span>
+<span class="c1">#-------------------------------------------------------------------------#</span>
+
+
+<span class="c1">#------------------------------ nginx ------------------------------------#</span>
+<span class="nv">nginx_enable</span><span class="o">=</span><span class="s2">&quot;YES&quot;</span>  <span class="c1"># (bool) Set to &quot;NO&quot; by default. Set it to &quot;YES&quot; to enable nginx</span>
+
+<span class="c1">#php_fpm_enable=&quot;YES&quot;</span>
+
+<span class="nv">fcgiwrap_enable</span><span class="o">=</span><span class="s2">&quot;YES&quot;</span>
+<span class="nv">fcgiwrap_profiles</span><span class="o">=</span><span class="s2">&quot;lightsquid&quot;</span>
+<span class="nv">fcgiwrap_flags</span><span class="o">=</span><span class="s2">&quot;-c 4&quot;</span>
+<span class="nv">fcgiwrap_lightsquid_socket</span><span class="o">=</span><span class="s2">&quot;unix:/var/run/fcgiwrap/lightsquid.socket&quot;</span>
+<span class="nv">fcgiwrap_lightsquid_user</span><span class="o">=</span><span class="s2">&quot;www&quot;</span>
+<span class="c1">#-------------------------------------------------------------------------#</span>
+</pre></div>
+
+
+<p>Запускаем всех демонов:</p>
+<div class="highlight"><pre><span></span>service squid start
+service ipcad start
+service fcgiwrap start
+service nginx start
+</pre></div>
+
+
+<p>Пробуем выйти в интернет, открыть запрещенные сайты - все должно работать как и предполагали. Через пять минут пробуем зайти в <strong>Free-SA</strong> <code>http://squid.local/</code> и посмотреть статистику.
+ Чтобы посмотреть статистику в режиме реального времени нужно открыть ссылку <code>http://squid.local/cgi-bin/</code>, где <code>squid.local</code> - имя вашего сервера с <strong>nginx</strong>.</p>
+<hr>
+<p>Ссылки по теме:</p>
+<ol>
+<li><a href="http://rejik.ru/index_ru_6_0.html">Rejik FAQ: А нельзя ли обойтись без установки локального web сервера?</a></li>
+<li><a href="http://wiki.dieg.info/ipcad">Wiki - IT рабочие заметки: ipcad</a></li>
+<li><a href="http://www.lissyara.su/articles/freebsd/programms/free-sa/">lissyara.su: Анализатор статистики Free-SA</a></li>
+<li><a href="http://rootmaster.at.ua/publ/shljuz_dlja_nebolshoj_seti_na_osnove_freebsd/1-1-0-82">rootmaster.at.ua: шлюз для небольшой сети на основе FreeBSD.</a></li>
+<li><a href="http://ru.doc.pfsense.org/index.php/%D0%9F%D0%BE%D0%B4%D1%81%D1%87%D0%B5%D1%82_%D1%82%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_%D1%81_%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E_Squid_%D0%B8_ipcad_%D0%B2_pfSense_1.2.3">Подсчет трафика с помощью Squid и ipcad в pfSense 1.2.3</a></li>
+<li><a href="https://coolchevy.org.ua/2011/11/25/simple-cgi-support-for-nginx/">coolchevy's blog: Simple CGI support for Nginx</a></li>
+<li><a href="http://habrahabr.ru/post/138984/">Habrahabr: Вебсервер nginx + fastcgi-wrapper + matlab</a></li>
+<li><a href="http://nginx.localdomain.pl/wiki/FcgiWrap">nginx.localdomain.pl: Simple CGI support for Nginx (fcgiwrap)</a></li>
+<li><a href="http://www.rejik.ru/index_ru_8_1.html">Rejik: DBL листы - что это и где взять?</a></li>
+<li><a href="http://free-sa.sourceforge.net/">Free-SA log processor</a></li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://blog.metajiji.tk/blog/freebsd4-migrate-to-virtualbox/">Перенос FreeBSD 4 на VirtualBox</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/sed-dos2unix-unix2dos/">Аналоги на sed для dos2unix и unix2dos</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/generate-ssl-certificates/">Скрипт генерации сертификатов SSL для nginx.</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/freebsd-dos2unix-unix2dos-bom/">Работа с текстом во FreeBSD dos2unix, unix2dos, удаление BOM в консоли.</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/freebsd-linux-external-ip/">FreeBSD, Linux узнать внешний ip адрес с консоли.</a></li>
+    </ul>
+</section>
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+                var disqus_url = 'http://blog.metajiji.tk/blog/squid-rejik-ipcad-free-sa-nginx/';
+
+            var disqus_config = function () {
+                this.language = "ru";
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/METAJIJI/"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://stackoverflow.com/users/2020443/metajiji"><i class="fa fa-stack-overflow fa-lg"></i> stackoverflow</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/fedora-chromium-firefox-flashplayer/">Fedora 25 install adobe flashplayer</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/atlassian/"><i class="fa fa-folder-open fa-lg"></i>Atlassian</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bash/"><i class="fa fa-folder-open fa-lg"></i>Bash</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bat-cmd/"><i class="fa fa-folder-open fa-lg"></i>Bat-cmd</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bind/"><i class="fa fa-folder-open fa-lg"></i>Bind</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/blog/"><i class="fa fa-folder-open fa-lg"></i>Blog</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/centos/"><i class="fa fa-folder-open fa-lg"></i>CentOS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/docker/"><i class="fa fa-folder-open fa-lg"></i>Docker</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/fedora/"><i class="fa fa-folder-open fa-lg"></i>Fedora</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/freebsd/"><i class="fa fa-folder-open fa-lg"></i>FreeBSD</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/gitlab/"><i class="fa fa-folder-open fa-lg"></i>Gitlab</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/hardware/"><i class="fa fa-folder-open fa-lg"></i>Hardware</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/javascript/"><i class="fa fa-folder-open fa-lg"></i>JavaScript</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/linux/"><i class="fa fa-folder-open fa-lg"></i>Linux</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/macosx/"><i class="fa fa-folder-open fa-lg"></i>MacOSX</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/mikrotik/"><i class="fa fa-folder-open fa-lg"></i>Mikrotik</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/postgresql/"><i class="fa fa-folder-open fa-lg"></i>PostgreSQL</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/ubuntu/"><i class="fa fa-folder-open fa-lg"></i>Ubuntu</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/vcs/"><i class="fa fa-folder-open fa-lg"></i>VCS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/windows/"><i class="fa fa-folder-open fa-lg"></i>Windows</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zabbix/"><i class="fa fa-folder-open fa-lg"></i>Zabbix</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zimbra/"><i class="fa fa-folder-open fa-lg"></i>Zimbra</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 Denis Kadyshev
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://blog.metajiji.tk/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://blog.metajiji.tk/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://blog.metajiji.tk/theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+    <!-- Google Analytics Universal -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106896103-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics Universal Code -->
+
+
+</body>
+</html>

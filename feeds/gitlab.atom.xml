@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - Gitlab</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/gitlab.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2017-03-20T00:00:00+07:00</updated><entry><title>Gitlab SMTP not work via external smtp</title><link href="http://blog.metajiji.tk/blog/gitlab-smtp-not-work/" rel="alternate"></link><published>2017-03-20T00:00:00+07:00</published><updated>2017-03-20T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2017-03-20:/blog/gitlab-smtp-not-work/</id><summary type="html">&lt;p&gt;When gitlab try to send email via external smtp server, sidekiq mail queue crash with error like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Fix for &lt;strong&gt;package installed&lt;/strong&gt; gitlab:&lt;/h1&gt;
+&lt;h2&gt;Edit &lt;code&gt;/etc/gitlab/gitlab.rb&lt;/code&gt; and add:&lt;/h2&gt;
+&lt;h3&gt;For ubuntu system wide ca bundle:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gitlab_rails …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;When gitlab try to send email via external smtp server, sidekiq mail queue crash with error like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;SSL_connect returned=1 errno=0 state=SSLv3 read server certificate B: certificate verify failed
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Fix for &lt;strong&gt;package installed&lt;/strong&gt; gitlab:&lt;/h1&gt;
+&lt;h2&gt;Edit &lt;code&gt;/etc/gitlab/gitlab.rb&lt;/code&gt; and add:&lt;/h2&gt;
+&lt;h3&gt;For ubuntu system wide ca bundle:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gitlab_rails[&amp;#39;smtp_ca_file&amp;#39;] = &amp;quot;/etc/ssl/certs/ca-certificates.crt&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;For centos system wide ca bundle:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gitlab_rails[&amp;#39;smtp_ca_file&amp;#39;] = &amp;quot;/etc/pki/tls/certs/ca-bundle.crt&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Or omnibus gitlab package:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gitlab_rails[&amp;#39;smtp_ca_file&amp;#39;] = &amp;quot;/opt/gitlab/embedded/ssl/cert.pem&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Then run &lt;code&gt;gitlab-ctl reconfigure&lt;/code&gt;.&lt;/h2&gt;
+&lt;h1&gt;For gitlab installed from &lt;strong&gt;source code&lt;/strong&gt;:&lt;/h1&gt;
+&lt;h3&gt;Edit file &lt;code&gt;config/initializers/smtp_settings.rb&lt;/code&gt;:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ActionMailer::Base.smtp_settings = {
+    authentication: :login,
+    ...
+    # For ubuntu
+    ca_file: &amp;quot;/etc/ssl/certs/ca-certificates.crt&amp;quot;,
+    # For centos
+    #ca_file: &amp;quot;/etc/pki/tls/certs/ca-bundle.crt&amp;quot;,
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Finnaly &lt;strong&gt;restart&lt;/strong&gt; &lt;code&gt;gitlab&lt;/code&gt; service:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;service gitlab restart
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Links&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://gitlab.com/gitlab-org/gitlab-ce/issues/1558#note_1183160"&gt;SSL certification error #1558&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gitlab.com/gitlab-org/gitlab-ce/issues/2143"&gt;SMTP Gmail account working on gitlab but not on gitlab-ci #2143&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="gitlab"></category><category term="smtp"></category><category term="ruby"></category><category term="ssl"></category><category term="openssl"></category><category term="ca"></category><category term="certificates"></category></entry></feed>

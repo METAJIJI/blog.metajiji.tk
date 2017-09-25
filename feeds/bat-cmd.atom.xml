@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - Bat-cmd</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/bat-cmd.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2013-05-11T00:00:00+07:00</updated><entry><title>Hex to string cmd, bat "function"</title><link href="http://blog.metajiji.tk/blog/hex-to-string-cmd-bat-function/" rel="alternate"></link><published>2013-05-11T00:00:00+07:00</published><updated>2013-05-11T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-05-11:/blog/hex-to-string-cmd-bat-function/</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;ECHO&lt;/span&gt; OFF
+
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;: Включение расширенной обработки команд.&lt;/span&gt;
+&lt;span class="k"&gt;SETLOCAL&lt;/span&gt; ENABLEEXTENSIONS ENABLEDELAYEDEXPANSION
+
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;: Строка в hex - в данном случае dlink.&lt;/span&gt;
+&lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;x16=646c696e6b&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;CALL&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;Hex_To_String&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;%x16%&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; str
+&lt;span class="k"&gt;ECHO&lt;/span&gt;.&lt;span class="nv"&gt;%str%&lt;/span&gt;
+
+&lt;span class="k"&gt;PAUSE&lt;/span&gt;
+&lt;span class="k"&gt;EXIT&lt;/span&gt;
+
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;Hex_To_String&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;: Вызывать так: CALL :Hex_To_String %hex_x16_string% value_name&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;: Где %hex_x16_string% - строка в 16-ричном hex формате&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;: value_name - имя переменной, в которую вернуть значение вычисленной строки …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;ECHO&lt;/span&gt; OFF
+
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;: Включение расширенной обработки команд.&lt;/span&gt;
+&lt;span class="k"&gt;SETLOCAL&lt;/span&gt; ENABLEEXTENSIONS ENABLEDELAYEDEXPANSION
+
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;: Строка в hex - в данном случае dlink.&lt;/span&gt;
+&lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;x16=646c696e6b&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;CALL&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;Hex_To_String&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;%x16%&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; str
+&lt;span class="k"&gt;ECHO&lt;/span&gt;.&lt;span class="nv"&gt;%str%&lt;/span&gt;
+
+&lt;span class="k"&gt;PAUSE&lt;/span&gt;
+&lt;span class="k"&gt;EXIT&lt;/span&gt;
+
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;Hex_To_String&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;: Вызывать так: CALL :Hex_To_String %hex_x16_string% value_name&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;: Где %hex_x16_string% - строка в 16-ричном hex формате&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;: value_name - имя переменной, в которую вернуть значение вычисленной строки.&lt;/span&gt;
+    &lt;span class="k"&gt;SETLOCAL&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;x16=&lt;/span&gt;&lt;span class="nv"&gt;%~1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;45
+    &lt;span class="k"&gt;FOR&lt;/span&gt; &lt;span class="se"&gt;%%&lt;/span&gt;A &lt;span class="k"&gt;IN&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;- . / 0 1 2 3 4 5 6 7 8 9&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;DO&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;s.!n!=&lt;/span&gt;&lt;span class="se"&gt;%%&lt;/span&gt;&lt;span class="s2"&gt;A&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="k"&gt;/A&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;65
+    &lt;span class="k"&gt;FOR&lt;/span&gt; &lt;span class="se"&gt;%%&lt;/span&gt;A &lt;span class="k"&gt;IN&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;A B C D E F G H I J K L M N O P Q R S T U V W X Y Z&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;DO&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;s.!n!=&lt;/span&gt;&lt;span class="se"&gt;%%&lt;/span&gt;&lt;span class="s2"&gt;A&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="k"&gt;/A&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;97
+    &lt;span class="k"&gt;FOR&lt;/span&gt; &lt;span class="se"&gt;%%&lt;/span&gt;A &lt;span class="k"&gt;IN&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;a b c d e f g h i j k l m n o p q r s t u v w x y z&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;DO&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;s.!n!=&lt;/span&gt;&lt;span class="se"&gt;%%&lt;/span&gt;&lt;span class="s2"&gt;A&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="k"&gt;/A&lt;/span&gt; &lt;span class="nv"&gt;n&lt;/span&gt;&lt;span class="o"&gt;+=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;xs=&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;FOR&lt;/span&gt; &lt;span class="k"&gt;/L&lt;/span&gt; &lt;span class="se"&gt;%%&lt;/span&gt;C &lt;span class="k"&gt;IN&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;,&lt;span class="mi"&gt;2&lt;/span&gt;,&lt;span class="mi"&gt;8184&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;DO&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="k"&gt;IF&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;!x16:~&lt;/span&gt;&lt;span class="se"&gt;%%&lt;/span&gt;&lt;span class="s2"&gt;C,1!&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;GOTO&lt;/span&gt; &lt;span class="nl"&gt;_ex_Hex&lt;/span&gt;&lt;span class="c1"&gt; str&lt;/span&gt;
+        &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="k"&gt;/A&lt;/span&gt; &lt;span class="nv"&gt;x10&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nv"&gt;x16:&lt;/span&gt;&lt;span class="o"&gt;~%%&lt;/span&gt;&lt;span class="nv"&gt;C&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+        &lt;span class="k"&gt;CALL&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="nv"&gt;xs&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;!xs!&lt;/span&gt;&lt;span class="se"&gt;%%&lt;/span&gt;s.!x10!&lt;span class="se"&gt;%%&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;_ex_Hex&lt;/span&gt;
+    &lt;span class="k"&gt;ENDLOCAL&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;%~2&lt;/span&gt;&lt;span class="s2"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;%xs%&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;GOTO&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;EOF&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://forum.script-coding.com/viewtopic.php?id=6978"&gt;CMD/BAT: hex дампер&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.cyberforum.ru/cmd-bat/thread671391-page4.html"&gt;Полезные BAT/CMD скрипты&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.string-functions.com/hex-string.aspx"&gt;Hex to string converter Online&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.string-functions.com/string-hex.aspx"&gt;String to hex converter Online&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Windows"></category><category term="bat"></category><category term="cmd"></category><category term="hex to string"></category><category term="hex"></category><category term="string"></category></entry><entry><title>Создание ярлыка .url в Windows из cmd\bat</title><link href="http://blog.metajiji.tk/blog/create-shorcut-cmd-bat-in-windows/" rel="alternate"></link><published>2013-04-09T00:00:00+07:00</published><updated>2013-04-09T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-04-09:/blog/create-shorcut-cmd-bat-in-windows/</id><summary type="html">&lt;p&gt;Для создания ярлыка в &lt;strong&gt;Windows&lt;/strong&gt; на сетевую папку использую такой &lt;code&gt;bat&lt;/code&gt; скрипт:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;ECHO&lt;/span&gt; OFF
+
+&lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;PATH_TO_URL=Server.url&amp;quot;&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="k"&gt;ECHO&lt;/span&gt;.[InternetShortcut]
+    &lt;span class="k"&gt;ECHO&lt;/span&gt;.URL=file://server/
+    &lt;span class="k"&gt;ECHO&lt;/span&gt;.IconFile=&lt;span class="nv"&gt;%windir%&lt;/span&gt;\system32\SHELL32.dll
+    &lt;span class="k"&gt;ECHO&lt;/span&gt;.IconIndex=17
+&lt;span class="p"&gt;)&amp;gt;&lt;/span&gt;&lt;span class="nv"&gt;%PATH_TO_URL%&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://forum.oszone.net/post-2150529.html"&gt;forum.oszone.net: CMD/BAT - создать ярлык&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Для создания ярлыка в &lt;strong&gt;Windows&lt;/strong&gt; на сетевую папку использую такой &lt;code&gt;bat&lt;/code&gt; скрипт:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;ECHO&lt;/span&gt; OFF
+
+&lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;PATH_TO_URL=Server.url&amp;quot;&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="k"&gt;ECHO&lt;/span&gt;.[InternetShortcut]
+    &lt;span class="k"&gt;ECHO&lt;/span&gt;.URL=file://server/
+    &lt;span class="k"&gt;ECHO&lt;/span&gt;.IconFile=&lt;span class="nv"&gt;%windir%&lt;/span&gt;\system32\SHELL32.dll
+    &lt;span class="k"&gt;ECHO&lt;/span&gt;.IconIndex=17
+&lt;span class="p"&gt;)&amp;gt;&lt;/span&gt;&lt;span class="nv"&gt;%PATH_TO_URL%&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://forum.oszone.net/post-2150529.html"&gt;forum.oszone.net: CMD/BAT - создать ярлык&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="cmd"></category><category term="bat"></category><category term="url file"></category><category term="shortcut"></category></entry><entry><title>Блокирование рекламы в Skype 6.11.66.102 bat,cmd файл.</title><link href="http://blog.metajiji.tk/blog/windows-skype-disable-ad/" rel="alternate"></link><published>2013-02-20T00:00:00+07:00</published><updated>2013-02-20T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-02-20:/blog/windows-skype-disable-ad/</id><summary type="html">&lt;p&gt;Для блокировки назойливой рекламы, которая к тому же сделана на *&lt;em&gt;Flash&lt;/em&gt;, что сильно мешает нормальной работе за комптютером, был написан простенький &lt;code&gt;bat&lt;/code&gt; файл:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;ECHO&lt;/span&gt; OFF
+CHCP 866 &lt;span class="p"&gt;&amp;gt;&lt;/span&gt;nul
+
+&lt;span class="k"&gt;FOR&lt;/span&gt; &lt;span class="se"&gt;%%&lt;/span&gt;a &lt;span class="k"&gt;IN&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;rad.msn.com apps.skype.com&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;DO&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="k"&gt;TYPE&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;%SystemRoot%&lt;/span&gt;&lt;span class="s2"&gt;\system32\drivers\etc\hosts&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; FIND /I &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;%%&lt;/span&gt;&lt;span class="s2"&gt;a&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; FIND &lt;span class="s2"&gt;&amp;quot;127.0 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Для блокировки назойливой рекламы, которая к тому же сделана на *&lt;em&gt;Flash&lt;/em&gt;, что сильно мешает нормальной работе за комптютером, был написан простенький &lt;code&gt;bat&lt;/code&gt; файл:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;ECHO&lt;/span&gt; OFF
+CHCP 866 &lt;span class="p"&gt;&amp;gt;&lt;/span&gt;nul
+
+&lt;span class="k"&gt;FOR&lt;/span&gt; &lt;span class="se"&gt;%%&lt;/span&gt;a &lt;span class="k"&gt;IN&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;rad.msn.com apps.skype.com&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;DO&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="k"&gt;TYPE&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;%SystemRoot%&lt;/span&gt;&lt;span class="s2"&gt;\system32\drivers\etc\hosts&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; FIND /I &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;%%&lt;/span&gt;&lt;span class="s2"&gt;a&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; FIND &lt;span class="s2"&gt;&amp;quot;127.0.0.1&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;&amp;gt;&lt;/span&gt;nul &lt;span class="p"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;ECHO&lt;/span&gt;.&lt;span class="se"&gt;%%&lt;/span&gt;a уже заблокирован! &lt;span class="p"&gt;||&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;%SystemRoot%&lt;/span&gt;&lt;span class="s2"&gt;\system32\drivers\etc\hosts&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;ECHO&lt;/span&gt;.127.0.0.1 &lt;span class="se"&gt;%%&lt;/span&gt;a&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;ECHO&lt;/span&gt;.&lt;span class="se"&gt;%%&lt;/span&gt;a заблокирован! &lt;span class="p"&gt;||&lt;/span&gt; &lt;span class="k"&gt;ECHO&lt;/span&gt;.Ошибка записи! &lt;span class="p"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;PAUSE&lt;/span&gt; &lt;span class="p"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;EXIT&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;: Reset DNS cache&lt;/span&gt;
+IPCONFIG /flushdns
+
+&lt;span class="k"&gt;PAUSE&lt;/span&gt;
+&lt;span class="k"&gt;EXIT&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Скопировать текст скрипта, сохранить как &lt;code&gt;Block_SkypeAD.bat&lt;/code&gt; в кодировке &lt;code&gt;cp866&lt;/code&gt; (&lt;strong&gt;DOS&lt;/strong&gt;) и запустить.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://yoursitename.ru/0713-reklama-skype/"&gt;Реклама в скайпе&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://community.skype.com/t5/Общий-Форум/Как-отключить-дурацкую-рекламу-в-скайп/td-p/811628"&gt;Как отключить дурацкую рекламу в скайп???????&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Windows"></category><category term="Skype"></category><category term="block ad"></category><category term="disable spam"></category><category term="spam"></category></entry></feed>

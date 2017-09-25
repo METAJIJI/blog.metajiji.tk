@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - Blog</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/blog.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2016-10-21T00:00:00+07:00</updated><entry><title>lightbox markdown pelican</title><link href="http://blog.metajiji.tk/blog/lightbox-markdown-pelican/" rel="alternate"></link><published>2016-10-21T00:00:00+07:00</published><updated>2016-10-21T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2016-10-21:/blog/lightbox-markdown-pelican/</id><summary type="html">&lt;p&gt;В заголовке документа&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;lightbox: true
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;После чего в шаблоне &lt;code&gt;base.html&lt;/code&gt; срабатывают условия:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+...
+    {% if (article and article.lightbox) %}
+        &lt;span class="c"&gt;&amp;lt;!-- Enable lightbox (https://github.com/dimsemenov/Magnific-Popup) --&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;link&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;//cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    {% endif %}
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+
+...
+{% if (article and article.lightbox …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;В заголовке документа&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;lightbox: true
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;После чего в шаблоне &lt;code&gt;base.html&lt;/code&gt; срабатывают условия:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+...
+    {% if (article and article.lightbox) %}
+        &lt;span class="c"&gt;&amp;lt;!-- Enable lightbox (https://github.com/dimsemenov/Magnific-Popup) --&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;link&lt;/span&gt; &lt;span class="na"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;//cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    {% endif %}
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+
+...
+{% if (article and article.lightbox) %}
+&lt;span class="c"&gt;&amp;lt;!-- Enable lightbox gallery plugin for Bootstrap (https://github.com/ashleydw/lightbox) --&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;//cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+    &lt;span class="nx"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;{% if MAGNIFIC_POPUP_SELECTOR %}{{ MAGNIFIC_POPUP_SELECTOR }}{% else %}img[class*=&amp;quot;mfp-&amp;quot;]{% endif %}&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;magnificPopup&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;
+        &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;MAGNIFIC_POPUP_OPTIONS&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;}{{&lt;/span&gt; &lt;span class="nx"&gt;MAGNIFIC_POPUP_OPTIONS&lt;/span&gt; &lt;span class="p"&gt;}}{&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="nx"&gt;endif&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;});&lt;/span&gt;
+&lt;span class="p"&gt;});&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+{% endif %}
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;А так же стоит упомянуть конфиг:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Bootstrap magnific lightbox options&lt;/span&gt;
+&lt;span class="n"&gt;MAGNIFIC_POPUP_OPTIONS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;span class="s1"&gt;closeOnContentClick: true,&lt;/span&gt;
+&lt;span class="s1"&gt;callbacks: {&lt;/span&gt;
+&lt;span class="s1"&gt;    elementParse: function(item){&lt;/span&gt;
+&lt;span class="s1"&gt;        item.src = item.el.attr(&amp;#39;src&amp;#39;);  // read src from img tag&lt;/span&gt;
+&lt;span class="s1"&gt;    },&lt;/span&gt;
+&lt;span class="s1"&gt;},&lt;/span&gt;
+&lt;span class="s1"&gt;gallery: {&lt;/span&gt;
+&lt;span class="s1"&gt;    enabled: true&lt;/span&gt;
+&lt;span class="s1"&gt;}&lt;/span&gt;
+&lt;span class="s1"&gt;&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Эта строка &lt;code&gt;item.src = item.el.attr('src');&lt;/code&gt; помогает извлечь из тега &lt;code&gt;img&lt;/code&gt; путь до картинки, изначально скрипт умеет извлекать только из  аттрибута &lt;code&gt;href&lt;/code&gt; тега &lt;code&gt;a&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;При написании текстов картинки вставляется так:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;![&lt;span class="nt"&gt;image alt text&lt;/span&gt;](&lt;span class="na"&gt;{attach}folder/image.jpg &amp;quot;image title text&amp;quot;&lt;/span&gt;){: class=&amp;quot;mfp-image center-block&amp;quot;}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Где:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;mfp-image&lt;/code&gt; - таким образом указывается тип встраиваемый в lightbox&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;center-block&lt;/code&gt; - это стандартный &lt;code&gt;bootstrap3&lt;/code&gt; клас для центрирования блока по центру страницы&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;{attach}&lt;/code&gt; - относительный путь от текущего документа&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;{attach}/&lt;/code&gt; - путь от корня сайта&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Вместо &lt;code&gt;{attach}&lt;/code&gt; можно использовать &lt;code&gt;{filename}&lt;/code&gt;, разница в том, что &lt;code&gt;{attach}&lt;/code&gt; копирует "вложения" вместе со страницей, а &lt;code&gt;{filename}&lt;/code&gt; не копирует, а лишь ссылается более, подробно читайте в документации pelican.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://letchap.github.io/2013/12/11/realiser-une-galerie-dimages-avec-pelican-et-bootstrap/"&gt;Réaliser une galerie d'images avec Pelican et Bootstrap&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://kura.io/lightbox/"&gt;Lightbox — A pure CSS lightbox for Pelican&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/dimsemenov/Magnific-Popup/"&gt;Magnific-Popup&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://dimsemenov.com/plugins/magnific-popup/documentation.html"&gt;Magnific Popup Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://docs.getpelican.com/en/latest/content.html#articles-and-pages"&gt;Attaching static files&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Blog"></category><category term="lightbox"></category><category term="markdown"></category><category term="pelican"></category></entry><entry><title>Смена движка и хостинга</title><link href="http://blog.metajiji.tk/blog/blog-moved/" rel="alternate"></link><published>2016-10-09T00:00:00+07:00</published><updated>2016-10-09T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2016-10-09:/blog/blog-moved/</id><summary type="html">&lt;p&gt;Перенес блог на статический генератор сайтов &lt;code&gt;pelican&lt;/code&gt;, а в качестве хостинга решил использовать &lt;strong&gt;github pages&lt;/strong&gt;.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Перенес блог на статический генератор сайтов &lt;code&gt;pelican&lt;/code&gt;, а в качестве хостинга решил использовать &lt;strong&gt;github pages&lt;/strong&gt;.&lt;/p&gt;</content><category term="blog"></category></entry></feed>

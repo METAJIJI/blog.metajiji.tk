@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Mikrotik WPA2-EAP WDS MESH - For system administrator</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://blog.metajiji.tk/favicon.png" rel="icon">
+
+<link rel="canonical" href="http://blog.metajiji.tk/blog/mikrotik-wpa2-eap-wds-mesh/">
+
+        <meta name="author" content="Denis Kadyshev" />
+        <meta name="keywords" content="Mikrotik,WDS,MESH,WPA2-EAP" />
+        <meta name="description" content="Постановка задачи, реализовать Wi-Fi сеть WPA2-EAP с авторизацией через LDAP учетки или сертификаты с бесшовным роумингом, используя WDS-MESH. При этом трафик Wi-Fi клиентов завернуть во vlan (tagged), а трафик самого роутера оставить без тега (untagged). Подготовка Сброс кнопкой Reset на корпусе. Подключаемся через Windox по кабелю 2-5 порты или Wifi …" />
+
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/bootstrap.custom.min.css" type="text/css"/>
+    <link href="http://blog.metajiji.tk/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://blog.metajiji.tk/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="http://blog.metajiji.tk/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/style.css" type="text/css"/>
+
+
+        <link href="http://blog.metajiji.tk/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator ATOM Feed"/>
+
+
+
+        <link href="http://blog.metajiji.tk/feeds/mikrotik.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator Mikrotik ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://blog.metajiji.tk/" class="navbar-brand">
+For system administrator            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/">Blog</a></li>
+                         <li><a href="http://blog.metajiji.tk/about/">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="http://blog.metajiji.tk/archives/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="http://blog.metajiji.tk" title="For system administrator"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="http://blog.metajiji.tk/category/mikrotik/" title="Mikrotik">Mikrotik</a></li>
+                <li class="active">Mikrotik WPA2-EAP WDS MESH</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://blog.metajiji.tk/blog/mikrotik-wpa2-eap-wds-mesh/"
+                       rel="bookmark"
+                       title="Permalink to Mikrotik WPA2-EAP WDS MESH">
+                        Mikrotik WPA2-EAP WDS MESH
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-07-11T00:00:00+07:00"> Пт. 11 Июль 2014</time>
+    </span>
+          <span class="label label-default">Modified</span>
+            <span class="modified">
+                <i class="fa fa-calendar"></i><time datetime="2014-07-11T00:00:00+07:00"> Пт. 11 Июль 2014</time>
+            </span>
+
+
+            <span class="label label-default">By</span>
+            <a href="http://blog.metajiji.tk/author/denis-kadyshev.html"><i class="fa fa-user"></i> Denis Kadyshev</a>
+
+        <span class="label label-default">Category</span>
+        <a href="http://blog.metajiji.tk/category/mikrotik/">Mikrotik</a>
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://blog.metajiji.tk/tag/mikrotik/">Mikrotik</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/wds/">WDS</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/mesh/">MESH</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/wpa2-eap/">WPA2-EAP</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Постановка задачи, реализовать <strong>Wi-Fi</strong> сеть <strong>WPA2-EAP</strong> с авторизацией через <strong>LDAP</strong> учетки или сертификаты с бесшовным роумингом,
+ используя <strong>WDS-MESH</strong>.
+При этом трафик <strong>Wi-Fi</strong> клиентов завернуть во <code>vlan</code> (<strong>tagged</strong>), а трафик самого роутера оставить без тега (<strong>untagged</strong>).</p>
+<h1>Подготовка</h1>
+<ul>
+<li>Сброс кнопкой <code>Reset</code> на корпусе.</li>
+<li>Подключаемся через <code>Windox</code> по кабелю 2-5 порты или <strong>Wifi</strong>, в открывшемся диалоговом окне сброс пока не нажимаем!</li>
+<li>
+<p>Прописываем статический <code>ip</code> на <code>ether1</code>, основной шлюз, <strong>DNS сервер</strong>.</p>
+<div class="highlight"><pre><span></span>/ip address add address=10.10.0.101/24 interface=ether1 network=10.10.0.0
+/ip dns set servers=10.10.10.254
+/ip route add distance=1 gateway=10.10.0.1
+</pre></div>
+
+
+</li>
+<li>
+<p>Жмем сброс настроек в диалоговом окне (та самая кнопка, которую не нажимали в начале).</p>
+</li>
+<li>Роутер произведет сброс заводских настроек, но оставит пользовательские.</li>
+<li>Если роутер, спустя минуту не ушол в ребут - делаем вручную.</li>
+<li>Подключаемся по статическому <code>ip</code> и делаем остальные настройки, <code>Identity</code> (я выбрал простой нейминг точек <code>ap1</code>, <code>ap2</code>...), <code>clock</code>, <code>SNTP</code>,
+ отключаем ненужные сервисы (<code>telnet</code>, <code>api</code>) и т.д...<div class="highlight"><pre><span></span>/system ntp client set enabled=yes primary-ntp=10.10.10.254
+/system clock set time-zone-name=Asia/Novosibirsk
+/system identity set name=ap1
+/ip service set telnet disabled=yes
+/ip service set ftp disabled=yes
+/ip service set api disabled=yes
+/ip service set api-ssl disabled=yes
+</pre></div>
+
+
+</li>
+</ul>
+<h1>Добавляем интерфейс <code>vlan5</code> от <code>ether1</code>.</h1>
+<div class="highlight"><pre><span></span>/interface vlan add interface=ether1 l2mtu=1594 name=vlan5 vlan-id=5
+</pre></div>
+
+
+<h1>Создаем <strong>Bridge</strong> интерфейс</h1>
+<p>Называем его например <code>br-vlan5</code>, добавляем в него порты <code>wlan1</code>, <code>vlan5</code>.</p>
+<div class="highlight"><pre><span></span>/interface bridge add name=br-vlan5
+/interface bridge port add bridge=br-vlan5 interface=wlan1
+/interface bridge port add bridge=br-vlan5 interface=vlan5
+</pre></div>
+
+
+<h1>Создаем <strong>Mesh</strong> интерфейс</h1>
+<p>Называем его например <code>Mesh-Interface</code>, добавляем в него порт <code>br-vlan5</code>.</p>
+<div class="highlight"><pre><span></span>/interface mesh add hwmp-rann-propagation-delay=5 name=Mesh-Interface
+/interface mesh port add interface=br-vlan5 mesh=Mesh-Interfacee
+</pre></div>
+
+
+<h1>Создаем <strong>Security Profle</strong>:</h1>
+<div class="highlight"><pre><span></span>/interface wireless security-profiles add authentication-types=wpa2-eap management-protection=allowed mode=dynamic-keys name=WPA2-EAP-MESH
+</pre></div>
+
+
+<ul>
+<li>Name: <code>WPA2-EAP-MESH</code></li>
+<li>Mode: <code>dynamic keys</code></li>
+<li>Authentication Types: [v] <code>WPA2 EAP</code></li>
+<li>Unicast &amp; Group Ciphers: <code>aes ccm</code></li>
+<li>Supplicant Identity: <code>ap1</code> (для каждой точки свой, на всякий случай, если вдруг точка начнет авторизовываться в RADIUS, будет легче найти проблемную).</li>
+<li>Management Protection: <code>Disabled</code></li>
+<li>EAP Methods: <code>passthrough</code></li>
+<li>TLS Mode: <code>no certificates</code></li>
+<li>TLS Certificate: <code>none</code></li>
+</ul>
+<h1>Настраиваем <code>wlan1</code> интерфейс:</h1>
+<div class="highlight"><pre><span></span>/interface wireless set [ find default-name=wlan1 ] band=2ghz-b/g/n disabled=no l2mtu=2290 mode=ap-bridge radio-name=AP1 security-profile=WPA2-EAP-MESH ssid=YOUR_SSID wds-default-bridge=Mesh-Interface wds-mode=dynamic-mesh wireless-protocol=802.11
+</pre></div>
+
+
+<h1>Выбираем канал</h1>
+<p>Частоту <s>канал</s>, я выбрал <code>2412</code></p>
+<blockquote>
+<p><strong>ВАЖНО</strong>, для работы WDS необходимо, чтобы канал на ВСЕХ роутерах был один.</p>
+</blockquote>
+<ul>
+<li>Mode: ap bridge</li>
+<li>Band: 2GHz-B/G/N</li>
+</ul>
+<h1>Настройка <strong>SSID</strong> сети</h1>
+<ul>
+<li>Wireless Protocol: <code>802.11</code></li>
+<li>Security Profile: <code>WPA2-EAP-MESH</code></li>
+<li>Bridge Mode: <code>Enabled</code></li>
+<li>WDS Mode: <code>Dynamic-Mesh</code></li>
+<li>WDS Default Bridge: <code>Mesh-Interface</code></li>
+</ul>
+<h1>Настройка <strong>WDS</strong>:</h1>
+<p>Создаем <strong>Security-Profile</strong>, чтобы роутеры могли авторизовывать друг друга:</p>
+<div class="highlight"><pre><span></span>/interface wireless security-profiles add authentication-types=wpa2-psk eap-methods=&quot;&quot; mode=dynamic-keys name=4WDS supplicant-identity=&quot;&quot; wpa2-pre-shared-key=wpa2password4wds
+</pre></div>
+
+
+<ul>
+<li>Name: <code>4WDS</code></li>
+<li>Mode: <code>dynamic keys</code></li>
+<li>Authentication Types: [v] <code>WPA2 PSK</code></li>
+<li>Unicast &amp; Group Ciphers: <code>aes ccm</code></li>
+<li>WPA2 Pre-Shared Key: <code>ОдинаковыйПарольНаВсехРоутерах</code></li>
+<li>Management Protection: <code>Disabled</code></li>
+</ul>
+<h1>Создаем <strong>Connect-List</strong></h1>
+<p>Добавляем в него <strong>MAC</strong>-адреса каждого роутера.</p>
+<div class="highlight"><pre><span></span>/interface wireless connect-list add interface=wlan1 security-profile=4WDS wireless-protocol=802.11 mac-address=4C:5E:0C:XX:XX:01 comment=ap2
+/interface wireless connect-list add interface=wlan1 security-profile=4WDS wireless-protocol=802.11 mac-address=4C:5E:0C:XX:XX:10 comment=ap3
+</pre></div>
+
+
+<ul>
+<li>Interface: <code>Wlan1</code></li>
+<li>Mac Address: <code>XX:XX:XX:XX:XX:XX</code></li>
+<li>[V] Connect</li>
+<li>Wireless Protocol: <code>802.11</code></li>
+<li>Security Profile: <code>4WDS</code></li>
+</ul>
+<h1>Добавляем информацию о RADIUS сервере:</h1>
+<div class="highlight"><pre><span></span>/radius add address=10.10.10.254 secret=supersecretpwd service=wireless
+</pre></div>
+
+
+<ul>
+<li>Service: [v] <code>wireless</code></li>
+<li>Address: <code>10.10.10.254</code> (у меня RADIUS на этом сервере).</li>
+<li>Secret: <code>*****</code> (Пароль от радиус сервера).</li>
+<li>Authentication Port: <code>1812</code> (стандартный)</li>
+<li>Accounting Port: <code>1813</code> (стандартный)</li>
+</ul>
+<h1>Настройка RADIUS сервера:</h1>
+<blockquote>
+<p>Продолжение следует...</p>
+<p>Технология надежд не оправдала, возможно я неправильно что-то сделал, спустя какое-то время вернули обратно в обычный режим WPA2-EAP с разными частотами <s>каналами</s>
+и заниженой мощьностью передатчика (исходили из расчета ~10-20 активных клиентов на 1 точку доступа).</p>
+</blockquote>
+<hr>
+<p>Ссылки по теме:</p>
+<ol>
+<li><a href="http://wiki.mikrotik.com/wiki/Manual:Interface/Wireless#RADIUS_EAP_pass-through_authentication">Manual:Interface/Wireless</a></li>
+<li><a href="http://wiki.mikrotik.com/wiki/Wireless_WDS_Mesh">Wireless WDS Mesh</a></li>
+<li><a href="http://habrahabr.ru/post/217657/">Контроллер Wi-Fi точек доступа на Mikrotik</a></li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+                var disqus_url = 'http://blog.metajiji.tk/blog/mikrotik-wpa2-eap-wds-mesh/';
+
+            var disqus_config = function () {
+                this.language = "ru";
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/METAJIJI/"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://stackoverflow.com/users/2020443/metajiji"><i class="fa fa-stack-overflow fa-lg"></i> stackoverflow</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/fedora-chromium-firefox-flashplayer/">Fedora 25 install adobe flashplayer</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/atlassian/"><i class="fa fa-folder-open fa-lg"></i>Atlassian</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bash/"><i class="fa fa-folder-open fa-lg"></i>Bash</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bat-cmd/"><i class="fa fa-folder-open fa-lg"></i>Bat-cmd</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bind/"><i class="fa fa-folder-open fa-lg"></i>Bind</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/blog/"><i class="fa fa-folder-open fa-lg"></i>Blog</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/centos/"><i class="fa fa-folder-open fa-lg"></i>CentOS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/docker/"><i class="fa fa-folder-open fa-lg"></i>Docker</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/fedora/"><i class="fa fa-folder-open fa-lg"></i>Fedora</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/freebsd/"><i class="fa fa-folder-open fa-lg"></i>FreeBSD</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/gitlab/"><i class="fa fa-folder-open fa-lg"></i>Gitlab</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/hardware/"><i class="fa fa-folder-open fa-lg"></i>Hardware</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/javascript/"><i class="fa fa-folder-open fa-lg"></i>JavaScript</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/linux/"><i class="fa fa-folder-open fa-lg"></i>Linux</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/macosx/"><i class="fa fa-folder-open fa-lg"></i>MacOSX</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/mikrotik/"><i class="fa fa-folder-open fa-lg"></i>Mikrotik</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/postgresql/"><i class="fa fa-folder-open fa-lg"></i>PostgreSQL</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/ubuntu/"><i class="fa fa-folder-open fa-lg"></i>Ubuntu</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/vcs/"><i class="fa fa-folder-open fa-lg"></i>VCS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/windows/"><i class="fa fa-folder-open fa-lg"></i>Windows</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zabbix/"><i class="fa fa-folder-open fa-lg"></i>Zabbix</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zimbra/"><i class="fa fa-folder-open fa-lg"></i>Zimbra</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 Denis Kadyshev
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://blog.metajiji.tk/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://blog.metajiji.tk/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://blog.metajiji.tk/theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+    <!-- Google Analytics Universal -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106896103-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics Universal Code -->
+
+
+</body>
+</html>

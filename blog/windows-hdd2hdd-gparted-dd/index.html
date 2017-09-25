@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Перенос Windows 7 с одного HDD на другой HDD меньшего объема. (dd + Gparted) - For system administrator</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://blog.metajiji.tk/favicon.png" rel="icon">
+
+<link rel="canonical" href="http://blog.metajiji.tk/blog/windows-hdd2hdd-gparted-dd/">
+
+        <meta name="author" content="Denis Kadyshev" />
+        <meta name="keywords" content="windows,gparted,dd" />
+        <meta name="description" content="На работе часто бывает необходимо перенести или скопировать Windows 7 с одного HDD на другой по разным причинам, умирает HDD или нужно установить HDD с меньшим или наоборот с бОльшим объемом, в общем проблема решается довольно просто, при помощи 2 утилит dd и Gparted. Загружаемся в Ubuntu LiveCD, у меня …" />
+
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/bootstrap.custom.min.css" type="text/css"/>
+    <link href="http://blog.metajiji.tk/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://blog.metajiji.tk/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="http://blog.metajiji.tk/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/style.css" type="text/css"/>
+
+
+        <link href="http://blog.metajiji.tk/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator ATOM Feed"/>
+
+
+
+        <link href="http://blog.metajiji.tk/feeds/windows.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator Windows ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://blog.metajiji.tk/" class="navbar-brand">
+For system administrator            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/">Blog</a></li>
+                         <li><a href="http://blog.metajiji.tk/about/">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="http://blog.metajiji.tk/archives/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="http://blog.metajiji.tk" title="For system administrator"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="http://blog.metajiji.tk/category/windows/" title="Windows">Windows</a></li>
+                <li class="active">Перенос Windows 7 с одного HDD на другой HDD меньшего объема. (dd + Gparted)</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://blog.metajiji.tk/blog/windows-hdd2hdd-gparted-dd/"
+                       rel="bookmark"
+                       title="Permalink to Перенос Windows 7 с одного HDD на другой HDD меньшего объема. (dd + Gparted)">
+                        Перенос Windows 7 с одного HDD на другой HDD меньшего объема. (dd + Gparted)
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2012-02-08T00:00:00+07:00"> Ср. 08 Февраль 2012</time>
+    </span>
+          <span class="label label-default">Modified</span>
+            <span class="modified">
+                <i class="fa fa-calendar"></i><time datetime="2012-02-08T00:00:00+07:00"> Ср. 08 Февраль 2012</time>
+            </span>
+
+
+            <span class="label label-default">By</span>
+            <a href="http://blog.metajiji.tk/author/denis-kadyshev.html"><i class="fa fa-user"></i> Denis Kadyshev</a>
+
+        <span class="label label-default">Category</span>
+        <a href="http://blog.metajiji.tk/category/windows/">Windows</a>
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://blog.metajiji.tk/tag/windows/">windows</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/gparted/">gparted</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/dd/">dd</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>На работе часто бывает необходимо перенести или скопировать <strong>Windows 7</strong> с одного <strong>HDD</strong> на другой по разным причинам,
+ умирает <strong>HDD</strong> или нужно установить <strong>HDD</strong> с меньшим или наоборот с бОльшим объемом,
+ в общем проблема решается довольно просто, при помощи 2 утилит <code>dd</code> и <strong>Gparted</strong>.</p>
+<p>Загружаемся в <strong>Ubuntu LiveCD</strong>, у меня была загрузка по сети образа <strong>Ubuntu 12.04 LTS Desktop</strong>.</p>
+<p>И первым делом копируем главную загрузочную запись (<strong>MBR</strong>):</p>
+<div class="highlight"><pre><span></span>dd <span class="k">if</span><span class="o">=</span>/dev/sda <span class="nv">of</span><span class="o">=</span>/dev/sdb <span class="nv">bs</span><span class="o">=</span><span class="m">512</span> <span class="nv">count</span><span class="o">=</span><span class="m">1</span>
+</pre></div>
+
+
+<p>После чего запускаем <strong>Ggparted</strong> и копируем разделы (она имеется в обычном <strong>ISO</strong>).</p>
+<p>Не забываем проверить флаг <code>boot</code> на <code>100М</code>байтном разделе.</p>
+<hr>
+<p>Немного об утилите <code>dd</code>:</p>
+<ul>
+<li><code>if=/dev/sda</code> -- <code>i</code>nput <code>f</code>ile (входной файл, в данном случае диск с <strong>Windows 7</strong>)</li>
+<li><code>of=/dev/sdb</code> -- <code>o</code>utput <code>f</code>ile (выходной файл, в данном случае диск куда копируем)</li>
+<li><code>bs=512</code> -- <strong>b</strong>lock <strong>s</strong>ize (<strong>Внимание</strong>! Операнд <code>count</code> работает с блоками, а не с байтами! <code>512</code> блоков)</li>
+<li><code>count=1</code> -- <code>count</code> (количество раз проведения операции копирования буфером)</li>
+</ul>
+<p><strong>MBR</strong> находится в <code>0</code> секторе первого раздела жесткого диска и занимает вместе с таблицей разделов ровно <code>512</code> байт.
+ Поэтому и размер блока выбираем <code>512</code>, а количество <code>count</code> единица - получаем <code>512</code> байт.</p>
+<p>А если нам нужно не весь <strong>MBR</strong>, а только загрузочный код, который занимает первые <code>446</code> байт <code>0</code> сектора, то придется изменить размер блока:</p>
+<div class="highlight"><pre><span></span>dd <span class="k">if</span><span class="o">=</span>/dev/sda <span class="nv">of</span><span class="o">=</span>boot-code.mbr <span class="nv">bs</span><span class="o">=</span><span class="m">446</span> <span class="nv">count</span><span class="o">=</span><span class="m">1</span>
+</pre></div>
+
+
+<p>Обратите внимание, на то, что сохраняем в файл, т.к. в устройство записать такой объем не получится, как уже говорилось выше, запись на устройства производится блоками по <code>512</code> байт.</p>
+<p>Чтобы теперь записать сохраненный загрузчик, нужно получить блок размером в <code>512</code> байт,
+ для этого сохраняем в другой файл таблицу разделов - это оставшиеся <code>66</code> байт после загрузочного кода - <code>446</code> байт.</p>
+<div class="highlight"><pre><span></span>dd <span class="k">if</span><span class="o">=</span>/dev/sdb <span class="nv">of</span><span class="o">=</span>part-table.mbr <span class="nv">bs</span><span class="o">=</span><span class="m">1</span> <span class="nv">count</span><span class="o">=</span><span class="m">66</span> <span class="nv">skip</span><span class="o">=</span><span class="m">446</span>
+</pre></div>
+
+
+<p><code>skip=n</code>(блоков) Этот операнд пропускает n блоков от начала входного (<code>if</code>) файла(устройства), а затем копирует указанное количество блоков.</p>
+<p><strong>Внимание</strong>! Операнд <code>skip</code> (как и <code>count</code>) имеет дело с блоками, а не с байтами! Поэтому размер блока следует выбирать вдумчиво.
+И еще обратите внимание на то, что сейчас мы выбрали устройство <code>/dev/sdb</code>, т.к. нам нужна таблица разделов именно этого устройства,
+ ведь мы туда собираемся копировать загрузчик с устройства <code>/dev/sda</code> :)</p>
+<p>Теперь нужно "собрать" <strong>MBR</strong> из имеющихся кусочков:</p>
+<div class="highlight"><pre><span></span>cat boot-code.mbr &gt; mbr
+cat part-table.mbr &gt;&gt; mbr
+</pre></div>
+
+
+<p>Теперь наконец-то мы можем записать загрузочный код на устройство!</p>
+<div class="highlight"><pre><span></span>dd <span class="k">if</span><span class="o">=</span>mbr <span class="nv">of</span><span class="o">=</span>/dev/sdb <span class="nv">bs</span><span class="o">=</span><span class="m">512</span> <span class="nv">count</span><span class="o">=</span><span class="m">1</span>
+</pre></div>
+
+
+<hr>
+<p>Ссылки по теме:</p>
+<ol>
+<li><a href="http://www.youisbee.ru/index.php/documents/25-linux/62-dd.pdf">Команда dd и её использование.</a></li>
+<li><a href="http://asplinux.net/node/5548">Как мне скопировать загрузочную запись линуха на дискету?</a></li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://blog.metajiji.tk/blog/rdp-windows-easy-print-driver/">RDP Windows, перенаправленные принтеры, Easy Print Driver.</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/microsoft-office-starter-2010-file-associations/">Восстановление ассоциаций офисных документов в Microsoft Office Starter 2010</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/windows-skype-disable-ad/">Блокирование рекламы в Skype 6.11.66.102 bat,cmd файл.</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/KIASUO-1252-windows-server-x64-corflags-exe/">Запуск КИАСУО 1252 на Windows Server x64, corflags.exe, NetFramework 3.5</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/taskhost-exe-thread-exit-cpu-high-usage/">taskhost.exe "Thread exit" CPU high usage</a></li>
+    </ul>
+</section>
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+                var disqus_url = 'http://blog.metajiji.tk/blog/windows-hdd2hdd-gparted-dd/';
+
+            var disqus_config = function () {
+                this.language = "ru";
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/METAJIJI/"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://stackoverflow.com/users/2020443/metajiji"><i class="fa fa-stack-overflow fa-lg"></i> stackoverflow</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/fedora-chromium-firefox-flashplayer/">Fedora 25 install adobe flashplayer</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/atlassian/"><i class="fa fa-folder-open fa-lg"></i>Atlassian</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bash/"><i class="fa fa-folder-open fa-lg"></i>Bash</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bat-cmd/"><i class="fa fa-folder-open fa-lg"></i>Bat-cmd</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bind/"><i class="fa fa-folder-open fa-lg"></i>Bind</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/blog/"><i class="fa fa-folder-open fa-lg"></i>Blog</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/centos/"><i class="fa fa-folder-open fa-lg"></i>CentOS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/docker/"><i class="fa fa-folder-open fa-lg"></i>Docker</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/fedora/"><i class="fa fa-folder-open fa-lg"></i>Fedora</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/freebsd/"><i class="fa fa-folder-open fa-lg"></i>FreeBSD</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/gitlab/"><i class="fa fa-folder-open fa-lg"></i>Gitlab</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/hardware/"><i class="fa fa-folder-open fa-lg"></i>Hardware</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/javascript/"><i class="fa fa-folder-open fa-lg"></i>JavaScript</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/linux/"><i class="fa fa-folder-open fa-lg"></i>Linux</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/macosx/"><i class="fa fa-folder-open fa-lg"></i>MacOSX</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/mikrotik/"><i class="fa fa-folder-open fa-lg"></i>Mikrotik</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/postgresql/"><i class="fa fa-folder-open fa-lg"></i>PostgreSQL</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/ubuntu/"><i class="fa fa-folder-open fa-lg"></i>Ubuntu</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/vcs/"><i class="fa fa-folder-open fa-lg"></i>VCS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/windows/"><i class="fa fa-folder-open fa-lg"></i>Windows</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zabbix/"><i class="fa fa-folder-open fa-lg"></i>Zabbix</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zimbra/"><i class="fa fa-folder-open fa-lg"></i>Zimbra</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 Denis Kadyshev
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://blog.metajiji.tk/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://blog.metajiji.tk/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://blog.metajiji.tk/theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+    <!-- Google Analytics Universal -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106896103-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics Universal Code -->
+
+
+</body>
+</html>

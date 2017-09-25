@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Запуск и адаптация МАРК-SQL 1.5.4 для MySQL 5.x - For system administrator</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://blog.metajiji.tk/favicon.png" rel="icon">
+
+<link rel="canonical" href="http://blog.metajiji.tk/blog/marc-sql-1.5.4-mysql-5.x/">
+
+        <meta name="author" content="Denis Kadyshev" />
+        <meta name="keywords" content="FreeBSD,Linux,MySQL,marc sql,МАРК-SQL,АИБС" />
+        <meta name="description" content="Столкнулся с проблемой, АИБС &#34;МАРК-SQL&#34; для школьных библиотек 1.5.4 не работала с MySQL, а разработчики заверяли, что программа не совместима с MySQL. Решил проанализировать запросы, которые ходят между программой и сервером при помощи MySQL-Proxy [2]. И сразу увидел некорректный запрос с использованием зарезервированного слова SEPARATOR: SELECT TAG,SUBTAG …" />
+
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/bootstrap.custom.min.css" type="text/css"/>
+    <link href="http://blog.metajiji.tk/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://blog.metajiji.tk/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="http://blog.metajiji.tk/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/style.css" type="text/css"/>
+
+
+        <link href="http://blog.metajiji.tk/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator ATOM Feed"/>
+
+
+
+        <link href="http://blog.metajiji.tk/feeds/windows.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator Windows ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://blog.metajiji.tk/" class="navbar-brand">
+For system administrator            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/">Blog</a></li>
+                         <li><a href="http://blog.metajiji.tk/about/">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="http://blog.metajiji.tk/archives/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="http://blog.metajiji.tk" title="For system administrator"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="http://blog.metajiji.tk/category/windows/" title="Windows">Windows</a></li>
+                <li class="active">Запуск и адаптация МАРК-SQL 1.5.4 для MySQL 5.x</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://blog.metajiji.tk/blog/marc-sql-1.5.4-mysql-5.x/"
+                       rel="bookmark"
+                       title="Permalink to Запуск и адаптация МАРК-SQL 1.5.4 для MySQL 5.x">
+                        Запуск и адаптация МАРК-SQL 1.5.4 для MySQL 5.x
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-07-04T00:00:00+07:00"> Пт. 04 Июль 2014</time>
+    </span>
+          <span class="label label-default">Modified</span>
+            <span class="modified">
+                <i class="fa fa-calendar"></i><time datetime="2014-07-04T00:00:00+07:00"> Пт. 04 Июль 2014</time>
+            </span>
+
+
+            <span class="label label-default">By</span>
+            <a href="http://blog.metajiji.tk/author/denis-kadyshev.html"><i class="fa fa-user"></i> Denis Kadyshev</a>
+
+        <span class="label label-default">Category</span>
+        <a href="http://blog.metajiji.tk/category/windows/">Windows</a>
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://blog.metajiji.tk/tag/freebsd/">FreeBSD</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/linux/">Linux</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/mysql/">MySQL</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/marc-sql/">marc sql</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/mark-sql/">МАРК-SQL</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/aibs/">АИБС</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Столкнулся с проблемой, <strong>АИБС "МАРК-SQL" для школьных библиотек 1.5.4</strong> не работала с <strong>MySQL</strong>, а разработчики заверяли, что программа не совместима с <strong>MySQL</strong>.</p>
+<p>Решил проанализировать запросы, которые ходят между программой и сервером при помощи <a href="http://dev.mysql.com/downloads/mysql-proxy/" title="Download MySQL Proxy">MySQL-Proxy [2]</a>.</p>
+<p>И сразу увидел некорректный запрос с использованием зарезервированного слова <code>SEPARATOR</code>:</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TAG</span><span class="p">,</span><span class="n">SUBTAG</span><span class="p">,</span><span class="n">FLAGS</span><span class="p">,</span><span class="n">SEPARATOR</span><span class="p">,</span><span class="n">CAPTION</span> <span class="k">FROM</span> <span class="n">TAG</span>
+</pre></div>
+
+
+<p>После добавления обратных кавычек к <a href="http://dev.mysql.com/doc/mysqld-version-reference/en/mysqld-version-reference-reservedwords-5-0.html" title="Reserved Words in MySQL 5.0">зарезервированному слову <code>SEPARATOR</code> [1]</a> запрос выполнился в <strong>MySQL</strong> без проблем:</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">TAG</span><span class="p">,</span><span class="n">SUBTAG</span><span class="p">,</span><span class="n">FLAGS</span><span class="p">,</span><span class="o">`</span><span class="n">SEPARATOR</span><span class="o">`</span><span class="p">,</span><span class="n">CAPTION</span> <span class="k">FROM</span> <span class="n">TAG</span>
+</pre></div>
+
+
+<p>Значит для нормальной работы программы <strong>АИБС "МАРК-SQL" для школьных библиотек 1.5.4</strong> нужно ловить каждый запрос, и если требуется, экранировать зарезервированные слова <strong>MySQL</strong> на лету. С этой задачей вполне успешно справится <a href="http://dev.mysql.com/downloads/mysql-proxy/" title="Download MySQL Proxy">MySQL-Proxy [2]</a> с поддержкой <a href="http://www.lua.org/pil/20.1.html" title="Programming in Lua">lua скриптов [4]</a>.</p>
+<p>После установки, запуска <strong>MySQL-Proxy</strong> и подключения <code>lua</code> скрипта:</p>
+<div class="highlight"><pre><span></span><span class="kr">function</span> <span class="nf">MyDebug</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>
+        <span class="c1">-- enable\disable debug messages print to stdout.</span>
+        <span class="kd">local</span> <span class="n">dbg</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="kr">if</span> <span class="n">dbg</span> <span class="o">==</span> <span class="mi">1</span> <span class="kr">then</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[DEBUG] &#39;</span> <span class="o">..</span> <span class="n">str</span><span class="p">)</span>
+        <span class="kr">end</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">read_query</span><span class="p">(</span><span class="n">packet</span><span class="p">)</span>
+        <span class="kd">local</span> <span class="n">file</span> <span class="o">=</span> <span class="nb">io.open</span><span class="p">(</span><span class="s1">&#39;/var/log/mysql-proxy.log&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+        <span class="kd">local</span> <span class="n">q</span> <span class="o">=</span> <span class="nb">string.sub</span><span class="p">(</span><span class="n">packet</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">MyDebug</span><span class="p">(</span><span class="s1">&#39;Orig. Query: &#39;</span> <span class="o">..</span> <span class="n">q</span><span class="p">)</span>
+        <span class="n">file</span><span class="p">:</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Orig. Query: &#39;</span> <span class="o">..</span> <span class="n">q</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="c1">-- Таблица зарезервированных слов MySQL.</span>
+        <span class="c1">-- http://dev.mysql.com/doc/mysqld-version-reference/en/mysqld-version-reference-reservedwords-5-7.html</span>
+
+        <span class="n">q</span> <span class="o">=</span> <span class="nb">string.gsub</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="s1">&#39;(SEPARATOR)&#39;</span><span class="p">,</span> <span class="s1">&#39;`%1`&#39;</span><span class="p">)</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="nb">string.gsub</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="s1">&#39;(INT%d)&#39;</span><span class="p">,</span> <span class="s1">&#39;`%1`&#39;</span><span class="p">)</span>
+
+        <span class="c1">-- Исправление поискового запроса (захардкоженного в marcp.exe) и регистронезависимый поиск.</span>
+        <span class="kd">local</span> <span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">str1</span><span class="p">,</span><span class="n">str2</span><span class="p">,</span><span class="n">str3</span> <span class="o">=</span> <span class="nb">string.find</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="s2">&quot;SELECT TERM,CNT FROM (.-) WHERE TERM%s*&gt;=%s*(&#39;.-&#39;)%s(.*)&quot;</span><span class="p">)</span> <span class="c1">-- TODO: проверить всегда ли передаются кавычки в поле WHERE TERM &gt;= &#39;&#39;.</span>
+        <span class="kr">if</span> <span class="n">str1</span> <span class="o">~=</span> <span class="kc">nil</span> <span class="ow">and</span> <span class="n">str2</span> <span class="o">~=</span> <span class="kc">nil</span> <span class="ow">and</span> <span class="n">str3</span> <span class="o">~=</span> <span class="kc">nil</span> <span class="kr">then</span>
+                <span class="n">MyDebug</span><span class="p">(</span><span class="s1">&#39;str1: &#39;</span> <span class="o">..</span> <span class="n">str1</span><span class="p">);</span> <span class="n">MyDebug</span><span class="p">(</span><span class="s1">&#39;str2: &#39;</span> <span class="o">..</span> <span class="n">str2</span><span class="p">);</span> <span class="n">MyDebug</span><span class="p">(</span><span class="s1">&#39;str3: &#39;</span> <span class="o">..</span> <span class="n">str3</span><span class="p">)</span>
+                <span class="n">str2</span> <span class="o">=</span> <span class="nb">string.gsub</span><span class="p">(</span><span class="n">str2</span><span class="p">,</span> <span class="s2">&quot;^&#39;&quot;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="c1">-- Delete start &#39;.</span>
+                <span class="n">str2</span> <span class="o">=</span> <span class="nb">string.gsub</span><span class="p">(</span><span class="n">str2</span><span class="p">,</span> <span class="s2">&quot;&#39;$&quot;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="c1">-- Delete end &#39;.</span>
+                <span class="n">MyDebug</span><span class="p">(</span><span class="s1">&#39;Fixed str2: &#39;</span> <span class="o">..</span> <span class="n">str2</span><span class="p">)</span>
+                <span class="n">q</span> <span class="o">=</span> <span class="nb">string.format</span><span class="p">(</span><span class="s2">&quot;SELECT TERM,CNT FROM %s WHERE LOWER(TERM) LIKE LOWER(&#39;%s%%&#39;) %s&quot;</span><span class="p">,</span><span class="n">str1</span><span class="p">,</span><span class="n">str2</span><span class="p">,</span><span class="n">str3</span><span class="p">)</span>
+        <span class="kr">end</span>
+
+        <span class="c1">-- Исправляем кавычки в запросе.</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="nb">string.gsub</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="s1">&#39;SELECT CODE,NAME FROM%s+&quot;(.+)&quot;%s*(.*)&#39;</span><span class="p">,</span> <span class="s1">&#39;SELECT CODE,NAME FROM `%1` %2&#39;</span><span class="p">)</span> <span class="c1">-- Del start &#39;.</span>
+
+        <span class="n">MyDebug</span><span class="p">(</span><span class="s1">&#39;Fixed query: &#39;</span> <span class="o">..</span> <span class="n">q</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">file</span><span class="p">:</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Fixed query: &#39;</span> <span class="o">..</span> <span class="n">q</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">file</span><span class="p">:</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="n">proxy</span><span class="p">.</span><span class="n">queries</span><span class="p">:</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">string.char</span><span class="p">(</span><span class="n">proxy</span><span class="p">.</span><span class="n">COM_QUERY</span><span class="p">)</span> <span class="o">..</span> <span class="n">q</span><span class="p">,</span> <span class="p">{</span><span class="n">resultset_is_needed</span> <span class="o">=</span> <span class="kc">true</span><span class="p">})</span>
+
+        <span class="kr">return</span> <span class="n">proxy</span><span class="p">.</span><span class="n">PROXY_SEND_QUERY</span>
+<span class="kr">end</span>
+
+<span class="kr">function</span> <span class="nf">read_query_result</span><span class="p">(</span><span class="n">inj</span><span class="p">)</span>
+        <span class="kr">if</span> <span class="n">inj</span><span class="p">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">inj</span><span class="p">.</span><span class="n">resultset</span><span class="p">.</span><span class="n">rows</span> <span class="o">~=</span> <span class="kc">nil</span> <span class="kr">then</span>
+                <span class="kd">local</span> <span class="n">file</span> <span class="o">=</span> <span class="nb">io.open</span><span class="p">(</span><span class="s1">&#39;/var/log/mysql-proxy.log&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+                <span class="kr">for</span> <span class="n">row</span> <span class="kr">in</span> <span class="n">inj</span><span class="p">.</span><span class="n">resultset</span><span class="p">.</span><span class="n">rows</span> <span class="kr">do</span>
+                <span class="kd">local</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="kd">local</span> <span class="n">fields</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="kr">while</span> <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="kr">do</span>
+                        <span class="kr">if</span> <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">row</span> <span class="kr">then</span> <span class="kr">break</span> <span class="kr">end</span>
+                                <span class="n">file</span><span class="p">:</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Response field: &#39;</span> <span class="o">..</span> <span class="n">inj</span><span class="p">.</span><span class="n">resultset</span><span class="p">.</span><span class="n">fields</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span> <span class="o">..</span> <span class="s1">&#39; =&gt; &#39;</span> <span class="o">..</span> <span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">..</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                                <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+                        <span class="kr">end</span>
+                <span class="kr">end</span>
+                <span class="n">file</span><span class="p">:</span><span class="n">close</span><span class="p">()</span>
+                <span class="kr">return</span> <span class="n">proxy</span><span class="p">.</span><span class="n">PROXY_IGNORE_RESULT</span>
+        <span class="kr">end</span>
+<span class="kr">end</span>
+</pre></div>
+
+
+<p>В ходе экспериментов для подключения к БД был получен такой конфиг <code>dns.ini</code> для работы с <strong>MySQL</strong>:</p>
+<div class="highlight"><pre><span></span><span class="na">Универс|DRIVER</span><span class="o">=</span><span class="s">MySQL ODBC 5.2 Unicode Driver;NO_SSPS=1;MULTI_STATEMENTS=1;AUTO_RECONNECT=1;LOG_QUERY=0;IGNORE_SPACE=1;COMPRESSED_PROTO=1;NO_PROMPT=1;CHARSET=cp1251;DATABASE=marcsql;SERVER=192.168.4.26;PORT=4040;UID=marcsql;PASSWORD=password;</span>
+</pre></div>
+
+
+<p>Описание некоторых опций:</p>
+<ul>
+<li><code>NO_SSPS=1;</code> - Включение подстановок на стороне клиента, а не сервера (т.е. запросы в которых есть знаки "?").</li>
+<li><code>COMPRESSED_PROTO=1;</code> - Включение сжатия (немного повышается скорость работы с большими результатами запросов).</li>
+<li><code>NO_PROMPT=1;</code> - Отключение окна запроса, при переподключении к БД.</li>
+<li><code>CHARSET=cp1251;</code> - Кодировка в которой будет идти обмен между сервером и клиентом (программа для <strong>Windows</strong> и работает в <code>cp1251</code>).</li>
+<li><code>BASE=marcsql;</code> - Имя базы.</li>
+<li><code>SERVER=192.168.4.26;</code> - Адрес сервера <strong>MySQL-Proxy</strong>.</li>
+<li><code>PORT=4040;</code> - Порт на котором работает <strong>MySQL-Proxy</strong>.</li>
+<li><code>UID=marcsql;</code> - Логин, для подключения к БД.</li>
+<li><code>PASSWORD=password;</code> - Пароль, для подключения к БД.</li>
+</ul>
+<p>Но на этом рано останавливаться, нужно еще привести в порядок запросы в файлах программы да и самой программе объяснить, что мы будем использовать <strong>MySQL</strong>, а не <strong>MS Access</strong>:
+Добавляем в конец информацию о <code>MySQL</code> в <code>bin/db.ini</code>:</p>
+<div class="highlight"><pre><span></span><span class="k">[Mysql]</span>
+
+<span class="na">ScriptPath</span><span class="o">=</span><span class="s">..\sql\Mysql</span>
+<span class="na">CreateTempTable</span><span class="o">=</span><span class="s">CREATE TABLE &amp;Table&amp;TabSuf(DOC_ID INTEGER PRIMARY KEY)</span>
+<span class="na">DictQuery</span><span class="o">=</span><span class="s">SELECT TERM,CNT FROM &amp;Table</span>
+</pre></div>
+
+
+<p>В файле <code>DbmsParams.ini</code>:</p>
+<div class="highlight"><pre><span></span><span class="k">[Mysql]</span>
+
+<span class="na">$VARCHAR</span><span class="o">=</span><span class="s">VARCHAR</span>
+<span class="na">$COUNTER</span><span class="o">=</span><span class="s">INT AUTO_INCREMENT</span>
+<span class="na">$DOUBLE</span><span class="o">=</span><span class="s">FLOAT</span>
+<span class="na">$LONGTEXT</span><span class="o">=</span><span class="s">TEXT</span>
+<span class="na">$LONGBINARY</span><span class="o">=</span><span class="s">TEXT</span>
+<span class="na">$MIDTEXT</span><span class="o">=</span><span class="s">TEXT</span>
+<span class="na">$TEXT</span><span class="o">=</span><span class="s">TEXT</span>
+<span class="na">$DBPREF_</span><span class="o">=</span><span class="s">marcsql.</span>
+<span class="na">$COLUMN</span><span class="o">=</span>
+<span class="na">$TOP1000</span><span class="o">=</span>
+<span class="na">$ALTERCOLUMN</span><span class="o">=</span><span class="s">ALTER COLUMN</span>
+</pre></div>
+
+
+<p>Добавляем информацию о возрастном маркере в <code>EditMap.ini</code>:</p>
+<div class="highlight"><pre><span></span><span class="k">[333a]</span>
+<span class="na">EditForm</span><span class="o">=</span><span class="s">TECombo</span>
+<span class="na">ComboValues</span><span class="o">=</span><span class="s">0+  Для дошкольного возраста,6+  Для младшего школьного возраста,12+ Для среднего школьного возраста,16+ Для старшего школьного возраста,18+ Для взрослых</span>
+<span class="na">TagValues</span><span class="o">=</span><span class="s">Для дошкольного возраста,Для младшего школьного возраста,Для среднего школьного возраста,Для старшего школьного возраста,Для взрослых</span>
+<span class="na">Separator</span><span class="o">=</span><span class="s">,</span>
+<span class="na">OnlyFormEdit</span><span class="o">=</span><span class="s">Yes</span>
+<span class="na">DefaultMenu</span><span class="o">=</span><span class="s">NO</span>
+
+<span class="k">[200e]</span>
+<span class="na">EditForm</span><span class="o">=</span><span class="s">TECombo</span>
+<span class="na">ComboValues</span><span class="o">=</span><span class="s">[0+],[6+],[12+],[16+],[18+]</span>
+<span class="na">TagValues</span><span class="o">=</span><span class="s">[0+],[6+],[12+],[16+],[18+]</span>
+<span class="na">Separator</span><span class="o">=</span><span class="s">,</span>
+<span class="na">OnlyFormEdit</span><span class="o">=</span><span class="s">Yes</span>
+<span class="na">DefaultMenu</span><span class="o">=</span><span class="s">NO</span>
+</pre></div>
+
+
+<p>Добавляем редактор <strong>LibreOffice</strong> в файле <code>marc.ini</code> в секцию <code>[Editors]</code>:</p>
+<div class="highlight"><pre><span></span><span class="k">[Editors]</span>
+
+<span class="na">LibreOffice</span><span class="o">=</span><span class="s">swriter.exe</span>
+</pre></div>
+
+
+<p>Изменяем файл <code>phase.ini</code> под потребности нашей школы:</p>
+<div class="highlight"><pre><span></span><span class="k">[Книги]</span>
+
+<span class="na">CreateTags</span><span class="o">=</span><span class="s">245anpbco,100ae,700ae,653a,520a,020ac,090ax,084a,110a,260abc,440a,650a,200e,300ab,333a,952be,526cde,250a,998а,773b,773d,773t,773g,013ddee</span>
+<span class="na">EditTags</span><span class="o">=</span><span class="s">245,100,700,653,520,020,090,084,110,200,260,440,650,300,333,952,526,250,998,773</span>
+<span class="na">ViewTags</span><span class="o">=</span><span class="s">100a,100e,700a,700e,245a,245b,245o,245p,245n,260a,260b,260c,300a,300b,333a,440a,020a,020c,650a,090a,090x,084a</span>
+<span class="na">ShowAllTags</span><span class="o">=</span><span class="s">YES</span>
+<span class="na">RecType</span><span class="o">=</span><span class="s">a</span>
+<span class="na">BibLevel</span><span class="o">=</span><span class="s">m</span>
+</pre></div>
+
+
+<p>В файле <code>RdrData.ini</code>, в секции <code>[Common]</code> исправляем запрос <code>LastReaderQuery</code>:</p>
+<div class="highlight"><pre><span></span><span class="na">LastReaderQuery</span><span class="o">=</span><span class="s">SELECT RDR_ID FROM &amp;ReadersPrefREADERS ORDER BY LEN(RDR_ID) DESC, RDR_ID DESC LIMIT 1</span>
+</pre></div>
+
+
+<p>Теперь <strong>SQL файлы</strong>, заходим в каталог <code>sql</code>:
+Была проблема при удалении записей из таблиц словарей, исправляется в файле <code>delidx.sql</code>:
+Ищем строку:</p>
+<div class="highlight"><pre><span></span><span class="k">DELETE</span> <span class="k">FROM</span> <span class="o">&amp;</span><span class="k">Table</span> <span class="k">WHERE</span> <span class="n">CNT</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Заменяем её на:</p>
+<div class="highlight"><pre><span></span><span class="k">DELETE</span> <span class="k">FROM</span> <span class="o">&amp;</span><span class="k">Table</span> <span class="k">WHERE</span> <span class="n">CNT</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Исправляем проблему с удалением данных из таблицы <code>METAIDX</code> ищем в файле <code>dropdict.sql</code> строку:</p>
+<div class="highlight"><pre><span></span><span class="k">DELETE</span> <span class="k">FROM</span> <span class="n">METAIDX</span> <span class="k">WHERE</span> <span class="n">NAME</span><span class="o">=</span><span class="s1">&#39;&amp;Table.TERM&#39;</span>
+</pre></div>
+
+
+<p>Заменяем её на:</p>
+<div class="highlight"><pre><span></span><span class="k">DELETE</span> <span class="k">FROM</span> <span class="o">`</span><span class="n">METAIDX</span><span class="o">`</span> <span class="k">WHERE</span> <span class="o">`</span><span class="n">NAME</span><span class="o">`</span> <span class="o">=</span> <span class="s1">&#39;&amp;Table.`TERM`&#39;</span><span class="p">;</span>
+<span class="k">DELETE</span> <span class="k">FROM</span> <span class="o">`</span><span class="n">METAIDX</span><span class="o">`</span> <span class="k">WHERE</span> <span class="o">`</span><span class="n">NAME</span><span class="o">`</span> <span class="o">=</span> <span class="s1">&#39;&amp;Table.TERM&#39;</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Теперь создаем каталог <code>Mysql</code> и копируем все файлы из каталога <code>Access</code> в созданный каталог <code>Mysql</code> (напоминаю, мы должны быть в каталоге <code>sql</code>). Другими словами мы должны получить копию папки <code>sql/Acess</code>, но по адресу <code>sql/Mysql</code>.</p>
+<p>И приводим в порядок файлы в каталоге <code>sql/Mysql</code>:
+Файл <code>crdict.sql</code> приводим к такому виду:</p>
+<div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">METAIDX</span><span class="p">(</span><span class="o">`</span><span class="n">NAME</span><span class="o">`</span><span class="p">,</span><span class="o">`</span><span class="k">TYPE</span><span class="o">`</span><span class="p">,</span><span class="o">`</span><span class="n">MAXLEN</span><span class="o">`</span><span class="p">,</span><span class="o">`</span><span class="n">TAGS</span><span class="o">`</span><span class="p">,</span><span class="o">`</span><span class="n">CAPTION</span><span class="o">`</span><span class="p">,</span><span class="o">`</span><span class="n">SEP</span><span class="o">`</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="s1">&#39;&amp;Table.`TERM`&#39;</span><span class="p">,</span><span class="s1">&#39;&amp;Type&#39;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">MaxLen</span><span class="p">,</span><span class="s1">&#39;&amp;Taglist&#39;</span><span class="p">,</span><span class="s1">&#39;&amp;Caption&#39;</span><span class="p">,</span><span class="s1">&#39;&amp;Sep&#39;</span><span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">&amp;</span><span class="k">Table</span> <span class="p">(</span>
+ <span class="o">`</span><span class="n">IDX_ID</span><span class="o">`</span> <span class="nb">INT</span> <span class="n">AUTO_INCREMENT</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+ <span class="o">`</span><span class="n">TERM</span><span class="o">`</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="o">&amp;</span><span class="n">MaxLen</span><span class="p">),</span>
+ <span class="o">`</span><span class="n">CNT</span><span class="o">`</span> <span class="nb">INTEGER</span><span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`&amp;</span><span class="n">TableX</span><span class="o">`</span> <span class="p">(</span>
+ <span class="o">`</span><span class="n">IDX_ID</span><span class="o">`</span> <span class="nb">INTEGER</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+ <span class="o">`</span><span class="n">DOC_ID</span><span class="o">`</span> <span class="nb">INTEGER</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+ <span class="k">FOREIGN</span> <span class="k">KEY</span><span class="p">(</span><span class="o">`</span><span class="n">IDX_ID</span><span class="o">`</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="o">`&amp;</span><span class="k">Table</span><span class="o">`</span><span class="p">(</span><span class="o">`</span><span class="n">IDX_ID</span><span class="o">`</span><span class="p">));</span>
+
+<span class="k">CREATE</span> <span class="k">INDEX</span> <span class="o">&amp;</span><span class="n">TableXB</span> <span class="k">ON</span> <span class="o">&amp;</span><span class="n">TableX</span><span class="p">(</span><span class="o">`</span><span class="n">DOC_ID</span><span class="o">`</span><span class="p">);</span>
+<span class="k">CREATE</span> <span class="k">INDEX</span> <span class="o">&amp;</span><span class="n">TableXC</span> <span class="k">ON</span> <span class="o">&amp;</span><span class="n">TableX</span><span class="p">(</span><span class="o">`</span><span class="n">IDX_ID</span><span class="o">`</span><span class="p">);</span>
+</pre></div>
+
+
+<p>Файл <code>rebuild.sql</code> приводим к такому виду:</p>
+<div class="highlight"><pre><span></span><span class="k">DROP</span> <span class="k">TABLE</span> <span class="k">IF</span> <span class="k">EXISTS</span> <span class="o">`</span><span class="n">IDXTEMP</span><span class="o">`</span><span class="p">;</span>
+
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">IDXTEMP</span><span class="o">`</span> <span class="p">(</span><span class="o">`</span><span class="n">DOC_ID</span><span class="o">`</span> <span class="nb">INTEGER</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Term</span> <span class="nb">Text</span><span class="p">);</span>
+<span class="err">$</span><span class="n">BUILD</span><span class="p">;</span>
+<span class="err">$Инициализация</span> <span class="err">таблицы</span> <span class="err">индексов</span><span class="p">;</span>
+<span class="k">DELETE</span> <span class="k">FROM</span> <span class="o">&amp;</span><span class="n">TableX</span><span class="p">;</span>
+<span class="k">DELETE</span> <span class="k">FROM</span> <span class="o">&amp;</span><span class="k">Table</span><span class="p">;</span>
+<span class="err">$Заполнение</span> <span class="err">таблицы</span> <span class="err">индексов</span><span class="p">;</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="o">&amp;</span><span class="k">Table</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Term</span><span class="p">,</span><span class="n">CNT</span><span class="p">)</span> <span class="k">SELECT</span> <span class="o">&amp;</span><span class="n">Term</span><span class="p">,</span> <span class="k">Count</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Term</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">IDXTEMP</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="o">&amp;</span><span class="n">Term</span><span class="p">;</span>
+<span class="err">$Заполнение</span> <span class="err">таблицы</span> <span class="err">перекрестных</span> <span class="err">ссылок</span><span class="p">;</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="o">&amp;</span><span class="n">TableX</span><span class="p">(</span><span class="n">IDX_ID</span><span class="p">,</span><span class="n">DOC_ID</span><span class="p">)</span> <span class="k">SELECT</span> <span class="o">&amp;</span><span class="k">Table</span><span class="p">.</span><span class="n">IDX_ID</span><span class="p">,</span><span class="n">IDXTEMP</span><span class="p">.</span><span class="n">DOC_ID</span> <span class="k">FROM</span> <span class="o">&amp;</span><span class="k">Table</span><span class="p">,</span><span class="n">IDXTEMP</span>
+<span class="k">WHERE</span> <span class="n">IDXTEMP</span><span class="p">.</span><span class="o">&amp;</span><span class="n">Term</span><span class="o">=&amp;</span><span class="k">Table</span><span class="p">.</span><span class="o">&amp;</span><span class="n">Term</span><span class="p">;</span>
+<span class="err">$Удаление</span> <span class="err">временной</span> <span class="err">таблицы</span><span class="p">;</span>
+<span class="k">DROP</span> <span class="k">TABLE</span> <span class="n">IDXTEMP</span><span class="p">;</span>
+</pre></div>
+
+
+<p>На этом изменения в файлах программы окончены. Пришло время конвертировать базу, я конвертировал при помощи <a href="http://www.bullzip.com/products/a2m/info.php" title="BullZip Access To MySQL">BullZip Access To MySQL [6]</a>, на выходе получил <code>.sql</code> файл, который был скопирован на сервер и залит в БД. На этом все.</p>
+<hr>
+<p>Ссылки по теме:</p>
+<ol>
+<li><a href="http://dev.mysql.com/doc/mysqld-version-reference/en/mysqld-version-reference-reservedwords-5-0.html" title="Reserved Words in MySQL 5.0">Reserved Words in MySQL 5.0</a></li>
+<li><a href="http://dev.mysql.com/downloads/mysql-proxy/" title="Download MySQL Proxy">Download MySQL Proxy</a></li>
+<li><a href="https://dev.mysql.com/downloads/connector/odbc/">Download Connector/ODBC</a></li>
+<li><a href="http://www.lua.org/pil/20.1.html" title="Programming in Lua">20.1 – Pattern-Matching Functions</a></li>
+<li><a href="http://habrahabr.ru/post/177057/">MySQL On air. Мониторим SQL запросы</a></li>
+<li><a href="http://www.bullzip.com/products/a2m/info.php" title="BullZip Access To MySQL">BullZip Access To MySQL</a></li>
+<li><a href="http://forum.informsystema.ru/viewtopic.php?f=2&amp;t=52">MySQL и MarcSQL</a></li>
+<li><a href="http://informsystema.ru/Software.aspx?id=14">Версия АИБС "МАРК-SQL" для школьных библиотек находится в свободном доступе для российских школ.</a></li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://blog.metajiji.tk/blog/sed-dos2unix-unix2dos/">Аналоги на sed для dos2unix и unix2dos</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/freebsd-dos2unix-unix2dos-bom/">Работа с текстом во FreeBSD dos2unix, unix2dos, удаление BOM в консоли.</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/freebsd-linux-external-ip/">FreeBSD, Linux узнать внешний ip адрес с консоли.</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/log-rotation-named-bind/">Ротация логов named Bind и newsyslog</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/freebsd-chroot-sftp-chroot-ssh/">FreeBSD chroot sftp и chroot ssh</a></li>
+    </ul>
+</section>
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+                var disqus_url = 'http://blog.metajiji.tk/blog/marc-sql-1.5.4-mysql-5.x/';
+
+            var disqus_config = function () {
+                this.language = "ru";
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/METAJIJI/"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://stackoverflow.com/users/2020443/metajiji"><i class="fa fa-stack-overflow fa-lg"></i> stackoverflow</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/fedora-chromium-firefox-flashplayer/">Fedora 25 install adobe flashplayer</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/atlassian/"><i class="fa fa-folder-open fa-lg"></i>Atlassian</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bash/"><i class="fa fa-folder-open fa-lg"></i>Bash</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bat-cmd/"><i class="fa fa-folder-open fa-lg"></i>Bat-cmd</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bind/"><i class="fa fa-folder-open fa-lg"></i>Bind</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/blog/"><i class="fa fa-folder-open fa-lg"></i>Blog</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/centos/"><i class="fa fa-folder-open fa-lg"></i>CentOS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/docker/"><i class="fa fa-folder-open fa-lg"></i>Docker</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/fedora/"><i class="fa fa-folder-open fa-lg"></i>Fedora</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/freebsd/"><i class="fa fa-folder-open fa-lg"></i>FreeBSD</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/gitlab/"><i class="fa fa-folder-open fa-lg"></i>Gitlab</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/hardware/"><i class="fa fa-folder-open fa-lg"></i>Hardware</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/javascript/"><i class="fa fa-folder-open fa-lg"></i>JavaScript</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/linux/"><i class="fa fa-folder-open fa-lg"></i>Linux</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/macosx/"><i class="fa fa-folder-open fa-lg"></i>MacOSX</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/mikrotik/"><i class="fa fa-folder-open fa-lg"></i>Mikrotik</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/postgresql/"><i class="fa fa-folder-open fa-lg"></i>PostgreSQL</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/ubuntu/"><i class="fa fa-folder-open fa-lg"></i>Ubuntu</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/vcs/"><i class="fa fa-folder-open fa-lg"></i>VCS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/windows/"><i class="fa fa-folder-open fa-lg"></i>Windows</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zabbix/"><i class="fa fa-folder-open fa-lg"></i>Zabbix</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zimbra/"><i class="fa fa-folder-open fa-lg"></i>Zimbra</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 Denis Kadyshev
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://blog.metajiji.tk/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://blog.metajiji.tk/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://blog.metajiji.tk/theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+    <!-- Google Analytics Universal -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106896103-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics Universal Code -->
+
+
+</body>
+</html>

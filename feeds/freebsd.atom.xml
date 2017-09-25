@@ -1,0 +1,1846 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - FreeBSD</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/freebsd.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2013-09-17T00:00:00+07:00</updated><entry><title>Решение проблем во FreeBSD &lt; 9.x c bsd tar.</title><link href="http://blog.metajiji.tk/blog/freebsd-9x-fix-bsd-tar/" rel="alternate"></link><published>2013-09-17T00:00:00+07:00</published><updated>2013-09-17T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-09-17:/blog/freebsd-9x-fix-bsd-tar/</id><summary type="html">&lt;p&gt;При обновлении портов на &lt;strong&gt;FreeBSD&lt;/strong&gt; ниже &lt;strong&gt;9.x&lt;/strong&gt; возникают подобные проблемы с &lt;code&gt;xz&lt;/code&gt; архивами:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# cd usr/ports/misc/mc&lt;/span&gt;
+&lt;span class="c1"&gt;# make&lt;/span&gt;
+&lt;span class="o"&gt;===&lt;/span&gt;&amp;gt;  License GPLv3 accepted by the &lt;span class="nv"&gt;user&lt;/span&gt;
+&lt;span class="o"&gt;===&lt;/span&gt;&amp;gt;  Found saved configuration &lt;span class="k"&gt;for&lt;/span&gt; mc-4.8.1.6
+&lt;span class="o"&gt;===&lt;/span&gt;&amp;gt; Fetching all distfiles required by mc-4.8.1.7 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;building&lt;/span&gt;
+&lt;span class="o"&gt;===&lt;/span&gt;&amp;gt;  Extracting &lt;span class="k"&gt;for&lt;/span&gt; mc-4.8.1 …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;При обновлении портов на &lt;strong&gt;FreeBSD&lt;/strong&gt; ниже &lt;strong&gt;9.x&lt;/strong&gt; возникают подобные проблемы с &lt;code&gt;xz&lt;/code&gt; архивами:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# cd usr/ports/misc/mc&lt;/span&gt;
+&lt;span class="c1"&gt;# make&lt;/span&gt;
+&lt;span class="o"&gt;===&lt;/span&gt;&amp;gt;  License GPLv3 accepted by the &lt;span class="nv"&gt;user&lt;/span&gt;
+&lt;span class="o"&gt;===&lt;/span&gt;&amp;gt;  Found saved configuration &lt;span class="k"&gt;for&lt;/span&gt; mc-4.8.1.6
+&lt;span class="o"&gt;===&lt;/span&gt;&amp;gt; Fetching all distfiles required by mc-4.8.1.7 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;building&lt;/span&gt;
+&lt;span class="o"&gt;===&lt;/span&gt;&amp;gt;  Extracting &lt;span class="k"&gt;for&lt;/span&gt; mc-4.8.1.7
+&lt;span class="o"&gt;=&lt;/span&gt;&amp;gt; SHA256 Checksum OK &lt;span class="k"&gt;for&lt;/span&gt; mc-4.8.1.7.tar.xz.
+&lt;span class="o"&gt;===&lt;/span&gt;&amp;gt;   mc-4.8.1.7 depends on file: /usr/local/bin/xz - &lt;span class="nv"&gt;found&lt;/span&gt;
+&lt;span class="o"&gt;===&lt;/span&gt;&amp;gt;   mc-4.8.1.7 depends on file: /usr/local/bin/perl5.14.2 - found
+tar: Unrecognized archive format: Inappropriate file &lt;span class="nb"&gt;type&lt;/span&gt; or format
+tar: Error &lt;span class="nb"&gt;exit&lt;/span&gt; delayed from previous errors.
+*** Error code &lt;span class="m"&gt;1&lt;/span&gt;
+
+Stop in /usr/ports/misc/mc.
+*** Error code &lt;span class="m"&gt;1&lt;/span&gt;
+
+Stop in /usr/ports/misc/mc.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Лечится довольно просто, установкой &lt;code&gt;libarchive&lt;/code&gt; и 1 строчкой в &lt;code&gt;/etc/make.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /usr/ports/archivers/libarchive
+make install clean
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;TAR=/usr/local/bin/bsdtar&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /etc/make.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://forum.lissyara.su/viewtopic.php?p=348488#p348488"&gt;tar: Unrecognized archive format&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://sysadmins.ru/post11006037.html"&gt;Обновление портов и tar.Xz&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://likeunix.ru/tar-xz-error-compiling/"&gt;Исправление ошибки во freebsd tar xz.&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="FreeBSD"></category><category term="BSD tar"></category><category term="tar"></category></entry><entry><title>Работа с текстом во FreeBSD dos2unix, unix2dos, удаление BOM в консоли.</title><link href="http://blog.metajiji.tk/blog/freebsd-dos2unix-unix2dos-bom/" rel="alternate"></link><published>2013-08-03T00:00:00+07:00</published><updated>2013-08-03T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-08-03:/blog/freebsd-dos2unix-unix2dos-bom/</id><summary type="html">&lt;p&gt;Замена текста:&lt;/p&gt;
+&lt;p&gt;Способ 1: Замена подстроки с помощью &lt;code&gt;perl&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;perl -e &lt;span class="s1"&gt;&amp;#39;s/foo/bar/g&amp;#39;&lt;/span&gt; -pi ./index.html
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Способ 2: Замена с помощью &lt;code&gt;sed&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sed -e &lt;span class="s1"&gt;&amp;#39;s/foo/bar/g&amp;#39;&lt;/span&gt;  ./index.html &amp;gt; index_new.html
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Способ 3: Замена с помощью &lt;code&gt;awk&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;awk &lt;span class="s1"&gt;&amp;#39;{gsub(&amp;quot;foo&amp;quot;, &amp;quot;bar&amp;quot;, $0); print &amp;gt; FILENAME}&amp;#39;&lt;/span&gt; ./index.html
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Полезные …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Замена текста:&lt;/p&gt;
+&lt;p&gt;Способ 1: Замена подстроки с помощью &lt;code&gt;perl&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;perl -e &lt;span class="s1"&gt;&amp;#39;s/foo/bar/g&amp;#39;&lt;/span&gt; -pi ./index.html
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Способ 2: Замена с помощью &lt;code&gt;sed&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sed -e &lt;span class="s1"&gt;&amp;#39;s/foo/bar/g&amp;#39;&lt;/span&gt;  ./index.html &amp;gt; index_new.html
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Способ 3: Замена с помощью &lt;code&gt;awk&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;awk &lt;span class="s1"&gt;&amp;#39;{gsub(&amp;quot;foo&amp;quot;, &amp;quot;bar&amp;quot;, $0); print &amp;gt; FILENAME}&amp;#39;&lt;/span&gt; ./index.html
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Полезные функции для работы с файлами:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dos2unix&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    sed -i &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;s/&amp;#39;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;printf&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;\015&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;$//g&amp;#39;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+unix2dos&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    sed -i &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;s|$|&amp;#39;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;printf&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;\015&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;|g&amp;#39;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+delete_BOM&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;#awk &amp;#39;{sub(/^\xEF\xBB\xBF/,&amp;quot;&amp;quot;,$0); print &amp;gt; FILENAME}&amp;#39; &amp;quot;$1&amp;quot;&lt;/span&gt;
+    awk &lt;span class="s1"&gt;&amp;#39;{sub(/^\xEF\xBB\xBF/,&amp;quot;&amp;quot;,$0); print}&amp;#39;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;1&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.awkbak&amp;quot;&lt;/span&gt;
+    mv &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;1&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.awkbak&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;#По 1 файлу&lt;/span&gt;
+dos2unix -o russian.php
+delete_BOM russian.php
+
+&lt;span class="c1"&gt;# Найти и обработать все *.tpl и *.php файлы от текущего каталога.&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; i in &lt;span class="k"&gt;$(&lt;/span&gt;find . -type f &lt;span class="se"&gt;\(&lt;/span&gt; -name &lt;span class="s1"&gt;&amp;#39;*.tpl&amp;#39;&lt;/span&gt; -o -name &lt;span class="s1"&gt;&amp;#39;*.php&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\)&lt;/span&gt; -print&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Working: &amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;...&amp;#39;&lt;/span&gt;
+    dos2unix -o &lt;span class="nv"&gt;$i&lt;/span&gt;
+    delete_BOM &lt;span class="nv"&gt;$i&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;dos2unix -o&lt;/code&gt; для обратной совместимости с одноименной консольной утилитой &lt;code&gt;/usr/ports/converters/unix2dos&lt;/code&gt;,
+ но зачем засорять систему лишними пакетами, если можно обойтись встроенными средствами?&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;P.S. Если кто-то подскажет более изящное решение на &lt;code&gt;awk&lt;/code&gt;, &lt;code&gt;sed&lt;/code&gt; или еще чем-то, что идет штатно во &lt;strong&gt;FreeBSD&lt;/strong&gt; для удаления &lt;strong&gt;BOM&lt;/strong&gt;, буду только рад :)
+ Варианты с &lt;code&gt;perl&lt;/code&gt; не предлагать, они очевидны и не интересны :)
+Первый вариант с &lt;code&gt;awk&lt;/code&gt; почему-то не работает, часть файла теряется.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;FreeBSD&lt;/strong&gt; Подсказывает в &lt;code&gt;motd&lt;/code&gt; вариант на &lt;code&gt;sed&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sed -e &lt;span class="s1"&gt;&amp;#39;1s/^\xef\xbb\xbf//&amp;#39;&lt;/span&gt; &amp;lt; bomfile &amp;gt; newfile
+&lt;/pre&gt;&lt;/div&gt;</content><category term="FreeBSD"></category><category term="Linux"></category><category term="dos2unix"></category><category term="unix2dos"></category><category term="sed"></category><category term="awk"></category><category term="perl"></category><category term="BOM"></category></entry><entry><title>isc-dhcpd - Скрипт для просмотра и удаления арендованных адресов из файла dhcpd.leases.</title><link href="http://blog.metajiji.tk/blog/freebsd-isc-dhcpd-dhcpdleases/" rel="alternate"></link><published>2013-06-19T00:00:00+07:00</published><updated>2013-06-19T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-06-19:/blog/freebsd-isc-dhcpd-dhcpdleases/</id><summary type="html">&lt;p&gt;Скрипт парсит &lt;code&gt;dhcpd.leases&lt;/code&gt; файл и отображает список подсетей &lt;code&gt;0/24&lt;/code&gt; на выбор, после выбора подсети выдается список арендованных &lt;code&gt;ip&lt;/code&gt; со статусом &lt;code&gt;free&lt;/code&gt; или &lt;code&gt;active&lt;/code&gt;,
+ где можно выбрать один или несколько &lt;code&gt;ip&lt;/code&gt; и удалить.
+Скрипт использует &lt;code&gt;dialog&lt;/code&gt;, за счет чего меню получается очень привлекательным :) - писал под &lt;strong&gt;FreeBSD&lt;/strong&gt;,
+ на &lt;strong&gt;Linux&lt;/strong&gt; не …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Скрипт парсит &lt;code&gt;dhcpd.leases&lt;/code&gt; файл и отображает список подсетей &lt;code&gt;0/24&lt;/code&gt; на выбор, после выбора подсети выдается список арендованных &lt;code&gt;ip&lt;/code&gt; со статусом &lt;code&gt;free&lt;/code&gt; или &lt;code&gt;active&lt;/code&gt;,
+ где можно выбрать один или несколько &lt;code&gt;ip&lt;/code&gt; и удалить.
+Скрипт использует &lt;code&gt;dialog&lt;/code&gt;, за счет чего меню получается очень привлекательным :) - писал под &lt;strong&gt;FreeBSD&lt;/strong&gt;,
+ на &lt;strong&gt;Linux&lt;/strong&gt; не тестировал (возможно будут проблемы из-за несовместимости &lt;strong&gt;BSD awk&lt;/strong&gt; и &lt;strong&gt;GNU awk&lt;/strong&gt;), хотя думаю, что должен работать и под &lt;strong&gt;Linux&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="c1"&gt;# загружаем /etc/rc.conf.&lt;/span&gt;
+. /etc/rc.conf
+
+&lt;span class="c1"&gt;#TODO - установить имя файла более точнее, см. /usr/local/etc/rc.d/isc-dhcpd.&lt;/span&gt;
+&lt;span class="nv"&gt;file&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$dhcpd_rootdir&lt;/span&gt;/var/db/dhcpd/dhcpd.leases
+
+&lt;span class="nv"&gt;tempfile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;mktemp &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt;/dev/null&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nv"&gt;tempfile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/tmp/&lt;span class="k"&gt;$(&lt;/span&gt;basename &lt;span class="nv"&gt;$0&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;_&lt;span class="nv"&gt;$$&lt;/span&gt;
+&lt;span class="nb"&gt;trap&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;rm -f &lt;/span&gt;&lt;span class="nv"&gt;$tempfile&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt; &lt;span class="m"&gt;5&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;
+
+&lt;span class="c1"&gt;### functions: BEGIN&lt;/span&gt;
+&lt;span class="c1"&gt;# Функция запуска команд в информационном окошке.&lt;/span&gt;
+exec_fun&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    dialog --sleep &lt;span class="m"&gt;1&lt;/span&gt; --title &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+        --msgbox &lt;span class="s2"&gt;&amp;quot;`echo ;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt; 2&amp;gt;&amp;amp;1;echo`&amp;quot;&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt; &lt;span class="m"&gt;85&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# Функция удаления lease.&lt;/span&gt;
+del_lease&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    exec_fun &lt;span class="s2"&gt;&amp;quot;service isc-dhcpd stop&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Status Daemon:&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#TODO - убедиться, что демон остановлен.&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Бекап базы.&lt;/span&gt;
+    &lt;span class="nv"&gt;DATE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;date &lt;span class="s2"&gt;&amp;quot;+%Y%m%d%H%M&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    cp -vf &lt;span class="nv"&gt;$file&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;file&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.&lt;span class="nv"&gt;$DATE&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; i in &lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        awk &lt;span class="s1"&gt;&amp;#39;BEGIN { FLG=0; } {&lt;/span&gt;
+&lt;span class="s1"&gt;            if ($0==&amp;quot;lease &amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; {&amp;quot;) FLG=1;&lt;/span&gt;
+&lt;span class="s1"&gt;            if (FLG==&amp;quot;0&amp;quot;) printf &amp;quot;%s&amp;quot;,$0&amp;quot;\n&amp;quot;;&lt;/span&gt;
+&lt;span class="s1"&gt;            if ($0==&amp;quot;}&amp;quot; &amp;amp;&amp;amp; FLG==&amp;quot;1&amp;quot;) FLG=0;&lt;/span&gt;
+&lt;span class="s1"&gt;        }&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;$file&lt;/span&gt; &amp;gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;file&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.new
+        mv -vf &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;file&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.new &lt;span class="nv"&gt;$file&lt;/span&gt;
+    &lt;span class="k"&gt;done&lt;/span&gt;
+
+    &lt;span class="o"&gt;[&lt;/span&gt; -f &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;file&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;~&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm -vf &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;file&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;~&amp;quot;&lt;/span&gt;
+    exec_fun &lt;span class="s2"&gt;&amp;quot;service isc-dhcpd start&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Status Daemon:&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#TODO - убедиться, что демон запущен.&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Функция получения списка subnet из dhcpd.leasees файла.&lt;/span&gt;
+get_subnet_list&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    grep -oE &lt;span class="s1"&gt;&amp;#39;^lease [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;$file&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sort -u &lt;span class="se"&gt;\&lt;/span&gt;
+        &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;BEGIN { n=1; }{ print n&amp;quot; &amp;quot;$2&amp;quot;0/24 off&amp;quot;; n++; }&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Функция получения списка ip по subnet&amp;#39;у /24 и вывод списка в виде dialog.&lt;/span&gt;
+get_leases&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="nv"&gt;LIST&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;awk &lt;span class="s1"&gt;&amp;#39;{ out=&amp;quot;&amp;quot;; sub(/[;#].*/,&amp;quot;&amp;quot;,$0); \&lt;/span&gt;
+&lt;span class="s1"&gt;                if ($1&amp;quot; &amp;quot;$2&amp;quot; &amp;quot;$3 ~ /^lease &amp;#39;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$1&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sed &lt;span class="s1"&gt;&amp;#39;s|\.|\\.|g&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;[0-9]?[0-9]?[0-9] \{$/ ) { out=&amp;quot; &amp;quot;$2; FLG=1; } \&lt;/span&gt;
+&lt;span class="s1"&gt;                if ($1==&amp;quot;binding&amp;quot; &amp;amp;&amp;amp; FLG==&amp;quot;1&amp;quot;) out=&amp;quot; &amp;quot;$3; \&lt;/span&gt;
+&lt;span class="s1"&gt;                if ($1==&amp;quot;}&amp;quot; &amp;amp;&amp;amp; FLG==&amp;quot;1&amp;quot;) { out=&amp;quot;\n&amp;quot;; FLG=0; } \&lt;/span&gt;
+&lt;span class="s1"&gt;                printf out,&amp;quot; &amp;quot;; }&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;$file&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+            sort -un -t . -k &lt;span class="m"&gt;1&lt;/span&gt;,1 -k &lt;span class="m"&gt;2&lt;/span&gt;,2 -k &lt;span class="m"&gt;3&lt;/span&gt;,3 -k &lt;span class="m"&gt;4&lt;/span&gt;,4 &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+            awk &lt;span class="s1"&gt;&amp;#39;BEGIN { n=1; }{ print n&amp;quot; \&amp;quot;&amp;quot;$1&amp;quot; &amp;quot;$2&amp;quot;\&amp;quot; off&amp;quot;; n++; }&amp;#39;&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+
+        &lt;span class="nv"&gt;DIALOG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;dialog --backtitle &amp;quot;Редактирование &amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;quot;&lt;/span&gt;
+&lt;span class="s1"&gt;            --cancel-label Back&lt;/span&gt;
+&lt;span class="s1"&gt;            --ok-label Delete&lt;/span&gt;
+&lt;span class="s1"&gt;            --title &amp;quot;Редактирование &amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;0/24&amp;quot; --clear&lt;/span&gt;
+&lt;span class="s1"&gt;            --checklist &amp;quot;Выбор lease&amp;quot; 20 61 10&lt;/span&gt;
+&lt;span class="s1"&gt;            &amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$LIST&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; 2&amp;gt; &amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$tempfile&lt;/span&gt;
+        &lt;span class="nb"&gt;eval&lt;/span&gt; &lt;span class="nv"&gt;$DIALOG&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Собственно удаление выбранных lease. $(cat $tempfile)&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; -eq &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+            &lt;span class="c1"&gt;# Формируем и передаваем в функцию удаления список ip.&lt;/span&gt;
+            &lt;span class="nv"&gt;DEL_LIST&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; i in &lt;span class="k"&gt;$(&lt;/span&gt;cat &lt;span class="nv"&gt;$tempfile&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+                &lt;span class="nv"&gt;DEL_LIST&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$DEL_LIST&lt;/span&gt;&lt;span class="s2"&gt; &amp;quot;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$LIST&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{&lt;/span&gt;
+&lt;span class="s1"&gt;                    if ($1==&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;quot;) {&lt;/span&gt;
+&lt;span class="s1"&gt;                        sub(/0\/24$/,&amp;quot;&amp;quot;,$2);&lt;/span&gt;
+&lt;span class="s1"&gt;                        sub(/&amp;quot;/,&amp;quot;&amp;quot;,$2);&lt;/span&gt;
+&lt;span class="s1"&gt;                        print $2;&lt;/span&gt;
+&lt;span class="s1"&gt;                    }&lt;/span&gt;
+&lt;span class="s1"&gt;                }&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;done&lt;/span&gt;
+            del_lease &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$DEL_LIST&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;
+            break&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="c1"&gt;# Выходим из while [true].&lt;/span&gt;
+        &lt;span class="k"&gt;fi&lt;/span&gt;
+    &lt;span class="k"&gt;done&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;span class="c1"&gt;### functions: END&lt;/span&gt;
+
+&lt;span class="o"&gt;[&lt;/span&gt; ! -f &lt;span class="nv"&gt;$file&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ERROR: File &amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;quot; not exist or not readable!&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+
+&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="nv"&gt;LIST&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;get_subnet_list&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    dialog --backtitle &lt;span class="s2"&gt;&amp;quot;Редактирование &lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+        --cancel-label Exit &lt;span class="se"&gt;\&lt;/span&gt;
+        --title &lt;span class="s2"&gt;&amp;quot;Редактирование &lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; --clear &lt;span class="se"&gt;\&lt;/span&gt;
+        --radiolist &lt;span class="s2"&gt;&amp;quot;Выбор subnet&amp;quot;&lt;/span&gt; &lt;span class="m"&gt;20&lt;/span&gt; &lt;span class="m"&gt;61&lt;/span&gt; &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+        &lt;span class="nv"&gt;$LIST&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt; &lt;span class="nv"&gt;$tempfile&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; -eq &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+        &lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$LIST&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{ if ($1==&amp;quot;&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;cat &lt;span class="nv"&gt;$tempfile&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;quot;) { \&lt;/span&gt;
+&lt;span class="s1"&gt;            sub(/0\/24$/,&amp;quot;&amp;quot;,$2); print &amp;quot;get_leases &amp;quot;$2 }}&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+        break&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="c1"&gt;# Выходим из while [true].&lt;/span&gt;
+    &lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="FreeBSD"></category><category term="isc-dhcpd"></category><category term="dhcp leases"></category></entry><entry><title>Скрипт для пакетного конвертирования из wav в alaw, ulaw, gsm через sox.</title><link href="http://blog.metajiji.tk/blog/asterisk-wav-to-alaw-ulaw-gsm-sox/" rel="alternate"></link><published>2013-03-22T00:00:00+07:00</published><updated>2013-03-22T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-03-22:/blog/asterisk-wav-to-alaw-ulaw-gsm-sox/</id><summary type="html">&lt;p&gt;Скрипт для пакетного конвертирования из &lt;code&gt;wav&lt;/code&gt; в &lt;code&gt;alaw&lt;/code&gt;, &lt;code&gt;ulaw&lt;/code&gt;, &lt;code&gt;gsm&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="nv"&gt;IN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;IN&amp;#39;&lt;/span&gt;  &lt;span class="c1"&gt;# Входная папка.&lt;/span&gt;
+&lt;span class="nv"&gt;OUT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;OUT&amp;#39;&lt;/span&gt;  &lt;span class="c1"&gt;# Выходная папка.&lt;/span&gt;
+
+&lt;span class="o"&gt;[&lt;/span&gt; ! -d &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$IN&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; mkdir -v &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$IN&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Create dir: &lt;/span&gt;&lt;span class="nv"&gt;$IN&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# Создаем папку для входных файлов.&lt;/span&gt;
+&lt;span class="c1"&gt;#[ -d &amp;quot;$OUT&amp;quot; ] &amp;amp;&amp;amp; rm -vrf &amp;quot;$OUT&amp;quot; &amp;amp;&amp;amp; echo &amp;quot;Delete dir: $OUT&amp;quot;  # Чистим папку OUT.&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; ! -d &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; mkdir -v …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Скрипт для пакетного конвертирования из &lt;code&gt;wav&lt;/code&gt; в &lt;code&gt;alaw&lt;/code&gt;, &lt;code&gt;ulaw&lt;/code&gt;, &lt;code&gt;gsm&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="nv"&gt;IN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;IN&amp;#39;&lt;/span&gt;  &lt;span class="c1"&gt;# Входная папка.&lt;/span&gt;
+&lt;span class="nv"&gt;OUT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;OUT&amp;#39;&lt;/span&gt;  &lt;span class="c1"&gt;# Выходная папка.&lt;/span&gt;
+
+&lt;span class="o"&gt;[&lt;/span&gt; ! -d &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$IN&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; mkdir -v &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$IN&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Create dir: &lt;/span&gt;&lt;span class="nv"&gt;$IN&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# Создаем папку для входных файлов.&lt;/span&gt;
+&lt;span class="c1"&gt;#[ -d &amp;quot;$OUT&amp;quot; ] &amp;amp;&amp;amp; rm -vrf &amp;quot;$OUT&amp;quot; &amp;amp;&amp;amp; echo &amp;quot;Delete dir: $OUT&amp;quot;  # Чистим папку OUT.&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; ! -d &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; mkdir -v &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Create dir: &lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# Создаем папку для выходных файлов.&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; -d &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/wav&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm -vrf &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/wav&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Delete dir: &lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/wav&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# Чистим папку для wav файлов.&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; ! -d &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/wav&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; mkdir -v &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/wav&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Create dir: &lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/wav&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# Создаем папку для wav файлов.&lt;/span&gt;
+
+convert_to&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="c1"&gt;#$1 - Output format file.&lt;/span&gt;
+    &lt;span class="c1"&gt;#$2 - IN file.&lt;/span&gt;
+
+    &lt;span class="o"&gt;[&lt;/span&gt; -z &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ERROR: $1 is empty!&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+    &lt;span class="o"&gt;[&lt;/span&gt; -z &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ERROR: $2 is empty!&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+
+    &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="nv"&gt;$1&lt;/span&gt; in
+        alaw&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;SOX_OPT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;-t al&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+        ulaw&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;SOX_OPT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;-t ul&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+        gsm&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;SOX_OPT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+        *&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ERROR: fromat &lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt; is not supported!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+    &lt;span class="k"&gt;esac&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Если нужные директории не существуют, то создаем их.&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; ! -d &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/wav&lt;/span&gt;&lt;span class="nv"&gt;$D_OUT&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Create dir: &lt;/span&gt;&lt;span class="nv"&gt;$D_IN&lt;/span&gt;&lt;span class="s2"&gt; -&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/wav&lt;/span&gt;&lt;span class="nv"&gt;$D_OUT&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        mkdir -vp &lt;span class="nv"&gt;$OUT&lt;/span&gt;/wav&lt;span class="nv"&gt;$D_OUT&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;------------------------&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;fi&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; ! -d &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;$1$D_OUT&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Create dir: &lt;/span&gt;&lt;span class="nv"&gt;$D_IN&lt;/span&gt;&lt;span class="s2"&gt; -&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;$1$D_OUT&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        mkdir -vp &lt;span class="nv"&gt;$OUT&lt;/span&gt;/&lt;span class="nv"&gt;$1$D_OUT&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;------------------------&amp;#39;&lt;/span&gt;
+    &lt;span class="k"&gt;fi&lt;/span&gt;
+
+    &lt;span class="nv"&gt;F_OUT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;basename &lt;span class="nv"&gt;$2&lt;/span&gt; .wav&lt;span class="k"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Processing: &lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="s2"&gt; -&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;$1$D_OUT&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;$F_OUT&lt;/span&gt;&lt;span class="s2"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Проверим, существует ли входной файл.&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -f &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+        &lt;span class="c1"&gt;# Если нету wav, то для начала сконвертим в wav.&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; ! -f &lt;span class="nv"&gt;$OUT&lt;/span&gt;/wav&lt;span class="nv"&gt;$D_OUT&lt;/span&gt;/&lt;span class="nv"&gt;$F_OUT&lt;/span&gt;.wav &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+            &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Convert to 8bit wav first at 8000Hz - this can take a while...&amp;#39;&lt;/span&gt;
+            sox &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; -r &lt;span class="m"&gt;8000&lt;/span&gt; -c1 &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/wav&lt;/span&gt;&lt;span class="nv"&gt;$D_OUT&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;$F_OUT&lt;/span&gt;&lt;span class="s2"&gt;.wav&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;fi&lt;/span&gt;
+
+        &lt;span class="c1"&gt;#Проверяем имеется ли входной wav файл.&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -f &lt;span class="nv"&gt;$OUT&lt;/span&gt;/wav&lt;span class="nv"&gt;$D_OUT&lt;/span&gt;/&lt;span class="nv"&gt;$F_OUT&lt;/span&gt;.wav &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+            &lt;span class="c1"&gt;# Если файл в нужном формате $1 уже существует, то сперва удаляем его, потом конвертим&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -f &lt;span class="nv"&gt;$OUT&lt;/span&gt;/&lt;span class="nv"&gt;$1$D_OUT&lt;/span&gt;/&lt;span class="nv"&gt;$F_OUT&lt;/span&gt;.&lt;span class="nv"&gt;$1&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+                &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;INFO: File exist! &lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;$1$D_OUT&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;$F_OUT&lt;/span&gt;&lt;span class="s2"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt; remove...&amp;quot;&lt;/span&gt;
+                rm -vf &lt;span class="nv"&gt;$OUT&lt;/span&gt;/&lt;span class="nv"&gt;$1$D_OUT&lt;/span&gt;/&lt;span class="nv"&gt;$F_OUT&lt;/span&gt;.&lt;span class="nv"&gt;$1&lt;/span&gt;
+            &lt;span class="k"&gt;fi&lt;/span&gt;
+            sox &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/wav&lt;/span&gt;&lt;span class="nv"&gt;$D_OUT&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;$F_OUT&lt;/span&gt;&lt;span class="s2"&gt;.wav&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;$SOX_OPT&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;$1$D_OUT&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;$F_OUT&lt;/span&gt;&lt;span class="s2"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;
+            &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ERROR: Input wav file &lt;/span&gt;&lt;span class="nv"&gt;$OUT&lt;/span&gt;&lt;span class="s2"&gt;/wav&lt;/span&gt;&lt;span class="nv"&gt;$D_OUT&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;$F_OUT&lt;/span&gt;&lt;span class="s2"&gt;.wav is not exist!&amp;quot;&lt;/span&gt;
+            &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+        &lt;span class="k"&gt;fi&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;ERROR: Input file &lt;/span&gt;&lt;span class="nv"&gt;$2&lt;/span&gt;&lt;span class="s2"&gt; not exists!&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+find &lt;span class="nv"&gt;$IN&lt;/span&gt; -type d -depth -print &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;read&lt;/span&gt; D_IN&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="c1"&gt;# ищем сперва самые &amp;quot;глубокие Директории&amp;quot;&lt;/span&gt;
+    &lt;span class="nv"&gt;D_OUT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$D_IN&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sed -e &lt;span class="s1"&gt;&amp;#39;s/&amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$IN&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;//&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# Получаем имя выходного каталога.&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Ищем во входном каталоге wav файлы.&lt;/span&gt;
+    find &lt;span class="nv"&gt;$D_IN&lt;/span&gt; -type f -name &lt;span class="s2"&gt;&amp;quot;*.wav&amp;quot;&lt;/span&gt; -print -maxdepth &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;read&lt;/span&gt; file&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        convert_to alaw &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+        convert_to ulaw &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+        convert_to gsm &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;done&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+
+&lt;span class="c1"&gt;# TIP - Увеличение громкости&lt;/span&gt;
+&lt;span class="c1"&gt;#sox file1.wav -v 5 file2.wav&lt;/span&gt;
+&lt;span class="c1"&gt;#ffmpeg myfile.wav $i -vol 256 -acodec pcm_s16le -ar 8000 -ac 1 -y filename_out&amp;quot;${i%wav}wav&amp;quot; -vol volume change audio volume (256=normal)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="FreeBSD"></category><category term="Asterisk"></category><category term="wav to alaw ulaw gsm sox"></category></entry><entry><title>Контент фильтр и статистика посещенных сайтов Squid + rejik + ipcad + Free-SA + nginx</title><link href="http://blog.metajiji.tk/blog/squid-rejik-ipcad-free-sa-nginx/" rel="alternate"></link><published>2013-03-21T00:00:00+07:00</published><updated>2013-03-21T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-03-21:/blog/squid-rejik-ipcad-free-sa-nginx/</id><summary type="html">&lt;p&gt;Для организации логирования, статистики посещенных сайтов и других сетевых соединений я воспользовался связкой &lt;strong&gt;Squid&lt;/strong&gt; + &lt;strong&gt;Free-SA&lt;/strong&gt; + &lt;strong&gt;ipcad&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Squid&lt;/strong&gt; - Прокси сервер, который работает у меня в прозрачном (&lt;strong&gt;transparent&lt;/strong&gt; или &lt;strong&gt;intercept&lt;/strong&gt;) режиме - пользователям ничего настраивать не придется.
+ Более подробно о нем писать не вижу смысла.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Free-SA&lt;/strong&gt; - Анализатор логов &lt;strong&gt;Squid&lt;/strong&gt; написан на языке Си …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;Для организации логирования, статистики посещенных сайтов и других сетевых соединений я воспользовался связкой &lt;strong&gt;Squid&lt;/strong&gt; + &lt;strong&gt;Free-SA&lt;/strong&gt; + &lt;strong&gt;ipcad&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Squid&lt;/strong&gt; - Прокси сервер, который работает у меня в прозрачном (&lt;strong&gt;transparent&lt;/strong&gt; или &lt;strong&gt;intercept&lt;/strong&gt;) режиме - пользователям ничего настраивать не придется.
+ Более подробно о нем писать не вижу смысла.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Free-SA&lt;/strong&gt; - Анализатор логов &lt;strong&gt;Squid&lt;/strong&gt; написан на языке Си, по функциональности и назначению похож на &lt;strong&gt;LightSquid&lt;/strong&gt;.
+ Главное отличие - скорость формирования отчетов от 7 до 20 раз выше по сравнению с &lt;strong&gt;LightSquid&lt;/strong&gt; (7х - для 50 Мб файла &lt;code&gt;access.log&lt;/code&gt;, 20x - для 1 Гб).
+ Присутствуют дополнительные отчеты (в том числе для оценки эффективности сервера), изменяемые "на лету" темы оформления,
+ имеется поддержка различных форматов файлов журналов (&lt;strong&gt;Squid&lt;/strong&gt;, &lt;strong&gt;CLF&lt;/strong&gt;, &lt;strong&gt;Postfix&lt;/strong&gt;, &lt;strong&gt;Qmail&lt;/strong&gt;, &lt;strong&gt;CGP&lt;/strong&gt;).
+ Имеет мало зависимостей в отличие от того же &lt;strong&gt;LightSquid&lt;/strong&gt; и малые требования к веб серверу! В настройках можно много чего интересного покрутить, об этом ниже.
+ Еще хотелось бы отметить полезного из функционала - опционально можно включить в отчеты полные URL - для подробной отчетности, либо наоборот отключить (будет быстрее формироваться статистика).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Rejik&lt;/strong&gt; - &lt;code&gt;redirector&lt;/code&gt; для &lt;strong&gt;Squid&lt;/strong&gt;, выполняющий функции контент фильтра. Поддерживает регулярные выражения, и просто списки сайтов.
+ Можно добавлять исключения, применять правила по времени или ip адресам. Из плюсов - высокая скорость работы.
+ Из минусов, чтобы скачать базы, нужно либо поработать - проверить несколько сотен сайтов на принадлежность, либо просто купить списки "плохих" сайтов.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ipcad&lt;/strong&gt; - Коллектора для сбора трафика, идущего в обход прокси-сервера. Остается только взять извлечь из него статистику и записать в лог &lt;strong&gt;Squid&lt;/strong&gt;. Скрипт для этого есть ниже.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;nginx&lt;/strong&gt; - Легковесный и производительный веб-сервер. Для запуска &lt;strong&gt;CGI&lt;/strong&gt; скриптов/программ лучше всего использовать &lt;code&gt;fcgiwrap&lt;/code&gt;, о настройке ниже. Более подробно расписывать не вижу смысла.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Весь выбранный софт бесплатный и имеется в портах &lt;strong&gt;FreeBSD&lt;/strong&gt; и под &lt;strong&gt;Linux&lt;/strong&gt;, думаю тоже все эти пакеты есть.&lt;/p&gt;
+&lt;p&gt;Итак по порядку, первым делом обновляем порты и устанавливаем весь перечисленный софт:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FreeBSD# &lt;span class="nb"&gt;cd&lt;/span&gt; /usr/ports
+FreeBSD# portsnap fetch update
+FreeBSD# &lt;span class="nb"&gt;cd&lt;/span&gt; /usr/ports/www/squid
+FreeBSD# make config &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; make config-recursive
+&lt;span class="o"&gt;[&lt;/span&gt;x&lt;span class="o"&gt;]&lt;/span&gt; SQUID_IDENT
+&lt;span class="o"&gt;[&lt;/span&gt;x&lt;span class="o"&gt;]&lt;/span&gt; SQUID_KQUEUE
+&lt;span class="o"&gt;[&lt;/span&gt;x&lt;span class="o"&gt;]&lt;/span&gt; SQUID_LARGEFILE
+FreeBSD# make install clean
+FreeBSD# &lt;span class="nb"&gt;cd&lt;/span&gt; /usr/ports/www/free-sa
+FreeBSD# make install clean
+FreeBSD# &lt;span class="nb"&gt;cd&lt;/span&gt; /usr/ports/www/rejik
+FreeBSD# make config &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;amp&lt;span class="p"&gt;;&amp;amp;&lt;/span&gt;amp&lt;span class="p"&gt;;&lt;/span&gt; make config-recursive
+&lt;span class="o"&gt;[&lt;/span&gt;x&lt;span class="o"&gt;]&lt;/span&gt; BAN
+&lt;span class="o"&gt;[&lt;/span&gt;x&lt;span class="o"&gt;]&lt;/span&gt; DBL
+&lt;span class="o"&gt;[&lt;/span&gt;x&lt;span class="o"&gt;]&lt;/span&gt; WWW
+FreeBSD# make install clean
+FreeBSD# &lt;span class="nb"&gt;cd&lt;/span&gt; /usr/ports/www/nginx
+FreeBSD# make config &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;amp&lt;span class="p"&gt;;&amp;amp;&lt;/span&gt;amp&lt;span class="p"&gt;;&lt;/span&gt; make config-recursive
+&lt;span class="o"&gt;[&lt;/span&gt;x&lt;span class="o"&gt;]&lt;/span&gt; HTTP
+&lt;span class="o"&gt;[&lt;/span&gt;x&lt;span class="o"&gt;]&lt;/span&gt; HTTP_CACHE
+&lt;span class="o"&gt;[&lt;/span&gt;x&lt;span class="o"&gt;]&lt;/span&gt; HTTP_REWRITE
+&lt;span class="o"&gt;[&lt;/span&gt;x&lt;span class="o"&gt;]&lt;/span&gt; HTTP_STATUS
+&lt;span class="o"&gt;[&lt;/span&gt;x&lt;span class="o"&gt;]&lt;/span&gt; WWW
+FreeBSD# make install clean
+FreeBSD# &lt;span class="nb"&gt;cd&lt;/span&gt; /usr/ports/www/fcgiwrap
+FreeBSD# make install clean
+FreeBSD# &lt;span class="nb"&gt;cd&lt;/span&gt; /usr/ports/net-mgmt/ipcad
+FreeBSD# make install clean
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Когда все успешно установится переходим к настройкам:
+Листинг &lt;code&gt;free-sa.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;# Sample configuration file for free-sa(1)&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;# copy to /usr/local/etc/free-sa/free-sa.conf&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;#########&lt;/span&gt;
+&lt;span class="c1"&gt;# FILES #&lt;/span&gt;
+&lt;span class="c1"&gt;#########&lt;/span&gt;
+&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/var/log/squid/access.log&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#usertab=&amp;quot;/usr/local/etc/free-sa/users&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;downloads&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/usr/local/etc/free-sa/downloads.sample&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#local_filter=&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#global_filter=&amp;quot;&amp;quot;&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;###############&lt;/span&gt;
+&lt;span class="c1"&gt;# DIRECTORIES #&lt;/span&gt;
+&lt;span class="c1"&gt;###############&lt;/span&gt;
+&lt;span class="nv"&gt;targetdir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/usr/local/www/data/free-sa&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;tmpdir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/var/cache/free-sa&amp;quot;&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;#####################&lt;/span&gt;
+&lt;span class="c1"&gt;# REPORTS SELECTION #&lt;/span&gt;
+&lt;span class="c1"&gt;#####################&lt;/span&gt;
+&lt;span class="nv"&gt;ts&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;paf&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;saf&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;pdn&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;sdn&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;cct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;pst&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;dld&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;fullurl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;users&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#email=&amp;quot;&amp;quot;&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;##################&lt;/span&gt;
+&lt;span class="c1"&gt;# REPORTS LIMITS #&lt;/span&gt;
+&lt;span class="c1"&gt;##################&lt;/span&gt;
+&lt;span class="c1"&gt;#paf_limit=&amp;quot;50&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#saf_limit=&amp;quot;50&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#pdn_limit=&amp;quot;50&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#sdn_limit=&amp;quot;50&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#cct_limit=&amp;quot;50&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#pst_limit=&amp;quot;50&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#dld_limit=&amp;quot;50&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#lcf_limit=&amp;quot;50&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#url_limit=&amp;quot;50&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#ts_limit=&amp;quot;0&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#dld_min=&amp;quot;0&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#rtr_timeout=&amp;quot;5000&amp;quot;&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;####################&lt;/span&gt;
+&lt;span class="c1"&gt;# OTHER PARAMETERS #&lt;/span&gt;
+&lt;span class="c1"&gt;####################&lt;/span&gt;
+&lt;span class="nv"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;free-sa.conf&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;logformat&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;0&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#skip_errors=&amp;quot;false&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;fulltraffic&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;inameuser&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#user_unescape=&amp;quot;false&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;indicators&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;overwrite&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;2&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;resolveip&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;showinfo&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;true&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#site=&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#logo=&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;locale&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ru_RU.KOI8-R&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#rotate=&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;divisor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;b&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#tz_shift=&amp;quot;0&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Создаем каталог для скриптов:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir /usr/local/etc/squid/scripts
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;И создаем в этой папке скрипты:&lt;/p&gt;
+&lt;p&gt;Листинг &lt;code&gt;ipcadstat.sh&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Диапазон адресов локальной cети, указываем подсеть.&lt;/span&gt;
+&lt;span class="nv"&gt;net&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;192\.168\.[0-9]?[0-9]?[0-9]\.[0-9]?[0-9]?[0-9]&lt;/span&gt;$&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="c1"&gt;# 192.168.0.0/16&lt;/span&gt;
+&lt;span class="c1"&gt;#net=&amp;quot;192\.168\.0\.[0-9]?[0-9]?[0-9]$&amp;quot; # 192.168.0.0/24&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Каталог с логами squid&amp;#39;а&lt;/span&gt;
+&lt;span class="nv"&gt;squid_DIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/var/log/squid/&amp;#39;&lt;/span&gt;
+
+&lt;span class="nv"&gt;ttime&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;rsh localhost sh ip acco &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s1"&gt;&amp;#39;Accounting data saved&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print ($4)}&amp;#39;&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+rsh localhost clear ip accounting &amp;gt; /dev/null
+rsh localhost show ip accounting checkpoint &lt;span class="p"&gt;|&lt;/span&gt; awk -v &lt;span class="nv"&gt;vtime&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$ttime&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{&lt;/span&gt;
+&lt;span class="s1"&gt; if ( $2 ~ /^&amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$net&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/ )&lt;/span&gt;
+&lt;span class="s1"&gt;     print (vtime&amp;quot;.000&amp;quot;,1,$2,&amp;quot;TCP_MISS/200&amp;quot;,$4,&amp;quot;CONNECT&amp;quot;,$1&amp;quot;:&amp;quot;$5,&amp;quot;-&amp;quot;,&amp;quot;DIRECT/&amp;quot;$1,&amp;quot;-&amp;quot;)&lt;/span&gt;
+&lt;span class="s1"&gt; }&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$squid_DIR&lt;/span&gt;&lt;span class="s2"&gt;/access.log&amp;quot;&lt;/span&gt;
+
+&lt;span class="c1"&gt;#TODO - если ошибок не было, то продолжаем.&lt;/span&gt;
+/usr/local/bin/free-sa
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Листинг &lt;code&gt;rotate_log.sh&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Ротация логов Squid&lt;/span&gt;
+/usr/local/sbin/squid -k rotate
+&lt;span class="k"&gt;for&lt;/span&gt; i in &lt;span class="k"&gt;$(&lt;/span&gt;ls &lt;span class="nv"&gt;$squid_DIR&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep -i &lt;span class="s1"&gt;&amp;#39;\.log\.[4-9]&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    rm -f &lt;span class="nv"&gt;$squid_DIR&lt;/span&gt;/&lt;span class="nv"&gt;$i&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Добавляем эти скрипты в планировщик заданий &lt;code&gt;/etc/crontab&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# rotate squid logs&lt;/span&gt;
+&lt;span class="m"&gt;0&lt;/span&gt;    &lt;span class="m"&gt;0&lt;/span&gt;  */1  *  *  root  /usr/local/etc/squid/scripts/rotate_log.sh &amp;gt;&amp;gt;/var/log/squid/rotate_log.log &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Наполнение лога squid данными из ipcad.&lt;/span&gt;
+*/5  *  *    *  *  root  /usr/local/etc/squid/scripts/ipcadstat.sh &amp;gt;&amp;gt;/var/log/squid/ipcadstat.log &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Привожу только те строки, которые изменил в дефолтном конфиге &lt;strong&gt;Squid&lt;/strong&gt; - &lt;code&gt;/usr/local/etc/squid/squid.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;http_port &lt;span class="m"&gt;3129&lt;/span&gt; transparent
+cache_mem &lt;span class="m"&gt;500&lt;/span&gt; MB
+maximum_object_size_in_memory &lt;span class="m"&gt;64&lt;/span&gt; KB
+cache_dir ufs /var/squid/cache &lt;span class="m"&gt;20480&lt;/span&gt; &lt;span class="m"&gt;16&lt;/span&gt; &lt;span class="m"&gt;256&lt;/span&gt;
+maximum_object_size &lt;span class="m"&gt;100&lt;/span&gt; MB
+access_log /var/log/squid/access.log squid
+cache_log /var/log/squid/cache.log
+logfile_rotate &lt;span class="m"&gt;100&lt;/span&gt;
+strip_query_terms off
+url_rewrite_program /usr/local/rejik/redirector /usr/local/rejik/redirector.conf
+url_rewrite_children &lt;span class="m"&gt;10&lt;/span&gt;
+header_access Via deny all
+cache_mgr Тут@Мое.мыло
+visible_hostname имя.сервера.сквида
+error_directory /usr/local/etc/squid/errors/Russian-1251
+dns_nameservers Тут.ip.вашего.DNS.сервера
+append_domain .local
+forwarded_for off
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Страницу блокировки я предпочитаю отдавать самим &lt;strong&gt;Squid&lt;/strong&gt;, как это описано в &lt;strong&gt;FAQ&lt;/strong&gt; по &lt;strong&gt;rejik&lt;/strong&gt;'у - &lt;a href="http://rejik.ru/index_ru_6_0.html"&gt;А нельзя ли обойтись без установки локального web сервера?&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Добавляем строки в &lt;code&gt;/usr/local/etc/squid/mime.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Для rejik&lt;/span&gt;
+dfgxfdgdfg-squid-porno dfgxfdgdfg-squid-deny/dfgxfdgdfg-squid-porno-html rejik/porno.html - ascii
+dfgxfdgdfg-squid-deny dfgxfdgdfg-squid-deny/dfgxfdgdfg-squid-deny-html rejik/deny.html  - ascii
+dfgxfdgdfg-squid-banner dfgxfdgdfg-squid-banner/dfgxfdgdfg-squid-banner-1px rejik/1x1.gif  - image
+dfgxfdgdfg-squid-js dfgxfdgdfg-squid-js/dfgxfdgdfg-squid-js-js  rejik/js.js  - ascii
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;Файл &lt;code&gt;1x1.gif&lt;/code&gt; - это пустая &lt;strong&gt;gif&lt;/strong&gt; картинка размером &lt;strong&gt;1x1&lt;/strong&gt; пиксель.
+Файл &lt;code&gt;js.js&lt;/code&gt; - это пустой текстовый файл.
+Файлы &lt;code&gt;porno.html&lt;/code&gt;, &lt;code&gt;deny.html&lt;/code&gt; - произвольный &lt;strong&gt;html&lt;/strong&gt; документ, который будут видеть те, кто откроет запрещенный сайт.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Например у меня &lt;code&gt;deny.html&lt;/code&gt; выглядит так:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;!DOCTYPE html PUBLIC &amp;quot;-//W3C//DTD XHTML 1.0 Transitional//EN&amp;quot; &amp;quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt; &lt;span class="na"&gt;xmlns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://www.w3.org/1999/xhtml&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;meta&lt;/span&gt; &lt;span class="na"&gt;http-equiv&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Content-Type&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;content&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/html; charset=UTF-8&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Доступ ограничен&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt; &lt;span class="na"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text/css&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class="o"&gt;&amp;lt;!&lt;/span&gt;&lt;span class="nt"&gt;--&lt;/span&gt;
+            &lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nt"&gt;td&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nt"&gt;th&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="k"&gt;font-family&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Verdana&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Arial&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Helvetica&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;sans-serif&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="k"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;#FFFFFF&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="nt"&gt;body&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="k"&gt;background-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;#000000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="k"&gt;margin-top&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="k"&gt;margin-left&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="k"&gt;margin-right&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;style1&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="k"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mh"&gt;#FF0000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="k"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="k"&gt;font-weight&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;bold&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nc"&gt;style2&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="k"&gt;font-size&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="kt"&gt;px&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="nt"&gt;--&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;style&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;head&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+
+    &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;align&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;center&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class="ni"&gt;&amp;amp;nbsp;&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;style1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Содержимое данного сайта заблокировано!&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class="ni"&gt;&amp;amp;nbsp;&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Система контентной фильтрации определила,&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;br&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span class="ni"&gt;&amp;amp;nbsp;&lt;/span&gt; что материалы запрашиваемого вами ресурса&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;br&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span class="ni"&gt;&amp;amp;nbsp;&lt;/span&gt; могут противоречить целям и задачам &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;br&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span class="ni"&gt;&amp;amp;nbsp;&lt;/span&gt; образовательного процесса.&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class="ni"&gt;&amp;amp;nbsp;&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;hr&lt;/span&gt; &lt;span class="na"&gt;width&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;400&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;3&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span class="ni"&gt;&amp;amp;nbsp;&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;span&lt;/span&gt; &lt;span class="na"&gt;class&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;style2&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;Если вы уверены, что сайт не содержит недопустимой информации,&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;br&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span class="ni"&gt;&amp;amp;nbsp;&lt;/span&gt; обратитесь к системному администратору. После проверки адрес&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;br&lt;/span&gt; &lt;span class="p"&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span class="ni"&gt;&amp;amp;nbsp;&lt;/span&gt; будет добавлен в список разрешенных ресурсов.&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;span&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;p&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Листинг &lt;code&gt;/usr/local/rejik/redirector.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;error_log&lt;/span&gt; &lt;span class="s"&gt;/usr/local/rejik/redirector.err&lt;/span&gt;
+&lt;span class="s"&gt;change_log&lt;/span&gt; &lt;span class="s"&gt;/usr/local/rejik/redirector.log&lt;/span&gt;
+&lt;span class="s"&gt;make-cache&lt;/span&gt; &lt;span class="s"&gt;/usr/local/rejik/make-cache&lt;/span&gt;
+&lt;span class="s"&gt;allow_urls&lt;/span&gt; &lt;span class="s"&gt;/usr/local/rejik/banlists/allow_urls&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Список ip - исключений. (для кого НЕ будут применяться правила фильтрации)&lt;/span&gt;
+&lt;span class="s"&gt;allow_ip&lt;/span&gt; &lt;span class="s"&gt;f:/usr/local/rejik/ip/allow&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;#&amp;lt;audio-video&amp;gt;&lt;/span&gt;
+&lt;span class="c1"&gt;#ban_dir  /usr/local/rejik/banlists/audio-video&lt;/span&gt;
+&lt;span class="c1"&gt;#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="c1"&gt;#log off&lt;/span&gt;
+
+&lt;span class="c1"&gt;#&amp;lt;avto-moto&amp;gt;&lt;/span&gt;
+&lt;span class="c1"&gt;#ban_dir  /usr/local/rejik/banlists/avto-moto&lt;/span&gt;
+&lt;span class="c1"&gt;#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="c1"&gt;#log off&lt;/span&gt;
+
+&lt;span class="s"&gt;&amp;lt;banner&amp;gt;&lt;/span&gt;
+&lt;span class="s"&gt;ban_dir&lt;/span&gt; &lt;span class="s"&gt;/usr/local/rejik/banlists/banners&lt;/span&gt;
+&lt;span class="c1"&gt;#файлы смотри в каталоге /usr/local/etc/squid/icons/rejik + mime.conf файл сквида&lt;/span&gt;
+&lt;span class="s"&gt;url&lt;/span&gt; &lt;span class="s"&gt;http://127.0.0.1:3126/squid-internal-static/icons/rejik/1x1.gif&lt;/span&gt;
+&lt;span class="s"&gt;log&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;
+
+&lt;span class="c1"&gt;#&amp;lt;chats&amp;gt;&lt;/span&gt;
+&lt;span class="c1"&gt;#ban_dir  /usr/local/rejik/banlists/chats&lt;/span&gt;
+&lt;span class="c1"&gt;#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="c1"&gt;#log off&lt;/span&gt;
+
+&lt;span class="c1"&gt;#&amp;lt;dating&amp;gt;&lt;/span&gt;
+&lt;span class="c1"&gt;#ban_dir  /usr/local/rejik/banlists/dating&lt;/span&gt;
+&lt;span class="c1"&gt;#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="c1"&gt;#log off&lt;/span&gt;
+
+&lt;span class="s"&gt;&amp;lt;extremism&amp;gt;&lt;/span&gt;
+&lt;span class="s"&gt;ban_dir&lt;/span&gt;  &lt;span class="s"&gt;/usr/local/rejik/banlists/extremism&lt;/span&gt;
+&lt;span class="s"&gt;url&lt;/span&gt; &lt;span class="s"&gt;http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="s"&gt;log&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;
+
+&lt;span class="c1"&gt;#&amp;lt;icq&amp;gt;&lt;/span&gt;
+&lt;span class="c1"&gt;#ban_dir  /usr/local/rejik/banlists/icq&lt;/span&gt;
+&lt;span class="c1"&gt;#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="c1"&gt;#log off&lt;/span&gt;
+
+&lt;span class="c1"&gt;#&amp;lt;jobsearch&amp;gt;&lt;/span&gt;
+&lt;span class="c1"&gt;#ban_dir  /usr/local/rejik/banlists/jobsearch&lt;/span&gt;
+&lt;span class="c1"&gt;#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="c1"&gt;#log off&lt;/span&gt;
+
+&lt;span class="s"&gt;&amp;lt;online-games&amp;gt;&lt;/span&gt;
+&lt;span class="s"&gt;ban_dir&lt;/span&gt;  &lt;span class="s"&gt;/usr/local/rejik/banlists/online-games&lt;/span&gt;
+&lt;span class="s"&gt;url&lt;/span&gt; &lt;span class="s"&gt;http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="s"&gt;log&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;
+
+&lt;span class="s"&gt;&amp;lt;phishihg&amp;gt;&lt;/span&gt;
+&lt;span class="s"&gt;ban_dir&lt;/span&gt;  &lt;span class="s"&gt;/usr/local/rejik/banlists/phishing&lt;/span&gt;
+&lt;span class="s"&gt;url&lt;/span&gt; &lt;span class="s"&gt;http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="s"&gt;log&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;
+
+&lt;span class="c1"&gt;#&amp;lt;photogallery&amp;gt;&lt;/span&gt;
+&lt;span class="c1"&gt;#ban_dir  /usr/local/rejik/banlists/photogallery&lt;/span&gt;
+&lt;span class="c1"&gt;#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="c1"&gt;#log off&lt;/span&gt;
+
+&lt;span class="s"&gt;&amp;lt;porno&amp;gt;&lt;/span&gt;
+&lt;span class="s"&gt;ban_dir&lt;/span&gt;  &lt;span class="s"&gt;/usr/local/rejik/banlists/porno&lt;/span&gt;
+&lt;span class="s"&gt;url&lt;/span&gt; &lt;span class="s"&gt;http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="s"&gt;log&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;
+
+&lt;span class="s"&gt;&amp;lt;socnet&amp;gt;&lt;/span&gt;
+&lt;span class="s"&gt;ban_dir&lt;/span&gt;  &lt;span class="s"&gt;/usr/local/rejik/banlists/socnet&lt;/span&gt;
+&lt;span class="s"&gt;url&lt;/span&gt; &lt;span class="s"&gt;http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="s"&gt;work_ip&lt;/span&gt; &lt;span class="s"&gt;f:/usr/local/rejik/ip/deny_socnet&lt;/span&gt;
+&lt;span class="s"&gt;log&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;
+
+&lt;span class="s"&gt;&amp;lt;spyware&amp;gt;&lt;/span&gt;
+&lt;span class="s"&gt;ban_dir&lt;/span&gt;  &lt;span class="s"&gt;/usr/local/rejik/banlists/spyware&lt;/span&gt;
+&lt;span class="s"&gt;url&lt;/span&gt; &lt;span class="s"&gt;http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="s"&gt;log&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;
+
+&lt;span class="s"&gt;&amp;lt;torrents&amp;gt;&lt;/span&gt;
+&lt;span class="s"&gt;ban_dir&lt;/span&gt;  &lt;span class="s"&gt;/usr/local/rejik/banlists/torrents&lt;/span&gt;
+&lt;span class="s"&gt;url&lt;/span&gt; &lt;span class="s"&gt;http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="s"&gt;log&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;
+
+&lt;span class="s"&gt;&amp;lt;virus-detect&amp;gt;&lt;/span&gt;
+&lt;span class="s"&gt;ban_dir&lt;/span&gt;  &lt;span class="s"&gt;/usr/local/rejik/banlists/virus-detect&lt;/span&gt;
+&lt;span class="s"&gt;url&lt;/span&gt; &lt;span class="s"&gt;http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="s"&gt;log&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;
+
+&lt;span class="s"&gt;&amp;lt;warez&amp;gt;&lt;/span&gt;
+&lt;span class="s"&gt;ban_dir&lt;/span&gt;  &lt;span class="s"&gt;/usr/local/rejik/banlists/warez&lt;/span&gt;
+&lt;span class="s"&gt;url&lt;/span&gt; &lt;span class="s"&gt;http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="s"&gt;log&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;
+
+&lt;span class="c1"&gt;#&amp;lt;web-mail&amp;gt;&lt;/span&gt;
+&lt;span class="c1"&gt;#ban_dir  /usr/local/rejik/banlists/web-mail&lt;/span&gt;
+&lt;span class="c1"&gt;#url http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="c1"&gt;#log off&lt;/span&gt;
+
+&lt;span class="s"&gt;&amp;lt;web-proxy&amp;gt;&lt;/span&gt;
+&lt;span class="s"&gt;ban_dir&lt;/span&gt;  &lt;span class="s"&gt;/usr/local/rejik/banlists/web-proxy&lt;/span&gt;
+&lt;span class="s"&gt;url&lt;/span&gt; &lt;span class="s"&gt;http://127.0.0.1:3126/squid-internal-static/icons/rejik/deny.html&lt;/span&gt;
+&lt;span class="s"&gt;log&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Так как &lt;strong&gt;rejik&lt;/strong&gt; из текстовых файлов со списками плохих сайтов делает файлы бинарные файлы, от после внесения изменений в списки, нужно обновлять &lt;code&gt;*.cache&lt;/code&gt; файлы &lt;strong&gt;rejik&lt;/strong&gt;'а, для этого я использую скрипт:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Путь  до rejik&lt;/span&gt;
+&lt;span class="nv"&gt;REJIK_PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/local/rejik
+
+
+&lt;span class="c1"&gt;# Найдем и удалим файлы кеша rejik&lt;/span&gt;
+find &lt;span class="nv"&gt;$REJIK_PATH&lt;/span&gt; -name &lt;span class="s1"&gt;&amp;#39;*.cache&amp;#39;&lt;/span&gt; -exec rm &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="se"&gt;\;&lt;/span&gt;
+&lt;span class="c1"&gt;# Создадим снова кеш rejik&lt;/span&gt;
+&lt;span class="nv"&gt;$REJIK_PATH&lt;/span&gt;/make-cache
+
+&lt;span class="c1"&gt;# говорим squid перечитать новую конфигурацию&lt;/span&gt;
+/usr/local/sbin/squid -k reconfigure
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Листинг с описанием виртуального хоста &lt;code&gt;squid.local&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="c1"&gt;#-------------------------- Options --------------------------#&lt;/span&gt;
+    &lt;span class="kn"&gt;listen&lt;/span&gt; &lt;span class="s"&gt;*:80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="kn"&gt;server_name&lt;/span&gt; &lt;span class="s"&gt;squid.local&lt;/span&gt; &lt;span class="s"&gt;squid&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="kn"&gt;open_file_cache&lt;/span&gt; &lt;span class="s"&gt;max=100000&lt;/span&gt; &lt;span class="s"&gt;inactive=40s&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="kn"&gt;open_file_cache_valid&lt;/span&gt; &lt;span class="s"&gt;60s&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="kn"&gt;open_file_cache_min_uses&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="kn"&gt;open_file_cache_errors&lt;/span&gt; &lt;span class="no"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Logs&lt;/span&gt;
+    &lt;span class="kn"&gt;access_log&lt;/span&gt; &lt;span class="s"&gt;/var/log/nginx/squid.local_http_access.log&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="kn"&gt;error_log&lt;/span&gt; &lt;span class="s"&gt;/var/log/nginx/squid.local_http_error.log&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;#-------------------------- Configs --------------------------#&lt;/span&gt;
+    &lt;span class="c1"&gt;# redirect server error pages to the static page /50x.html&lt;/span&gt;
+    &lt;span class="kn"&gt;error_page&lt;/span&gt; &lt;span class="mi"&gt;500&lt;/span&gt; &lt;span class="mi"&gt;502&lt;/span&gt; &lt;span class="mi"&gt;503&lt;/span&gt; &lt;span class="mi"&gt;504&lt;/span&gt; &lt;span class="s"&gt;/50x.html&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="kn"&gt;location&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/50x.html&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="kn"&gt;root&lt;/span&gt; &lt;span class="s"&gt;/usr/local/www/nginx-dist&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# deny access to .htaccess files, if Apache&amp;#39;s document root concurs with nginx&amp;#39;s one&lt;/span&gt;
+    &lt;span class="kn"&gt;location&lt;/span&gt; &lt;span class="p"&gt;~&lt;/span&gt; &lt;span class="sr"&gt;/\.ht&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="kn"&gt;deny&lt;/span&gt; &lt;span class="s"&gt;all&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="kn"&gt;index&lt;/span&gt; &lt;span class="s"&gt;index.html&lt;/span&gt; &lt;span class="s"&gt;free-sa.cgi&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;#-------------------------- Locations ------------------------#&lt;/span&gt;
+
+    &lt;span class="kn"&gt;location&lt;/span&gt; &lt;span class="p"&gt;~&lt;/span&gt; &lt;span class="sr"&gt;^/favicon.ico$&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="kn"&gt;root&lt;/span&gt; &lt;span class="s"&gt;/usr/local/www/data/free-sa&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="kn"&gt;log_not_found&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="kn"&gt;access_log&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="kn"&gt;expires&lt;/span&gt; &lt;span class="s"&gt;max&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Main location&lt;/span&gt;
+    &lt;span class="kn"&gt;location&lt;/span&gt; &lt;span class="s"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="kn"&gt;root&lt;/span&gt; &lt;span class="s"&gt;/usr/local/www/data/free-sa&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+        &lt;span class="kn"&gt;location&lt;/span&gt; &lt;span class="p"&gt;~&lt;/span&gt; &lt;span class="sr"&gt;\.cgi$&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="kn"&gt;gzip&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;#gzip makes scripts feel slower since they have to complete before getting gzipped&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_pass&lt;/span&gt; &lt;span class="s"&gt;unix:/var/run/fcgiwrap/lightsquid.socket&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_index&lt;/span&gt; &lt;span class="s"&gt;free-sa.cgi&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;SCRIPT_FILENAME&lt;/span&gt; &lt;span class="s"&gt;/usr/local/www/data/free-sa/&lt;/span&gt;&lt;span class="nv"&gt;$fastcgi_script_name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;QUERY_STRING&lt;/span&gt; &lt;span class="nv"&gt;$query_string&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;REQUEST_METHOD&lt;/span&gt; &lt;span class="nv"&gt;$request_method&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;CONTENT_TYPE&lt;/span&gt; &lt;span class="nv"&gt;$content_type&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;CONTENT_LENGTH&lt;/span&gt; &lt;span class="nv"&gt;$content_length&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;GATEWAY_INTERFACE&lt;/span&gt; &lt;span class="s"&gt;CGI/1.1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;SERVER_SOFTWARE&lt;/span&gt; &lt;span class="s"&gt;nginx&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;SCRIPT_NAME&lt;/span&gt; &lt;span class="nv"&gt;$fastcgi_script_name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;REQUEST_URI&lt;/span&gt; &lt;span class="nv"&gt;$request_uri&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;DOCUMENT_URI&lt;/span&gt; &lt;span class="nv"&gt;$document_uri&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;DOCUMENT_ROOT&lt;/span&gt; &lt;span class="nv"&gt;$document_root&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;SERVER_PROTOCOL&lt;/span&gt; &lt;span class="nv"&gt;$server_protocol&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;REMOTE_ADDR&lt;/span&gt; &lt;span class="nv"&gt;$remote_addr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;REMOTE_PORT&lt;/span&gt; &lt;span class="nv"&gt;$remote_port&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;SERVER_ADDR&lt;/span&gt; &lt;span class="nv"&gt;$server_addr&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;SERVER_PORT&lt;/span&gt; &lt;span class="nv"&gt;$server_port&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;SERVER_NAME&lt;/span&gt; &lt;span class="nv"&gt;$server_name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Конечно же каталог с логами должен существовать и права должны быть такие же как у &lt;strong&gt;nginx&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir /var/log/nginx
+chown www:www /var/log/nginx
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Не забываем про ротацию логов - добавляем в &lt;code&gt;/etc/newsyslog.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# nginx&lt;/span&gt;
+/var/log/nginx-error.log www:www  &lt;span class="m"&gt;644&lt;/span&gt;  &lt;span class="m"&gt;7&lt;/span&gt;    &lt;span class="m"&gt;900&lt;/span&gt; *     XC /var/run/nginx.pid &lt;span class="m"&gt;30&lt;/span&gt;
+/var/log/nginx/*.log  www:www  &lt;span class="m"&gt;644&lt;/span&gt;  &lt;span class="m"&gt;7&lt;/span&gt;    &lt;span class="m"&gt;900&lt;/span&gt; *     GXC /var/run/nginx.pid &lt;span class="m"&gt;30&lt;/span&gt;
+
+&lt;span class="c1"&gt;# rejik&lt;/span&gt;
+/usr/local/rejik/redirector.err squid:squid &lt;span class="m"&gt;644&lt;/span&gt;  &lt;span class="m"&gt;10&lt;/span&gt;    &lt;span class="m"&gt;300&lt;/span&gt; *     XC
+&lt;span class="c1"&gt;# crontab for Squid&lt;/span&gt;
+/var/log/squid/rotate_log.log   &lt;span class="m"&gt;644&lt;/span&gt;  &lt;span class="m"&gt;3&lt;/span&gt;    &lt;span class="m"&gt;100&lt;/span&gt; *     XC
+/var/log/squid/ipcadstat.log   &lt;span class="m"&gt;644&lt;/span&gt;  &lt;span class="m"&gt;3&lt;/span&gt;    &lt;span class="m"&gt;100&lt;/span&gt; *     XC
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;И перезапускаем демона &lt;code&gt;newsyslog&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;service newsyslog restart
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В качестве бонуса привожу скрипт для удобной перезагрузки конфига &lt;em&gt;Squid&lt;/em&gt;. Так как после внесения изменений в конфигурацию &lt;strong&gt;Squid&lt;/strong&gt;, нужно перезапускать сервис,
+ либо из консоли давать команду &lt;code&gt;squid -k reconfigure&lt;/code&gt;, что не всегда удобно + если мы допустили ошибку в конфиге ничего хорошего не будет от такой команды
+ и уж темболее от перезагрузки сервиса - он не запустится, а у людей не будет интернета, чтобы всего этого избежать я написал простенький скриптик:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Функция вывода цветных сообщений&lt;/span&gt;
+COLOR_STR&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="nv"&gt;$2&lt;/span&gt; in
+        red&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nb"&gt;printf&lt;/span&gt; %b &lt;span class="s2"&gt;&amp;quot;\033[1;31m&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;\033[0m&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+        green&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nb"&gt;printf&lt;/span&gt; %b &lt;span class="s2"&gt;&amp;quot;\033[1;32m&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;\033[0m&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+    &lt;span class="k"&gt;esac&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+squid -k check
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$?&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    squid -k reconfigure
+    COLOR_STR &lt;span class="s1"&gt;&amp;#39;SUCCESS&amp;#39;&lt;/span&gt; green
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;: Squid config reloaded.&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt;
+    COLOR_STR &lt;span class="s1"&gt;&amp;#39;ERROR&amp;#39;&lt;/span&gt; red
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;: in Squid config file.&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В кратце как это работает - скрипт сперва проверяет синтаксис конфига &lt;code&gt;squid -k check&lt;/code&gt;, и если ошибок небыло, то выполняет загрузку нового конфига &lt;code&gt;squid -k reconfigure&lt;/code&gt;,
+ если были ошибки, то он выдаст ошибку и &lt;strong&gt;Squid&lt;/strong&gt; останется работать со старым конфигом, следовательно у всех будет интернет, а у вас будет время все исправить.&lt;/p&gt;
+&lt;p&gt;И последний конфиг - листинг файла конфигурации &lt;strong&gt;IpCad&lt;/strong&gt; &lt;code&gt;/usr/local/etc/ipcad.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;capture-ports enable&lt;span class="p"&gt;;&lt;/span&gt;
+
+interface lan0 filter &lt;span class="s2"&gt;&amp;quot;ip and dst net 192.168.0.0/16 and not src net 192.168.0.0/16 and not src port 80&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+aggregate &lt;span class="m"&gt;0&lt;/span&gt;.0.0.0/0 strip &lt;span class="m"&gt;32&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; /* Drop the last octet of all other IPs */
+
+aggregate &lt;span class="m"&gt;110&lt;/span&gt; into &lt;span class="m"&gt;110&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+aggregate &lt;span class="m"&gt;443&lt;/span&gt; into &lt;span class="m"&gt;443&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+aggregate &lt;span class="m"&gt;3129&lt;/span&gt; into &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+aggregate &lt;span class="m"&gt;3128&lt;/span&gt; into &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+aggregate &lt;span class="m"&gt;3130&lt;/span&gt;-65535 into &lt;span class="m"&gt;65535&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+rsh &lt;span class="nb"&gt;enable&lt;/span&gt; at &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1&lt;span class="p"&gt;;&lt;/span&gt;
+rsh root@127.0.0.1 admin&lt;span class="p"&gt;;&lt;/span&gt;
+rsh root@127.0.0.1 backup&lt;span class="p"&gt;;&lt;/span&gt;
+rsh root@127.0.0.1&lt;span class="p"&gt;;&lt;/span&gt;
+rsh &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1 view-only&lt;span class="p"&gt;;&lt;/span&gt;
+rsh &lt;span class="nv"&gt;ttl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+rsh &lt;span class="nv"&gt;timeout&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;30&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;chroot&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /var/log/ipcad&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;dumpfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; ipcad.dump&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="nv"&gt;pidfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; ipcad.pid&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Обратите внимание на строку &lt;code&gt;interface lan0 filter "ip and dst net 192.168.0.0/16 and not src net 192.168.0.0/16 and not src port 80";&lt;/code&gt;
+ Эта строка предписывает &lt;code&gt;ipcad&lt;/code&gt; собирать статистику пакетов попадающих в локальную сеть извне (из интернет) на &lt;strong&gt;LAN&lt;/strong&gt;-интерфейсе.
+ При этом в статистику не должны попадать пакеты от &lt;strong&gt;squid&lt;/strong&gt; (т.е. те, порт источника которых равен &lt;code&gt;80&lt;/code&gt; - у нас же прозрачный прокси) т.к. &lt;strong&gt;squid&lt;/strong&gt; сам отразит их статистику в своем логе.
+ Дублирование статистики нам ни к чему.&lt;/p&gt;
+&lt;p&gt;Как и чем заворачивать всех клиентов в &lt;strong&gt;Squid&lt;/strong&gt; выбирайте сами - в интернете полно информации по этому поводу, я приведу 2 примера заворота при помощи &lt;code&gt;pf&lt;/code&gt; и &lt;code&gt;ipfw&lt;/code&gt;:&lt;/p&gt;
+&lt;h4&gt;Пример для &lt;code&gt;pf&lt;/code&gt;:&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# редиректим всех, кроме таблицы &amp;lt;no_www_proxy&amp;gt; на наш Proxy сервер, чтобы отфильтровать &amp;quot;Плохие сайты&amp;quot;&lt;/span&gt;
+rdr proto tcp from !&amp;lt;no_www_proxy&amp;gt; to !lan0:network port http -&amp;gt; &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1 port &lt;span class="m"&gt;3129&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;Пример для &lt;code&gt;ipfw&lt;/code&gt;:&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Squid transparent redirect&lt;/span&gt;
+add fwd &lt;span class="m"&gt;127&lt;/span&gt;.0.0.1,3129 tcp from any to not &lt;span class="m"&gt;192&lt;/span&gt;.168.0.0/16 http via lan0
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Где &lt;code&gt;lan0&lt;/code&gt; - имя локального интерфейса.&lt;/p&gt;
+&lt;p&gt;Теперь можно все это добавить в автозагрузку и запустить.&lt;/p&gt;
+&lt;p&gt;Вырезка из &lt;code&gt;/etc/rc.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#------------------------------ squid ------------------------------------#&lt;/span&gt;
+&lt;span class="nv"&gt;squid_enable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;YES&amp;quot;&lt;/span&gt; &lt;span class="c1"&gt;# Прозрачный прокси, для ведения статистики посещенных сайтов.&lt;/span&gt;
+&lt;span class="nv"&gt;ipcad_enable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;YES&amp;quot;&lt;/span&gt; &lt;span class="c1"&gt;# Для записи в статистику squid&amp;#39;а, всего остального трафика.&lt;/span&gt;
+&lt;span class="c1"&gt;#-------------------------------------------------------------------------#&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;#------------------------------ nginx ------------------------------------#&lt;/span&gt;
+&lt;span class="nv"&gt;nginx_enable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;YES&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# (bool) Set to &amp;quot;NO&amp;quot; by default. Set it to &amp;quot;YES&amp;quot; to enable nginx&lt;/span&gt;
+
+&lt;span class="c1"&gt;#php_fpm_enable=&amp;quot;YES&amp;quot;&lt;/span&gt;
+
+&lt;span class="nv"&gt;fcgiwrap_enable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;YES&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;fcgiwrap_profiles&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;lightsquid&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;fcgiwrap_flags&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;-c 4&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;fcgiwrap_lightsquid_socket&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;unix:/var/run/fcgiwrap/lightsquid.socket&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;fcgiwrap_lightsquid_user&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;www&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#-------------------------------------------------------------------------#&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Запускаем всех демонов:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;service squid start
+service ipcad start
+service fcgiwrap start
+service nginx start
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Пробуем выйти в интернет, открыть запрещенные сайты - все должно работать как и предполагали. Через пять минут пробуем зайти в &lt;strong&gt;Free-SA&lt;/strong&gt; &lt;code&gt;http://squid.local/&lt;/code&gt; и посмотреть статистику.
+ Чтобы посмотреть статистику в режиме реального времени нужно открыть ссылку &lt;code&gt;http://squid.local/cgi-bin/&lt;/code&gt;, где &lt;code&gt;squid.local&lt;/code&gt; - имя вашего сервера с &lt;strong&gt;nginx&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://rejik.ru/index_ru_6_0.html"&gt;Rejik FAQ: А нельзя ли обойтись без установки локального web сервера?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://wiki.dieg.info/ipcad"&gt;Wiki - IT рабочие заметки: ipcad&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.lissyara.su/articles/freebsd/programms/free-sa/"&gt;lissyara.su: Анализатор статистики Free-SA&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://rootmaster.at.ua/publ/shljuz_dlja_nebolshoj_seti_na_osnove_freebsd/1-1-0-82"&gt;rootmaster.at.ua: шлюз для небольшой сети на основе FreeBSD.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://ru.doc.pfsense.org/index.php/%D0%9F%D0%BE%D0%B4%D1%81%D1%87%D0%B5%D1%82_%D1%82%D1%80%D0%B0%D1%84%D0%B8%D0%BA%D0%B0_%D1%81_%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E_Squid_%D0%B8_ipcad_%D0%B2_pfSense_1.2.3"&gt;Подсчет трафика с помощью Squid и ipcad в pfSense 1.2.3&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://coolchevy.org.ua/2011/11/25/simple-cgi-support-for-nginx/"&gt;coolchevy's blog: Simple CGI support for Nginx&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://habrahabr.ru/post/138984/"&gt;Habrahabr: Вебсервер nginx + fastcgi-wrapper + matlab&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://nginx.localdomain.pl/wiki/FcgiWrap"&gt;nginx.localdomain.pl: Simple CGI support for Nginx (fcgiwrap)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.rejik.ru/index_ru_8_1.html"&gt;Rejik: DBL листы - что это и где взять?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://free-sa.sourceforge.net/"&gt;Free-SA log processor&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="FreeBSD"></category><category term="rejik"></category><category term="squid"></category><category term="ipcad"></category><category term="Free-SA"></category><category term="nginx"></category><category term="content filter"></category></entry><entry><title>FreeBSD chroot sftp и chroot ssh</title><link href="http://blog.metajiji.tk/blog/freebsd-chroot-sftp-chroot-ssh/" rel="alternate"></link><published>2013-03-14T00:00:00+07:00</published><updated>2013-03-14T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-03-14:/blog/freebsd-chroot-sftp-chroot-ssh/</id><summary type="html">&lt;p&gt;Для предоставления доступа через &lt;code&gt;ssh&lt;/code&gt; и &lt;code&gt;sftp&lt;/code&gt; например к файлам сайта, можно использовать штатный для &lt;strong&gt;FreeBSD&lt;/strong&gt; демон &lt;code&gt;sshd&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Для начала добавим в конфиг демона &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; строки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;############## : BEGIN&lt;/span&gt;
+&lt;span class="c1"&gt;#pw usermod sftponly -d /usr/local/www/&lt;/span&gt;
+&lt;span class="c1"&gt;#chown root:wheel /usr/local/www/&lt;/span&gt;
+&lt;span class="c1"&gt;#AllowGroups wheel sftp&lt;/span&gt;
+&lt;span class="c1"&gt;#AllowUsers user1 user2 user3@192 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Для предоставления доступа через &lt;code&gt;ssh&lt;/code&gt; и &lt;code&gt;sftp&lt;/code&gt; например к файлам сайта, можно использовать штатный для &lt;strong&gt;FreeBSD&lt;/strong&gt; демон &lt;code&gt;sshd&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Для начала добавим в конфиг демона &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; строки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;############## : BEGIN&lt;/span&gt;
+&lt;span class="c1"&gt;#pw usermod sftponly -d /usr/local/www/&lt;/span&gt;
+&lt;span class="c1"&gt;#chown root:wheel /usr/local/www/&lt;/span&gt;
+&lt;span class="c1"&gt;#AllowGroups wheel sftp&lt;/span&gt;
+&lt;span class="c1"&gt;#AllowUsers user1 user2 user3@192.168.1.1 user3@192.168.2.*&lt;/span&gt;
+
+Match User web
+   ChrootDirectory /home/%u
+   X11Forwarding no
+   AllowTcpForwarding no
+
+Match Group sftp
+   ChrootDirectory %h
+   X11Forwarding no
+   AllowTcpForwarding no
+   ForceCommand internal-sftp
+&lt;span class="c1"&gt;############## : END&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Добавляем в систему пользователя &lt;code&gt;sftp&lt;/code&gt; и &lt;code&gt;web&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FreeBSD# adduser
+Username: sftp
+Full name:     
+Uid &lt;span class="o"&gt;(&lt;/span&gt;Leave empty &lt;span class="k"&gt;for&lt;/span&gt; default&lt;span class="o"&gt;)&lt;/span&gt;: 
+Login group &lt;span class="o"&gt;[&lt;/span&gt;sftp&lt;span class="o"&gt;]&lt;/span&gt;: 
+Login group is sftp. Invite sftp into other groups? &lt;span class="o"&gt;[]&lt;/span&gt;: 
+Login class &lt;span class="o"&gt;[&lt;/span&gt;default&lt;span class="o"&gt;]&lt;/span&gt;: 
+Shell &lt;span class="o"&gt;(&lt;/span&gt;sh csh tcsh nologin&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;sh&lt;span class="o"&gt;]&lt;/span&gt;: nologin
+Home directory &lt;span class="o"&gt;[&lt;/span&gt;/home/sftp&lt;span class="o"&gt;]&lt;/span&gt;: /usr/local/www
+Home directory permissions &lt;span class="o"&gt;(&lt;/span&gt;Leave empty &lt;span class="k"&gt;for&lt;/span&gt; default&lt;span class="o"&gt;)&lt;/span&gt;: 
+Use password-based authentication? &lt;span class="o"&gt;[&lt;/span&gt;yes&lt;span class="o"&gt;]&lt;/span&gt;: 
+Use an empty password? &lt;span class="o"&gt;(&lt;/span&gt;yes/no&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;no&lt;span class="o"&gt;]&lt;/span&gt;: 
+Use a random password? &lt;span class="o"&gt;(&lt;/span&gt;yes/no&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;no&lt;span class="o"&gt;]&lt;/span&gt;: 
+Enter password: 
+Enter password again: 
+Lock out the account after creation? &lt;span class="o"&gt;[&lt;/span&gt;no&lt;span class="o"&gt;]&lt;/span&gt;: 
+Username   : sftp
+Password   : *****
+Full Name  : 
+Uid        : &lt;span class="m"&gt;1002&lt;/span&gt;
+Class      : 
+Groups     : sftp 
+Home       : /usr/local/www
+Home Mode  : 
+Shell      : /usr/sbin/nologin
+Locked     : no
+OK? &lt;span class="o"&gt;(&lt;/span&gt;yes/no&lt;span class="o"&gt;)&lt;/span&gt;: y
+adduser: INFO: Successfully added &lt;span class="o"&gt;(&lt;/span&gt;sftp&lt;span class="o"&gt;)&lt;/span&gt; to the user database.
+Add another user? &lt;span class="o"&gt;(&lt;/span&gt;yes/no&lt;span class="o"&gt;)&lt;/span&gt;: y
+Username: web
+Full name: 
+Uid &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;1003&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;: 
+Login group &lt;span class="o"&gt;[&lt;/span&gt;web&lt;span class="o"&gt;]&lt;/span&gt;: 
+Login group is web. Invite webb into other groups? &lt;span class="o"&gt;[]&lt;/span&gt;: 
+Login class &lt;span class="o"&gt;[&lt;/span&gt;default&lt;span class="o"&gt;]&lt;/span&gt;: 
+Shell &lt;span class="o"&gt;(&lt;/span&gt;sh csh tcsh nologin&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;sh&lt;span class="o"&gt;]&lt;/span&gt;: csh
+Home directory &lt;span class="o"&gt;[&lt;/span&gt;/usr/local/web&lt;span class="o"&gt;]&lt;/span&gt;: /home/web
+Home directory permissions &lt;span class="o"&gt;(&lt;/span&gt;Leave empty &lt;span class="k"&gt;for&lt;/span&gt; default&lt;span class="o"&gt;)&lt;/span&gt;: 
+Use password-based authentication? &lt;span class="o"&gt;[&lt;/span&gt;yes&lt;span class="o"&gt;]&lt;/span&gt;: 
+Use an empty password? &lt;span class="o"&gt;(&lt;/span&gt;yes/no&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;no&lt;span class="o"&gt;]&lt;/span&gt;: 
+Use a random password? &lt;span class="o"&gt;(&lt;/span&gt;yes/no&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt;no&lt;span class="o"&gt;]&lt;/span&gt;: 
+Enter password: 
+Enter password again: 
+Lock out the account after creation? &lt;span class="o"&gt;[&lt;/span&gt;no&lt;span class="o"&gt;]&lt;/span&gt;: 
+Username   : web
+Password   : *****
+Full Name  : 
+Uid        : &lt;span class="m"&gt;1003&lt;/span&gt;
+Class      : 
+Groups     : web 
+Home       : /home/web
+Home Mode  : 
+Shell      : /bin/csh
+Locked     : no
+OK? &lt;span class="o"&gt;(&lt;/span&gt;yes/no&lt;span class="o"&gt;)&lt;/span&gt;: y
+adduser: INFO: Successfully added &lt;span class="o"&gt;(&lt;/span&gt;web&lt;span class="o"&gt;)&lt;/span&gt; to the user database.
+Add another user? &lt;span class="o"&gt;(&lt;/span&gt;yes/no&lt;span class="o"&gt;)&lt;/span&gt;: n
+Goodbye!
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Теперь нужно создать &lt;code&gt;chroot&lt;/code&gt; окружение для пользователя &lt;code&gt;web&lt;/code&gt;, для этого я написал скрипт &lt;code&gt;add_ssh_chrootuser.sh&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Проверка задано ли имя пользователя&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -z &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;  Usage: &lt;/span&gt;&lt;span class="nv"&gt;$0&lt;/span&gt;&lt;span class="s2"&gt; [ username ]&amp;quot;&lt;/span&gt;
+ &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+
+&lt;span class="nv"&gt;USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;
+&lt;span class="nv"&gt;GID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;id -g &lt;span class="nv"&gt;$USER&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;HOMEDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/home/&lt;span class="nv"&gt;$USER&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Задаем список каталогов в chroot окружении.&lt;/span&gt;
+&lt;span class="nv"&gt;SKEL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/bin&lt;/span&gt;
+&lt;span class="s2"&gt;    /sbin&lt;/span&gt;
+&lt;span class="s2"&gt;    /etc&lt;/span&gt;
+&lt;span class="s2"&gt;    /home/&lt;/span&gt;&lt;span class="nv"&gt;$USER&lt;/span&gt;&lt;span class="s2"&gt;&lt;/span&gt;
+&lt;span class="s2"&gt;    /lib&lt;/span&gt;
+&lt;span class="s2"&gt;    /libexec&lt;/span&gt;
+&lt;span class="s2"&gt;    /tmp&lt;/span&gt;
+&lt;span class="s2"&gt;    /usr/bin&lt;/span&gt;
+&lt;span class="s2"&gt;    /usr/share&lt;/span&gt;
+&lt;span class="s2"&gt;    /usr/local/bin&lt;/span&gt;
+&lt;span class="s2"&gt;    /usr/local/etc&lt;/span&gt;
+&lt;span class="s2"&gt;    /usr/local/share&lt;/span&gt;
+&lt;span class="s2"&gt;    /usr/local/libexec&amp;quot;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Создаем структуру каталогов внутри `chroot` окружения&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; i in &lt;span class="nv"&gt;$SKEL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="o"&gt;[&lt;/span&gt; ! -d &lt;span class="nv"&gt;$HOMEDIR$i&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; mkdir -pv &lt;span class="nv"&gt;$HOMEDIR$i&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Определяем какие библиотеки необходимо скопировать&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; item in sh csh zcat cat tbl groff chmod cp &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    ln ls date expr mkdir mv &lt;span class="nb"&gt;pwd&lt;/span&gt; locale &lt;span class="se"&gt;\&lt;/span&gt;
+    rm rmdir awk bzip2 diff du &lt;span class="se"&gt;\&lt;/span&gt;
+    ee fetch find grep gunzip gzip &lt;span class="se"&gt;\&lt;/span&gt;
+    more less sed sort tail head &lt;span class="se"&gt;\&lt;/span&gt;
+    tar touch vi ee mc mcedit &lt;span class="se"&gt;\&lt;/span&gt;
+    mysql mysqldump clear tput reset man zcat troff grotty&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="nv"&gt;p&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;whereis -q &lt;span class="nv"&gt;$item&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -n &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$p&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+        &lt;span class="c1"&gt;# Копируем бинарники внутрь chroot окружения&lt;/span&gt;
+        cp -vf &lt;span class="nv"&gt;$p&lt;/span&gt; &lt;span class="nv"&gt;$HOMEDIR$p&lt;/span&gt;
+        ldd &lt;span class="nv"&gt;$p&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print $3}&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s1"&gt;&amp;#39;.&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt;/tmp/chroot_liblist
+        &lt;span class="c1"&gt;#ldd $CMD_LIST|grep -v &amp;#39;:$&amp;#39;|grep -v &amp;quot;not a dynamic executable&amp;quot;|cut -f 3 -d &amp;quot; &amp;quot;|sort|uniq|sed 1d&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$item&lt;/span&gt;&lt;span class="s2"&gt; is NOT found, skip!&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Копируем библиотеки&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; item in &lt;span class="k"&gt;$(&lt;/span&gt;cat /tmp/chroot_liblist &lt;span class="p"&gt;|&lt;/span&gt; sort &lt;span class="p"&gt;|&lt;/span&gt; uniq&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    cp -vf &lt;span class="nv"&gt;$item&lt;/span&gt; &lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;/lib/
+&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;span class="c1"&gt;# Подчищаем за собой&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; -f /tmp/chroot_liblist &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm -vf /tmp/chroot_liblist
+
+&lt;span class="c1"&gt;# Копируем оставшиеся необходимые файлы и библиотеки&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; i in /etc/termcap &lt;span class="se"&gt;\&lt;/span&gt;
+    /etc/resolv.conf &lt;span class="se"&gt;\&lt;/span&gt;
+    /etc/nsswitch.conf &lt;span class="se"&gt;\&lt;/span&gt;
+    /libexec/ld-elf.so.1 &lt;span class="se"&gt;\&lt;/span&gt;
+    /libexec/ld-elf32.so.1&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    cp -vf &lt;span class="nv"&gt;$i&lt;/span&gt; &lt;span class="nv"&gt;$HOMEDIR$i&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+
+&lt;span class="c1"&gt;# если копировали mc, то копируем все необходимые для mc файлы.&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; i in /usr/local/share/mc &lt;span class="se"&gt;\&lt;/span&gt;
+    /usr/local/libexec/mc &lt;span class="se"&gt;\&lt;/span&gt;
+    /usr/local/etc/mc &lt;span class="se"&gt;\&lt;/span&gt;
+    /usr/local/man &lt;span class="se"&gt;\&lt;/span&gt;
+    /usr/share/man &lt;span class="se"&gt;\&lt;/span&gt;
+    /usr/share/groff_font &lt;span class="se"&gt;\&lt;/span&gt;
+    /usr/share/tmac&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    cp -vfR &lt;span class="nv"&gt;$i&lt;/span&gt; &lt;span class="nv"&gt;$HOMEDIR$i&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Если копировали mysql клиента, то настроим дефолтные опции.&lt;/span&gt;
+cat &amp;gt;&lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;/usr/local/etc/my.cnf&lt;span class="s"&gt;&amp;lt;&amp;lt;-_EOF&lt;/span&gt;
+&lt;span class="s"&gt;    [client]&lt;/span&gt;
+&lt;span class="s"&gt;    port=3306&lt;/span&gt;
+&lt;span class="s"&gt;    host=192.168.120.2&lt;/span&gt;
+&lt;span class="s"&gt;_EOF&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Генерируем /etc/motd для chroot окружения&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Welcome to chroot environment&amp;#39;&lt;/span&gt; &amp;gt; &lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;/etc/motd
+
+&lt;span class="c1"&gt;# Генерируем csh.cshrc для chroot окружения&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;setenv TERMCAP /etc/termcap&amp;#39;&lt;/span&gt; &amp;gt; &lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;/etc/csh.cshrc
+cp -fv /.cshrc &lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;/home/&lt;span class="nv"&gt;$USER&lt;/span&gt;/
+
+&lt;span class="c1"&gt;#т.к. man требует зачем-то наличие /sbin/sysctl, то создаем заглушку - пустой файл с правами запуска.&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; ! -d &lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;/sbin/ &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; mkdir -pv &lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;/sbin
+&lt;span class="o"&gt;[&lt;/span&gt; ! -x &lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;/sbin/sysctl &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; chmod -v +x &lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;/sbin/sysctl
+
+&lt;span class="c1"&gt;# Генерируем /etc/group для chroot окружения&lt;/span&gt;
+grep &lt;span class="nv"&gt;$GID&lt;/span&gt; /etc/group &amp;gt; &lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;/etc/group
+
+&lt;span class="c1"&gt;# Переносим запись о пользователе&lt;/span&gt;
+grep &lt;span class="s2"&gt;&amp;quot;^&lt;/span&gt;&lt;span class="nv"&gt;$USER&lt;/span&gt;&lt;span class="s2"&gt;:&amp;quot;&lt;/span&gt; /etc/master.passwd &amp;gt; &lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;/etc/master.passwd
+pwd_mkdb -d &lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;/etc &lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;/etc/master.passwd
+
+&lt;span class="c1"&gt;# Выставляем права&lt;/span&gt;
+chown root:wheel &lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;
+chmod &lt;span class="m"&gt;755&lt;/span&gt; &lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;
+chmod &lt;span class="m"&gt;777&lt;/span&gt; &lt;span class="nv"&gt;$HOMEDIR&lt;/span&gt;/tmp
+
+&lt;span class="k"&gt;for&lt;/span&gt; i in &lt;span class="nv"&gt;$SKEL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    chown -vR &lt;span class="nv"&gt;$USER&lt;/span&gt;:&lt;span class="nv"&gt;$GID&lt;/span&gt; &lt;span class="nv"&gt;$HOMEDIR$i&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Затем запускаем скрипт, указывая пользователя web:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sh add_ssh_chrootuser.sh web
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В каталоге &lt;code&gt;/home/web&lt;/code&gt; будет создана структура каталогов системы и будут скопированы программы и все необходимые для их запуска библиотеки.
+ В скрипте я копирую минимальный набор, которого хватает для чтения логов &lt;code&gt;nginx&lt;/code&gt;, работы с &lt;code&gt;mysql&lt;/code&gt; и некоторые другие программки - например &lt;code&gt;mc&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Перезапускаем демона &lt;code&gt;sshd&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FreeBSD# service sshd restart
+Stopping sshd.
+Starting sshd.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Все готово! Можно подключаться под созданными учетными записями.&lt;/p&gt;
+&lt;p&gt;Пользователь &lt;code&gt;web&lt;/code&gt; при подключении по &lt;code&gt;ssh&lt;/code&gt;, попадет в &lt;code&gt;chroot&lt;/code&gt; окружение, которое было создано скриптом, а пользователь &lt;code&gt;sftp&lt;/code&gt; не сможет входить по &lt;code&gt;ssh&lt;/code&gt;,
+ но сможет сводобно работать по &lt;code&gt;sftp&lt;/code&gt; протоколу, и самое главное, для него будет коневым каталогом &lt;code&gt;/usr/local/www&lt;/code&gt;, за его пределы он не сможет выйти.&lt;/p&gt;
+&lt;p&gt;P.S. Важно, чтобы права на &lt;strong&gt;chroot&lt;/strong&gt; директории были &lt;code&gt;chmod 755&lt;/code&gt; и владелец &lt;code&gt;root:wheel&lt;/code&gt;, в противном случае пользователи не смогут войти.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://www.lissyara.su/articles/freebsd/trivia/sftp+chroot/"&gt;lissyara.su - "Использование sftp+chroot из openssh в качестве альтернативы ftp-серверу."&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://wolandblog.com/1082-bash-sozdanie-chroot-okruzheniya-dlya-ssh-chroot-v-freebsd/"&gt;WOLAND's blog - "BASH. Создание chroot окружения для SSH chroot в FreeBSD."&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://forums.freebsd.org/showthread.php?t=19632"&gt;Forums.freebsd.org - [Solved] sftp/scp chroot solution?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.hilik.org.ua/chroot-ssh-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0/"&gt;Hilink - "chroot ssh доступ. Настройка."&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://al.ndd.ru/man/ssh-chroot_howto.html"&gt;Под защитой песочного демона (Евгений Зобнин) - Хакер, номер #093, стр. 093-118-4&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.opennet.ru/openforum/vsluhforumID1/46802.html"&gt;opennet.ru - "ssh chroot"&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="FreeBSD"></category><category term="Linux"></category><category term="chroot"></category><category term="ssh"></category><category term="sftp"></category><category term="sftponly"></category></entry><entry><title>Asterisk 1.8 и статистика по SNMP в zabbix</title><link href="http://blog.metajiji.tk/blog/freebsd_asterisk-18-snmp-zabbix/" rel="alternate"></link><published>2012-12-26T00:00:00+07:00</published><updated>2012-12-26T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-12-26:/blog/freebsd_asterisk-18-snmp-zabbix/</id><summary type="html">&lt;p&gt;Прежде чем начинать собирать статистику с &lt;strong&gt;Asterisk&lt;/strong&gt; по протоколу &lt;code&gt;snmp&lt;/code&gt;, нужно чтобы в нем был модуль &lt;code&gt;res_snmp.so&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FreeBSD# asterisk -rvvvv
+...
+pbx*CLI&amp;gt; module show like snmp
+Module           Description                    Use Count
+res_snmp.so      SNMP &lt;span class="o"&gt;[&lt;/span&gt;Sub&lt;span class="o"&gt;]&lt;/span&gt;Agent &lt;span class="k"&gt;for&lt;/span&gt; Asterisk   &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;span class="m"&gt;1&lt;/span&gt; modules loaded
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Как видим, все на месте. Для тех, у …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Прежде чем начинать собирать статистику с &lt;strong&gt;Asterisk&lt;/strong&gt; по протоколу &lt;code&gt;snmp&lt;/code&gt;, нужно чтобы в нем был модуль &lt;code&gt;res_snmp.so&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FreeBSD# asterisk -rvvvv
+...
+pbx*CLI&amp;gt; module show like snmp
+Module           Description                    Use Count
+res_snmp.so      SNMP &lt;span class="o"&gt;[&lt;/span&gt;Sub&lt;span class="o"&gt;]&lt;/span&gt;Agent &lt;span class="k"&gt;for&lt;/span&gt; Asterisk   &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;span class="m"&gt;1&lt;/span&gt; modules loaded
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Как видим, все на месте. Для тех, у кого это нет этого модуля, нужно пересобрать порт с нужной опцией:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FreeBSD# make config
+...
+&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; SNMP      SNMP protocol
+...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Когда разобрались с наличием модуля, идем в конфиг &lt;code&gt;/usr/local/etc/asterisk/res_snmp.conf&lt;/code&gt; и включаем &lt;strong&gt;SNMP&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;general&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt; We run as a subagent per default -- to run as a full agent
+&lt;span class="p"&gt;;&lt;/span&gt; we must run as root &lt;span class="o"&gt;(&lt;/span&gt;to be able to &lt;span class="nb"&gt;bind&lt;/span&gt; to port &lt;span class="m"&gt;161&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;subagent&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; yes
+&lt;span class="p"&gt;;&lt;/span&gt; SNMP must be explicitly enabled to be active
+&lt;span class="nv"&gt;enabled&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; yes
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Как видим, &lt;strong&gt;Asterisk&lt;/strong&gt; не может открыть &lt;code&gt;161&lt;/code&gt; порт (на этом порту работает протокол &lt;code&gt;snmp&lt;/code&gt;), если он запущен не от пользователя &lt;code&gt;root&lt;/code&gt;.
+ Но не беда, по умолчанию &lt;code&gt;asterisk&lt;/code&gt; работает как суб-агент &lt;code&gt;snmp&lt;/code&gt; это значит, что он может отдавать данные в демон &lt;code&gt;snmpd&lt;/code&gt; через сокет и ему не надо будет открывать &lt;code&gt;161&lt;/code&gt; порт.
+Готовим конфиг для &lt;code&gt;snmp&lt;/code&gt;, вот мой конфиг &lt;code&gt;/usr/local/etc/snmp/snmpd.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;syslocation  &lt;span class="s2"&gt;&amp;quot;Univers Server Room&amp;quot;&lt;/span&gt;
+syscontact  admin@my_organization_dom
+rocommunity  public ТУТ_IP_сервера_zabbix
+
+master agentx
+agentXPerms  &lt;span class="m"&gt;0660&lt;/span&gt; &lt;span class="m"&gt;0550&lt;/span&gt; asterisk asterisk
+agentXSocket /var/agentx/master
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Если с запуском &lt;strong&gt;Asterisk 1.8&lt;/strong&gt; в &lt;strong&gt;jail&lt;/strong&gt; не возникло проблем, то с запуском &lt;code&gt;snmpd&lt;/code&gt; было 2 проблемы:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Не запускался демон &lt;code&gt;snmpd&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FreeBSD# service snmpd restart
+snmpd not running? (check /var/run/net_snmpd.pid).
+Starting snmpd.
+/usr/local/etc/rc.d/snmpd: WARNING: failed to start snmpd
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Сообщение об ошибке как-то не особо помогло в решении проблемы, но все-же рискнем заглянуть в логи:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FreeBSD# cat /var/log/snmpd.log
+init_kmem: kvm_openfiles failed: /dev/mem: No such file or directory
+Agent initialization failed
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Решение оказалось простым &lt;code&gt;man snmpd&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FreeBSD# man snmpd
+....
+-r      Do not require root access to run the daemon.  Specifically, do
+               not exit if files only accessible to root  (such  as  /dev/kmem
+               etc.) cannot be opened.
+.....
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Как сказано в мане, говорим демону &lt;code&gt;snmpd&lt;/code&gt; запускаться с опцией &lt;code&gt;-r&lt;/code&gt;, добавляем в &lt;code&gt;/etc/rc.conf&lt;/code&gt; строку:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;#----------------------------- SNMP ---------------------------------------#
+snmpd_enable=&amp;quot;YES&amp;quot;
+snmpd_flags=&amp;quot;-r&amp;quot;
+#--------------------------------------------------------------------------#
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;И пробуем еще раз, теперь должно все запуститься:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FreeBSD# service snmpd restart
+Stopping snmpd.
+Waiting for PIDS: 27711.
+Starting snmpd.
+Error 2 (No such file or directory) could not get the assoclist
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Опять какая-то ошибка, немного погуглив яндексом в рамблере нашел страничку с описанием бага &lt;a href="http://sourceforge.net/p/net-snmp/bugs/2311/"&gt;#2311&lt;/a&gt;,
+ там говорится про ядро &lt;em&gt;FreeBSD&lt;/em&gt; и отсутствие в нем &lt;code&gt;SCTP&lt;/code&gt; (У меня в ядре как раз небыло этого &lt;code&gt;SCTP&lt;/code&gt;) и эту ошибку можно спокойно проигнорировать.&lt;/p&gt;
+&lt;p&gt;Ну чтож, если говорят, что все должно работать, то проверяем:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FreeBSD# sockstat | grep snmpd
+root     snmpd      27758 6  udp4   *:161                 *:*
+root     snmpd      27758 7  stream /var/agentx/master
+root     snmpd      27758 8  tcp4   *:199                 *:*
+root     snmpd      27758 9  stream /var/agentx/master
+
+Как видим, `snmpd` слушает `161` порт и **UNIX**-сокет `/var/agentx/master`. Значит мы все сделали правильно, и теперь двигаемся дальше к настройке **zabbix**.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;...... Тут должна быть часть о настройке Zabbix :) Когла-нибудь допишу. ......&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Настройка сервера Zabbix
+Основную работу мы проделали. Теперь нам нужно подключить сервер к Zabbix и добавить туда шаблон.
+Сначала добавим шаблон, это делается в меню Настройки – Шаблон – Импорт шаблона.
+Шаблон можно скачать тут. Перед тем, как импортировать его, все значения PASSWORD нужно сменить на тот пароль, который вы указали в snmpd.conf.
+Теперь добавим наш сервер Настройка – Узлы сети – Создать узел сети.
+Заполняем поля, вводим название хоста, его ИП адрес, присоединяем шаблон, который мы импортировали.
+Все, теперь все должно работать. Шаблон умеет показывать количество каналов, версию &lt;em&gt;, аптайм &lt;/em&gt;,
+ ИД процесса, количество загруженных модулей. Так же в шаблоне есть встроенный график, отображающий количество каналов.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://ggeek.blogspot.ru/2008/10/freebsd-jails-and-net-snmp.html"&gt;FreeBSD jails and net-snmp&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://sourceforge.net/p/net-snmp/bugs/2311/"&gt;SourceForge SNMPd bug: #2311 5.7.1 errors at startup on FreeBSD systems without SCTP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+MIB+Definitions"&gt;Asterisk MIB Definitions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://lists.digium.com/pipermail/asterisk-users/2009-November/241388.html"&gt;asterisk-users mailing list - ASTERISK and SNMP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://habrahabr.ru/sandbox/33568/"&gt;Мониторим Asterisk при помощи snmp и Zabbix&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Asterisk"></category><category term="FreeBSD"></category><category term="zabbix"></category><category term="SNMP"></category></entry><entry><title>Установка git + gitweb + nginx + fcgiwrap на FreeBSD.</title><link href="http://blog.metajiji.tk/blog/freebsd-git-gitweb-nginx-fcgiwrap/" rel="alternate"></link><published>2012-12-21T00:00:00+07:00</published><updated>2012-12-21T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-12-21:/blog/freebsd-git-gitweb-nginx-fcgiwrap/</id><summary type="html">&lt;p&gt;Понадобился репозиторий для хранения конфигов серверов и активного сетевого оборудования. Почитав про системы контроля версий и немного поразмыслив выбрал &lt;code&gt;git&lt;/code&gt;.
+У меня уже имелся готовый веб хостинг на &lt;strong&gt;nginx&lt;/strong&gt; под &lt;strong&gt;FreeBSD&lt;/strong&gt; - решил использовать его.&lt;/p&gt;
+&lt;p&gt;Итак смотрим что есть в составе порта &lt;code&gt;git&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /usr/ports/devel/git/
+make config
+&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; CONTRIB …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Понадобился репозиторий для хранения конфигов серверов и активного сетевого оборудования. Почитав про системы контроля версий и немного поразмыслив выбрал &lt;code&gt;git&lt;/code&gt;.
+У меня уже имелся готовый веб хостинг на &lt;strong&gt;nginx&lt;/strong&gt; под &lt;strong&gt;FreeBSD&lt;/strong&gt; - решил использовать его.&lt;/p&gt;
+&lt;p&gt;Итак смотрим что есть в составе порта &lt;code&gt;git&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /usr/ports/devel/git/
+make config
+&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; CONTRIB    Install contributed scripts
+&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; CURL       Data transfer via cURL
+&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; CVS        Enable CVS support
+&lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; ETCSHELLS  Modify /etc/shells
+&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; GITWEB     Install gitweb
+&lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; GUI        GUI &lt;span class="o"&gt;(&lt;/span&gt;Graphical User Interface&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; HTMLDOCS   Install additional documentation
+&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; ICONV      Encoding conversion via iconv
+&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; NLS        Native Language Support
+&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; P4         Enable Perforce support
+&lt;span class="o"&gt;[&lt;/span&gt;*&lt;span class="o"&gt;]&lt;/span&gt; PERL       Perl scripting language
+&lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; SVN        Subversion support
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Меня интересовали 2 вещи, какая-нибудь простенькая веб &lt;strike&gt;морда&lt;/strike&gt; интерфейс и собственно сам &lt;code&gt;git&lt;/code&gt;.
+ Видим, что в составе порта есть &lt;code&gt;GITWEB&lt;/code&gt;, как говорит &lt;strong&gt;wikipedia&lt;/strong&gt; "&lt;code&gt;gitweb&lt;/code&gt; - написан на &lt;code&gt;Perl&lt;/code&gt; (Kay Sievers).
+ Большинство &lt;strike&gt;приведённых ниже&lt;/strike&gt; крупных публичных &lt;code&gt;git&lt;/code&gt;-репозиториев его и применяет."&lt;/p&gt;
+&lt;p&gt;Настраиваем по вкусу и ставим:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;make config-recursive
+make install clean
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Затем идем в &lt;code&gt;/etc/rc.conf&lt;/code&gt; и приводим блок с веб сервером примерно к такому виду:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#----------------------------- nginx --------------------------------------#&lt;/span&gt;
+&lt;span class="nv"&gt;nginx_enable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;YES&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# (bool) Set to &amp;quot;NO&amp;quot; by default. Set it to &amp;quot;YES&amp;quot; to enable nginx&lt;/span&gt;
+&lt;span class="nv"&gt;nginx_profiles&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# (str) Set to &amp;quot;&amp;quot; by default. Define your profiles here.&lt;/span&gt;
+&lt;span class="nv"&gt;nginxlimits_enable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;NO&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# (bool) Set to &amp;quot;NO&amp;quot; by default. Set it to yes to run `limits $limits_args` just before nginx starts.&lt;/span&gt;
+&lt;span class="nv"&gt;nginx_flags&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# (str) Set to &amp;quot;&amp;quot; by default. Extra flags passed to start command.&lt;/span&gt;
+&lt;span class="nv"&gt;nginxlimits_args&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;-e -U www&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# (str) Default to &amp;quot;-e -U www&amp;quot; Arguments of pre-start limits run.&lt;/span&gt;
+
+&lt;span class="nv"&gt;php_fpm_enable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;YES&amp;quot;&lt;/span&gt;
+
+&lt;span class="nv"&gt;fcgiwrap_enable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;YES&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;fcgiwrap_user&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;www&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# (str) run fcgiwrap as user&lt;/span&gt;
+&lt;span class="c1"&gt;#fcgiwrap_socket=&amp;quot;unix:/var/run/fcgiwrap/fcgiwrap.sock&amp;quot; #this could also be: tcp:[ipv4_addr]:port (for ipv4) | tcp6:[ipv6_addr]:port (for ipv6)&lt;/span&gt;
+&lt;span class="c1"&gt;#fcgiwrap_flags=&amp;quot;-c 4&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;fcgiwrap_profiles&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;gitweb&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;fcgiwrap_gitweb_socket&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;unix:/var/run/fcgiwrap/gitweb.socket&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;#--------------------------------------------------------------------------#&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Я специально запускаю отдельный экземпляр &lt;code&gt;fcgiwrap&lt;/code&gt; для каждого "сайта". Если не дай бог упадет, то упадет только один сайт, а не все сразу. :)&lt;/p&gt;
+&lt;p&gt;Теперь настройки nginx:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;server&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="c1"&gt;#-------------------------- Options --------------------------#&lt;/span&gt;
+ &lt;span class="kn"&gt;listen&lt;/span&gt; &lt;span class="n"&gt;192.168.4.27&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;443&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="kn"&gt;server_name&lt;/span&gt; &lt;span class="s"&gt;git.local&lt;/span&gt; &lt;span class="s"&gt;git&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+ &lt;span class="kn"&gt;open_file_cache&lt;/span&gt; &lt;span class="s"&gt;max=100000&lt;/span&gt; &lt;span class="s"&gt;inactive=40s&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="kn"&gt;open_file_cache_valid&lt;/span&gt; &lt;span class="s"&gt;60s&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="kn"&gt;open_file_cache_min_uses&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="kn"&gt;open_file_cache_errors&lt;/span&gt; &lt;span class="no"&gt;on&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;#ssl&lt;/span&gt;
+&lt;span class="c1"&gt;# ssl on;&lt;/span&gt;
+&lt;span class="c1"&gt;# ssl_certificate  ssl/git/git.local.crt;&lt;/span&gt;
+&lt;span class="c1"&gt;# ssl_certificate_key ssl/git/git.local.key;&lt;/span&gt;
+
+&lt;span class="c1"&gt;#logs&lt;/span&gt;
+ &lt;span class="kn"&gt;access_log&lt;/span&gt; &lt;span class="s"&gt;/var/log/nginx/git.local_https_access.log&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="kn"&gt;error_log&lt;/span&gt; &lt;span class="s"&gt;/var/log/nginx/git.local_https_error.log&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;#-------------------------- Configs --------------------------#&lt;/span&gt;
+ &lt;span class="c1"&gt;# Default config&lt;/span&gt;
+ &lt;span class="kn"&gt;include&lt;/span&gt; &lt;span class="s"&gt;confs/main.conf&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+ &lt;span class="kn"&gt;gzip&lt;/span&gt; &lt;span class="no"&gt;off&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="c1"&gt;#-------------------------- Locations ------------------------#&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Main location&lt;/span&gt;
+ &lt;span class="kn"&gt;location&lt;/span&gt; &lt;span class="s"&gt;/&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kn"&gt;root&lt;/span&gt; &lt;span class="s"&gt;/usr/local/www/gitweb&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="kn"&gt;index&lt;/span&gt; &lt;span class="s"&gt;gitweb.cgi&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+  &lt;span class="kn"&gt;location&lt;/span&gt; &lt;span class="p"&gt;~&lt;/span&gt; &lt;span class="sr"&gt;^/(.*\.cgi)$&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+   &lt;span class="kn"&gt;include&lt;/span&gt;  &lt;span class="s"&gt;fastcgi_params&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+   &lt;span class="kn"&gt;fastcgi_pass&lt;/span&gt; &lt;span class="s"&gt;unix:/var/run/fcgiwrap/gitweb.socket&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+   &lt;span class="kn"&gt;fastcgi_index&lt;/span&gt; &lt;span class="s"&gt;gitweb.cgi&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+   &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;SCRIPT_FILENAME&lt;/span&gt; &lt;span class="s"&gt;/usr/local/www/gitweb/gitweb.cgi&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+   &lt;span class="kn"&gt;fastcgi_param&lt;/span&gt; &lt;span class="s"&gt;DOCUMENT_ROOT&lt;/span&gt; &lt;span class="s"&gt;/usr/local/www/gitweb&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;
+
+ &lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Теперь самое интересное, после установки порта &lt;code&gt;devel/git&lt;/code&gt; в каталоге веб сервера &lt;code&gt;/usr/local/www&lt;/code&gt; ничего не появилось,
+ хотя опция &lt;code&gt;GITWEB&lt;/code&gt; была отмечена, беглый анализ логов установки и поиск по винту навел на папочку:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FreeBSD# find /usr -name gitweb
+/usr/local/share/examples/git/gitweb
+
+FreeBSD# ls /usr/local/share/examples/git/gitweb
+gitweb.cgi static
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Вот оно! Копируем всю найденную папку &lt;code&gt;gitweb&lt;/code&gt; в каталог веб сервера:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cp /usr/local/share/examples/git/gitweb /usr/local/www
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Запускаем сервисы:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FreeBSD# service nginx reload
+Performing sanity check on nginx configuration:
+nginx: the configuration file /usr/local/etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /usr/local/etc/nginx/nginx.conf &lt;span class="nb"&gt;test&lt;/span&gt; is successful
+FreeBSD# service fcgiwrap &lt;span class="nv"&gt;start&lt;/span&gt;
+&lt;span class="o"&gt;===&lt;/span&gt;&amp;gt; fcgiwrap profile: gitweb
+Starting fcgiwrap.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Переходим по ссылке &lt;code&gt;http://git.local&lt;/code&gt; - все работает, ура! :)&lt;/p&gt;
+&lt;p&gt;P.S. Памятка работы с git репозиторием:&lt;/p&gt;
+&lt;p&gt;Создаю на сервере новую папку (например &lt;code&gt;/git/www/test&lt;/code&gt;).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir -p /git/www/test
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Делаю в ней инициализацию пустого репозитория &lt;code&gt;git init&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /git/www/test
+git init
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;На локальной машине скачиваю созданный репозиторий:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git clone git@git.local:/git/www/test/.git
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Это создаст локальную копию удалённого репозитория (пока пустого).&lt;/p&gt;
+&lt;p&gt;Накидываю кучу файлов в локальную папку, которую мы создали на предыдущем шаге. Делаю, так сказать, каркас проекта. Если нужно — добавляю исключения в файл (&lt;code&gt;.gitignore&lt;/code&gt;)&lt;/p&gt;
+&lt;p&gt;Выполняю:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /git/www/test
+git add .
+git commit
+git push
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Обязательно ввожу комментарий к своим изменениям - желательно писать всегда что-то адекватное, чтобы потом можно было понять что именно было изменено.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;git add .&lt;/code&gt; - добавляет новые файлы в репозиторий от текущего каталога.&lt;/li&gt;
+&lt;li&gt;`git commit&lt;/b&gt; - Фиксирует новую ревизию кода - тут-то и спросит ввести комментарий.&lt;/li&gt;
+&lt;li&gt;`git push&lt;/b&gt; - Отправляет изменения на сервер.&lt;/li&gt;
+&lt;li&gt;Всё. Локальный и удалённый репозиарии обновлены и синхронизированы.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Если вы веб-разрабочик и вам нужно довольно часто показывать текущий результат работы — очень полезно будет положить файл &lt;code&gt;post-receive&lt;/code&gt; в папку &lt;code&gt;.git/hooks&lt;/code&gt; какого-либо проекта с таким содержимым:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class="nb"&gt;cd&lt;/span&gt; ..
+env -i git checkout -f
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Удалённый репозиторий успешно обновлён!&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;И дайте ему права на исполнение. Теперь после каждого обновления (шаг 5) будет также обновляться рабочее дерево проекта и реальные файлы всегда будут последней,
+ актуальной версии (а этого почти все и ожидают, когда обновили удалённый репозиторий, но так по умолчанию не происходит).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;UPD&lt;/strong&gt;: 21.06.2014&lt;/p&gt;
+&lt;p&gt;Если после настройки появляется ошибка:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;404&lt;/span&gt; &lt;span class="s"&gt;-&lt;/span&gt; &lt;span class="s"&gt;No&lt;/span&gt; &lt;span class="s"&gt;projects&lt;/span&gt; &lt;span class="s"&gt;found.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Возможно причина в правах на репазитории, необходимо, чтобы владельцем файлов в репазиториях был тот же пользователь, что и у &lt;code&gt;fcgiwrap&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Если репазитории храятся в /git-repos, то решением будет:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /git-repos
+chown -R www:www .
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://ru.wikipedia.org/wiki/Git"&gt;Wikipedia - Git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://forums.freebsd.org/showthread.php?t=19101"&gt;HOWTO: GIT hosting = nginx + cgit + gitosis + ssh&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://habrahabr.ru/post/86753/"&gt;Устанавливаем и настраиваем cGit на Ubuntu&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://habrahabr.ru/post/43806/"&gt;Собственный сервер Git на базе Ubuntu или Debian/GNU Linux&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://habrahabr.ru/post/43808/"&gt;Tip по использованию Git под Windows&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.unix-heaven.org/node/30"&gt;Installing Git and Gitweb on FreeBSD&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://nginx.localdomain.pl/wiki/FcgiWrap"&gt;Simple CGI support for Nginx (fcgiwrap)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://git-scm.com/book/ru/Git-%D0%BD%D0%B0-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B5-%D0%9F%D1%80%D0%BE%D1%82%D0%BE%D0%BA%D0%BE%D0%BB%D1%8B"&gt;4.1 Git на сервере - Протоколы&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://stackoverflow.com/questions/10275536/configuring-gitweb-404-no-projects-found"&gt;Configuring GitWeb - 404 - No projects found&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="FreeBSD"></category><category term="git"></category><category term="gitweb"></category><category term="fcgiwrap"></category></entry><entry><title>VirtualBox и FreeBSD, не запускаются виртуальные машины при загрузке системы.</title><link href="http://blog.metajiji.tk/blog/freebsd-virtualbox-autostart-vm-on-boot/" rel="alternate"></link><published>2012-12-18T00:00:00+07:00</published><updated>2012-12-18T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-12-18:/blog/freebsd-virtualbox-autostart-vm-on-boot/</id><summary type="html">&lt;p&gt;Столкнулся с проблемой на &lt;strong&gt;FreeBSD&lt;/strong&gt; - не запускаются виртуальные машины при загрузке системы.&lt;/p&gt;
+&lt;p&gt;Все оказалось довольно просто - нужные модули ядра не подгружались при загрузке системы,
+ выход оказался очень прост - при запуске скрипта &lt;code&gt;/usr/local/etc/rc.d/vboxheadless&lt;/code&gt; подгружать эти модули, если они вдруг не загружены.&lt;/p&gt;
+&lt;p&gt;Открываем стартовый скрипт &lt;code&gt;/usr/local …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Столкнулся с проблемой на &lt;strong&gt;FreeBSD&lt;/strong&gt; - не запускаются виртуальные машины при загрузке системы.&lt;/p&gt;
+&lt;p&gt;Все оказалось довольно просто - нужные модули ядра не подгружались при загрузке системы,
+ выход оказался очень прост - при запуске скрипта &lt;code&gt;/usr/local/etc/rc.d/vboxheadless&lt;/code&gt; подгружать эти модули, если они вдруг не загружены.&lt;/p&gt;
+&lt;p&gt;Открываем стартовый скрипт &lt;code&gt;/usr/local/etc/rc.d/vboxheadless&lt;/code&gt;, находим там строки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vboxheadless_start&lt;span class="o"&gt;()&lt;/span&gt;
+&lt;span class="o"&gt;{&lt;/span&gt;
+ &lt;span class="nb"&gt;local&lt;/span&gt; machine mpidfile pid vmname vmuser vmflags vmdelay
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;И добавляем заветные строки, которые будут проверять и загружать необходимые модули ядра, если потребуется:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vboxheadless_start&lt;span class="o"&gt;()&lt;/span&gt;
+&lt;span class="o"&gt;{&lt;/span&gt;
+ &lt;span class="nb"&gt;local&lt;/span&gt; machine mpidfile pid vmname vmuser vmflags vmdelay
+
+&lt;span class="o"&gt;(&lt;/span&gt; ! kldstat &lt;span class="p"&gt;|&lt;/span&gt; grep vboxnetflt &amp;gt;/dev/null &lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; kldload vboxnetflt
+&lt;span class="o"&gt;(&lt;/span&gt; ! kldstat &lt;span class="p"&gt;|&lt;/span&gt; grep vboxnetadp &amp;gt;/dev/null &lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; kldload vboxnetadp
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ну и не забываем в &lt;code&gt;/etc/rc.conf&lt;/code&gt; указать нужные настройки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#---------------------- VirtualBox ----------------------------------------#&lt;/span&gt;
+&lt;span class="nv"&gt;vboxnet_enable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;YES&amp;quot;&lt;/span&gt;
+&lt;span class="nv"&gt;vboxheadless_enable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;YES&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# (bool): Set to &amp;quot;NO&amp;quot; by default. Set it to &amp;quot;YES&amp;quot; to enable vboxheadless.&lt;/span&gt;
+&lt;span class="nv"&gt;vboxheadless_user&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;root&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# (str): Default user account to run with. (default: vboxusers)&lt;/span&gt;
+&lt;span class="nv"&gt;vboxheadless_stop&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;poweroff&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# (str): Default stop cmd for VBoxManage controlvm. (default: savestate)&lt;/span&gt;
+&lt;span class="nv"&gt;vboxheadless_delay&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;0&amp;quot;&lt;/span&gt;   &lt;span class="c1"&gt;# (int): Default startup/shutdown delay in seconds. (default: 0)&lt;/span&gt;
+&lt;span class="nv"&gt;vboxheadless_machines&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Win7&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# (str): Space separated list of machines.&lt;/span&gt;
+&lt;span class="c1"&gt;#--------------------------------------------------------------------------#&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;А так же в файле &lt;code&gt;/boot/loader.conf&lt;/code&gt; добавляем строку:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;vboxdrv_load&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;YES&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Теперь все будет само запускаться, при загрузке системы!&lt;/p&gt;</content><category term="FreeBSD"></category><category term="Virtualbox"></category></entry><entry><title>Настраиваем запись логов в isc-dhcp-server под FreeBSD</title><link href="http://blog.metajiji.tk/blog/logging-in-isc-dhcp-server-freebsd/" rel="alternate"></link><published>2012-12-12T00:00:00+07:00</published><updated>2012-12-12T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-12-12:/blog/logging-in-isc-dhcp-server-freebsd/</id><summary type="html">&lt;p&gt;После установки и настройки порта &lt;code&gt;isc-dhcpd-server&lt;/code&gt; очень захотелось,
+ чтобы логи от этого демона складировались в отдельный файлик, например &lt;code&gt;/var/log/dhcpd.log&lt;/code&gt;,
+ а не в общий системный лог &lt;code&gt;/var/log/messages&lt;/code&gt;. Как этого достичь описано ниже.&lt;/p&gt;
+&lt;p&gt;Первым делом добавляем строку в конфиг демона dhcpd &lt;code&gt;/usr/local/etc/dhcpd.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;log-facility …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;После установки и настройки порта &lt;code&gt;isc-dhcpd-server&lt;/code&gt; очень захотелось,
+ чтобы логи от этого демона складировались в отдельный файлик, например &lt;code&gt;/var/log/dhcpd.log&lt;/code&gt;,
+ а не в общий системный лог &lt;code&gt;/var/log/messages&lt;/code&gt;. Как этого достичь описано ниже.&lt;/p&gt;
+&lt;p&gt;Первым делом добавляем строку в конфиг демона dhcpd &lt;code&gt;/usr/local/etc/dhcpd.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;log-facility local7&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;# куда в syslog шлем логи&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Теперь в &lt;code&gt;syslog&lt;/code&gt; принимаем от демона &lt;code&gt;dhcpd&lt;/code&gt; логи - добавляем строки в файл &lt;code&gt;/etc/syslog.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;!dhcpd
+local7.*  /var/log/dhcpd.log
+
+&lt;span class="c1"&gt;# Если встретили эту сроку (я имею ввиду это -&amp;gt; !*), то закоментируйте, а то не заработает :)&lt;/span&gt;
+&lt;span class="c1"&gt;#!*&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;А так же рассказываем &lt;code&gt;syslog&lt;/code&gt;'у, что у нас есть &lt;code&gt;dhcpd&lt;/code&gt; демон, для этого добавляем опцию в &lt;code&gt;/etc/rc.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;syslogd_flags&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;-l /var/db/dhcpd/var/run/log -ss&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;И не забываем про ротацию логов в &lt;code&gt;/etc/newsyslog.conf&lt;/code&gt; добавляем строки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# dhcp&lt;/span&gt;
+/var/log/dhcpd.log  &lt;span class="m"&gt;644&lt;/span&gt;  &lt;span class="m"&gt;15&lt;/span&gt;    &lt;span class="m"&gt;300&lt;/span&gt; *     XC
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://www.sergeysl.ru/freebsd-isc-dhcp-server/"&gt;FreeBSD: DHCP-сервер для локальной сети на базе ISC DHCP Server&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.thtech.net/dhcp-snooping/"&gt;Cisco DHCP Snooping with ISC DHCPd&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://team.pc-club.ru/?page_id=91"&gt;Reagent Team - dhcp opt 82&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="FeeBSD"></category><category term="isc-dhcp-server"></category><category term="isc-dhcpd"></category><category term="logging"></category></entry><entry><title>Перенос FreeBSD 4 на VirtualBox</title><link href="http://blog.metajiji.tk/blog/freebsd4-migrate-to-virtualbox/" rel="alternate"></link><published>2012-06-08T00:00:00+07:00</published><updated>2012-06-08T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-06-08:/blog/freebsd4-migrate-to-virtualbox/</id><summary type="html">&lt;p&gt;Заходим по &lt;strong&gt;ssh&lt;/strong&gt; на машину, которую будем переносить, останавливаем все процессы, которые могут использовать &lt;strong&gt;hdd&lt;/strong&gt; и писать туда важную информацию (например &lt;strong&gt;MySQL&lt;/strong&gt; и т.п.) и делаем дампы всех важных разделов:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dump -0uan -f - /usr &lt;span class="p"&gt;|&lt;/span&gt; ssh -c blowfish user@ip.ip.ip.ip dd &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/home/user/oldsrv/var.dd …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Заходим по &lt;strong&gt;ssh&lt;/strong&gt; на машину, которую будем переносить, останавливаем все процессы, которые могут использовать &lt;strong&gt;hdd&lt;/strong&gt; и писать туда важную информацию (например &lt;strong&gt;MySQL&lt;/strong&gt; и т.п.) и делаем дампы всех важных разделов:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dump -0uan -f - /usr &lt;span class="p"&gt;|&lt;/span&gt; ssh -c blowfish user@ip.ip.ip.ip dd &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/home/user/oldsrv/var.dd
+dump -0uan -f - /var &lt;span class="p"&gt;|&lt;/span&gt; ssh -c blowfish user@ip.ip.ip.ip dd &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/home/user/oldsrv/var.dd
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Грузимся с &lt;strong&gt;LiveCD FreeBSD&lt;/strong&gt; у меня уже была загрузка по сети &lt;strong&gt;FreeBSD 9.0&lt;/strong&gt; (но думаю подойдет и любой другой дистрибутив, &lt;strong&gt;Frenzy&lt;/strong&gt; например).&lt;/p&gt;
+&lt;p&gt;Восстанавливаем корневой раздел:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir /tmp/oldsrv
+&lt;span class="nb"&gt;cd&lt;/span&gt; /tmp/oldsrv
+scp user@ip.ip.ip.ip:/home/user/oldsrv/*.dd
+dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;from_real_srv/rootfs.dd &lt;span class="p"&gt;|&lt;/span&gt; restore -rf -
+...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Убедиться, что все необходимые каталоги, куда будем восстанавливать остальные разделы имеются:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ls usr
+ls var
+...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;И начинаем восстанавливать остальные разделы:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;from_real_srv/usr.dd &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; usr&lt;span class="p"&gt;;&lt;/span&gt; restore -rf -&lt;span class="o"&gt;)&lt;/span&gt;
+dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;from_real_srv/var.dd &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; var&lt;span class="p"&gt;;&lt;/span&gt; restore -rf -&lt;span class="o"&gt;)&lt;/span&gt;
+...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://www.freebsd.org/doc/ru/books/handbook/backup-basics.html"&gt;17.12. Основы технологии резервного копирования.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.lissyara.su/articles/freebsd/trivia/move_system_between_hard_drives/"&gt;Перенос FreeBSD с одного жёсткого диска на другой.&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="FreeBSD"></category><category term="dump"></category><category term="restore"></category><category term="ssh"></category><category term="virtualbox"></category></entry><entry><title>FreeBSD 9.0 GPT + gmirror</title><link href="http://blog.metajiji.tk/blog/freebsd-90-gpt-gmirror/" rel="alternate"></link><published>2012-04-04T00:00:00+07:00</published><updated>2012-04-04T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-04-04:/blog/freebsd-90-gpt-gmirror/</id><summary type="html">&lt;p&gt;Столкнулся с проблемой реализации подобной связки &lt;strong&gt;GPT&lt;/strong&gt; и &lt;code&gt;gmirror&lt;/code&gt; на &lt;strong&gt;FreeBSD 9.0&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Методом проб и ошибок получилась вот такая пошаговая инструкция:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Загружаемся с диска &lt;strong&gt;FreeBSD 9.0&lt;/strong&gt; &lt;code&gt;amd64&lt;/code&gt; в режиме &lt;strong&gt;LiveCD&lt;/strong&gt;, система спросит логин, вводим &lt;code&gt;root&lt;/code&gt;, а вместо пароля просто жмем Enter.&lt;/li&gt;
+&lt;li&gt;Удаляем все &lt;strong&gt;GPT&lt;/strong&gt; данные с дисков:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gpart …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Столкнулся с проблемой реализации подобной связки &lt;strong&gt;GPT&lt;/strong&gt; и &lt;code&gt;gmirror&lt;/code&gt; на &lt;strong&gt;FreeBSD 9.0&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Методом проб и ошибок получилась вот такая пошаговая инструкция:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Загружаемся с диска &lt;strong&gt;FreeBSD 9.0&lt;/strong&gt; &lt;code&gt;amd64&lt;/code&gt; в режиме &lt;strong&gt;LiveCD&lt;/strong&gt;, система спросит логин, вводим &lt;code&gt;root&lt;/code&gt;, а вместо пароля просто жмем Enter.&lt;/li&gt;
+&lt;li&gt;Удаляем все &lt;strong&gt;GPT&lt;/strong&gt; данные с дисков:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gpart destroy -F ada0
+gpart destroy -F ada1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Создаем &lt;strong&gt;GPT&lt;/strong&gt; на &lt;code&gt;1&lt;/code&gt; диске:
+    &lt;code&gt;bash
+    gpart create -s gpt ada0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Создаем &lt;strong&gt;GPT&lt;/strong&gt; разметку на &lt;code&gt;1&lt;/code&gt; диске:
+3.1 Загрузочный раздел&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gpart add -b &lt;span class="m"&gt;34&lt;/span&gt; -s &lt;span class="m"&gt;94&lt;/span&gt; -t freebsd-boot ada0
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;3.2 Раздел подкачки&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gpart add -s 5G -t freebsd-swap ada0
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;3.3 Файловую систему &lt;code&gt;UFS&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gpart add -t freebsd-ufs ada0
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;3.4 Проверяем все ли так, как мы задумали&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gpart &lt;span class="nv"&gt;show&lt;/span&gt;
+&lt;span class="o"&gt;=&lt;/span&gt;&amp;gt;        &lt;span class="m"&gt;34&lt;/span&gt;  &lt;span class="m"&gt;2930277101&lt;/span&gt;  ada0  GPT  &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.4T&lt;span class="o"&gt;)&lt;/span&gt;
+          &lt;span class="m"&gt;34&lt;/span&gt;          &lt;span class="m"&gt;94&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  freebsd-boot  &lt;span class="o"&gt;(&lt;/span&gt;47k&lt;span class="o"&gt;)&lt;/span&gt;
+         &lt;span class="m"&gt;128&lt;/span&gt;     &lt;span class="m"&gt;2097152&lt;/span&gt;     &lt;span class="m"&gt;2&lt;/span&gt;  freebsd-swap  &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.0G&lt;span class="o"&gt;)&lt;/span&gt;
+     &lt;span class="m"&gt;2097280&lt;/span&gt;  &lt;span class="m"&gt;2928179855&lt;/span&gt;     &lt;span class="m"&gt;3&lt;/span&gt;  freebsd-ufs  &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.4T&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;3.5 Записываем загрузчик&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gpart bootcode -b /boot/pmbr -p /boot/gptboot -i &lt;span class="m"&gt;1&lt;/span&gt; ada0
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;3.6 Копируем разметку &lt;strong&gt;GTP&lt;/strong&gt; с &lt;code&gt;1&lt;/code&gt; диска на &lt;code&gt;2&lt;/code&gt; диск&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gpart backup ada0 &lt;span class="p"&gt;|&lt;/span&gt; gpart restore -F ada1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;3.7. Проверяем что теперь получилось:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gpart &lt;span class="nv"&gt;show&lt;/span&gt;
+&lt;span class="o"&gt;=&lt;/span&gt;&amp;gt;        &lt;span class="m"&gt;34&lt;/span&gt;  &lt;span class="m"&gt;2930277101&lt;/span&gt;  ada0  GPT  &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.4T&lt;span class="o"&gt;)&lt;/span&gt;
+          &lt;span class="m"&gt;34&lt;/span&gt;          &lt;span class="m"&gt;94&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  freebsd-boot  &lt;span class="o"&gt;(&lt;/span&gt;47k&lt;span class="o"&gt;)&lt;/span&gt;
+         &lt;span class="m"&gt;128&lt;/span&gt;     &lt;span class="m"&gt;2097152&lt;/span&gt;     &lt;span class="m"&gt;2&lt;/span&gt;  freebsd-swap  &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.0G&lt;span class="o"&gt;)&lt;/span&gt;
+     &lt;span class="m"&gt;2097280&lt;/span&gt;  &lt;span class="m"&gt;2928179855&lt;/span&gt;     &lt;span class="m"&gt;3&lt;/span&gt;  freebsd-ufs  &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.4T&lt;span class="o"&gt;)&lt;/span&gt;
+
+&lt;span class="o"&gt;=&lt;/span&gt;&amp;gt;        &lt;span class="m"&gt;34&lt;/span&gt;  &lt;span class="m"&gt;2930277101&lt;/span&gt;  ada1  GPT  &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.4T&lt;span class="o"&gt;)&lt;/span&gt;
+          &lt;span class="m"&gt;34&lt;/span&gt;          &lt;span class="m"&gt;94&lt;/span&gt;     &lt;span class="m"&gt;1&lt;/span&gt;  freebsd-boot  &lt;span class="o"&gt;(&lt;/span&gt;47k&lt;span class="o"&gt;)&lt;/span&gt;
+         &lt;span class="m"&gt;128&lt;/span&gt;     &lt;span class="m"&gt;2097152&lt;/span&gt;     &lt;span class="m"&gt;2&lt;/span&gt;  freebsd-swap  &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.0G&lt;span class="o"&gt;)&lt;/span&gt;
+     &lt;span class="m"&gt;2097280&lt;/span&gt;  &lt;span class="m"&gt;2928179855&lt;/span&gt;     &lt;span class="m"&gt;3&lt;/span&gt;  freebsd-ufs  &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;.4T&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;загружаем &lt;code&gt;gmirror&lt;/code&gt;:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gmirror load
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;4.1 Создаем &lt;strong&gt;RAID1&lt;/strong&gt; для &lt;strong&gt;SWAP&lt;/strong&gt; раздела&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gmirror label -v -b round-robin swap /dev/ada0p2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;4.2 Добавляем &lt;code&gt;2&lt;/code&gt;-ой диск в зеркало:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gmirror insert swap /dev/ada1p2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;4.3 Создаем &lt;strong&gt;RAID1&lt;/strong&gt; для &lt;strong&gt;UFS&lt;/strong&gt; раздела:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gmirror label -v -b round-robin rootfs ada0p3
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;4.4 Добавляем &lt;code&gt;2&lt;/code&gt;-ой диск в зеркало:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gmirror insert rootfs /dev/ada1p3
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;4.5 Удалить случайно созданные &lt;strong&gt;RAID1&lt;/strong&gt; разделы(если вдруг чего-то напутали выше)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gmirror remove swap ada0p2 ada1p2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Создаем файловые системы на &lt;strong&gt;RAID1&lt;/strong&gt; разделах&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;newfs -m &lt;span class="m"&gt;1&lt;/span&gt; -U /dev/mirror/rootfs
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;УСТАНОВКА &lt;strong&gt;FreeBSD&lt;/strong&gt;:
+6.1 Монтируем созданную файловую систему в &lt;code&gt;/mnt&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mount /dev/mirror/rootfs /mnt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;6.2 Устанавливаем &lt;code&gt;FreeBSD 9.0&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /usr/freebsd-dist
+sh
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;DESTDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/mnt
+&lt;span class="k"&gt;for&lt;/span&gt; file in base.txz kernel.txz lib32.txz&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;cat &lt;span class="nv"&gt;$file&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; tar --unlink -xpJf - -C &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DESTDIR&lt;/span&gt;&lt;span class="k"&gt;:-&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;6.3 Создаем &lt;code&gt;/etc/fstab&lt;/code&gt; для установленной системы:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat &amp;gt; /mnt/etc/fstab &lt;span class="s"&gt;&amp;lt;&amp;lt;-__EOF__&lt;/span&gt;
+&lt;span class="s"&gt;#dev   #mount #fs #opts #dump #pass&lt;/span&gt;
+&lt;span class="s"&gt;/dev/mirror/rootfs / ufs rw 1 1&lt;/span&gt;
+&lt;span class="s"&gt;/dev/mirror/swap none swap sw 0 0&lt;/span&gt;
+&lt;span class="s"&gt;__EOF__&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;6.4 Создаем &lt;code&gt;/boot/loader.conf&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat &amp;gt; /mnt/boot/loader.conf &lt;span class="s"&gt;&amp;lt;&amp;lt;-__EOF__&lt;/span&gt;
+&lt;span class="s"&gt;geom_mirror_load=&amp;quot;YES&amp;quot;&lt;/span&gt;
+&lt;span class="s"&gt;__EOF__&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Отмонтируем зеркало&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;umount /mnt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;все готово, теперь можно перезагружаться и смотреть на результат&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Ссылки по теме:
+&lt;em&gt; http://forums.freebsd.org/showthread.php?t=29098 HOWTO: Install FreeBSD 9.0 RELEASE (Root on UFS + ZFS, RAID1)
+&lt;/em&gt; http://bu7cher.blogspot.com/2011/03/freebsd-gmirror-gpt-ufs.html Варианты загрузки FreeBSD: gmirror + GPT + UFS
+&lt;em&gt; http://www.lissyara.su/articles/freebsd/file_system/gmirror/ Использование gmirror для создания программного зеркалирования дисков
+&lt;/em&gt; http://forums.freebsd.org/showthread.php?t=28348 [Solved] No gmirror in 9.0, now what?
+&lt;em&gt; http://www.wonkity.com/~wblock/docs/html/gmirror.html gmirror With Disk Partitions
+&lt;/em&gt; http://blather.michaelwlucas.com/archives/1071 mirroring FreeBSD-9 disks with GPT&lt;/p&gt;</content><category term="FreeBSD"></category><category term="GPT"></category><category term="gmirror"></category></entry><entry><title>FreeBSD утилита pw, управление пользователями и группами</title><link href="http://blog.metajiji.tk/blog/freebsd-pw/" rel="alternate"></link><published>2012-02-08T00:00:00+07:00</published><updated>2012-02-08T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-02-08:/blog/freebsd-pw/</id><summary type="html">&lt;h2&gt;Просмотреть текущее состояние можно командой &lt;code&gt;id&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;id USER
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Сменить &lt;strong&gt;UID&lt;/strong&gt;:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pw usermod metall -u &lt;span class="m"&gt;1005&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Сменить &lt;strong&gt;GID&lt;/strong&gt;:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pw groupmod metall -g &lt;span class="m"&gt;1005&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Или:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pw usermod metall -g &lt;span class="m"&gt;1005&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Изменить список групп, к которым принадлежит пользователь:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pw usermod USER -G vboxusers
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Или:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pw usermod root -G operator,vboxusers
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Хочу обратить внимание …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Просмотреть текущее состояние можно командой &lt;code&gt;id&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;id USER
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Сменить &lt;strong&gt;UID&lt;/strong&gt;:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pw usermod metall -u &lt;span class="m"&gt;1005&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Сменить &lt;strong&gt;GID&lt;/strong&gt;:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pw groupmod metall -g &lt;span class="m"&gt;1005&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Или:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pw usermod metall -g &lt;span class="m"&gt;1005&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Изменить список групп, к которым принадлежит пользователь:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pw usermod USER -G vboxusers
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Или:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pw usermod root -G operator,vboxusers
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Хочу обратить внимание на то, что группа "по умолчанию" не изменяется. Например для &lt;code&gt;root&lt;/code&gt; такая группа будет &lt;code&gt;wheel&lt;/code&gt; и ее указывать не нужно.&lt;/p&gt;
+&lt;h2&gt;Например, как добавить пользователя в группу &lt;code&gt;vboxusers&lt;/code&gt;:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pw usermod USER -G wheel,vboxusers
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Добавить в группу пользователя (Чаще бывает нужно добавить пользователя в группу, но команда дословно интерпретируется именно так):&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pw groupmod GROUP -m USER
+&lt;/pre&gt;&lt;/div&gt;</content><category term="freebsd"></category><category term="pw"></category><category term="usermod"></category><category term="groupmod"></category></entry><entry><title>Уменьшение количества соединений в состоянии TCP TIME_WAIT</title><link href="http://blog.metajiji.tk/blog/freebsd-tcp-timewait/" rel="alternate"></link><published>2012-01-30T00:00:00+07:00</published><updated>2012-01-30T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-01-30:/blog/freebsd-tcp-timewait/</id><summary type="html">&lt;p&gt;&lt;strong&gt;TCP TIME_WAIT&lt;/strong&gt; состояние характерно для завершающей стадии соединения.&lt;/p&gt;
+&lt;p&gt;Рассмотрим пример:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;FIN&lt;/code&gt; 1 =&amp;gt; 2&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ACK&lt;/code&gt; 1 &amp;lt;= 2&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FIN&lt;/code&gt; 1 &amp;lt;= 2&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ACK&lt;/code&gt; 1 =&amp;gt; 2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;В первой строке хост 1 инициирует завершение соединение отправкой пакета с флагом &lt;code&gt;FIN&lt;/code&gt;.
+Хост 2, получив такой пакет подтверждает его флагом &lt;code&gt;ACK&lt;/code&gt;, после чего в свою очередь отправляет …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;TCP TIME_WAIT&lt;/strong&gt; состояние характерно для завершающей стадии соединения.&lt;/p&gt;
+&lt;p&gt;Рассмотрим пример:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;FIN&lt;/code&gt; 1 =&amp;gt; 2&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ACK&lt;/code&gt; 1 &amp;lt;= 2&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;FIN&lt;/code&gt; 1 &amp;lt;= 2&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ACK&lt;/code&gt; 1 =&amp;gt; 2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;В первой строке хост 1 инициирует завершение соединение отправкой пакета с флагом &lt;code&gt;FIN&lt;/code&gt;.
+Хост 2, получив такой пакет подтверждает его флагом &lt;code&gt;ACK&lt;/code&gt;, после чего в свою очередь отправляет хосту 1 свой пакет с флагом &lt;code&gt;FIN&lt;/code&gt; и закрывает соединение.
+ С момента получения этого пакета хостом 1, соединение переходит в состояние &lt;code&gt;TIME_WAIT&lt;/code&gt;.
+ Это время дается на случай, если последний &lt;code&gt;ACK&lt;/code&gt; не дойдет до хоста 2, тогда он снова отправит &lt;code&gt;FIN&lt;/code&gt;, на который хост 1 еще раз отошлет &lt;code&gt;ACK&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Соединение может еще долгое время находится в состоянии &lt;code&gt;TIME_WAIT&lt;/code&gt;, согласно &lt;strong&gt;RFC 1323&lt;/strong&gt; это время должно равнятся 2 минутам, двум &lt;code&gt;msl&lt;/code&gt; (&lt;strong&gt;Maximum Segment Lifetime&lt;/strong&gt;).
+ &lt;code&gt;MSL&lt;/code&gt; - это время, в течение которого сегмент может путешествовать по сети (&lt;strong&gt;RFC&lt;/strong&gt; рекомендует &lt;strong&gt;60 секунд&lt;/strong&gt;).
+ На загруженном сервере при таком значении &lt;code&gt;msl&lt;/code&gt; число соединений &lt;code&gt;time_wait&lt;/code&gt; расчет очень быстро, к тому же упомянутый &lt;strong&gt;RFC&lt;/strong&gt; составлялся достаточно давно и пропускная способность каналов с тех пор возросла многократно,
+ поэтому многие уменьшают это значение.&lt;/p&gt;
+&lt;p&gt;Во &lt;strong&gt;FreeBSD&lt;/strong&gt; есть переменная &lt;code&gt;sysctl net.inet.tcp.msl&lt;/code&gt;, по умолчанию равная &lt;strong&gt;30 секундам&lt;/strong&gt;.
+Можно уменьшить его до &lt;strong&gt;20&lt;/strong&gt; или даже &lt;strong&gt;15 секунд&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;net.inet.tcp.msl=15000&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/sysctl.conf
+/etc/rc.d/sysctl start
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В &lt;strong&gt;Linux&lt;/strong&gt; немного сложнее, там &lt;code&gt;msl&lt;/code&gt; спрятано в ядре в файле &lt;code&gt;/net/tcp.h&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#define TCP_TIMEWAIT_LEN (60*HZ)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="FreeBSD"></category><category term="TCP time-wait"></category><category term="timewait"></category></entry></feed>

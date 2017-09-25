@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - Atlassian</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/atlassian.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2017-07-03T00:00:00+07:00</updated><entry><title>Atlassian crowd apache tomcat jni native lib</title><link href="http://blog.metajiji.tk/blog/atlassian-crowd-jni-native-lib/" rel="alternate"></link><published>2017-07-03T00:00:00+07:00</published><updated>2017-07-03T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2017-07-03:/blog/atlassian-crowd-jni-native-lib/</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;Install Requirements&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y gcc make apr-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Download oracle jdk &lt;code&gt;tar.gz&lt;/code&gt; file and extract to /opt, create symlink for convenience:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /opt
+tar -xf jdk-8u121-linux-x64.tar.gz
+ln -s jdk1.8.0_121 jdk-latest
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, for upgrade jdk, just extract new &lt;code&gt;tar.gz&lt;/code&gt; file and update symlink to new …&lt;/p&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;Install Requirements&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y gcc make apr-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Download oracle jdk &lt;code&gt;tar.gz&lt;/code&gt; file and extract to /opt, create symlink for convenience:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /opt
+tar -xf jdk-8u121-linux-x64.tar.gz
+ln -s jdk1.8.0_121 jdk-latest
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now, for upgrade jdk, just extract new &lt;code&gt;tar.gz&lt;/code&gt; file and update symlink to new jdk folder.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Extract and build jni-native library&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; crowd/apache-tomcat/bin
+tar -xf tomcat-native.tar.gz
+&lt;span class="nb"&gt;cd&lt;/span&gt; tomcat-native-1.1.33-src/jni/native
+&lt;span class="nv"&gt;JAVA_HOME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/opt/jdk-latest ./configure --with-apr&lt;span class="o"&gt;=&lt;/span&gt;/usr/bin/apr-1-config
+make
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now we have builded jni native so library in &lt;code&gt;.libs&lt;/code&gt; folder, if no errors.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Use APR library. Add correct &lt;code&gt;java.library.path&lt;/code&gt; option in startup script:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Create configuration file &lt;code&gt;/etc/default/crowd&lt;/code&gt; if you use my systemd unit for start crowd (link below):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;JAVA_OPTS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;-Djava.library.path=/opt/atlassian/crowd/apache-tomcat/bin/tomcat-native-1.1.33-src/jni/native/.libs&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Alternatively edit the &lt;code&gt;/opt/atlassian/crowd/apache-tomcat/bin/setenv.sh&lt;/code&gt;
+and add this to &lt;code&gt;JAVA_OPTS&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;-Djava.library.path&lt;span class="o"&gt;=&lt;/span&gt;/opt/atlassian/crowd/apache-tomcat/bin/tomcat-native-1.1.33-src/jni/native/.libs&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://confluence.atlassian.com/crowd/setting-crowd-to-run-automatically-and-use-an-unprivileged-system-user-on-unix-211649189.html"&gt;Setting Crowd to Run Automatically and Use an Unprivileged System User on UNIX&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="CentOS"></category><category term="Atlassian"></category><category term="crowd"></category></entry><entry><title>Atlassian crowd systemd unit</title><link href="http://blog.metajiji.tk/blog/atlassian-crowd-systemd/" rel="alternate"></link><published>2017-07-03T00:00:00+07:00</published><updated>2017-07-03T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2017-07-03:/blog/atlassian-crowd-systemd/</id><summary type="html">&lt;p&gt;Create systemd service unit in &lt;code&gt;/etc/systemd/system/crowd.service&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
+&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Crowd&lt;/span&gt;
+&lt;span class="na"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;network.target&lt;/span&gt;
+
+&lt;span class="k"&gt;[Service]&lt;/span&gt;
+&lt;span class="na"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;oneshot&lt;/span&gt;
+&lt;span class="na"&gt;RemainAfterExit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;yes&lt;/span&gt;
+&lt;span class="na"&gt;User&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;nobody&lt;/span&gt;
+&lt;span class="na"&gt;Group&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;nobody&lt;/span&gt;
+
+&lt;span class="na"&gt;Environment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;JAVA_HOME=/opt/jdk-latest&lt;/span&gt;
+&lt;span class="na"&gt;Environment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;PATH=/opt/jdk-latest/bin:/usr/sbin:/usr/bin&lt;/span&gt;
+&lt;span class="na"&gt;EnvironmentFile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;-/etc/default/crowd&lt;/span&gt;
+
+&lt;span class="na"&gt;WorkingDirectory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/opt/atlassian/crowd&lt;/span&gt;
+
+&lt;span class="na"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/bin/sh start_crowd …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Create systemd service unit in &lt;code&gt;/etc/systemd/system/crowd.service&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
+&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Crowd&lt;/span&gt;
+&lt;span class="na"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;network.target&lt;/span&gt;
+
+&lt;span class="k"&gt;[Service]&lt;/span&gt;
+&lt;span class="na"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;oneshot&lt;/span&gt;
+&lt;span class="na"&gt;RemainAfterExit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;yes&lt;/span&gt;
+&lt;span class="na"&gt;User&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;nobody&lt;/span&gt;
+&lt;span class="na"&gt;Group&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;nobody&lt;/span&gt;
+
+&lt;span class="na"&gt;Environment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;JAVA_HOME=/opt/jdk-latest&lt;/span&gt;
+&lt;span class="na"&gt;Environment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;PATH=/opt/jdk-latest/bin:/usr/sbin:/usr/bin&lt;/span&gt;
+&lt;span class="na"&gt;EnvironmentFile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;-/etc/default/crowd&lt;/span&gt;
+
+&lt;span class="na"&gt;WorkingDirectory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/opt/atlassian/crowd&lt;/span&gt;
+
+&lt;span class="na"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/bin/sh start_crowd.sh&lt;/span&gt;
+&lt;span class="na"&gt;ExecStop&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/bin/sh stop_crowd.sh&lt;/span&gt;
+
+&lt;span class="k"&gt;[Install]&lt;/span&gt;
+&lt;span class="na"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;multi-user.target&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Create configuration file &lt;code&gt;/etc/default/crowd&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;JAVA_OPTS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Enable and start service unit on system start:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;systemctl &lt;span class="nb"&gt;enable&lt;/span&gt; crowd.service
+systemctl start crowd.service
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://confluence.atlassian.com/crowd/setting-crowd-to-run-automatically-and-use-an-unprivileged-system-user-on-unix-211649189.html"&gt;Setting Crowd to Run Automatically and Use an Unprivileged System User on UNIX&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="CentOS"></category><category term="Ubuntu"></category><category term="systemd"></category><category term="Atlassian"></category><category term="crowd"></category></entry><entry><title>Автоматическое удаление бекапов confluence</title><link href="http://blog.metajiji.tk/blog/confluence-cron-delete-backups/" rel="alternate"></link><published>2017-03-20T00:00:00+07:00</published><updated>2017-03-20T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2017-03-20:/blog/confluence-cron-delete-backups/</id><summary type="html">&lt;p&gt;Создать файл &lt;code&gt;/etc/cron.daily/confluence-cleanup&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="o"&gt;(&lt;/span&gt;
+    &lt;span class="nb"&gt;cd&lt;/span&gt; /opt/atlassian/confluence.application-data/backups
+    &lt;span class="k"&gt;for&lt;/span&gt; f in daily-backup-*.zip&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;ls daily-backup-*.zip &lt;span class="p"&gt;|&lt;/span&gt; wc -l&lt;span class="k"&gt;)&lt;/span&gt; -gt &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nb"&gt;break&lt;/span&gt;
+        rm -vf &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;done&lt;/span&gt;
+&lt;span class="o"&gt;)&lt;/span&gt;
+
+&lt;span class="nv"&gt;EXITVALUE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$EXITVALUE&lt;/span&gt; !&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    /usr/bin/logger -t confluence &lt;span class="s2"&gt;&amp;quot;ALERT exited abnormally with [&lt;/span&gt;&lt;span class="nv"&gt;$EXITVALUE&lt;/span&gt;&lt;span class="s2"&gt;]&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;0 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Создать файл &lt;code&gt;/etc/cron.daily/confluence-cleanup&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="o"&gt;(&lt;/span&gt;
+    &lt;span class="nb"&gt;cd&lt;/span&gt; /opt/atlassian/confluence.application-data/backups
+    &lt;span class="k"&gt;for&lt;/span&gt; f in daily-backup-*.zip&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;ls daily-backup-*.zip &lt;span class="p"&gt;|&lt;/span&gt; wc -l&lt;span class="k"&gt;)&lt;/span&gt; -gt &lt;span class="m"&gt;10&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nb"&gt;break&lt;/span&gt;
+        rm -vf &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;done&lt;/span&gt;
+&lt;span class="o"&gt;)&lt;/span&gt;
+
+&lt;span class="nv"&gt;EXITVALUE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$?&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$EXITVALUE&lt;/span&gt; !&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    /usr/bin/logger -t confluence &lt;span class="s2"&gt;&amp;quot;ALERT exited abnormally with [&lt;/span&gt;&lt;span class="nv"&gt;$EXITVALUE&lt;/span&gt;&lt;span class="s2"&gt;]&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Обазательно укажите верный путь до каталога с бекапами &lt;code&gt;/opt/atlassian/confluence.application-data/backups&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Дать права на запуск для этого файла:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;chmod +x /etc/cron.daily/confluence-cleanup
+&lt;/pre&gt;&lt;/div&gt;</content><category term="atlassian"></category><category term="confluence"></category><category term="linux"></category><category term="cron"></category></entry></feed>

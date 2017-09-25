@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - VCS</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/vcs.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2016-12-10T00:00:00+07:00</updated><entry><title>Обновление подмодулей git</title><link href="http://blog.metajiji.tk/blog/git_submodule-update/" rel="alternate"></link><published>2016-12-10T00:00:00+07:00</published><updated>2016-12-10T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2016-12-10:/blog/git_submodule-update/</id><summary type="html">&lt;p&gt;Инициализуруются подмодули так:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git submodule init
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Синхронизируются и обновляются так:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git submodule sync
+git submodule update
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Получить последние версии кода:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git submodule update --recursive --remote
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://oddstyle.ru/wordpress-2/stati-wordpress/upravlenie-wordpress-sajtom-s-pomoshhyu-git-i-composer-chast-3-ispolzuem-podmoduli-git-dlya-upravleniya-temami-i-plaginami.html"&gt;Управление WordPress-сайтом с помощью Git и Composer. Часть 3. Используем подмодули Git для управления темами и плагинами&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Инициализуруются подмодули так:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git submodule init
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Синхронизируются и обновляются так:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git submodule sync
+git submodule update
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Получить последние версии кода:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git submodule update --recursive --remote
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://oddstyle.ru/wordpress-2/stati-wordpress/upravlenie-wordpress-sajtom-s-pomoshhyu-git-i-composer-chast-3-ispolzuem-podmoduli-git-dlya-upravleniya-temami-i-plaginami.html"&gt;Управление WordPress-сайтом с помощью Git и Composer. Часть 3. Используем подмодули Git для управления темами и плагинами&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="git"></category><category term="bash"></category></entry></feed>

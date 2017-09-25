@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - Zimbra</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/zimbra.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2016-02-11T00:00:00+06:00</updated><entry><title>Zimbra: Prevent send *SPAM* emails from self domain to self domain</title><link href="http://blog.metajiji.tk/blog/zimbra-reject-self-domain/" rel="alternate"></link><published>2016-02-11T00:00:00+06:00</published><updated>2016-02-11T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2016-02-11:/blog/zimbra-reject-self-domain/</id><summary type="html">&lt;p&gt;Prevent send &lt;em&gt;SPAM&lt;/em&gt; emails from self domain to self domain:&lt;/p&gt;
+&lt;p&gt;Modify file &lt;code&gt;/opt/zimbra/conf/zmconfigd/smtpd_sender_restrictions.cf&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;Add string: &lt;code&gt;%%contains VAR:zimbraMtaSmtpdSenderRestrictions check_sender_access lmdb:/opt/zimbra/conf/postfix_sender_access%%&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Result full content file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;%%exact VAR:zimbraMtaSmtpdSenderRestrictions reject_authenticated_sender_login_mismatch%%&lt;/span&gt;
+&lt;span class="c"&gt;%%contains VAR:zimbraMtaSmtpdSenderRestrictions check_sender_access lmdb:/opt/zimbra/conf/postfix_reject_sender%%&lt;/span&gt;
+&lt;span class="c"&gt;%%contains VAR:zimbraServiceEnabled cbpolicyd …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Prevent send &lt;em&gt;SPAM&lt;/em&gt; emails from self domain to self domain:&lt;/p&gt;
+&lt;p&gt;Modify file &lt;code&gt;/opt/zimbra/conf/zmconfigd/smtpd_sender_restrictions.cf&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;Add string: &lt;code&gt;%%contains VAR:zimbraMtaSmtpdSenderRestrictions check_sender_access lmdb:/opt/zimbra/conf/postfix_sender_access%%&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Result full content file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;%%exact VAR:zimbraMtaSmtpdSenderRestrictions reject_authenticated_sender_login_mismatch%%&lt;/span&gt;
+&lt;span class="c"&gt;%%contains VAR:zimbraMtaSmtpdSenderRestrictions check_sender_access lmdb:/opt/zimbra/conf/postfix_reject_sender%%&lt;/span&gt;
+&lt;span class="c"&gt;%%contains VAR:zimbraServiceEnabled cbpolicyd^ check_policy_service inet:localhost:%%zimbraCBPolicydBindPort%%%%&lt;/span&gt;
+&lt;span class="c"&gt;%%contains VAR:zimbraServiceEnabled amavis^ check_sender_access regexp:/opt/zimbra/common/conf/tag_as_originating.re%%&lt;/span&gt;
+&lt;span class="n"&gt;permit_mynetworks&lt;/span&gt;
+&lt;span class="n"&gt;permit_sasl_authenticated&lt;/span&gt;
+&lt;span class="n"&gt;permit_tls_clientcerts&lt;/span&gt;
+&lt;span class="c"&gt;%%contains VAR:zimbraMtaSmtpdSenderRestrictions check_sender_access lmdb:/opt/zimbra/conf/postfix_sender_access%%&lt;/span&gt;
+&lt;span class="c"&gt;%%contains VAR:zimbraServiceEnabled amavis^ check_sender_access regexp:/opt/zimbra/common/conf/tag_as_foreign.re%%&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Create file  &lt;code&gt;/opt/zimbra/conf/postfix_sender_access&lt;/code&gt; with content:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;domain1.ltd REJECT  Not authorized
+domain2.ltd REJECT  Not authorized
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Enable modifications:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;su - zimbra
+zmprov mcf zimbraMtaSmtpdSenderRestrictions &lt;span class="s1"&gt;&amp;#39;check_sender_access lmdb:/opt/zimbra/conf/postfix_sender_access&amp;#39;&lt;/span&gt;
+postmap /opt/zimbra/conf/postfix_sender_access
+zmmtactl reload
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;h1&gt;LINKS&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;http://ossportal.org/forum/zimbra/1114&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Zimbra"></category><category term="self domain"></category><category term="spam"></category></entry><entry><title>Zimbra Google Chrome 45 Fix</title><link href="http://blog.metajiji.tk/blog/zimbra-google-chrome-45-fix/" rel="alternate"></link><published>2015-09-29T00:00:00+06:00</published><updated>2015-09-29T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2015-09-29:/blog/zimbra-google-chrome-45-fix/</id><summary type="html">&lt;p&gt;Возникла проблема с &lt;strong&gt;Zimbra Webmail&lt;/strong&gt; и &lt;strong&gt;Chrome&lt;/strong&gt; &lt;code&gt;v.45.0.2454.85&lt;/code&gt;, спустя неделю был опубликован фикс на офф сайте &lt;strong&gt;Zimbra&lt;/strong&gt;, я предлагаю очень похожий вариант, но без перезагрузки &lt;strong&gt;Zimbra&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Нужно найти в файлах, возможно необходимо будет сделать бекап или скопировать и закомментировать изменяемые строки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/opt/zimbra/jetty-distribution-7.6.12 …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Возникла проблема с &lt;strong&gt;Zimbra Webmail&lt;/strong&gt; и &lt;strong&gt;Chrome&lt;/strong&gt; &lt;code&gt;v.45.0.2454.85&lt;/code&gt;, спустя неделю был опубликован фикс на офф сайте &lt;strong&gt;Zimbra&lt;/strong&gt;, я предлагаю очень похожий вариант, но без перезагрузки &lt;strong&gt;Zimbra&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Нужно найти в файлах, возможно необходимо будет сделать бекап или скопировать и закомментировать изменяемые строки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/opt/zimbra/jetty-distribution-7.6.12.v20130726/webapps/zimbra/skins/_base/base2/skin.css
+/opt/zimbra/jetty-distribution-7.6.12.v20130726/webapps/zimbra/skins/_base/base3/skin.css
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Eсли эти строки отличаются - привести их к этому виду:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;skin_td_sidebar_ad&lt;/span&gt;        &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;SidebarAdWidth&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;skin_container_sidebar_ad&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="err"&gt;@AdStyle@&lt;/span&gt; &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="n"&gt;SidebarAdWidth&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Затем нужно найти строку:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;skin_td_main&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="kc"&gt;auto&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;height&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="kt"&gt;%&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;И привести её к виду:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="nn"&gt;skin_td_main&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;TABLE&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="k"&gt;table-layout&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;fixed&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Напомню, сделать это нужно в обоих файлах &lt;code&gt;base3&lt;/code&gt; и &lt;code&gt;base2&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Теперь самое интересное, чтобы не перезапускать &lt;strong&gt;Zimbra&lt;/strong&gt;, можно исправить уже имеющие стили в кеше:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /opt/zimbra/jetty/work/resource-cache/skinres/latest
+sed -i &lt;span class="s1"&gt;&amp;#39;s/#skin_td_main{width:auto;height:100%;}/#skin_td_main&amp;gt;TABLE{table-layout:fixed;}/g&amp;#39;&lt;/span&gt; ./*.css
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://forum.telus.com/thread/54935/category/Phones_Mobile_Devices/board/My_Home_Services_and_Devices/anyone-else-having-display-problems-with-telus-webmail-on-chrome-v-45-0-2454-85"&gt;Anyone else having display problems with Telus Webmail on Chrome v. 45.0.2454.85?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://wiki.zimbra.com/wiki/Zimbra_Web_Client_in_ZCS_8.0.x_and_Google_Chrome_45%2B"&gt;Zimbra Web Client in ZCS 8.0.x and Google Chrome 45+&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/jorgedlcruz/Zimbra/blob/master/Zimbra%20Google%20Chrome%2045%20Fix/zimbra-chrome45-fix.sh"&gt;Github: Zimbra Google Chrome 45 Fix&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Zimbra"></category><category term="bug"></category><category term="fix"></category><category term="chrome 45"></category><category term="chrome"></category></entry><entry><title>Zimbra: Отправка от списка рассылки</title><link href="http://blog.metajiji.tk/blog/zimbra-sendasdistlist/" rel="alternate"></link><published>2014-06-11T00:00:00+07:00</published><updated>2014-06-11T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-06-11:/blog/zimbra-sendasdistlist/</id><summary type="html">&lt;p&gt;Для начала необходимо переключиться на учетную запись &lt;code&gt;zimbra&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo su zimbra
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Для выдачи пользователю права на отправку от списка рассылки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;zmprov grr dl list@example.tld usr user@example.tld sendAsDistList
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Для отзыва, соответственно:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;zmprov rvr dl list@example.tld usr user@example.tld sendAsDistList
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Есть еще вариант, который не …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Для начала необходимо переключиться на учетную запись &lt;code&gt;zimbra&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo su zimbra
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Для выдачи пользователю права на отправку от списка рассылки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;zmprov grr dl list@example.tld usr user@example.tld sendAsDistList
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Для отзыва, соответственно:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;zmprov rvr dl list@example.tld usr user@example.tld sendAsDistList
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Есть еще вариант, который не пробовал:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Preferences&lt;/strong&gt; - &lt;strong&gt;Accounts&lt;/strong&gt; - &lt;strong&gt;Add Persona&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Persona Name: ListName&lt;/li&gt;
+&lt;li&gt;Settings for Sent Messages _From: ListName &lt;code&gt;list@example.ltd&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Reply-to [v]: ListName &lt;code&gt;list@example.ltd&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Use this persona: [v] &lt;code&gt;list@example.ltd&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Письмо будет уходить от его учетки, но в имя будет вписано то, что указано в поле &lt;code&gt;From&lt;/code&gt;, ответ клиенты будут отправлять на адрес и имя, которое указано в &lt;code&gt;Reply-to&lt;/code&gt;.
+ Так же, будет выбираться автоматически отправитель, при ответе на письма, пришедшие на адрес &lt;code&gt;list@example.ltd&lt;/code&gt;
+ (на самом деле это список рассылки и скорей всего у клиента будут указаны все участники списка рассылки).&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://www.ossportal.ru/forum/zimbra/703"&gt;Отправка от списка рассылки&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Zimbra"></category><category term="sendasdistlist"></category><category term="distlist"></category><category term="list"></category><category term="send as dist list"></category></entry></feed>

@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - CentOS</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/centos.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2017-05-06T00:00:00+07:00</updated><entry><title>Actual stable latest kernel in CentOS 7</title><link href="http://blog.metajiji.tk/blog/centos7-elrepo-kernel-latest-stable/" rel="alternate"></link><published>2017-05-06T00:00:00+07:00</published><updated>2017-05-06T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2017-05-06:/blog/centos7-elrepo-kernel-latest-stable/</id><summary type="html">&lt;p&gt;Устанавливаем актуальную версию ядра в CentOS 7.&lt;/p&gt;
+&lt;h3&gt;Добавляем репозиторий &lt;code&gt;elrepo-kernel&lt;/code&gt; из &lt;code&gt;elrepo-release&lt;/code&gt;:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;elrepo&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;RPM&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;GPG&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;elrepo&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;elrepo&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;elrepo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;release&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;7.0&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;2.&lt;/span&gt;&lt;span class="n"&gt;el7&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;elrepo&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;noarch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Включаем репозиторий &lt;code&gt;elrepo-kernel&lt;/code&gt;:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y yum-utils
+yum-config-manager --enable elrepo-kernel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Установка (какая …&lt;/h3&gt;</summary><content type="html">&lt;p&gt;Устанавливаем актуальную версию ядра в CentOS 7.&lt;/p&gt;
+&lt;h3&gt;Добавляем репозиторий &lt;code&gt;elrepo-kernel&lt;/code&gt; из &lt;code&gt;elrepo-release&lt;/code&gt;:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;rpm&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;elrepo&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;RPM&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;GPG&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;elrepo&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;
+&lt;span class="n"&gt;yum&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;elrepo&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;elrepo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;release&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;7.0&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;2.&lt;/span&gt;&lt;span class="n"&gt;el7&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;elrepo&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;noarch&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rpm&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Включаем репозиторий &lt;code&gt;elrepo-kernel&lt;/code&gt;:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y yum-utils
+yum-config-manager --enable elrepo-kernel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Установка (какая сейчас актуальная версия смотреть тут https://www.kernel.org/)&lt;/h3&gt;
+&lt;p&gt;Перед установкой важно понимать следующее:&lt;/p&gt;
+&lt;p&gt;Нет необходимости устанавливать пакет &lt;code&gt;kernel-lt-firmware&lt;/code&gt; или &lt;code&gt;kernel-ml-firmware&lt;/code&gt;. В дистрибутивном пакете &lt;code&gt;linux-firmware&lt;/code&gt; содержится больше файлов прошивки, чем в пакете &lt;code&gt;kernel-lt-firmware&lt;/code&gt; или &lt;code&gt;kernel-ml-firmware&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Нет необходимости устанавливать пакет &lt;code&gt;kernel-lt-headers&lt;/code&gt; или &lt;code&gt;kernel-ml-headers&lt;/code&gt;. Это необходимо, только если вы собираетесь пересобрать &lt;code&gt;glibc&lt;/code&gt; и следовательно, всю операционную систему.
+Если необходимо, чтобы заголовки ядра были установлены, вы должны использовать текущий пакет &lt;code&gt;kernel-headers&lt;/code&gt; из вашего дистрибутива, поскольку это связано с текущей версией &lt;code&gt;glibc&lt;/code&gt;.&lt;/p&gt;
+&lt;h4&gt;&lt;strong&gt;Текущая стабильная&lt;/strong&gt; (latest stable mainline kernel) версия ядра:&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y kernel-ml
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4&gt;&lt;strong&gt;LTS (Long Term Support)&lt;/strong&gt; версия ядра (предпочтительнее):&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y kernel-lt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Автозагрузка нового ядра&lt;/h3&gt;
+&lt;p&gt;Необходимо убедиться в том, что новая версия ядра установлена и добавлена в загрузчик:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;awk -F&amp;quot;&amp;#39;|\&amp;quot;&amp;quot; &amp;#39;/^menuentry/&amp;amp;&amp;amp;/elrepo/{print $2}&amp;#39; /boot/grub2/grub.cfg
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Должно получиться примерно следующее:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;CentOS Linux (4.4.70-1.el7.elrepo.x86_64) 7 (Core)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;На всякий случай проверим какое ядро загружется по умолчанию, для этого проверим каким образом &lt;code&gt;grub&lt;/code&gt; выбирает ядро для загруки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;grep GRUB_DEFAULT /etc/default/grub
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Должно быть: &lt;code&gt;GRUB_DEFAULT=saved&lt;/code&gt;, если отличается, приводим к этому виду. Это означает, что будет загружена последняя сохраненная версия.&lt;/p&gt;
+&lt;p&gt;Узнать какая версия ядра была загружена последней можно при помощи следующей команды:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;grub2-editenv list
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В ответ получим примерно следующее:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;saved_entry=CentOS Linux (3.10.0-514.21.1.el7.x86_64) 7 (Core)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В моем случае грузится старое &lt;code&gt;3.10&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Изменим загружаемое по умолчанию ядро на свеже-установленное (которое получали при помощи &lt;code&gt;awk&lt;/code&gt;):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;grub2-set-default &amp;#39;CentOS Linux (4.4.70-1.el7.elrepo.x86_64) 7 (Core)&amp;#39;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Убедимся, что  &lt;code&gt;grub&lt;/code&gt; выберет правильную версию ядра загружаемого по умолчанию:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;grub2-editenv list
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В моем случае я получил то, что написал в &lt;code&gt;grub2-set-default&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;saved_entry=CentOS Linux (4.4.70-1.el7.elrepo.x86_64) 7 (Core)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Сохраняем новую конфигурацию загрузчика:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;grub2-mkconfig -o /boot/grub2/grub.cfg
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Если ошибок небыло, то перезагружаем систему:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;reboot
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;После того, как система перезагрузилась можно проверить текущую версию ядра:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;uname -r
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Если в ответ получим &lt;code&gt;4.4.70-1.el7.elrepo.x86_64&lt;/code&gt;, значит все сделано верно.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/sec-Managing_Yum_Repositories.html"&gt;8.4.5. Adding, Enabling, and Disabling a Yum Repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://elrepo.org/tiki/tiki-index.php"&gt;The Community Enterprise Linux Repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.kernel.org/"&gt;The Linux Kernel Archives&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="CentOS"></category><category term="kernel"></category></entry><entry><title>CentOS 7 install python 3.5 rh sclo</title><link href="http://blog.metajiji.tk/blog/centos7-rh-python35-python/" rel="alternate"></link><published>2017-03-13T00:00:00+07:00</published><updated>2017-03-13T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2017-03-13:/blog/centos7-rh-python35-python/</id><summary type="html">&lt;h1&gt;Python35 on CentOS 7&lt;/h1&gt;
+&lt;h2&gt;Install packages&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y centos-release-scl
+yum install -y rh-python35-python
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Enable &lt;code&gt;rh-python35&lt;/code&gt; globally for all users&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat &amp;gt; /etc/profile.d/rh_python35.sh &amp;lt;&amp;lt;_EOF
+#!/bin/sh
+
+source /opt/rh/rh-python35/enable
+_EOF
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Activate without relogin&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;. /etc/profile.d/rh_python35.sh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;List available scl packages&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;scl --list
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Activate …&lt;/h2&gt;</summary><content type="html">&lt;h1&gt;Python35 on CentOS 7&lt;/h1&gt;
+&lt;h2&gt;Install packages&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y centos-release-scl
+yum install -y rh-python35-python
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Enable &lt;code&gt;rh-python35&lt;/code&gt; globally for all users&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat &amp;gt; /etc/profile.d/rh_python35.sh &amp;lt;&amp;lt;_EOF
+#!/bin/sh
+
+source /opt/rh/rh-python35/enable
+_EOF
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Activate without relogin&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;. /etc/profile.d/rh_python35.sh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;List available scl packages&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;scl --list
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Activate &lt;code&gt;rh-python35&lt;/code&gt; in current &lt;code&gt;bash&lt;/code&gt; session:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;scl enable rh-python35 bash
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Or in bash scripts:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s s-Atom"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="s s-Atom"&gt;=/opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;rh&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;rh&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="s s-Atom"&gt;python35&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;root&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;bin$&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="s s-Atom"&gt;:+:&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="p"&gt;}}&lt;/span&gt;
+&lt;span class="s s-Atom"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;LD_LIBRARY_PATH&lt;/span&gt;&lt;span class="s s-Atom"&gt;=/opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;rh&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;rh&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="s s-Atom"&gt;python35&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;root&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;lib64$&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;LD_LIBRARY_PATH&lt;/span&gt;&lt;span class="s s-Atom"&gt;:+:&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;LD_LIBRARY_PATH&lt;/span&gt;&lt;span class="p"&gt;}}&lt;/span&gt;
+&lt;span class="s s-Atom"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;MANPATH&lt;/span&gt;&lt;span class="s s-Atom"&gt;=/opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;rh&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;rh&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="s s-Atom"&gt;python35&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;root&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;share&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nn"&gt;man&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;MANPATH&lt;/span&gt;
+&lt;span class="s s-Atom"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PKG_CONFIG_PATH&lt;/span&gt;&lt;span class="s s-Atom"&gt;=/opt&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;rh&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;rh&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="s s-Atom"&gt;python35&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;root&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;lib64&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;pkgconfig$&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;PKG_CONFIG_PATH&lt;/span&gt;&lt;span class="s s-Atom"&gt;:+:&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nv"&gt;PKG_CONFIG_PATH&lt;/span&gt;&lt;span class="p"&gt;}}&lt;/span&gt;
+&lt;span class="s s-Atom"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;XDG_DATA_DIRS&lt;/span&gt;&lt;span class="s s-Atom"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/opt/rh/rh-python35/root/usr/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}&amp;quot;&lt;/span&gt;
+
+&lt;span class="s s-Atom"&gt;python&lt;/span&gt; &lt;span class="s s-Atom"&gt;--verion&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Or this method:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;. /opt/rh/rh-python35/enable
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Create virtualenv in Python35:&lt;/h2&gt;
+&lt;p&gt;Python 3 has a built-in support for virtual environments&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;https://docs.python.org/3/library/venv.html#module-venv&lt;/li&gt;
+&lt;li&gt;https://docs.python.org/3.6/whatsnew/3.6.html#id7&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python3 -m venv venv
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Use &lt;code&gt;rh-python35&lt;/code&gt; in &lt;code&gt;supervisor&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[program:app]&lt;/span&gt;
+&lt;span class="na"&gt;directory&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/srv/app&lt;/span&gt;
+
+&lt;span class="na"&gt;environment&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;PATH=/srv/app/venv/bin:/opt/rh/rh-python35/root/usr/bin,&lt;/span&gt;
+&lt;span class="s"&gt;    LD_LIBRARY_PATH=/opt/rh/rh-python35/root/usr/lib64&lt;/span&gt;
+
+&lt;span class="na"&gt;command&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/srv/app/venv/bin/gunicorn ...&lt;/span&gt;
+
+&lt;span class="na"&gt;stdout_logfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/srv/app/logs/%(program_name)s.log&lt;/span&gt;
+&lt;span class="na"&gt;stdout_logfile_maxbytes&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;5MB  ; max # logfile bytes b4 rotation (default 50MB)&lt;/span&gt;
+&lt;span class="na"&gt;stdout_logfile_backups&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;5     ; # of stdout logfile backups (default 10)&lt;/span&gt;
+&lt;span class="na"&gt;redirect_stderr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;true&lt;/span&gt;
+
+&lt;span class="na"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;nobody&lt;/span&gt;
+&lt;span class="na"&gt;numprocs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;1&lt;/span&gt;
+&lt;span class="na"&gt;autostart&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;true&lt;/span&gt;
+&lt;span class="na"&gt;autorestart&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;true&lt;/span&gt;
+&lt;span class="na"&gt;startsecs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;5&lt;/span&gt;
+&lt;span class="na"&gt;stopwaitsecs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;60&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Use &lt;code&gt;rh-python35&lt;/code&gt; in &lt;code&gt;systemd&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Unit]&lt;/span&gt;
+&lt;span class="na"&gt;Description&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Foo bar service&lt;/span&gt;
+&lt;span class="na"&gt;Requires&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;nginx.service&lt;/span&gt;
+&lt;span class="na"&gt;Before&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;nginx.service&lt;/span&gt;
+&lt;span class="na"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;network.target&lt;/span&gt;
+
+&lt;span class="k"&gt;[Service]&lt;/span&gt;
+&lt;span class="na"&gt;Type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;notify&lt;/span&gt;
+&lt;span class="na"&gt;User&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;jenkins&lt;/span&gt;
+&lt;span class="na"&gt;Group&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;jenkins&lt;/span&gt;
+
+&lt;span class="na"&gt;Environment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;LD_LIBRARY_PATH=/opt/rh/rh-python35/root/usr/lib64&lt;/span&gt;
+&lt;span class="na"&gt;Environment&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;PATH=/srv/app/venv/bin:/opt/rh/rh-python35/root/usr/bin&lt;/span&gt;
+
+&lt;span class="na"&gt;WorkingDirectory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/srv/app&lt;/span&gt;
+&lt;span class="na"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/srv/app/venv/bin/uwsgi \&lt;/span&gt;
+&lt;span class="s"&gt;    --module app.wsgi \&lt;/span&gt;
+&lt;span class="s"&gt;    --http :8006 \&lt;/span&gt;
+&lt;span class="s"&gt;    ...&lt;/span&gt;
+
+&lt;span class="na"&gt;PIDFile&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/srv/app/var/run/app.pid&lt;/span&gt;
+
+&lt;span class="na"&gt;KillMode&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;process&lt;/span&gt;
+&lt;span class="na"&gt;Restart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;always&lt;/span&gt;
+&lt;span class="na"&gt;KillSignal&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;SIGTERM&lt;/span&gt;
+&lt;span class="na"&gt;NotifyAccess&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;all&lt;/span&gt;
+
+&lt;span class="k"&gt;[Install]&lt;/span&gt;
+&lt;span class="na"&gt;WantedBy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;multi-user.target&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://xmodulo.com/enable-software-collections-centos.html"&gt;How to enable Software Collections (SCL) on CentOS&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="Centos"></category><category term="Centos 7"></category><category term="python35"></category><category term="python3"></category><category term="python"></category></entry><entry><title>CentOS 7 install modern git 2.x rh sclo</title><link href="http://blog.metajiji.tk/blog/centos7-rh-sclo-git/" rel="alternate"></link><published>2017-03-13T00:00:00+07:00</published><updated>2017-03-13T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2017-03-13:/blog/centos7-rh-sclo-git/</id><summary type="html">&lt;h1&gt;Install requirements&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y scl-utils centos-release-scl
+yum install -y sclo-git25
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Enable git globally for all users&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat &amp;gt; /etc/profile.d/sclo_git25.sh &amp;lt;&amp;lt;_EOF
+#!/bin/sh
+
+source /opt/rh/sclo-git25/enable
+source /opt/rh/sclo-git25/root/usr/share/bash-completion/completions/git
+_EOF
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Activate without relogin&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;. /etc/profile.d/sclo_git25.sh …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h1&gt;Install requirements&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y scl-utils centos-release-scl
+yum install -y sclo-git25
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Enable git globally for all users&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat &amp;gt; /etc/profile.d/sclo_git25.sh &amp;lt;&amp;lt;_EOF
+#!/bin/sh
+
+source /opt/rh/sclo-git25/enable
+source /opt/rh/sclo-git25/root/usr/share/bash-completion/completions/git
+_EOF
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Activate without relogin&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;. /etc/profile.d/sclo_git25.sh
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="Centos"></category><category term="Centos 7"></category><category term="git"></category></entry><entry><title>Centos 7 broken nfsdcltrack: sqlite_insert_client</title><link href="http://blog.metajiji.tk/blog/centos-7-broken-nfsdcltrack/" rel="alternate"></link><published>2016-04-27T00:00:00+06:00</published><updated>2016-04-27T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2016-04-27:/blog/centos-7-broken-nfsdcltrack/</id><summary type="html">&lt;p&gt;После установки и настройки &lt;code&gt;nfs&lt;/code&gt; сервера под &lt;strong&gt;Centos 7&lt;/strong&gt; в логах были обнаружены ошибки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;nfsdcltrack[3706]: sqlite_insert_client: insert statement prepare failed: table clients has 2 columns but 3 values were supplied
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Быстрый поиск привел в багзиллу, где нашлось решение, проблема была в структуре базы, для начала нужно открыть базу:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sqlite3 …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;После установки и настройки &lt;code&gt;nfs&lt;/code&gt; сервера под &lt;strong&gt;Centos 7&lt;/strong&gt; в логах были обнаружены ошибки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;nfsdcltrack[3706]: sqlite_insert_client: insert statement prepare failed: table clients has 2 columns but 3 values were supplied
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Быстрый поиск привел в багзиллу, где нашлось решение, проблема была в структуре базы, для начала нужно открыть базу:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sqlite3 /var/lib/nfs/nfsdcltrack/main.sqlite
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Затем выполнить запрос:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;alter&lt;/span&gt; &lt;span class="k"&gt;table&lt;/span&gt; &lt;span class="n"&gt;clients&lt;/span&gt; &lt;span class="k"&gt;add&lt;/span&gt; &lt;span class="k"&gt;column&lt;/span&gt; &lt;span class="n"&gt;has_session&lt;/span&gt; &lt;span class="nb"&gt;INTEGER&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;После чего необходимо перезапустить &lt;code&gt;nfs&lt;/code&gt; сервер:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;systemctl restart nfs
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://bugzilla.redhat.com/show_bug.cgi?id=1285097"&gt;Bug 1285097 - nfs-utils package broke nfsdcltrack&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="CentOS"></category><category term="CentOS 7"></category><category term="nfsdcltrack"></category></entry><entry><title>Centos 6 install python 2.7</title><link href="http://blog.metajiji.tk/blog/centos-6-install-python-27/" rel="alternate"></link><published>2016-03-24T00:00:00+06:00</published><updated>2016-03-24T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2016-03-24:/blog/centos-6-install-python-27/</id><summary type="html">&lt;p&gt;&lt;strong&gt; Centos 6&lt;/strong&gt; install &lt;code&gt;python2.7&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install centos-release-SCL
+yum install python27 python27-python-virtualenv
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/opt/rh/python27/root/usr/lib64&amp;#39;&lt;/span&gt; &amp;gt; /etc/ld.so.conf.d/python27.conf &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; ldconfig
+virtualenv --prompt&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;(proj_name)&amp;quot;&lt;/span&gt; -p /opt/rh/python27/root/usr/lib/python2.7 .env
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;А вот так лучше &lt;code&gt;не стоит делать&lt;/code&gt;:&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt; Centos 6&lt;/strong&gt; install &lt;code&gt;python2.7&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install centos-release-SCL
+yum install python27 python27-python-virtualenv
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/opt/rh/python27/root/usr/lib64&amp;#39;&lt;/span&gt; &amp;gt; /etc/ld.so.conf.d/python27.conf &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; ldconfig
+virtualenv --prompt&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;(proj_name)&amp;quot;&lt;/span&gt; -p /opt/rh/python27/root/usr/lib/python2.7 .env
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;А вот так лучше &lt;code&gt;не стоит делать&lt;/code&gt;:&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y rubygems ruby-devel tar
+gem install fpm
+curl https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tgz &amp;gt; Python-2.7.11.tgz
+tar -xvf Python-2.7.11.tgz
+&lt;span class="nb"&gt;cd&lt;/span&gt; Python-2.7.11
+yum -y install openssl-devel readline-devel bzip2-devel sqlite-devel zlib-devel ncurses-devel db4-devel expat-devel
+./configure --prefix&lt;span class="o"&gt;=&lt;/span&gt;/usr/local --enable-unicode&lt;span class="o"&gt;=&lt;/span&gt;ucs4 --enable-shared --enable-ipv6
+make -j&lt;span class="k"&gt;$(&lt;/span&gt;nproc&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;test&lt;/span&gt; -d /tmp/python-2.7 &lt;span class="o"&gt;||&lt;/span&gt; mkdir /tmp/python-2.7
+make install &lt;span class="nv"&gt;DESTDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/tmp/python-2.7
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/sbin/ldconfig&amp;#39;&lt;/span&gt; &amp;gt; /tmp/python-2.7/run-ldconfig.sh
+&lt;span class="nb"&gt;test&lt;/span&gt; -d /tmp/python-2.7/etc/ld.so.conf.d &lt;span class="o"&gt;||&lt;/span&gt; mkdir /tmp/python-2.7/etc/ld.so.conf.d
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/usr/local/lib&amp;#39;&lt;/span&gt; &amp;gt; /tmp/python-2.7/etc/ld.so.conf.d/python27.conf
+
+fpm -s dir -t rpm -n python27 -v &lt;span class="m"&gt;2&lt;/span&gt;.7.11_1 -C /tmp/python-2.7 &lt;span class="se"&gt;\&lt;/span&gt;
+  --after-install /tmp/python-2.7/run-ldconfig.sh &lt;span class="se"&gt;\&lt;/span&gt;
+  -d &lt;span class="s1"&gt;&amp;#39;openssl&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+  -d &lt;span class="s1"&gt;&amp;#39;bzip2&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+  -d &lt;span class="s1"&gt;&amp;#39;zlib&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+  -d &lt;span class="s1"&gt;&amp;#39;expat&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+  -d &lt;span class="s1"&gt;&amp;#39;db4&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+  -d &lt;span class="s1"&gt;&amp;#39;sqlite&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+  -d &lt;span class="s1"&gt;&amp;#39;ncurses&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+  -d &lt;span class="s1"&gt;&amp;#39;readline&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+  --directories&lt;span class="o"&gt;=&lt;/span&gt;/usr/local/lib/python2.7/ &lt;span class="se"&gt;\&lt;/span&gt;
+  --directories&lt;span class="o"&gt;=&lt;/span&gt;/usr/local/include/python2.7/ &lt;span class="se"&gt;\&lt;/span&gt;
+  usr/local etc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;rpm&lt;/code&gt; конечно же соберется и даже все будет правильно и лучше, чем просто злобный &lt;code&gt;make install&lt;/code&gt;, но &lt;code&gt;python27&lt;/code&gt; есть в официальных репозиториях и лучше ставить оттуда,
+ это избавит от необходимости собирать другие пакеты, например &lt;code&gt;python-virtualenv&lt;/code&gt;, &lt;code&gt;python-pip&lt;/code&gt; и другие.&lt;/p&gt;</content><category term="CentOS"></category><category term="Linux"></category><category term="Python 2.7"></category></entry><entry><title>Centos7 LXC</title><link href="http://blog.metajiji.tk/blog/centos7-lxc/" rel="alternate"></link><published>2015-10-10T00:00:00+06:00</published><updated>2016-10-14T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2015-10-10:/blog/centos7-lxc/</id><summary type="html">&lt;p&gt;Сборка из исходных кодов стабильной версии &lt;code&gt;lxc&lt;/code&gt; для &lt;strong&gt;Centos 7&lt;/strong&gt; с поддержкой &lt;code&gt;python&lt;/code&gt;.
+Поддержка &lt;code&gt;python&lt;/code&gt; необходима, например для работы команды &lt;code&gt;lxc-ls --fancy&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Установка зависимостей:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y epel-release
+yum install -y gcc git rpm-build automake make python34 python34-devel
+yum install -y libcap-devel docbook2X graphviz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Согласно официальному сайту на момент написания …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Сборка из исходных кодов стабильной версии &lt;code&gt;lxc&lt;/code&gt; для &lt;strong&gt;Centos 7&lt;/strong&gt; с поддержкой &lt;code&gt;python&lt;/code&gt;.
+Поддержка &lt;code&gt;python&lt;/code&gt; необходима, например для работы команды &lt;code&gt;lxc-ls --fancy&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Установка зависимостей:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum install -y epel-release
+yum install -y gcc git rpm-build automake make python34 python34-devel
+yum install -y libcap-devel docbook2X graphviz
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Согласно официальному сайту на момент написания статьи доступно 3 версии &lt;strong&gt;LXC&lt;/strong&gt;, я выбрал &lt;code&gt;LTS stable-1.0&lt;/code&gt;
+Скачивание исходных кодов:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git clone git://github.com/lxc/lxc -b stable-1.0
+&lt;span class="nb"&gt;cd&lt;/span&gt; lxc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Почитав немного доку и исходники, получился такой порядок действий:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./autogen.sh
+./configure --enable-python &lt;span class="nv"&gt;PYTHON&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/bin/python3.4 &lt;span class="nv"&gt;PYTHONDEV_CFLAGS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;-I/usr/include/python-3.4m &lt;span class="nv"&gt;PYTHONDEV_LIBS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;-l/usr/include/python-3.4m
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Как можно заметить, конфигурация происходит с явным указанием версии &lt;code&gt;python3.4&lt;/code&gt;, он появился сравнительно недавно в &lt;strong&gt;EPEL&lt;/strong&gt;, его и будем использовать далее.&lt;/p&gt;
+&lt;p&gt;Т.к. у нас &lt;strong&gt;Centos&lt;/strong&gt; и тут не все &lt;s&gt;как у людей&lt;/s&gt; как в других дистрибутивах, изменим в исходниках путь до исполняемого файла &lt;strong&gt;Python&lt;/strong&gt;, но сперва найдем файлы, которые нужно модифицировать:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;grep -Rn &lt;span class="s1"&gt;&amp;#39;^#.*/python3&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В результате у меня получился такой небольшой скрипт:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; f in config/apparmor/lxc-generate-aa-rules.py src/lxc/lxc-device src/lxc/lxc-ls.in src/lxc/lxc-start-ephemeral.in src/lxc/lxc-ls src/lxc/lxc-start-ephemeral src/python-lxc/examples/api_test.py src/python-lxc/examples/pyconsole-vte.py src/python-lxc/examples/pyconsole.py src/python-lxc/setup.py src/python-lxc/setup.py.in&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    sed -i &lt;span class="s1"&gt;&amp;#39;s|#!/usr/bin/python3|#!/usr/bin/python3.4|&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;$f&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+
+sed -i &lt;span class="s1"&gt;&amp;#39;s|Requires: python3|Requires: python34|&amp;#39;&lt;/span&gt; lxc.spec
+sed -i &lt;span class="s1"&gt;&amp;#39;s|BuildRequires: python3-devel|BuildRequires: python34-devel|&amp;#39;&lt;/span&gt; lxc.spec
+sed -i &lt;span class="s1"&gt;&amp;#39;s|/python3.3/site-packages/|/python3.4/site-packages/|&amp;#39;&lt;/span&gt; lxc.spec
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;После изменений проверим результат:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;grep -Rn &lt;span class="s1"&gt;&amp;#39;^#.*/python3&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Теперь соберем &lt;code&gt;rpm&lt;/code&gt; пакеты используя &lt;strong&gt;Python3.4&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;make rpm &lt;span class="nv"&gt;PYTHON&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/bin/python3.4 &lt;span class="nv"&gt;PYTHONDEV_CFLAGS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;-I/usr/include/python-3.4m &lt;span class="nv"&gt;PYTHONDEV_LIBS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;-l/usr/include/python-3.4m
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Найти собранные пакеты можно в каталоге &lt;code&gt;cd /root/rpmbuild/RPMS/x86_64&lt;/code&gt;, а установить командой:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;yum localinstall lxc-libs-1.0.7-1.el7.centos.x86_64.rpm lxc-1.0.7-1.el7.centos.x86_64.rpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Не будем останавливаться на этом!
+Для запуска &lt;strong&gt;Centos 7&lt;/strong&gt; контейнера необходимо проделать еще несколько манипуляций:
+В файле &lt;code&gt;/usr/share/lxc/config/centos.common.conf&lt;/code&gt; нужно найти опцию &lt;code&gt;lxc.cap.drop&lt;/code&gt;, содержащую значения &lt;code&gt;setfcap&lt;/code&gt; и &lt;code&gt;setpcap&lt;/code&gt; их нужно убрать,
+ например для хоста &lt;strong&gt;Ubuntu 14.04&lt;/strong&gt; нужно сделать примерно так:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#lxc.cap.drop = mac_admin mac_override setfcap setpcap&lt;/span&gt;
+&lt;span class="na"&gt;lxc.cap.drop&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;mac_admin mac_override&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Не зависимо от дистрибутива нужно в тот же файл еще добавить в конец сроки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# This lets LXC SUSE containers run on hosts with apparmor.&lt;/span&gt;
+&lt;span class="c1"&gt;# It does nothing on hosts which do not have apparmor enabled.&lt;/span&gt;
+&lt;span class="na"&gt;lxc.aa_profile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;unconfined&lt;/span&gt;
+
+&lt;span class="c1"&gt;# https://bugs.launchpad.net/ubuntu/+source/lxc/+bug/1347020&lt;/span&gt;
+&lt;span class="na"&gt;lxc.kmsg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;UPD: &lt;strong&gt;14.10.2016&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Под &lt;strong&gt;Centos 7&lt;/strong&gt; и начиная с &lt;strong&gt;Ubuntu 16.06&lt;/strong&gt; для персистентных контейнеров лучше использовать &lt;code&gt;systemd-nspawn&lt;/code&gt; и управлять ими через &lt;code&gt;machinectl&lt;/code&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://bugzilla.redhat.com/show_bug.cgi?id=1176816"&gt;Bug 1176816 - booting a centos 7 container is extremely slow&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://bugs.launchpad.net/ubuntu/+source/lxc/+bug/1339781"&gt;centos 7 needs setpcap capability&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://bugs.launchpad.net/ubuntu/+source/lxc/+bug/1347020"&gt;systemd does not boot in a container&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[[lxc-devel] [PATCH] Various fixes for Fedora/CentOS/OpenSUSE templates and systemd.](https://lists.linuxcontainers.org/pipermail/lxc-devel/2014-September/010261.html)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/lxc/lxc/issues/340"&gt;big big login delays in CentOS 7 systemd #340&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://linuxcontainers.org/lxc/downloads/"&gt;Linux Containers: Downloads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[LXC 1.0: Troubleshooting and debugging &lt;a href="http://www.stgraber.org/2014/02/18/lxc-1-0-troubleshooting-and-debugging/"&gt;10/10&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="Centos"></category><category term="Centos 7"></category><category term="LXC"></category><category term="python"></category><category term="rpm"></category></entry></feed>

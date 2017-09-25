@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - Fedora</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/fedora.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2017-10-05T00:00:00+07:00</updated><entry><title>Fedora 25 install adobe flashplayer</title><link href="http://blog.metajiji.tk/blog/fedora-chromium-firefox-flashplayer/" rel="alternate"></link><published>2017-10-05T00:00:00+07:00</published><updated>2017-10-05T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2017-10-05:/blog/fedora-chromium-firefox-flashplayer/</id><summary type="html">&lt;h3&gt;Install Adobe repository:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dnf install http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Find and install required package for &lt;code&gt;chromium-browser&lt;/code&gt;:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dnf provides */libpepflashplayer.so
+sudo dnf install flash-player-ppapi
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Activate PepperFlash plugin in chromium-browser:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo ln -s /usr/lib64/flash-plugin/libpepflashplayer.so /usr/lib64/chromium-browser/PepperFlash/libpepflashplayer.so
+sudo …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h3&gt;Install Adobe repository:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dnf install http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Find and install required package for &lt;code&gt;chromium-browser&lt;/code&gt;:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dnf provides */libpepflashplayer.so
+sudo dnf install flash-player-ppapi
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Activate PepperFlash plugin in chromium-browser:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo ln -s /usr/lib64/flash-plugin/libpepflashplayer.so /usr/lib64/chromium-browser/PepperFlash/libpepflashplayer.so
+sudo ln -s /usr/lib64/flash-plugin/manifest.json /usr/lib64/chromium-browser/PepperFlash/manifest.json
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Install package for &lt;code&gt;firefox&lt;/code&gt;:&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dnf install flash-plugin
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;For Firefox just do&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dnf install http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
+sudo dnf install flash-plugin freshplayerplugin
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;h1&gt;LINKS&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://ask.fedoraproject.org/en/question/10217/sticky-how-do-i-install-adobe-flash-on-fedora/"&gt;[Sticky] How do I install Adobe Flash on Fedora?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://helpx.adobe.com/flash-player.html"&gt;Install Flash Player in five easy steps&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.if-not-true-then-false.com/2010/install-adobe-flash-player-10-on-fedora-centos-red-hat-rhel/"&gt;Adobe Flash Player 25 on Fedora 25/24, CentOS/RHEL 7.3/6.9/5.11&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Fedora"></category><category term="Linux"></category><category term="flashplayer"></category><category term="chromium"></category><category term="firefox"></category></entry><entry><title>Flash player not working in chrome incognito.</title><link href="http://blog.metajiji.tk/blog/flash-player-chrome-incognito/" rel="alternate"></link><published>2017-06-08T00:00:00+07:00</published><updated>2017-06-08T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2017-06-08:/blog/flash-player-chrome-incognito/</id><summary type="html">&lt;p&gt;Flash player now working in chrome private window (incognito), solution is simple stupid!&lt;/p&gt;
+&lt;p&gt;Just open &lt;code&gt;chrome://flags/#prefer-html-over-flash&lt;/code&gt; and change the &lt;code&gt;Prefer HTML over Flash&lt;/code&gt; dropdown box to &lt;code&gt;disabled&lt;/code&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;LINKS&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;https://forums.adobe.com/thread/2298071&lt;/li&gt;
+&lt;li&gt;chrome://flags/#prefer-html-over-flash&lt;/li&gt;
+&lt;/ul&gt;</summary><content type="html">&lt;p&gt;Flash player now working in chrome private window (incognito), solution is simple stupid!&lt;/p&gt;
+&lt;p&gt;Just open &lt;code&gt;chrome://flags/#prefer-html-over-flash&lt;/code&gt; and change the &lt;code&gt;Prefer HTML over Flash&lt;/code&gt; dropdown box to &lt;code&gt;disabled&lt;/code&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;LINKS&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;https://forums.adobe.com/thread/2298071&lt;/li&gt;
+&lt;li&gt;chrome://flags/#prefer-html-over-flash&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Google chrome"></category><category term="chromium"></category><category term="flash"></category><category term="adobe flash"></category></entry><entry><title>Fedora - install Nvidia driver</title><link href="http://blog.metajiji.tk/blog/fedora-nvidia-driver/" rel="alternate"></link><published>2017-05-08T00:00:00+07:00</published><updated>2017-05-08T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2017-05-08:/blog/fedora-nvidia-driver/</id><summary type="html">&lt;h1&gt;Install RPMFusion repository&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Important! Upgrade to latest versions kernel and SELinux packages&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dnf update kernel* selinux-policy*
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Install required packages&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dnf install gcc kernel-headers kernel-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Install Nvidia drivers …&lt;/h1&gt;</summary><content type="html">&lt;h1&gt;Install RPMFusion repository&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Important! Upgrade to latest versions kernel and SELinux packages&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dnf update kernel* selinux-policy*
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Install required packages&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dnf install gcc kernel-headers kernel-devel
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Install Nvidia drivers&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dnf install akmod-nvidia xorg-x11-drv-nvidia-304xx xorg-x11-drv-nvidia-304xx-libs
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Check akmod module&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo akmods
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Rebuild initramfs&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dracut -f /boot/initramfs-&lt;span class="k"&gt;$(&lt;/span&gt;uname -r&lt;span class="k"&gt;)&lt;/span&gt;.img &lt;span class="k"&gt;$(&lt;/span&gt;uname -r&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;Known issues&lt;/h1&gt;
+&lt;h2&gt;Black screen&lt;/h2&gt;
+&lt;p&gt;Disable &lt;code&gt;nouveau&lt;/code&gt; driver&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;GRUB_CMDLINE_LINUX&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;... rd.drivers.blacklist=nouveau nouveau.modeset=0 ...&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;h1&gt;LINKS&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;https://sys-adm.in/os/nix/425-fedora-install-nvidia-driver.html&lt;/li&gt;
+&lt;li&gt;https://rpmfusion.org/Howto/NVIDIA&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Fedora"></category><category term="Linux"></category><category term="Nvidia"></category></entry></feed>

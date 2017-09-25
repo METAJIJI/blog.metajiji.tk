@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - Docker</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/docker.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2016-11-28T00:00:00+07:00</updated><entry><title>Docker tmpfs systemd</title><link href="http://blog.metajiji.tk/blog/docker-tmpfs-systemd/" rel="alternate"></link><published>2016-11-28T00:00:00+07:00</published><updated>2016-11-28T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2016-11-28:/blog/docker-tmpfs-systemd/</id><summary type="html">&lt;p&gt;Создаем &lt;code&gt;override.conf&lt;/code&gt; для сервиса &lt;code&gt;docker&lt;/code&gt; командой &lt;code&gt;systemctl edit docker.service&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Service]&lt;/span&gt;
+&lt;span class="na"&gt;ExecStartPre&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/bin/env install -m 711 -o root -g root -vd /var/lib/docker_ /var/lib/docker&lt;/span&gt;
+&lt;span class="na"&gt;ExecStartPre&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/bin/env mount -t tmpfs none /var/lib/docker&lt;/span&gt;
+&lt;span class="na"&gt;ExecStartPre&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/bin/env rsync -a /var/lib/docker_ …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Создаем &lt;code&gt;override.conf&lt;/code&gt; для сервиса &lt;code&gt;docker&lt;/code&gt; командой &lt;code&gt;systemctl edit docker.service&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Service]&lt;/span&gt;
+&lt;span class="na"&gt;ExecStartPre&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/bin/env install -m 711 -o root -g root -vd /var/lib/docker_ /var/lib/docker&lt;/span&gt;
+&lt;span class="na"&gt;ExecStartPre&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/bin/env mount -t tmpfs none /var/lib/docker&lt;/span&gt;
+&lt;span class="na"&gt;ExecStartPre&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/bin/env rsync -a /var/lib/docker_/ /var/lib/docker/&lt;/span&gt;
+
+&lt;span class="na"&gt;ExecStopPost&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/bin/env install -m 711 -o root -g root -vd /var/lib/docker_&lt;/span&gt;
+&lt;span class="na"&gt;ExecStopPost&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;-/usr/bin/env rsync -a /var/lib/docker/ /var/lib/docker_/&lt;/span&gt;
+&lt;span class="na"&gt;ExecStopPost&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;/usr/bin/env umount /var/lib/docker&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Где:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/var/lib/docker_&lt;/code&gt; - каталог для хранения образов и контейнеров на диске&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/var/lib/docker&lt;/code&gt; - tmpfs в RAM&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Перед запуском сервиса &lt;code&gt;docker&lt;/code&gt; будут создаваться, при необходимости нужные для работы каталоги,
+затем монтируется &lt;code&gt;tmpfs&lt;/code&gt; в &lt;code&gt;/var/lib/docker&lt;/code&gt; после чего в этот каталог будет скопировано
+ содержимое с диска &lt;code&gt;/var/lib/docker_&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;При остановке сервиса все происходи в обратной последовательности, после остановки сервиса &lt;code&gt;docker&lt;/code&gt;
+ данные копируются из &lt;code&gt;tmpfs&lt;/code&gt; на диск, после чего &lt;code&gt;/var/lib/docker&lt;/code&gt; отмонтируется, а все данные 
+из этого каталога мгновенно уничтожаются.&lt;/p&gt;
+&lt;p&gt;Таким образом при запуске сервиса автоматически файловая система контейнеров и образов помещается в &lt;strong&gt;RAM&lt;/strong&gt;,
+ а при остановке копируется на диск, чтобы при следующем запуске данные не потерялись.&lt;/p&gt;</content><category term="docker systemd tmpfs"></category></entry></feed>

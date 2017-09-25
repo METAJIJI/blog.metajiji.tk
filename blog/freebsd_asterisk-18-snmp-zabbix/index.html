@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Asterisk 1.8 и статистика по SNMP в zabbix - For system administrator</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://blog.metajiji.tk/favicon.png" rel="icon">
+
+<link rel="canonical" href="http://blog.metajiji.tk/blog/freebsd_asterisk-18-snmp-zabbix/">
+
+        <meta name="author" content="Denis Kadyshev" />
+        <meta name="keywords" content="Asterisk,FreeBSD,zabbix,SNMP" />
+        <meta name="description" content="Прежде чем начинать собирать статистику с Asterisk по протоколу snmp, нужно чтобы в нем был модуль res_snmp.so: FreeBSD# asterisk -rvvvv ... pbx*CLI&gt; module show like snmp Module Description Use Count res_snmp.so SNMP [Sub]Agent for Asterisk 0 1 modules loaded Как видим, все на месте. Для тех, у …" />
+
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/bootstrap.custom.min.css" type="text/css"/>
+    <link href="http://blog.metajiji.tk/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://blog.metajiji.tk/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="http://blog.metajiji.tk/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/style.css" type="text/css"/>
+
+
+        <link href="http://blog.metajiji.tk/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator ATOM Feed"/>
+
+
+
+        <link href="http://blog.metajiji.tk/feeds/freebsd.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator FreeBSD ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://blog.metajiji.tk/" class="navbar-brand">
+For system administrator            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/">Blog</a></li>
+                         <li><a href="http://blog.metajiji.tk/about/">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="http://blog.metajiji.tk/archives/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="http://blog.metajiji.tk" title="For system administrator"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="http://blog.metajiji.tk/category/freebsd/" title="FreeBSD">FreeBSD</a></li>
+                <li class="active">Asterisk 1.8 и статистика по SNMP в zabbix</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://blog.metajiji.tk/blog/freebsd_asterisk-18-snmp-zabbix/"
+                       rel="bookmark"
+                       title="Permalink to Asterisk 1.8 и статистика по SNMP в zabbix">
+                        Asterisk 1.8 и статистика по SNMP в zabbix
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2012-12-26T00:00:00+07:00"> Ср. 26 Декабрь 2012</time>
+    </span>
+          <span class="label label-default">Modified</span>
+            <span class="modified">
+                <i class="fa fa-calendar"></i><time datetime="2012-12-26T00:00:00+07:00"> Ср. 26 Декабрь 2012</time>
+            </span>
+
+
+            <span class="label label-default">By</span>
+            <a href="http://blog.metajiji.tk/author/denis-kadyshev.html"><i class="fa fa-user"></i> Denis Kadyshev</a>
+
+        <span class="label label-default">Category</span>
+        <a href="http://blog.metajiji.tk/category/freebsd/">FreeBSD</a>
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://blog.metajiji.tk/tag/asterisk/">Asterisk</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/freebsd/">FreeBSD</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/zabbix/">zabbix</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/snmp/">SNMP</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Прежде чем начинать собирать статистику с <strong>Asterisk</strong> по протоколу <code>snmp</code>, нужно чтобы в нем был модуль <code>res_snmp.so</code>:</p>
+<div class="highlight"><pre><span></span>FreeBSD# asterisk -rvvvv
+...
+pbx*CLI&gt; module show like snmp
+Module           Description                    Use Count
+res_snmp.so      SNMP <span class="o">[</span>Sub<span class="o">]</span>Agent <span class="k">for</span> Asterisk   <span class="m">0</span>
+<span class="m">1</span> modules loaded
+</pre></div>
+
+
+<p>Как видим, все на месте. Для тех, у кого это нет этого модуля, нужно пересобрать порт с нужной опцией:</p>
+<div class="highlight"><pre><span></span>FreeBSD# make config
+...
+<span class="o">[</span>*<span class="o">]</span> SNMP      SNMP protocol
+...
+</pre></div>
+
+
+<p>Когда разобрались с наличием модуля, идем в конфиг <code>/usr/local/etc/asterisk/res_snmp.conf</code> и включаем <strong>SNMP</strong>:</p>
+<div class="highlight"><pre><span></span><span class="o">[</span>general<span class="o">]</span>
+<span class="p">;</span> We run as a subagent per default -- to run as a full agent
+<span class="p">;</span> we must run as root <span class="o">(</span>to be able to <span class="nb">bind</span> to port <span class="m">161</span><span class="o">)</span>
+<span class="nv">subagent</span> <span class="o">=</span> yes
+<span class="p">;</span> SNMP must be explicitly enabled to be active
+<span class="nv">enabled</span> <span class="o">=</span> yes
+</pre></div>
+
+
+<p>Как видим, <strong>Asterisk</strong> не может открыть <code>161</code> порт (на этом порту работает протокол <code>snmp</code>), если он запущен не от пользователя <code>root</code>.
+ Но не беда, по умолчанию <code>asterisk</code> работает как суб-агент <code>snmp</code> это значит, что он может отдавать данные в демон <code>snmpd</code> через сокет и ему не надо будет открывать <code>161</code> порт.
+Готовим конфиг для <code>snmp</code>, вот мой конфиг <code>/usr/local/etc/snmp/snmpd.conf</code>:</p>
+<div class="highlight"><pre><span></span>syslocation  <span class="s2">&quot;Univers Server Room&quot;</span>
+syscontact  admin@my_organization_dom
+rocommunity  public ТУТ_IP_сервера_zabbix
+
+master agentx
+agentXPerms  <span class="m">0660</span> <span class="m">0550</span> asterisk asterisk
+agentXSocket /var/agentx/master
+</pre></div>
+
+
+<p>Если с запуском <strong>Asterisk 1.8</strong> в <strong>jail</strong> не возникло проблем, то с запуском <code>snmpd</code> было 2 проблемы:</p>
+<ol>
+<li>
+<p>Не запускался демон <code>snmpd</code>:</p>
+<div class="highlight"><pre><span></span>FreeBSD# service snmpd restart
+snmpd not running? (check /var/run/net_snmpd.pid).
+Starting snmpd.
+/usr/local/etc/rc.d/snmpd: WARNING: failed to start snmpd
+</pre></div>
+
+
+<p>Сообщение об ошибке как-то не особо помогло в решении проблемы, но все-же рискнем заглянуть в логи:</p>
+<div class="highlight"><pre><span></span>FreeBSD# cat /var/log/snmpd.log
+init_kmem: kvm_openfiles failed: /dev/mem: No such file or directory
+Agent initialization failed
+</pre></div>
+
+
+<p>Решение оказалось простым <code>man snmpd</code>:</p>
+<div class="highlight"><pre><span></span>FreeBSD# man snmpd
+....
+-r      Do not require root access to run the daemon.  Specifically, do
+               not exit if files only accessible to root  (such  as  /dev/kmem
+               etc.) cannot be opened.
+.....
+</pre></div>
+
+
+<p>Как сказано в мане, говорим демону <code>snmpd</code> запускаться с опцией <code>-r</code>, добавляем в <code>/etc/rc.conf</code> строку:</p>
+<div class="highlight"><pre><span></span>#----------------------------- SNMP ---------------------------------------#
+snmpd_enable=&quot;YES&quot;
+snmpd_flags=&quot;-r&quot;
+#--------------------------------------------------------------------------#
+</pre></div>
+
+
+<p>И пробуем еще раз, теперь должно все запуститься:</p>
+<div class="highlight"><pre><span></span>FreeBSD# service snmpd restart
+Stopping snmpd.
+Waiting for PIDS: 27711.
+Starting snmpd.
+Error 2 (No such file or directory) could not get the assoclist
+</pre></div>
+
+
+</li>
+<li>
+<p>Опять какая-то ошибка, немного погуглив яндексом в рамблере нашел страничку с описанием бага <a href="http://sourceforge.net/p/net-snmp/bugs/2311/">#2311</a>,
+ там говорится про ядро <em>FreeBSD</em> и отсутствие в нем <code>SCTP</code> (У меня в ядре как раз небыло этого <code>SCTP</code>) и эту ошибку можно спокойно проигнорировать.</p>
+<p>Ну чтож, если говорят, что все должно работать, то проверяем:</p>
+<div class="highlight"><pre><span></span>FreeBSD# sockstat | grep snmpd
+root     snmpd      27758 6  udp4   *:161                 *:*
+root     snmpd      27758 7  stream /var/agentx/master
+root     snmpd      27758 8  tcp4   *:199                 *:*
+root     snmpd      27758 9  stream /var/agentx/master
+
+Как видим, `snmpd` слушает `161` порт и **UNIX**-сокет `/var/agentx/master`. Значит мы все сделали правильно, и теперь двигаемся дальше к настройке **zabbix**.
+</pre></div>
+
+
+</li>
+</ol>
+<p>...... Тут должна быть часть о настройке Zabbix :) Когла-нибудь допишу. ......</p>
+<blockquote>
+<p>Настройка сервера Zabbix
+Основную работу мы проделали. Теперь нам нужно подключить сервер к Zabbix и добавить туда шаблон.
+Сначала добавим шаблон, это делается в меню Настройки – Шаблон – Импорт шаблона.
+Шаблон можно скачать тут. Перед тем, как импортировать его, все значения PASSWORD нужно сменить на тот пароль, который вы указали в snmpd.conf.
+Теперь добавим наш сервер Настройка – Узлы сети – Создать узел сети.
+Заполняем поля, вводим название хоста, его ИП адрес, присоединяем шаблон, который мы импортировали.
+Все, теперь все должно работать. Шаблон умеет показывать количество каналов, версию <em>, аптайм </em>,
+ ИД процесса, количество загруженных модулей. Так же в шаблоне есть встроенный график, отображающий количество каналов.</p>
+</blockquote>
+<hr>
+<p>Ссылки по теме:</p>
+<ol>
+<li><a href="http://ggeek.blogspot.ru/2008/10/freebsd-jails-and-net-snmp.html">FreeBSD jails and net-snmp</a></li>
+<li><a href="http://sourceforge.net/p/net-snmp/bugs/2311/">SourceForge SNMPd bug: #2311 5.7.1 errors at startup on FreeBSD systems without SCTP</a></li>
+<li><a href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+MIB+Definitions">Asterisk MIB Definitions</a></li>
+<li><a href="http://lists.digium.com/pipermail/asterisk-users/2009-November/241388.html">asterisk-users mailing list - ASTERISK and SNMP</a></li>
+<li><a href="http://habrahabr.ru/sandbox/33568/">Мониторим Asterisk при помощи snmp и Zabbix</a></li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://blog.metajiji.tk/blog/asterisk-wav-to-alaw-ulaw-gsm-sox/">Скрипт для пакетного конвертирования из wav в alaw, ulaw, gsm через sox.</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/zabbix-in-linux/">zabbix in linux</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/freebsd4-migrate-to-virtualbox/">Перенос FreeBSD 4 на VirtualBox</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/sed-dos2unix-unix2dos/">Аналоги на sed для dos2unix и unix2dos</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/freebsd-dos2unix-unix2dos-bom/">Работа с текстом во FreeBSD dos2unix, unix2dos, удаление BOM в консоли.</a></li>
+    </ul>
+</section>
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+                var disqus_url = 'http://blog.metajiji.tk/blog/freebsd_asterisk-18-snmp-zabbix/';
+
+            var disqus_config = function () {
+                this.language = "ru";
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/METAJIJI/"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://stackoverflow.com/users/2020443/metajiji"><i class="fa fa-stack-overflow fa-lg"></i> stackoverflow</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/fedora-chromium-firefox-flashplayer/">Fedora 25 install adobe flashplayer</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/atlassian/"><i class="fa fa-folder-open fa-lg"></i>Atlassian</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bash/"><i class="fa fa-folder-open fa-lg"></i>Bash</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bat-cmd/"><i class="fa fa-folder-open fa-lg"></i>Bat-cmd</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bind/"><i class="fa fa-folder-open fa-lg"></i>Bind</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/blog/"><i class="fa fa-folder-open fa-lg"></i>Blog</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/centos/"><i class="fa fa-folder-open fa-lg"></i>CentOS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/docker/"><i class="fa fa-folder-open fa-lg"></i>Docker</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/fedora/"><i class="fa fa-folder-open fa-lg"></i>Fedora</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/freebsd/"><i class="fa fa-folder-open fa-lg"></i>FreeBSD</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/gitlab/"><i class="fa fa-folder-open fa-lg"></i>Gitlab</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/hardware/"><i class="fa fa-folder-open fa-lg"></i>Hardware</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/javascript/"><i class="fa fa-folder-open fa-lg"></i>JavaScript</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/linux/"><i class="fa fa-folder-open fa-lg"></i>Linux</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/macosx/"><i class="fa fa-folder-open fa-lg"></i>MacOSX</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/mikrotik/"><i class="fa fa-folder-open fa-lg"></i>Mikrotik</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/postgresql/"><i class="fa fa-folder-open fa-lg"></i>PostgreSQL</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/ubuntu/"><i class="fa fa-folder-open fa-lg"></i>Ubuntu</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/vcs/"><i class="fa fa-folder-open fa-lg"></i>VCS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/windows/"><i class="fa fa-folder-open fa-lg"></i>Windows</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zabbix/"><i class="fa fa-folder-open fa-lg"></i>Zabbix</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zimbra/"><i class="fa fa-folder-open fa-lg"></i>Zimbra</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 Denis Kadyshev
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://blog.metajiji.tk/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://blog.metajiji.tk/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://blog.metajiji.tk/theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+    <!-- Google Analytics Universal -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106896103-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics Universal Code -->
+
+
+</body>
+</html>

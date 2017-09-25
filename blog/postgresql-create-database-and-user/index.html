@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>PostgreSQL. Создать базу данных и пользователя для нее. - For system administrator</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://blog.metajiji.tk/favicon.png" rel="icon">
+
+<link rel="canonical" href="http://blog.metajiji.tk/blog/postgresql-create-database-and-user/">
+
+        <meta name="author" content="Denis Kadyshev" />
+        <meta name="keywords" content="PostgreSQL" />
+        <meta name="description" content="Запускаем psql под пользователем postgres: su postgres -c psql Теперь в консоли PostgreSQL вводим следующие команды: create database dbname with encoding=&#39;UNICODE&#39;; create user dbuser with password &#39;dbpass&#39;; grant all privileges on database dbname to dbuser; А также не забываем дать доступ новому пользователю к серверу, для этого в файле …" />
+
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/bootstrap.custom.min.css" type="text/css"/>
+    <link href="http://blog.metajiji.tk/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://blog.metajiji.tk/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="http://blog.metajiji.tk/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/style.css" type="text/css"/>
+
+
+        <link href="http://blog.metajiji.tk/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator ATOM Feed"/>
+
+
+
+        <link href="http://blog.metajiji.tk/feeds/postgresql.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator PostgreSQL ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://blog.metajiji.tk/" class="navbar-brand">
+For system administrator            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/">Blog</a></li>
+                         <li><a href="http://blog.metajiji.tk/about/">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="http://blog.metajiji.tk/archives/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="http://blog.metajiji.tk" title="For system administrator"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="http://blog.metajiji.tk/category/postgresql/" title="PostgreSQL">PostgreSQL</a></li>
+                <li class="active">PostgreSQL. Создать базу данных и пользователя для нее.</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://blog.metajiji.tk/blog/postgresql-create-database-and-user/"
+                       rel="bookmark"
+                       title="Permalink to PostgreSQL. Создать базу данных и пользователя для нее.">
+                        PostgreSQL. Создать базу данных и пользователя для нее.
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-10-07T00:00:00+07:00"> Вт. 07 Октябрь 2014</time>
+    </span>
+          <span class="label label-default">Modified</span>
+            <span class="modified">
+                <i class="fa fa-calendar"></i><time datetime="2014-10-07T00:00:00+07:00"> Вт. 07 Октябрь 2014</time>
+            </span>
+
+
+            <span class="label label-default">By</span>
+            <a href="http://blog.metajiji.tk/author/denis-kadyshev.html"><i class="fa fa-user"></i> Denis Kadyshev</a>
+
+        <span class="label label-default">Category</span>
+        <a href="http://blog.metajiji.tk/category/postgresql/">PostgreSQL</a>
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://blog.metajiji.tk/tag/postgresql/">PostgreSQL</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Запускаем <code>psql</code> под пользователем <code>postgres</code>:</p>
+<div class="highlight"><pre><span></span>su postgres -c psql
+</pre></div>
+
+
+<p>Теперь в консоли <strong>PostgreSQL</strong> вводим следующие команды:</p>
+<div class="highlight"><pre><span></span>create database dbname with <span class="nv">encoding</span><span class="o">=</span><span class="s1">&#39;UNICODE&#39;</span><span class="p">;</span>
+create user dbuser with password <span class="s1">&#39;dbpass&#39;</span><span class="p">;</span>
+grant all privileges on database dbname to dbuser<span class="p">;</span>
+</pre></div>
+
+
+<p>А также не забываем дать доступ новому пользователю к серверу, для этого в файле <code>/var/lib/pgsql/data/pg_hba.conf</code>:</p>
+<div class="highlight"><pre><span></span><span class="c1"># For dbuser:</span>
+host    dbname dbuser   <span class="m">127</span>.0.0.1/32           md5
+<span class="nb">local</span>   dbname dbuser                          md5
+</pre></div>
+
+
+<p>Где:</p>
+<ul>
+<li><code>dbname</code> – имя базы данных</li>
+<li><code>dbuser</code> – имя пользователя</li>
+<li><code>dbpass</code> – пароль пользователя <code>dbuser</code></li>
+</ul>
+<p>И говорим серверу PostgreSQL перечитать измененный конфиг <code>pg_hba.conf</code>:</p>
+<div class="highlight"><pre><span></span>root@Linux# service postgresql reload
+</pre></div>
+
+
+<p>Скрипт для удобства:</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="nv">PGPORT</span><span class="o">=</span>
+
+<span class="nb">echo</span> <span class="s1">&#39;Input dbname: &#39;</span>
+<span class="nb">read</span> dbname
+
+<span class="nv">dbuser</span><span class="o">=</span><span class="si">${</span><span class="nv">dbuser</span><span class="k">:-</span><span class="nv">$dbname</span><span class="si">}</span>
+<span class="nb">echo</span> <span class="s2">&quot;Input dbuser: [</span><span class="nv">$dbuser</span><span class="s2">]&quot;</span>  <span class="c1"># Generate by dbname.</span>
+
+<span class="nv">randpass</span><span class="o">=</span><span class="k">$(</span>tr -cd A-Za-z &lt; /dev/urandom <span class="p">|</span> head -c8<span class="k">)</span>
+<span class="nb">echo</span> <span class="s2">&quot;Input dbpass [</span><span class="nv">$randpass</span><span class="s2">]:&quot;</span>  <span class="c1"># Generate random.</span>
+<span class="nb">read</span> dbpass
+<span class="nv">dbpass</span><span class="o">=</span><span class="si">${</span><span class="nv">dbpass</span><span class="k">:-</span><span class="nv">$randpass</span><span class="si">}</span>
+
+<span class="c1"># Facepalm centos... Need fill path to binary psql: /usr/pgsql-9.3/bin/psql</span>
+su - postgres -c <span class="s2">&quot;/usr/pgsql-9.3/bin/psql --dbname=</span><span class="nv">$DB</span><span class="s2"> --port=</span><span class="nv">$PGPORT</span><span class="s2"> &lt;&lt;_EOF</span>
+<span class="s2">\x</span>
+<span class="s2">CREATE DATABASE </span><span class="nv">$dbname</span><span class="s2"> WITH ENCODING=&#39;UNICODE&#39;;</span>
+<span class="s2">CREATE USER </span><span class="nv">$dbuser</span><span class="s2"> WITH PASSWORD &#39;</span><span class="nv">$dbpass</span><span class="s2">&#39;;</span>
+<span class="s2">GRANT ALL PRIVILEGES ON DATABASE </span><span class="nv">$dbname</span><span class="s2"> TO </span><span class="nv">$dbuser</span><span class="s2">;</span>
+<span class="s2">_EOF</span>
+<span class="s2">&quot;</span>
+<span class="c1"># TODO: check error code here.</span>
+
+<span class="c1"># Do backup modified cfg files.</span>
+cp /var/lib/pgsql/data/pg_hba.conf /var/lib/pgsql/data/pg_hba.conf_<span class="sb">`</span>date +%s<span class="sb">`</span>
+
+<span class="nv">PGPORT</span><span class="o">=</span><span class="si">${</span><span class="nv">PGPORT</span><span class="k">:-</span><span class="nv">5432</span><span class="si">}</span>
+<span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$dbname</span><span class="s2">&quot;</span> -a -n <span class="s2">&quot;</span><span class="nv">$dbuser</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> cat <span class="s">&lt;&lt;-_EOF &gt;&gt;/var/lib/pgsql/data/pg_hba.conf</span>
+
+<span class="s"> # For $dbuser, generated at `date`:</span>
+<span class="s"> host    $dbname $dbuser   127.0.0.1/32           md5</span>
+<span class="s"> local   $dbname $dbuser                          md5</span>
+<span class="s">_EOF</span>
+
+<span class="c1"># Do reload.</span>
+service postgresql-9.3 reload
+</pre></div>
+
+
+<hr>
+<p>Ссылки по теме:</p>
+<ol>
+<li><a href="http://michael-borisov.com/2012/11/02/postgresql-create-database-and-user/">PostgreSQL. Как создать базу данных и пользователя для нее.</a></li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://blog.metajiji.tk/blog/postgresql-mysql-create-database-and-user/">PostgreSQL & MySQL создать базу и пользователя</a></li>
+    </ul>
+</section>
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+                var disqus_url = 'http://blog.metajiji.tk/blog/postgresql-create-database-and-user/';
+
+            var disqus_config = function () {
+                this.language = "ru";
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/METAJIJI/"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://stackoverflow.com/users/2020443/metajiji"><i class="fa fa-stack-overflow fa-lg"></i> stackoverflow</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/fedora-chromium-firefox-flashplayer/">Fedora 25 install adobe flashplayer</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/atlassian/"><i class="fa fa-folder-open fa-lg"></i>Atlassian</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bash/"><i class="fa fa-folder-open fa-lg"></i>Bash</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bat-cmd/"><i class="fa fa-folder-open fa-lg"></i>Bat-cmd</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bind/"><i class="fa fa-folder-open fa-lg"></i>Bind</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/blog/"><i class="fa fa-folder-open fa-lg"></i>Blog</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/centos/"><i class="fa fa-folder-open fa-lg"></i>CentOS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/docker/"><i class="fa fa-folder-open fa-lg"></i>Docker</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/fedora/"><i class="fa fa-folder-open fa-lg"></i>Fedora</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/freebsd/"><i class="fa fa-folder-open fa-lg"></i>FreeBSD</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/gitlab/"><i class="fa fa-folder-open fa-lg"></i>Gitlab</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/hardware/"><i class="fa fa-folder-open fa-lg"></i>Hardware</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/javascript/"><i class="fa fa-folder-open fa-lg"></i>JavaScript</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/linux/"><i class="fa fa-folder-open fa-lg"></i>Linux</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/macosx/"><i class="fa fa-folder-open fa-lg"></i>MacOSX</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/mikrotik/"><i class="fa fa-folder-open fa-lg"></i>Mikrotik</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/postgresql/"><i class="fa fa-folder-open fa-lg"></i>PostgreSQL</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/ubuntu/"><i class="fa fa-folder-open fa-lg"></i>Ubuntu</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/vcs/"><i class="fa fa-folder-open fa-lg"></i>VCS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/windows/"><i class="fa fa-folder-open fa-lg"></i>Windows</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zabbix/"><i class="fa fa-folder-open fa-lg"></i>Zabbix</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zimbra/"><i class="fa fa-folder-open fa-lg"></i>Zimbra</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 Denis Kadyshev
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://blog.metajiji.tk/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://blog.metajiji.tk/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://blog.metajiji.tk/theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+    <!-- Google Analytics Universal -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106896103-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics Universal Code -->
+
+
+</body>
+</html>

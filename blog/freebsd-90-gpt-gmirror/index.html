@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>FreeBSD 9.0 GPT + gmirror - For system administrator</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://blog.metajiji.tk/favicon.png" rel="icon">
+
+<link rel="canonical" href="http://blog.metajiji.tk/blog/freebsd-90-gpt-gmirror/">
+
+        <meta name="author" content="Denis Kadyshev" />
+        <meta name="keywords" content="FreeBSD,GPT,gmirror" />
+        <meta name="description" content="Столкнулся с проблемой реализации подобной связки GPT и gmirror на FreeBSD 9.0. Методом проб и ошибок получилась вот такая пошаговая инструкция: Загружаемся с диска FreeBSD 9.0 amd64 в режиме LiveCD, система спросит логин, вводим root, а вместо пароля просто жмем Enter. Удаляем все GPT данные с дисков: gpart …" />
+
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/bootstrap.custom.min.css" type="text/css"/>
+    <link href="http://blog.metajiji.tk/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://blog.metajiji.tk/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="http://blog.metajiji.tk/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/style.css" type="text/css"/>
+
+
+        <link href="http://blog.metajiji.tk/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator ATOM Feed"/>
+
+
+
+        <link href="http://blog.metajiji.tk/feeds/freebsd.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator FreeBSD ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://blog.metajiji.tk/" class="navbar-brand">
+For system administrator            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/">Blog</a></li>
+                         <li><a href="http://blog.metajiji.tk/about/">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="http://blog.metajiji.tk/archives/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="http://blog.metajiji.tk" title="For system administrator"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="http://blog.metajiji.tk/category/freebsd/" title="FreeBSD">FreeBSD</a></li>
+                <li class="active">FreeBSD 9.0 GPT + gmirror</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://blog.metajiji.tk/blog/freebsd-90-gpt-gmirror/"
+                       rel="bookmark"
+                       title="Permalink to FreeBSD 9.0 GPT + gmirror">
+                        FreeBSD 9.0 GPT + gmirror
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2012-04-04T00:00:00+07:00"> Ср. 04 Апрель 2012</time>
+    </span>
+          <span class="label label-default">Modified</span>
+            <span class="modified">
+                <i class="fa fa-calendar"></i><time datetime="2012-04-04T00:00:00+07:00"> Ср. 04 Апрель 2012</time>
+            </span>
+
+
+            <span class="label label-default">By</span>
+            <a href="http://blog.metajiji.tk/author/denis-kadyshev.html"><i class="fa fa-user"></i> Denis Kadyshev</a>
+
+        <span class="label label-default">Category</span>
+        <a href="http://blog.metajiji.tk/category/freebsd/">FreeBSD</a>
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://blog.metajiji.tk/tag/freebsd/">FreeBSD</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/gpt/">GPT</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/gmirror/">gmirror</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Столкнулся с проблемой реализации подобной связки <strong>GPT</strong> и <code>gmirror</code> на <strong>FreeBSD 9.0</strong>.</p>
+<p>Методом проб и ошибок получилась вот такая пошаговая инструкция:</p>
+<ol>
+<li>Загружаемся с диска <strong>FreeBSD 9.0</strong> <code>amd64</code> в режиме <strong>LiveCD</strong>, система спросит логин, вводим <code>root</code>, а вместо пароля просто жмем Enter.</li>
+<li>Удаляем все <strong>GPT</strong> данные с дисков:</li>
+</ol>
+<div class="highlight"><pre><span></span>gpart destroy -F ada0
+gpart destroy -F ada1
+</pre></div>
+
+
+<ol>
+<li>Создаем <strong>GPT</strong> на <code>1</code> диске:
+    <code>bash
+    gpart create -s gpt ada0</code></li>
+<li>Создаем <strong>GPT</strong> разметку на <code>1</code> диске:
+3.1 Загрузочный раздел</li>
+</ol>
+<div class="highlight"><pre><span></span>gpart add -b <span class="m">34</span> -s <span class="m">94</span> -t freebsd-boot ada0
+</pre></div>
+
+
+<p>3.2 Раздел подкачки</p>
+<div class="highlight"><pre><span></span>gpart add -s 5G -t freebsd-swap ada0
+</pre></div>
+
+
+<p>3.3 Файловую систему <code>UFS</code></p>
+<div class="highlight"><pre><span></span>gpart add -t freebsd-ufs ada0
+</pre></div>
+
+
+<p>3.4 Проверяем все ли так, как мы задумали</p>
+<div class="highlight"><pre><span></span>gpart <span class="nv">show</span>
+<span class="o">=</span>&gt;        <span class="m">34</span>  <span class="m">2930277101</span>  ada0  GPT  <span class="o">(</span><span class="m">1</span>.4T<span class="o">)</span>
+          <span class="m">34</span>          <span class="m">94</span>     <span class="m">1</span>  freebsd-boot  <span class="o">(</span>47k<span class="o">)</span>
+         <span class="m">128</span>     <span class="m">2097152</span>     <span class="m">2</span>  freebsd-swap  <span class="o">(</span><span class="m">1</span>.0G<span class="o">)</span>
+     <span class="m">2097280</span>  <span class="m">2928179855</span>     <span class="m">3</span>  freebsd-ufs  <span class="o">(</span><span class="m">1</span>.4T<span class="o">)</span>
+</pre></div>
+
+
+<p>3.5 Записываем загрузчик</p>
+<div class="highlight"><pre><span></span>gpart bootcode -b /boot/pmbr -p /boot/gptboot -i <span class="m">1</span> ada0
+</pre></div>
+
+
+<p>3.6 Копируем разметку <strong>GTP</strong> с <code>1</code> диска на <code>2</code> диск</p>
+<div class="highlight"><pre><span></span>gpart backup ada0 <span class="p">|</span> gpart restore -F ada1
+</pre></div>
+
+
+<p>3.7. Проверяем что теперь получилось:</p>
+<div class="highlight"><pre><span></span>gpart <span class="nv">show</span>
+<span class="o">=</span>&gt;        <span class="m">34</span>  <span class="m">2930277101</span>  ada0  GPT  <span class="o">(</span><span class="m">1</span>.4T<span class="o">)</span>
+          <span class="m">34</span>          <span class="m">94</span>     <span class="m">1</span>  freebsd-boot  <span class="o">(</span>47k<span class="o">)</span>
+         <span class="m">128</span>     <span class="m">2097152</span>     <span class="m">2</span>  freebsd-swap  <span class="o">(</span><span class="m">1</span>.0G<span class="o">)</span>
+     <span class="m">2097280</span>  <span class="m">2928179855</span>     <span class="m">3</span>  freebsd-ufs  <span class="o">(</span><span class="m">1</span>.4T<span class="o">)</span>
+
+<span class="o">=</span>&gt;        <span class="m">34</span>  <span class="m">2930277101</span>  ada1  GPT  <span class="o">(</span><span class="m">1</span>.4T<span class="o">)</span>
+          <span class="m">34</span>          <span class="m">94</span>     <span class="m">1</span>  freebsd-boot  <span class="o">(</span>47k<span class="o">)</span>
+         <span class="m">128</span>     <span class="m">2097152</span>     <span class="m">2</span>  freebsd-swap  <span class="o">(</span><span class="m">1</span>.0G<span class="o">)</span>
+     <span class="m">2097280</span>  <span class="m">2928179855</span>     <span class="m">3</span>  freebsd-ufs  <span class="o">(</span><span class="m">1</span>.4T<span class="o">)</span>
+</pre></div>
+
+
+<ol>
+<li>загружаем <code>gmirror</code>:</li>
+</ol>
+<div class="highlight"><pre><span></span>gmirror load
+</pre></div>
+
+
+<p>4.1 Создаем <strong>RAID1</strong> для <strong>SWAP</strong> раздела</p>
+<div class="highlight"><pre><span></span>gmirror label -v -b round-robin swap /dev/ada0p2
+</pre></div>
+
+
+<p>4.2 Добавляем <code>2</code>-ой диск в зеркало:</p>
+<div class="highlight"><pre><span></span>gmirror insert swap /dev/ada1p2
+</pre></div>
+
+
+<p>4.3 Создаем <strong>RAID1</strong> для <strong>UFS</strong> раздела:</p>
+<div class="highlight"><pre><span></span>gmirror label -v -b round-robin rootfs ada0p3
+</pre></div>
+
+
+<p>4.4 Добавляем <code>2</code>-ой диск в зеркало:</p>
+<div class="highlight"><pre><span></span>gmirror insert rootfs /dev/ada1p3
+</pre></div>
+
+
+<p>4.5 Удалить случайно созданные <strong>RAID1</strong> разделы(если вдруг чего-то напутали выше)</p>
+<div class="highlight"><pre><span></span>gmirror remove swap ada0p2 ada1p2
+</pre></div>
+
+
+<ol>
+<li>Создаем файловые системы на <strong>RAID1</strong> разделах</li>
+</ol>
+<div class="highlight"><pre><span></span>newfs -m <span class="m">1</span> -U /dev/mirror/rootfs
+</pre></div>
+
+
+<ol>
+<li>УСТАНОВКА <strong>FreeBSD</strong>:
+6.1 Монтируем созданную файловую систему в <code>/mnt</code></li>
+</ol>
+<div class="highlight"><pre><span></span>mount /dev/mirror/rootfs /mnt
+</pre></div>
+
+
+<p>6.2 Устанавливаем <code>FreeBSD 9.0</code></p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> /usr/freebsd-dist
+sh
+<span class="nb">export</span> <span class="nv">DESTDIR</span><span class="o">=</span>/mnt
+<span class="k">for</span> file in base.txz kernel.txz lib32.txz<span class="p">;</span> <span class="k">do</span> <span class="o">(</span>cat <span class="nv">$file</span> <span class="p">|</span> tar --unlink -xpJf - -C <span class="si">${</span><span class="nv">DESTDIR</span><span class="k">:-</span><span class="p">/</span><span class="si">}</span><span class="o">)</span><span class="p">;</span> <span class="k">done</span>
+</pre></div>
+
+
+<p>6.3 Создаем <code>/etc/fstab</code> для установленной системы:</p>
+<div class="highlight"><pre><span></span>cat &gt; /mnt/etc/fstab <span class="s">&lt;&lt;-__EOF__</span>
+<span class="s">#dev   #mount #fs #opts #dump #pass</span>
+<span class="s">/dev/mirror/rootfs / ufs rw 1 1</span>
+<span class="s">/dev/mirror/swap none swap sw 0 0</span>
+<span class="s">__EOF__</span>
+</pre></div>
+
+
+<p>6.4 Создаем <code>/boot/loader.conf</code></p>
+<div class="highlight"><pre><span></span>cat &gt; /mnt/boot/loader.conf <span class="s">&lt;&lt;-__EOF__</span>
+<span class="s">geom_mirror_load=&quot;YES&quot;</span>
+<span class="s">__EOF__</span>
+</pre></div>
+
+
+<ol>
+<li>Отмонтируем зеркало</li>
+</ol>
+<div class="highlight"><pre><span></span>umount /mnt
+</pre></div>
+
+
+<ol>
+<li>все готово, теперь можно перезагружаться и смотреть на результат</li>
+</ol>
+<p>Ссылки по теме:
+<em> http://forums.freebsd.org/showthread.php?t=29098 HOWTO: Install FreeBSD 9.0 RELEASE (Root on UFS + ZFS, RAID1)
+</em> http://bu7cher.blogspot.com/2011/03/freebsd-gmirror-gpt-ufs.html Варианты загрузки FreeBSD: gmirror + GPT + UFS
+<em> http://www.lissyara.su/articles/freebsd/file_system/gmirror/ Использование gmirror для создания программного зеркалирования дисков
+</em> http://forums.freebsd.org/showthread.php?t=28348 [Solved] No gmirror in 9.0, now what?
+<em> http://www.wonkity.com/~wblock/docs/html/gmirror.html gmirror With Disk Partitions
+</em> http://blather.michaelwlucas.com/archives/1071 mirroring FreeBSD-9 disks with GPT</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://blog.metajiji.tk/blog/squid-rejik-ipcad-free-sa-nginx/">Контент фильтр и статистика посещенных сайтов Squid + rejik + ipcad + Free-SA + nginx</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/freebsd-pw/">FreeBSD утилита pw, управление пользователями и группами</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/marc-sql-1.5.4-mysql-5.x/">Запуск и адаптация МАРК-SQL 1.5.4 для MySQL 5.x</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/freebsd-chroot-sftp-chroot-ssh/">FreeBSD chroot sftp и chroot ssh</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/freebsd_asterisk-18-snmp-zabbix/">Asterisk 1.8 и статистика по SNMP в zabbix</a></li>
+    </ul>
+</section>
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+                var disqus_url = 'http://blog.metajiji.tk/blog/freebsd-90-gpt-gmirror/';
+
+            var disqus_config = function () {
+                this.language = "ru";
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/METAJIJI/"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://stackoverflow.com/users/2020443/metajiji"><i class="fa fa-stack-overflow fa-lg"></i> stackoverflow</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/fedora-chromium-firefox-flashplayer/">Fedora 25 install adobe flashplayer</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/atlassian/"><i class="fa fa-folder-open fa-lg"></i>Atlassian</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bash/"><i class="fa fa-folder-open fa-lg"></i>Bash</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bat-cmd/"><i class="fa fa-folder-open fa-lg"></i>Bat-cmd</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bind/"><i class="fa fa-folder-open fa-lg"></i>Bind</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/blog/"><i class="fa fa-folder-open fa-lg"></i>Blog</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/centos/"><i class="fa fa-folder-open fa-lg"></i>CentOS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/docker/"><i class="fa fa-folder-open fa-lg"></i>Docker</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/fedora/"><i class="fa fa-folder-open fa-lg"></i>Fedora</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/freebsd/"><i class="fa fa-folder-open fa-lg"></i>FreeBSD</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/gitlab/"><i class="fa fa-folder-open fa-lg"></i>Gitlab</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/hardware/"><i class="fa fa-folder-open fa-lg"></i>Hardware</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/javascript/"><i class="fa fa-folder-open fa-lg"></i>JavaScript</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/linux/"><i class="fa fa-folder-open fa-lg"></i>Linux</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/macosx/"><i class="fa fa-folder-open fa-lg"></i>MacOSX</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/mikrotik/"><i class="fa fa-folder-open fa-lg"></i>Mikrotik</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/postgresql/"><i class="fa fa-folder-open fa-lg"></i>PostgreSQL</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/ubuntu/"><i class="fa fa-folder-open fa-lg"></i>Ubuntu</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/vcs/"><i class="fa fa-folder-open fa-lg"></i>VCS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/windows/"><i class="fa fa-folder-open fa-lg"></i>Windows</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zabbix/"><i class="fa fa-folder-open fa-lg"></i>Zabbix</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zimbra/"><i class="fa fa-folder-open fa-lg"></i>Zimbra</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 Denis Kadyshev
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://blog.metajiji.tk/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://blog.metajiji.tk/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://blog.metajiji.tk/theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+    <!-- Google Analytics Universal -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106896103-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics Universal Code -->
+
+
+</body>
+</html>

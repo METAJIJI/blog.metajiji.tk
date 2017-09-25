@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - MacOSX</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/macosx.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2015-07-24T00:00:00+06:00</updated><entry><title>OS X Mavericks + Windows 7 + Ubuntu 14.04 на одном HDD с блоками в 4k с GPT</title><link href="http://blog.metajiji.tk/blog/os-x-mavericks-windows-7-ubuntu-1404/" rel="alternate"></link><published>2015-07-24T00:00:00+06:00</published><updated>2015-07-24T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2015-07-24:/blog/os-x-mavericks-windows-7-ubuntu-1404/</id><summary type="html">&lt;h1&gt;STEP 0: Создание флешки с помощью [UniBeast [6]] [6]&lt;/h1&gt;
+&lt;h1&gt;STEP 1: Разбиение диска.&lt;/h1&gt;
+&lt;p&gt;Создать таблицу разделов &lt;code&gt;GPT&lt;/code&gt;.
+Создать &lt;code&gt;3&lt;/code&gt; раздела заданного размера.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;hfs+&lt;/code&gt; Journaled (&lt;strong&gt;Mac&lt;/strong&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ms-DOS FAT32&lt;/code&gt; (&lt;strong&gt;Windows&lt;/strong&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ms-DOS FAT32&lt;/code&gt; (&lt;strong&gt;Linux&lt;/strong&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Если вы выберете именно &lt;code&gt;Ms-Dos Fat32&lt;/code&gt;, то &lt;strong&gt;дисковая утилита MacOS&lt;/strong&gt; сама выберет &lt;code&gt;GPT&lt;/code&gt; в режиме совместимости с &lt;code&gt;MBR&lt;/code&gt;! (можете …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;STEP 0: Создание флешки с помощью [UniBeast [6]] [6]&lt;/h1&gt;
+&lt;h1&gt;STEP 1: Разбиение диска.&lt;/h1&gt;
+&lt;p&gt;Создать таблицу разделов &lt;code&gt;GPT&lt;/code&gt;.
+Создать &lt;code&gt;3&lt;/code&gt; раздела заданного размера.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;hfs+&lt;/code&gt; Journaled (&lt;strong&gt;Mac&lt;/strong&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ms-DOS FAT32&lt;/code&gt; (&lt;strong&gt;Windows&lt;/strong&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Ms-DOS FAT32&lt;/code&gt; (&lt;strong&gt;Linux&lt;/strong&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Если вы выберете именно &lt;code&gt;Ms-Dos Fat32&lt;/code&gt;, то &lt;strong&gt;дисковая утилита MacOS&lt;/strong&gt; сама выберет &lt;code&gt;GPT&lt;/code&gt; в режиме совместимости с &lt;code&gt;MBR&lt;/code&gt;! (можете вручную этим заняться с помощь &lt;code&gt;gdisk&lt;/code&gt;)&lt;/p&gt;
+&lt;h2&gt;Установка &lt;strong&gt;OS X Mavericks&lt;/strong&gt;.&lt;/h2&gt;
+&lt;p&gt;Загрузка с флешки и запуск установленной ОС.
+Выполняете настройки и попадаете на рабочий стол.&lt;/p&gt;
+&lt;h1&gt;STEP 2: Создание и монтирование &lt;strong&gt;EFI&lt;/strong&gt; раздела:&lt;/h1&gt;
+&lt;p&gt;Открываем терминал - &lt;code&gt;Applications/Utilities/Terminal&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo -s
+&lt;span class="c1"&gt;# newfs_hfs -v EFI /dev/disk0s1&lt;/span&gt;
+&lt;span class="c1"&gt;# mkdir /Volumes/EFI&lt;/span&gt;
+&lt;span class="c1"&gt;# mount_hfs /dev/disk0s1 /Volumes/EFI&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;STEP 3: Установка &lt;strong&gt;CHAMELEON&lt;/strong&gt; на &lt;strong&gt;EFI&lt;/strong&gt; раздел:&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# cd /Volumes/OSX-USB/usr/standalone/i386&lt;/span&gt;
+&lt;span class="c1"&gt;# fdisk -f boot0 -u -y /dev/rdisk0&lt;/span&gt;
+&lt;span class="c1"&gt;# cp boot /Volumes/EFI/&lt;/span&gt;
+&lt;span class="c1"&gt;# cp -R /Volumes/OSX-USB/Extra /Volumes/EFI&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Загружаемся в &lt;strong&gt;Linux&lt;/strong&gt; и записываем загрузчик на раздел &lt;strong&gt;EFI&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /media/ubuntu/OSX-USB/usr/standalone/i386
+&lt;span class="c1"&gt;# dd if=boot1h of=/dev/sda1 bs=4096&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Если у вас диск с размером блоков в &lt;code&gt;512 байт&lt;/code&gt;, то можете обойтись без &lt;strong&gt;Linux&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# dd if=boot1h of=/dev/rdisk0s1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Чтобы &lt;strong&gt;MacOS&lt;/strong&gt; могла самостоятельно загружаться делаем активным &lt;strong&gt;EFI&lt;/strong&gt; раздел:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# fdisk -e /dev/rdisk0&lt;/span&gt;
+&lt;span class="c1"&gt;# p&lt;/span&gt;
+&lt;span class="c1"&gt;# f 1&lt;/span&gt;
+&lt;span class="c1"&gt;# w&lt;/span&gt;
+&lt;span class="c1"&gt;# y&lt;/span&gt;
+&lt;span class="c1"&gt;# q&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Теперь у вас полностью рабочая &lt;strong&gt;MacOS&lt;/strong&gt;!&lt;/p&gt;
+&lt;p&gt;Самое время добавить сюда &lt;strong&gt;Windows 7&lt;/strong&gt; и &lt;strong&gt;Ubuntu&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Загружаемся с флешки(диска) и устанавливаем &lt;strong&gt;Windows 7&lt;/strong&gt; на &lt;code&gt;2&lt;/code&gt; раздел.&lt;/p&gt;
+&lt;p&gt;После завершения установки &lt;strong&gt;Windows&lt;/strong&gt; - потеряется загрузчик &lt;strong&gt;Chameleon&lt;/strong&gt;, но это легко исправить:&lt;/p&gt;
+&lt;p&gt;Загружаем установленную &lt;strong&gt;OS X Mavericks&lt;/strong&gt; с флешки с которой только что её устанавливали.&lt;/p&gt;
+&lt;p&gt;Прописываем загрузчик на диск:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# cd /Volumes/OSX-USB/usr/standalone/i386&lt;/span&gt;
+&lt;span class="c1"&gt;# fdisk -f boot0 -u -y /dev/rdisk0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Делаем активным раздел с &lt;strong&gt;Windows 7&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# fdisk -e /dev/rdisk0&lt;/span&gt;
+&lt;span class="c1"&gt;# p&lt;/span&gt;
+&lt;span class="c1"&gt;# f 3&lt;/span&gt;
+&lt;span class="c1"&gt;# w&lt;/span&gt;
+&lt;span class="c1"&gt;# y&lt;/span&gt;
+&lt;span class="c1"&gt;# q&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Загружаемся снова с диска/флешки &lt;strong&gt;Windows 7&lt;/strong&gt;, и запускаем восстановление проблем запуска &lt;strong&gt;Windows&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Перезагружаемся - теперь &lt;strong&gt;Windows 7&lt;/strong&gt; должна загружаться снова, но сама - без &lt;strong&gt;Chamelion&lt;/strong&gt;, а он нам нужен для запуска &lt;strong&gt;OS X&lt;/strong&gt;!&lt;/p&gt;
+&lt;p&gt;В &lt;strong&gt;Windows&lt;/strong&gt; используем консольную утилиту &lt;code&gt;diskpart&lt;/code&gt;, чтобы сделать &lt;code&gt;EFI&lt;/code&gt; раздел &lt;strong&gt;активным&lt;/strong&gt;. Запускаем &lt;code&gt;cmd&lt;/code&gt; от &lt;strong&gt;администратора&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;C&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;\&lt;/span&gt;&lt;span class="c1"&gt;&amp;gt; diskpart&lt;/span&gt;
+C&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;\&lt;/span&gt;&lt;span class="c1"&gt;&amp;gt; select disk 0&lt;/span&gt;
+C&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;\&lt;/span&gt;&lt;span class="c1"&gt;&amp;gt; select partition 1&lt;/span&gt;
+C&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;\&lt;/span&gt;&lt;span class="c1"&gt;&amp;gt; active&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Перезагружаемся. &lt;strong&gt;Chameleon&lt;/strong&gt; должен запускаться с &lt;strong&gt;HDD&lt;/strong&gt;! &lt;strong&gt;Windows 7&lt;/strong&gt; и &lt;strong&gt;OS X&lt;/strong&gt; должны загружаться корректно.&lt;/p&gt;
+&lt;p&gt;Теперь можно установить &lt;strong&gt;Linux&lt;/strong&gt; в последний раздел.
+Я устанавливал &lt;strong&gt;Ubuntu 14.04&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;В установщике выбираем свой вариант установки.
+Последний &lt;code&gt;4&lt;/code&gt; раздел отмечаем &lt;code&gt;использовать как&lt;/code&gt;, файловая система &lt;code&gt;ext4&lt;/code&gt;.
+И &lt;strong&gt;важно&lt;/strong&gt; загрузчик &lt;b&gt;GRUB&lt;/b&gt; устанавливаем на раздел(&lt;code&gt;sda4&lt;/code&gt;), &lt;s&gt;не на диск (&lt;code&gt;sda&lt;/code&gt;)&lt;/s&gt;!&lt;/p&gt;
+&lt;p&gt;По завершению установки &lt;strong&gt;Linux&lt;/strong&gt; - &lt;strong&gt;Windows&lt;/strong&gt; опять поломается и перестанет грузиться!
+Уж не знаю что там сделал установщик &lt;strong&gt;Ubuntu&lt;/strong&gt;, но &lt;strong&gt;GPT&lt;/strong&gt; теперь в режиме &lt;code&gt;Ptotected MBR&lt;/code&gt;, а нам нужно &lt;code&gt;Mixed MBR&lt;/code&gt;.
+Но не беда, исправляем с помощью &lt;code&gt;gdisk&lt;/code&gt; (тот же &lt;code&gt;fdisk&lt;/code&gt; только для &lt;code&gt;GPT&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Не знаю почему &lt;code&gt;1&lt;/code&gt; и &lt;code&gt;4&lt;/code&gt; разделы отображаются в &lt;code&gt;fdisk&lt;/code&gt; не корректно (до установки &lt;strong&gt;Linux&lt;/strong&gt;, было все норм).
+Но зато раздел &lt;strong&gt;Windows&lt;/strong&gt; отображается нормально и загрузка всех ОС будет проходить успешно.&lt;/p&gt;
+&lt;h1&gt;STEP 4: &lt;a href="https://www.multibeast.com/" title="MultiBeast"&gt;MultiBeast [7]&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Можно загружаться в OS X и запускать &lt;a href="https://www.multibeast.com/" title="MultiBeast"&gt;MultiBeast [7]&lt;/a&gt;, устанавливать драйвера на звук и т.д.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://www.unibeast.com/" title="UniBeast"&gt;UniBeast&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.tonymacx86.com/401-install-bootloader-extra-efi-partition.html"&gt;Install Bootloader and Extra to EFI Partition&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://tonymacx86.blogspot.ru/2010/01/tweaking-your-system-install-chameleon.html"&gt;Tweaking Your System: Install Chameleon, DSDT, &amp;amp; Extras to EFI Partition&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.insanelymac.com/forum/topic/165878-os-x-windows-7-gpt-chameleon-2-finally-works/"&gt;OS X + Windows 7 + GPT + Chameleon 2 = Finally Works&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.mydellmini.com/forum/dual-booting/13834-windows-7-0xc000000e-boot-error.html"&gt;Windows 7 0xc000000e boot error&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.tonymacx86.com/general-hardware-discussion/100568-latest-haswell-lga1150-motherboard-info.html"&gt;Latest Haswell (LGA1150) Motherboard Info&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.insanelymac.com/forum/topic/277947-hackintosh-chameleon-to-boot-centos-linux-in-gpt-hdd/"&gt;Hackintosh: Chameleon to boot CentOS (Linux) in GPT HDD&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://tonymacx86.blogspot.ru/2009/11/dual-boot-windows-7-and-os-x-snow.html"&gt;tonymacx86 Blog: Dual Boot Windows 7 and OS X Snow Leopard Using Chameleon&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.multibeast.com/" title="MultiBeast"&gt;MultiBeast&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="Ubuntu"></category><category term="OS X"></category><category term="Windows"></category><category term="GPT"></category></entry><entry><title>MAC OS Hardware compatible table</title><link href="http://blog.metajiji.tk/blog/mac-os-hardware-compatible-table/" rel="alternate"></link><published>2014-11-18T00:00:00+06:00</published><updated>2014-11-18T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-11-18:/blog/mac-os-hardware-compatible-table/</id><summary type="html">&lt;table class="table table-striped table-bordered table-condensed table-hover"&gt;
+&lt;tr&gt;
+        &lt;th&gt;MB Model&lt;/th&gt;
+        &lt;th&gt;Driver&lt;/th&gt;
+        &lt;th&gt;Chip&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+        &lt;td&gt;P8B75mle&lt;/td&gt;
+        &lt;td&gt;VoodoHDA VT1708s&lt;/td&gt;
+        &lt;td&gt;VT1708s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+        &lt;td&gt;P7BH55D-M&lt;/td&gt;
+        &lt;td&gt;ALC892&lt;/td&gt;
+        &lt;td&gt;ALC892&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+        &lt;td&gt;P8Z77-V&lt;/td&gt;
+        &lt;td&gt;ALC887&lt;/td&gt;
+        &lt;td&gt;ALC887&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+        &lt;td&gt;P8H67&lt;/td&gt;
+        &lt;td&gt;ALC887&lt;/td&gt;
+        &lt;td&gt;ALC887&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;</summary><content type="html">&lt;table class="table table-striped table-bordered table-condensed table-hover"&gt;
+&lt;tr&gt;
+        &lt;th&gt;MB Model&lt;/th&gt;
+        &lt;th&gt;Driver&lt;/th&gt;
+        &lt;th&gt;Chip&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+        &lt;td&gt;P8B75mle&lt;/td&gt;
+        &lt;td&gt;VoodoHDA VT1708s&lt;/td&gt;
+        &lt;td&gt;VT1708s&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+        &lt;td&gt;P7BH55D-M&lt;/td&gt;
+        &lt;td&gt;ALC892&lt;/td&gt;
+        &lt;td&gt;ALC892&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+        &lt;td&gt;P8Z77-V&lt;/td&gt;
+        &lt;td&gt;ALC887&lt;/td&gt;
+        &lt;td&gt;ALC887&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+        &lt;td&gt;P8H67&lt;/td&gt;
+        &lt;td&gt;ALC887&lt;/td&gt;
+        &lt;td&gt;ALC887&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;</content><category term="hardware"></category><category term="mac os"></category><category term="os x"></category></entry></feed>

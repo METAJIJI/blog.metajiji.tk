@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - Bind</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/bind.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2013-09-17T00:00:00+07:00</updated><entry><title>Чтение файлов журнала .jnl bind, named named-journalprint</title><link href="http://blog.metajiji.tk/blog/jnl-bind-named-named-journalprint/" rel="alternate"></link><published>2013-09-17T00:00:00+07:00</published><updated>2013-09-17T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-09-17:/blog/jnl-bind-named-named-journalprint/</id><summary type="html">&lt;p&gt;Для чтения файлов журнала &lt;code&gt;.jnl&lt;/code&gt; &lt;strong&gt;DNS&lt;/strong&gt; сервера &lt;strong&gt;Named&lt;/strong&gt; (&lt;strong&gt;bind&lt;/strong&gt;), существует утилита &lt;code&gt;named-journalprint&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Пример использования:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;named-journalprint zone.local.jnl
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://master-zone.net/tag/bind-dynamic-update"&gt;Working with a journal-ized bind zone&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Для чтения файлов журнала &lt;code&gt;.jnl&lt;/code&gt; &lt;strong&gt;DNS&lt;/strong&gt; сервера &lt;strong&gt;Named&lt;/strong&gt; (&lt;strong&gt;bind&lt;/strong&gt;), существует утилита &lt;code&gt;named-journalprint&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Пример использования:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;named-journalprint zone.local.jnl
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://master-zone.net/tag/bind-dynamic-update"&gt;Working with a journal-ized bind zone&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Bind"></category><category term="named"></category><category term="jnl"></category><category term="journalprint"></category><category term="Linux"></category><category term="FreeBSD"></category></entry><entry><title>Ротация логов named Bind и newsyslog</title><link href="http://blog.metajiji.tk/blog/log-rotation-named-bind/" rel="alternate"></link><published>2013-04-09T00:00:00+07:00</published><updated>2013-04-09T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-04-09:/blog/log-rotation-named-bind/</id><summary type="html">&lt;p&gt;Ротация логов bind средствами самого bind, создаем конфиг:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;logging &lt;span class="o"&gt;{&lt;/span&gt;
+        channel update_debug &lt;span class="o"&gt;{&lt;/span&gt;
+                file &lt;span class="s2"&gt;&amp;quot;/var/log/named-update.log&amp;quot;&lt;/span&gt; versions &lt;span class="m"&gt;6&lt;/span&gt; size 512K&lt;span class="p"&gt;;&lt;/span&gt;
+                severity        debug &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                print-category  yes&lt;span class="p"&gt;;&lt;/span&gt;
+                print-severity  yes&lt;span class="p"&gt;;&lt;/span&gt;
+                print-time      yes&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        channel security_info &lt;span class="o"&gt;{&lt;/span&gt;
+                file &lt;span class="s2"&gt;&amp;quot;/var/log/named-auth.log&amp;quot;&lt;/span&gt; versions &lt;span class="m"&gt;6&lt;/span&gt; size 512K&lt;span class="p"&gt;;&lt;/span&gt;
+                severity        info&lt;span class="p"&gt;;&lt;/span&gt;
+                print-category  yes&lt;span class="p"&gt;;&lt;/span&gt;
+                print-severity  yes&lt;span class="p"&gt;;&lt;/span&gt;
+                print-time      yes&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="c1"&gt;#       channel queries …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Ротация логов bind средствами самого bind, создаем конфиг:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;logging &lt;span class="o"&gt;{&lt;/span&gt;
+        channel update_debug &lt;span class="o"&gt;{&lt;/span&gt;
+                file &lt;span class="s2"&gt;&amp;quot;/var/log/named-update.log&amp;quot;&lt;/span&gt; versions &lt;span class="m"&gt;6&lt;/span&gt; size 512K&lt;span class="p"&gt;;&lt;/span&gt;
+                severity        debug &lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                print-category  yes&lt;span class="p"&gt;;&lt;/span&gt;
+                print-severity  yes&lt;span class="p"&gt;;&lt;/span&gt;
+                print-time      yes&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        channel security_info &lt;span class="o"&gt;{&lt;/span&gt;
+                file &lt;span class="s2"&gt;&amp;quot;/var/log/named-auth.log&amp;quot;&lt;/span&gt; versions &lt;span class="m"&gt;6&lt;/span&gt; size 512K&lt;span class="p"&gt;;&lt;/span&gt;
+                severity        info&lt;span class="p"&gt;;&lt;/span&gt;
+                print-category  yes&lt;span class="p"&gt;;&lt;/span&gt;
+                print-severity  yes&lt;span class="p"&gt;;&lt;/span&gt;
+                print-time      yes&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="c1"&gt;#       channel queries {&lt;/span&gt;
+&lt;span class="c1"&gt;#               file &amp;quot;/var/log/queries&amp;quot; versions 6 size 10m;&lt;/span&gt;
+&lt;span class="c1"&gt;#               print-time      yes;&lt;/span&gt;
+&lt;span class="c1"&gt;#               print-category  yes;&lt;/span&gt;
+&lt;span class="c1"&gt;#               print-severity  yes;&lt;/span&gt;
+&lt;span class="c1"&gt;#       };&lt;/span&gt;
+
+&lt;span class="c1"&gt;#       category queries { queries; };&lt;/span&gt;
+        category update &lt;span class="o"&gt;{&lt;/span&gt; update_debug&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        category security &lt;span class="o"&gt;{&lt;/span&gt; security_info&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Обратите внимание на опцию:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;file &lt;span class="s2"&gt;&amp;quot;/var/log/named-update.log&amp;quot;&lt;/span&gt; versions &lt;span class="m"&gt;6&lt;/span&gt; size 512K&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Директива &lt;code&gt;file&lt;/code&gt; указывает на файл, куда нужно писать логи, а опция &lt;code&gt;versions&lt;/code&gt; задает количество лог-файлов, &lt;code&gt;size&lt;/code&gt; задает размер лог файла, при достижении которого нужно произвести ротацию.&lt;/p&gt;
+&lt;p&gt;И подключаем в &lt;code&gt;named.conf&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;include &lt;span class="s2"&gt;&amp;quot;/etc/namedb/log.conf&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;! ! ВАЖНО ! ! !&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Не используйте &lt;code&gt;newsyslog&lt;/code&gt; для ротации логов &lt;code&gt;bind&lt;/code&gt;, т.к. он не поддерживает переоткрытие лог-файла, а после того как &lt;code&gt;newsyslog&lt;/code&gt; произведет ротацию и создаст новый файл &lt;code&gt;bind&lt;/code&gt;
+ потеряет дескриптор (inode) прежнего лог-файла и перестанет писать логи, мало того &lt;code&gt;bind&lt;/code&gt; перестанет еще и обновлять &lt;code&gt;ddns&lt;/code&gt; зону!
+ Поэтому разумнее использовать либо встроенные средства ротации логов, либо перенаправить логи в &lt;code&gt;syslog&lt;/code&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://h30097.www3.hp.com/docs/base_doc/DOCUMENTATION/V50_HTML/SUPPDOCS/BIND_GDE/LOGGING.HTM"&gt;BIND Configuration File Guide - logging Statement&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.bog.pp.ru/work/bind.html"&gt;Bog BOS: DNS сервер BIND&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="FreeBSD"></category><category term="named"></category><category term="bind"></category><category term="logging"></category><category term="log rotation"></category><category term="newsyslog"></category></entry></feed>

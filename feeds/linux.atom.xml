@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - Linux</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/linux.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2017-03-20T00:00:00+07:00</updated><entry><title>Enable ip forwarding in linux</title><link href="http://blog.metajiji.tk/blog/linux-enable-ip-forwarding/" rel="alternate"></link><published>2017-03-20T00:00:00+07:00</published><updated>2017-03-20T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2017-03-20:/blog/linux-enable-ip-forwarding/</id><summary type="html">&lt;h1&gt;Debian/Ubuntu &lt;code&gt;/etc/network/options&lt;/code&gt;:&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ip_forward=yes
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;For restart network service &lt;code&gt;procps&lt;/code&gt;:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/etc/init.d/procps.sh restart
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;RedHat &lt;code&gt;/etc/sysconfig/network&lt;/code&gt;:&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FORWARD_IPV4=true
+&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h1&gt;Debian/Ubuntu &lt;code&gt;/etc/network/options&lt;/code&gt;:&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ip_forward=yes
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;For restart network service &lt;code&gt;procps&lt;/code&gt;:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/etc/init.d/procps.sh restart
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;RedHat &lt;code&gt;/etc/sysconfig/network&lt;/code&gt;:&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;FORWARD_IPV4=true
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="Centos"></category><category term="Ubuntu"></category><category term="ip_forwaring"></category></entry><entry><title>Запуск X приложений на полный экран в X сервере без DM</title><link href="http://blog.metajiji.tk/blog/run-x-applications-without-dm-nodm/" rel="alternate"></link><published>2015-08-27T00:00:00+06:00</published><updated>2015-08-27T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2015-08-27:/blog/run-x-applications-without-dm-nodm/</id><summary type="html">&lt;p&gt;Для запуска в &lt;code&gt;X&lt;/code&gt; сессии любой &lt;code&gt;X&lt;/code&gt; программы можно воспользоваться &lt;code&gt;nodm&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Установка необходимых пакетов:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install nodm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Настройка &lt;strong&gt;nodm&lt;/strong&gt; в файле &lt;code&gt;/etc/default/nodm&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# nodm configuration&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Set NODM_ENABLED to something different than &amp;#39;false&amp;#39; to enable nodm&lt;/span&gt;
+&lt;span class="nv"&gt;NODM_ENABLED&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+
+&lt;span class="c1"&gt;# User to autologin for&lt;/span&gt;
+&lt;span class="nv"&gt;NODM_USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;metall
+
+&lt;span class="c1"&gt;# First vt to try when …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Для запуска в &lt;code&gt;X&lt;/code&gt; сессии любой &lt;code&gt;X&lt;/code&gt; программы можно воспользоваться &lt;code&gt;nodm&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Установка необходимых пакетов:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install nodm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Настройка &lt;strong&gt;nodm&lt;/strong&gt; в файле &lt;code&gt;/etc/default/nodm&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# nodm configuration&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Set NODM_ENABLED to something different than &amp;#39;false&amp;#39; to enable nodm&lt;/span&gt;
+&lt;span class="nv"&gt;NODM_ENABLED&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;true&lt;/span&gt;
+
+&lt;span class="c1"&gt;# User to autologin for&lt;/span&gt;
+&lt;span class="nv"&gt;NODM_USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;metall
+
+&lt;span class="c1"&gt;# First vt to try when looking for free VTs&lt;/span&gt;
+&lt;span class="nv"&gt;NODM_FIRST_VT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;7&amp;#39;&lt;/span&gt;
+
+&lt;span class="c1"&gt;### xinit program&lt;/span&gt;
+&lt;span class="c1"&gt;###NODM_XINIT=/usr/bin/xinit&lt;/span&gt;
+
+&lt;span class="c1"&gt;# X session&lt;/span&gt;
+&lt;span class="nv"&gt;NODM_XSESSION&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/etc/X11/Xsession
+
+&lt;span class="c1"&gt;# Options for the X server&lt;/span&gt;
+&lt;span class="nv"&gt;NODM_X_OPTIONS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;-nolisten tcp&amp;#39;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# If an X session will run for less than this time in seconds, nodm will wait an&lt;/span&gt;
+&lt;span class="c1"&gt;# increasing bit of time before restarting the session.&lt;/span&gt;
+&lt;span class="nv"&gt;NODM_MIN_SESSION_TIME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;60&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://forum.kodi.tv/showthread.php?tid=111486&amp;amp;page=2"&gt;forum kodi, XBMC Server&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="nodm"></category><category term="X server"></category><category term="Xorg"></category></entry><entry><title>Найти все хардлинки(hardlinks) файла</title><link href="http://blog.metajiji.tk/blog/find-all-hardlinks/" rel="alternate"></link><published>2015-01-16T00:00:00+06:00</published><updated>2015-01-16T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2015-01-16:/blog/find-all-hardlinks/</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="o"&gt;[&lt;/span&gt; -z &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; cat &lt;span class="s"&gt;&amp;lt;&amp;lt;-_EOF_ &amp;amp;&amp;amp; exit 1&lt;/span&gt;
+&lt;span class="s"&gt;    Usage: ./$(basename $0) filename&lt;/span&gt;
+&lt;span class="s"&gt;_EOF_&lt;/span&gt;
+
+&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;
+
+&lt;span class="o"&gt;[&lt;/span&gt; ! -f &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$FILE&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;File &lt;/span&gt;&lt;span class="nv"&gt;$FILE&lt;/span&gt;&lt;span class="s2"&gt; not exists! Exiting...&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;ls -ld &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$FILE&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; -ne &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    find &lt;span class="sb"&gt;`&lt;/span&gt;df &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$FILE&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; tail -n+2 &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print $6}&amp;#39;&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt; -xdev -inum &lt;span class="sb"&gt;`&lt;/span&gt;ls -i &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$FILE&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; awk …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="o"&gt;[&lt;/span&gt; -z &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; cat &lt;span class="s"&gt;&amp;lt;&amp;lt;-_EOF_ &amp;amp;&amp;amp; exit 1&lt;/span&gt;
+&lt;span class="s"&gt;    Usage: ./$(basename $0) filename&lt;/span&gt;
+&lt;span class="s"&gt;_EOF_&lt;/span&gt;
+
+&lt;span class="nv"&gt;FILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;
+
+&lt;span class="o"&gt;[&lt;/span&gt; ! -f &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$FILE&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;File &lt;/span&gt;&lt;span class="nv"&gt;$FILE&lt;/span&gt;&lt;span class="s2"&gt; not exists! Exiting...&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;ls -ld &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$FILE&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; -ne &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    find &lt;span class="sb"&gt;`&lt;/span&gt;df &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$FILE&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; tail -n+2 &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print $6}&amp;#39;&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt; -xdev -inum &lt;span class="sb"&gt;`&lt;/span&gt;ls -i &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$FILE&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+&lt;span class="k"&gt;else&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;File &lt;/span&gt;&lt;span class="nv"&gt;$FILE&lt;/span&gt;&lt;span class="s2"&gt; is got only 1(one) link on filesystem...&amp;quot;&lt;/span&gt;
+    &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://superuser.com/questions/12972/how-can-you-see-the-actual-hard-link-by-ls"&gt;How can you see the actual hard link by ls?&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="FreeBSD"></category><category term="Linux"></category><category term="Bash"></category><category term="hardlinks"></category></entry><entry><title>GRUB_HIDDEN_TIMEOUT no longer supported, (deprecated).</title><link href="http://blog.metajiji.tk/blog/grub_hidden_timeout-no-longer-supported/" rel="alternate"></link><published>2014-04-30T00:00:00+07:00</published><updated>2014-04-30T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-04-30:/blog/grub_hidden_timeout-no-longer-supported/</id><summary type="html">&lt;p&gt;Столкнулся с проблемой после обновления системы &lt;strong&gt;Ubuntu 12.04&lt;/strong&gt;, а так же &lt;strong&gt;Ubuntu 14.04&lt;/strong&gt; и &lt;strong&gt;Ubuntu 16.04&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;root@Ubuntu:/# update-grub
+Generating grub configuration file ...
+Найден фон: /home/metall/Изображения/grub/about_1600px.png
+Предупреждение: Setting GRUB_TIMEOUT to a non-zero value when GRUB_HIDDEN_TIMEOUT is &lt;span class="nb"&gt;set&lt;/span&gt; is no longer supported.
+Found …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Столкнулся с проблемой после обновления системы &lt;strong&gt;Ubuntu 12.04&lt;/strong&gt;, а так же &lt;strong&gt;Ubuntu 14.04&lt;/strong&gt; и &lt;strong&gt;Ubuntu 16.04&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;root@Ubuntu:/# update-grub
+Generating grub configuration file ...
+Найден фон: /home/metall/Изображения/grub/about_1600px.png
+Предупреждение: Setting GRUB_TIMEOUT to a non-zero value when GRUB_HIDDEN_TIMEOUT is &lt;span class="nb"&gt;set&lt;/span&gt; is no longer supported.
+Found background image: /home/metall/Изображения/grub/about_1600px.png
+Найден образ linux: /boot/vmlinuz-3.13.0-24-generic
+Найден образ initrd: /boot/initrd.img-3.13.0-24-generic
+Найден Windows &lt;span class="m"&gt;7&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;loader&lt;span class="o"&gt;)&lt;/span&gt; на /dev/sda1
+завершено
+root@Ubuntu:/#
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;При генерации &lt;code&gt;grub.cfg&lt;/code&gt; появляется сообщение о том, что &lt;code&gt;GRUB_HIDDEN_TIMEOUT&lt;/code&gt; больше не поддерживается:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Предупреждение: Setting GRUB_TIMEOUT to a non-zero value when GRUB_HIDDEN_TIMEOUT is &lt;span class="nb"&gt;set&lt;/span&gt; is no longer supported.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Как выяснилось в установщике &lt;strong&gt;Ubuntu&lt;/strong&gt; имеется &lt;a href="https://bugs.launchpad.net/ubuntu/+source/grub2/+bug/1258597" title="Warning: Setting GRUB_TIMEOUT to a non-zero value when GRUB_HIDDEN_TIMEOUT is set is no longer supported"&gt;баг [1]&lt;/a&gt; исправить ситуацию легко, просто закоментируем эту опцию в файле &lt;code&gt;/etc/default/grub&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#GRUB_HIDDEN_TIMEOUT=0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;И обновим конфигурацию &lt;code&gt;grub&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;root@Ubuntu:/# update-grub
+Generating grub configuration file ...
+Найден фон: /home/metall/Изображения/grub/about_1600px.png
+Found background image: /home/metall/Изображения/grub/about_1600px.png
+Найден образ linux: /boot/vmlinuz-3.13.0-24-generic
+Найден образ initrd: /boot/initrd.img-3.13.0-24-generic
+Найден Windows &lt;span class="m"&gt;7&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;loader&lt;span class="o"&gt;)&lt;/span&gt; на /dev/sda1
+завершено
+root@Ubuntu:/#
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Как видим проблема ушла. Кстати, если установить конфиг из пакета, то эта опция там закоментирована:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dpkg-reconfigure grub-pc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://bugs.launchpad.net/ubuntu/+source/grub2/+bug/1258597" title="Warning: Setting GRUB_TIMEOUT to a non-zero value when GRUB_HIDDEN_TIMEOUT is set is no longer supported"&gt;Warning: Setting GRUB_TIMEOUT to a non-zero value when GRUB_HIDDEN_TIMEOUT is set is no longer supported.&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Ubuntu"></category><category term="Linux"></category><category term="Grub"></category></entry><entry><title>flock - предотвращение повторного запуска программы/скрипта из crontab.</title><link href="http://blog.metajiji.tk/blog/flock-crontab/" rel="alternate"></link><published>2014-04-05T00:00:00+07:00</published><updated>2014-04-05T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-04-05:/blog/flock-crontab/</id><summary type="html">&lt;p&gt;Столкнулся с проблемой, написанный мною бот для сайта запускался раз в минуту и однажды на сервере, где работал бот интернет канал сильно просел,
+ как результат за минуту бот не успел завершить свою работу.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;crontab&lt;/code&gt; запустил его еще раз, бот снова не успел, а &lt;code&gt;crontab&lt;/code&gt; продолжал беспощадно запускать копии бота - последствия …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Столкнулся с проблемой, написанный мною бот для сайта запускался раз в минуту и однажды на сервере, где работал бот интернет канал сильно просел,
+ как результат за минуту бот не успел завершить свою работу.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;crontab&lt;/code&gt; запустил его еще раз, бот снова не успел, а &lt;code&gt;crontab&lt;/code&gt; продолжал беспощадно запускать копии бота - последствия были не очень приятными.&lt;/p&gt;
+&lt;p&gt;Но проблема решилась очень просто, через &lt;code&gt;flock&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Теперь скрипт не запускается до тех пор, пока предыдущий запуск не закончит работу!&lt;/p&gt;
+&lt;p&gt;Например, запуск произвольного скрипта из &lt;code&gt;crontab&lt;/code&gt; раз в минуту:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;* * * * * root flock -n /tmp/script.lock -c /path/to/script.sh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Рассмотрим опции:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-n /tmp/script.lock&lt;/code&gt; - путь до &lt;code&gt;lock&lt;/code&gt; файла.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-c /path/to/script.sh&lt;/code&gt; - путь до скрипта или программы, которую нужно запустить.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Эта утилита имеется штатно на &lt;strong&gt;FreeBSD&lt;/strong&gt; и &lt;strong&gt;Linux&lt;/strong&gt;.&lt;/p&gt;</content><category term="Linux"></category><category term="FreeBSD"></category><category term="flock"></category><category term="crontab"></category><category term="bash"></category></entry><entry><title>Ubuntu Gnome-Terminal - включение beep enable system-beep, audible ping, bell, подавать гудок.</title><link href="http://blog.metajiji.tk/blog/ubuntu-gnome-terminal-enable-system-beep/" rel="alternate"></link><published>2013-01-30T00:00:00+07:00</published><updated>2013-01-30T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-01-30:/blog/ubuntu-gnome-terminal-enable-system-beep/</id><summary type="html">&lt;p&gt;Первым делом необходимо установить утилиту &lt;code&gt;beep&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install beep
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Затем нужно разрешить загрузку модуля &lt;code&gt;pcspkr&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo sed -i&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;s/blacklist pcspkr/#blacklist pcspkr/&amp;#39;&lt;/span&gt; /etc/modprobe.d/blacklist.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Либо, если Beep поддерживает звуковая карта ноутбука, попробовать активировать эту функцию:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat &amp;gt;&amp;gt;/etc/modprobe.d/alsa-base.conf&lt;span class="s"&gt;&amp;lt;&amp;lt;-_EOF&lt;/span&gt;
+
+&lt;span class="s"&gt;#Enable Beep …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Первым делом необходимо установить утилиту &lt;code&gt;beep&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install beep
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Затем нужно разрешить загрузку модуля &lt;code&gt;pcspkr&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo sed -i&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;s/blacklist pcspkr/#blacklist pcspkr/&amp;#39;&lt;/span&gt; /etc/modprobe.d/blacklist.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Либо, если Beep поддерживает звуковая карта ноутбука, попробовать активировать эту функцию:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat &amp;gt;&amp;gt;/etc/modprobe.d/alsa-base.conf&lt;span class="s"&gt;&amp;lt;&amp;lt;-_EOF&lt;/span&gt;
+
+&lt;span class="s"&gt;#Enable Beep&lt;/span&gt;
+&lt;span class="s"&gt;#https://bugs.launchpad.net/ubuntu/+source/beep/+bug/144022&lt;/span&gt;
+&lt;span class="s"&gt;options snd-hda-intel power_save=10 power_save_controller=Y index=0 beep_mode=1&lt;/span&gt;
+&lt;span class="s"&gt;_EOF&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Для включения сигналов в &lt;code&gt;gnome-terminal&lt;/code&gt; нужно включить в &lt;code&gt;metacity&lt;/code&gt; параметр &lt;code&gt;audible_bell&lt;/code&gt; и в самом &lt;code&gt;gnome-terminal&lt;/code&gt; проверить наличие галочки "&lt;strong&gt;Подавать гудок&lt;/strong&gt;".&lt;/p&gt;
+&lt;p&gt;Я сделал это через консоль:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gconftool-2 --set --type bool &lt;span class="s2"&gt;&amp;quot;/apps/gnome-terminal/profiles/Default/silent_bell&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;false&amp;quot;&lt;/span&gt;
+gconftool-2 --set --type string &lt;span class="s2"&gt;&amp;quot;/apps/metacity/general/audible_bell&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;on&amp;quot;&lt;/span&gt;
+gsettings &lt;span class="nb"&gt;set&lt;/span&gt; org.gnome.desktop.wm.preferences audible-bell &lt;span class="s1"&gt;&amp;#39;true&amp;#39;&lt;/span&gt;
+gconftool-2 --set --type string &lt;span class="s2"&gt;&amp;quot;/desktop/gnome/peripherals/keyboard/bell_mode&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;on&amp;quot;&lt;/span&gt;
+gsettings &lt;span class="nb"&gt;set&lt;/span&gt; org.gnome.settings-daemon.peripherals.keyboard bell-mode &lt;span class="s1"&gt;&amp;#39;on&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Проверяем:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; -e &lt;span class="s2"&gt;&amp;quot;\a&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;\a&amp;#39;&lt;/span&gt;
+ping -a ya.ru
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;У меня после этих манипуляций был слышен звук, как и в системной консоли.
+Регулировать громкость сигнала можно через &lt;code&gt;alsamixer&lt;/code&gt; в консоли - параметр &lt;code&gt;Beep&lt;/code&gt;, у меня он почему-то был почти около нуля и я добавил громкости.&lt;/p&gt;
+&lt;p&gt;Но радоваться рано, после перезагрузки гудок пропал. Выяснилось, что если отключить гудок и включить его снова, то все работает, но до следующей перезагрузки :(&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gsettings &lt;span class="nb"&gt;set&lt;/span&gt; org.gnome.desktop.wm.preferences audible-bell &lt;span class="s1"&gt;&amp;#39;false&amp;#39;&lt;/span&gt;
+gsettings &lt;span class="nb"&gt;set&lt;/span&gt; org.gnome.desktop.wm.preferences audible-bell &lt;span class="s1"&gt;&amp;#39;true&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;\a&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Немного подумав, сделал такой костыль:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat &amp;gt;&amp;gt;~/.bashrc&lt;span class="s"&gt;&amp;lt;&amp;lt;-_EOF&lt;/span&gt;
+&lt;span class="s"&gt;if [ -n &amp;quot;$DISPLAY&amp;quot; ]; then&lt;/span&gt;
+&lt;span class="s"&gt;    gsettings set org.gnome.desktop.wm.preferences audible-bell &amp;#39;false&amp;#39;&lt;/span&gt;
+&lt;span class="s"&gt;    gsettings set org.gnome.desktop.wm.preferences audible-bell &amp;#39;true&amp;#39;&lt;/span&gt;
+&lt;span class="s"&gt;fi&lt;/span&gt;
+&lt;span class="s"&gt;_EOF&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Буду крайне признателен, если кто-то подскажет более изящное решение.&lt;/p&gt;
+&lt;p&gt;P.S. Может кому пригодится, приведу еще дополнительные опции из &lt;code&gt;gconftool&lt;/code&gt; и &lt;code&gt;gsettings&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Ubuntu~$ gsettings list-recursively &lt;span class="p"&gt;|&lt;/span&gt; grep bell
+org.gnome.desktop.wm.preferences audible-bell &lt;span class="nb"&gt;true&lt;/span&gt;
+org.gnome.desktop.wm.preferences visual-bell &lt;span class="nb"&gt;false&lt;/span&gt;
+org.gnome.desktop.wm.preferences visual-bell-type &lt;span class="s1"&gt;&amp;#39;fullscreen-flash&amp;#39;&lt;/span&gt;
+org.gnome.settings-daemon.peripherals.keyboard bell-custom-file &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+org.gnome.settings-daemon.peripherals.keyboard bell-duration &lt;span class="m"&gt;100&lt;/span&gt;
+org.gnome.settings-daemon.peripherals.keyboard bell-mode &lt;span class="s1"&gt;&amp;#39;on&amp;#39;&lt;/span&gt;
+org.gnome.settings-daemon.peripherals.keyboard bell-pitch &lt;span class="m"&gt;400&lt;/span&gt;
+
+Ubuntu~$ gconftool -R /desktop &lt;span class="p"&gt;|&lt;/span&gt; grep -B4 bell
+  /desktop/gnome/peripherals:
+   /desktop/gnome/peripherals/keyboard:
+    &lt;span class="nv"&gt;repeat&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+    &lt;span class="nv"&gt;delay&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;500&lt;/span&gt;
+    &lt;span class="nv"&gt;bell_mode&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; off
+    &lt;span class="nv"&gt;bell_custom_file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;значение не установлено&lt;span class="o"&gt;)&lt;/span&gt;
+    &lt;span class="nv"&gt;remember_numlock_state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+    &lt;span class="nv"&gt;click_volume&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+    &lt;span class="nv"&gt;click&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+    &lt;span class="nv"&gt;bell_pitch&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;400&lt;/span&gt;
+    &lt;span class="nv"&gt;bell_duration&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;100&lt;/span&gt;
+
+Ubuntu~$ gconftool -R /apps &lt;span class="p"&gt;|&lt;/span&gt; grep -B20 bell
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://bugs.launchpad.net/ubuntu/+source/metacity/+bug/486154/comments/50"&gt;Comment 50 for bug 486154&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://ubuntuforums.org/showthread.php?t=1331186"&gt;Trying to ENABLE bell in gnome-terminal&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://bugs.launchpad.net/ubuntu/+source/beep/+bug/144022/comments/18"&gt;Comment 18 for bug 144022&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Ubuntu"></category><category term="Linux"></category><category term="System beep"></category><category term="speaker"></category></entry><entry><title>Linux Ubuntu создаем файл подкачки Swap</title><link href="http://blog.metajiji.tk/blog/linux-ubuntu-swap-to-file/" rel="alternate"></link><published>2012-12-27T00:00:00+07:00</published><updated>2012-12-27T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-12-27:/blog/linux-ubuntu-swap-to-file/</id><summary type="html">&lt;p&gt;Обычно &lt;strong&gt;swap&lt;/strong&gt; создают размером в 2 раза превышающим размер доступной оперативной памяти.&lt;/p&gt;
+&lt;p&gt;Шаг первый: Создадим файл с помощью команды низкоуровневого копирования &lt;code&gt;dd&lt;/code&gt; Файл забьём нулями из &lt;code&gt;/dev/zero&lt;/code&gt; и разметим на &lt;code&gt;256&lt;/code&gt; блоков по &lt;code&gt;1Мб&lt;/code&gt; каждый:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/zero &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/swap256.swap &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1M &lt;span class="nv"&gt;count&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;256&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Шаг второй …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Обычно &lt;strong&gt;swap&lt;/strong&gt; создают размером в 2 раза превышающим размер доступной оперативной памяти.&lt;/p&gt;
+&lt;p&gt;Шаг первый: Создадим файл с помощью команды низкоуровневого копирования &lt;code&gt;dd&lt;/code&gt; Файл забьём нулями из &lt;code&gt;/dev/zero&lt;/code&gt; и разметим на &lt;code&gt;256&lt;/code&gt; блоков по &lt;code&gt;1Мб&lt;/code&gt; каждый:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/zero &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/swap256.swap &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1M &lt;span class="nv"&gt;count&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;256&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Шаг второй: отформатируем получившийся файл как &lt;strong&gt;swap&lt;/strong&gt; устройство:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mkswap /swap256.swap
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Шаг третий: подключаем отформатированный файл (после второго шага это уже полноценный &lt;strong&gt;swap&lt;/strong&gt;) с помощью команды &lt;code&gt;swapon&lt;/code&gt; которая как раз для этого и предназначена.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo swapon /swap256.swap
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Четвёртый шаг: делаем так чтобы &lt;strong&gt;swap&lt;/strong&gt; файл подключался каждый раз при загрузке системы. Для этого в &lt;code&gt;/etc/fstab&lt;/code&gt; добавляем одну строчку:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/swap256.swap none swap sw &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Контролировать использование &lt;strong&gt;swap&lt;/strong&gt; можно как обычно через опцию &lt;code&gt;sysctl vm.swappiness&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;У меня в &lt;code&gt;/etc/sysctl.conf&lt;/code&gt; прописано:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;vm.swappiness&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Это значит, что система будет использовать &lt;strong&gt;swap&lt;/strong&gt;, если останется &lt;code&gt;10%&lt;/code&gt; от объема оперативной памяти.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://pintograss.blogspot.ru/2011/03/ubuntu-swap.html"&gt;Ubuntu. Как создать swap файл подкачки&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://en.wikipedia.org/wiki/Swappiness"&gt;Swappiness&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="Ubuntu"></category><category term="Swap"></category><category term="Swap to file"></category></entry><entry><title>Борьба с DDoS SYN-Flood штатными средствами и nginx в Linux</title><link href="http://blog.metajiji.tk/blog/ddos-nginx-linux/" rel="alternate"></link><published>2012-09-08T00:00:00+07:00</published><updated>2012-09-08T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-09-08:/blog/ddos-nginx-linux/</id><summary type="html">&lt;p&gt;Однажды мой знакомый написал мне, что его сайт перестал открываться сказал, что на сайт обрушилась &lt;strong&gt;DDoS&lt;/strong&gt; атака.
+ Полез я разбираться, в чем дело и в итоге суть проблемы была найдена - куча &lt;code&gt;ip&lt;/code&gt; адресов с различными &lt;strong&gt;User Agent&lt;/strong&gt;'ами приходили на сайт и делали очень много различных запросов...&lt;/p&gt;
+&lt;p&gt;В общем нужно …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Однажды мой знакомый написал мне, что его сайт перестал открываться сказал, что на сайт обрушилась &lt;strong&gt;DDoS&lt;/strong&gt; атака.
+ Полез я разбираться, в чем дело и в итоге суть проблемы была найдена - куча &lt;code&gt;ip&lt;/code&gt; адресов с различными &lt;strong&gt;User Agent&lt;/strong&gt;'ами приходили на сайт и делали очень много различных запросов...&lt;/p&gt;
+&lt;p&gt;В общем нужно было этих ботов отлавливать и блокировать им доступ к сайту, сперва подумал об &lt;code&gt;iptables&lt;/code&gt; и &lt;code&gt;ConfigServer Firewall&lt;/code&gt; (&lt;code&gt;csf&lt;/code&gt;), но хостинг был внутри &lt;strong&gt;OpenVZ&lt;/strong&gt;,
+ а это означало невозможность использования более &lt;code&gt;120&lt;/code&gt; правил, а так же невозможность установки модулей ядра и вообще каких либо изменений опций ядра.
+ Потому стандартные подходы для решения проблемы сразу отпадали.&lt;/p&gt;
+&lt;p&gt;А время шло, и переписываться с тех поддежкой хостинга небыло времени, а платить огромные суммы за защиту от такой примитивной атаки небыло никакого желания.&lt;/p&gt;
+&lt;p&gt;Решение пришло в голову неожиданно, при перечитывании &lt;code&gt;man ip&lt;/code&gt;, вспомнить зачем я его читал затрудняюсь, но решение было &lt;strike&gt;на редкость извращенским&lt;/strike&gt;, но вполне рабочим :)&lt;/p&gt;
+&lt;p&gt;Решением было добавление маршрута проблемного &lt;code&gt;IP&lt;/code&gt; в &lt;code&gt;blackhole&lt;/code&gt;. В следствие чего пакеты от этих адресов будут молча отбрасываться (the rule prescribes to silently drop the packet.).&lt;/p&gt;
+&lt;p&gt;Сперва конфигурируем &lt;code&gt;nginx&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;...
+worker_rlimit_nofile &lt;span class="m"&gt;200000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+events &lt;span class="o"&gt;{&lt;/span&gt;
+    worker_connections &lt;span class="m"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    use epoll&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+....
+
+http &lt;span class="o"&gt;{&lt;/span&gt;
+        index index.html index.htm index.php&lt;span class="p"&gt;;&lt;/span&gt;
+
+        &lt;span class="c1"&gt;##&lt;/span&gt;
+        &lt;span class="c1"&gt;# Basic Settings&lt;/span&gt;
+        &lt;span class="c1"&gt;##&lt;/span&gt;
+        sendfile on&lt;span class="p"&gt;;&lt;/span&gt;
+        send_timeout &lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        tcp_nopush on&lt;span class="p"&gt;;&lt;/span&gt;
+        tcp_nodelay on&lt;span class="p"&gt;;&lt;/span&gt;
+        keepalive_timeout &lt;span class="m"&gt;30&lt;/span&gt; &lt;span class="m"&gt;15&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        types_hash_max_size &lt;span class="m"&gt;2048&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        server_tokens off&lt;span class="p"&gt;;&lt;/span&gt;
+
+        client_header_timeout &lt;span class="m"&gt;15&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        client_body_timeout &lt;span class="m"&gt;15&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# лимитируем для зоны one 10 конектов в 1 сек.&lt;/span&gt;
+        limit_req_zone &lt;span class="nv"&gt;$binary_remote_addr&lt;/span&gt; &lt;span class="nv"&gt;zone&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;one:16m &lt;span class="nv"&gt;rate&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;10r/s&lt;span class="p"&gt;;&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# В ситуации когда сервер записал в сокет данные, но клиент не хочет&lt;/span&gt;
+        &lt;span class="c1"&gt;#       их забирать, после таймаута по закрытию соединения в ядре&lt;/span&gt;
+        &lt;span class="c1"&gt;#       данные будут держаться еще несколько минут. В nginx если директи                                                                             ва&lt;/span&gt;
+        &lt;span class="c1"&gt;#       для принудительного сброса всех данных после закрытия по таймаут                                                                             у.&lt;/span&gt;
+        reset_timedout_connection on&lt;span class="p"&gt;;&lt;/span&gt;
+
+        include /etc/nginx/mime.types&lt;span class="p"&gt;;&lt;/span&gt;
+        default_type application/octet-stream&lt;span class="p"&gt;;&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Logging Settings&lt;/span&gt;
+        access_log /var/log/nginx/access.log&lt;span class="p"&gt;;&lt;/span&gt;
+        error_log /var/log/nginx/error.log&lt;span class="p"&gt;;&lt;/span&gt;
+
+        gzip on&lt;span class="p"&gt;;&lt;/span&gt;
+        gzip_disable &lt;span class="s2"&gt;&amp;quot;msie6&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+...
+server &lt;span class="o"&gt;{&lt;/span&gt;
+        listen &lt;span class="m"&gt;80&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        server_name my.site&lt;span class="p"&gt;;&lt;/span&gt;
+
+        open_file_cache &lt;span class="nv"&gt;max&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;100000&lt;/span&gt; &lt;span class="nv"&gt;inactive&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;40s&lt;span class="p"&gt;;&lt;/span&gt;
+        open_file_cache_valid 60s&lt;span class="p"&gt;;&lt;/span&gt;
+        open_file_cache_min_uses &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        open_file_cache_errors on&lt;span class="p"&gt;;&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# это значит что законектится с лимитом в 3 подключения за 1 сек можно 3 раза, а дальше 503 ошибка. Что и пишется в лог access.&lt;/span&gt;
+        limit_req &lt;span class="nv"&gt;zone&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;one &lt;span class="nv"&gt;burst&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Default locations config.&lt;/span&gt;
+        include conf.std&lt;span class="p"&gt;;&lt;/span&gt;
+...
+&lt;span class="o"&gt;}&lt;/span&gt;
+...
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Файлик &lt;code&gt;/etc/nginx/conf.std&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;####### STANDART&lt;/span&gt;
+&lt;span class="c1"&gt;# redirect server error pages to the static page /50x.html&lt;/span&gt;
+error_page &lt;span class="m"&gt;500&lt;/span&gt; &lt;span class="m"&gt;502&lt;/span&gt; &lt;span class="m"&gt;503&lt;/span&gt; &lt;span class="m"&gt;504&lt;/span&gt; /50x.html&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;location&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /50x.html &lt;span class="o"&gt;{&lt;/span&gt;
+    root /usr/share/nginx/html&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Deny access to .htaccess files, if Apache&amp;#39;s document root concurs with nginx&amp;#39;s one&lt;/span&gt;
+location ~ /&lt;span class="se"&gt;\.&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;ht&lt;span class="p"&gt;|&lt;/span&gt;hg&lt;span class="p"&gt;|&lt;/span&gt;git&lt;span class="p"&gt;|&lt;/span&gt;svn&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; deny all&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+location ~ /&lt;span class="se"&gt;\&amp;lt;&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; deny  all&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;С конфигурацией &lt;code&gt;nginx&lt;/code&gt; все, теперь скрипты.&lt;/p&gt;
+&lt;p&gt;Добавляем в файл &lt;code&gt;/etc/crontab&lt;/code&gt; строки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# parse nginx logs and ban bad ip via nullroute&lt;/span&gt;
+* * * * * root /root/ddos/parse_nginx.log.sh &amp;gt;/root/ddos/parse_nginx.log.log &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Содержимое скрипта &lt;code&gt;/root/ddos/parse_nginx.log.sh&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="nv"&gt;ADMINS_IP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ip.ip.ip.ip&amp;#39;&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;date&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;--- запускаем систему парсинга nginx лога---&amp;#39;&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39; ищем ботов&amp;#39;&lt;/span&gt;
+cat /var/log/nginx/access.log &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;span class="p"&gt;|&lt;/span&gt; grep -E -e &lt;span class="s1"&gt;&amp;#39;HTTP/1.(0|1)&amp;quot; (400|403|405|499|503)&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;] &amp;quot;-&amp;quot; 400 0 &amp;quot;-&amp;quot; &amp;quot;-&amp;quot;&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;span class="p"&gt;|&lt;/span&gt; sort -nr &lt;span class="p"&gt;|&lt;/span&gt; uniq -c &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{if($1&amp;gt;10)print $1&amp;quot; &amp;quot;$2}&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    &amp;gt; /root/ddos/banlist.txt
+
+cat /var/log/nginx/error.log &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;span class="p"&gt;|&lt;/span&gt; grep -E &lt;span class="s1"&gt;&amp;#39;(limiting requests|limiting connections)&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;span class="p"&gt;|&lt;/span&gt; awk -F&lt;span class="s2"&gt;&amp;quot;client: &amp;quot;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;span class="p"&gt;|&lt;/span&gt; awk -F&lt;span class="s2"&gt;&amp;quot;,&amp;quot;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{print $1}&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;span class="p"&gt;|&lt;/span&gt; sort -nr &lt;span class="p"&gt;|&lt;/span&gt; uniq -c &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{if($1&amp;gt;10)print $1&amp;quot; &amp;quot;$2}&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    &amp;gt;&amp;gt; /root/ddos/banlist.txt
+
+&lt;span class="c1"&gt;# get unique ip&lt;/span&gt;
+cat /root/ddos/banlist.txt &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;span class="p"&gt;|&lt;/span&gt; grep -v &lt;span class="nv"&gt;$ADMINS_IP&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    &lt;span class="p"&gt;|&lt;/span&gt; uniq &lt;span class="p"&gt;|&lt;/span&gt; sort -nr &lt;span class="se"&gt;\&lt;/span&gt;
+    &amp;gt; /root/ddos/banlist_uniq.txt
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;------  очищаем tmp file бана-&amp;#39;&lt;/span&gt;
+cat /dev/null &amp;gt; /root/ddos/banlist.txt
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39; создаем DROP правила для 50 самых агрессивных ботов&amp;#39;&lt;/span&gt;
+awk &lt;span class="s1"&gt;&amp;#39;{print $2}&amp;#39;&lt;/span&gt; /root/ddos/banlist_uniq.txt &lt;span class="p"&gt;|&lt;/span&gt; uniq &lt;span class="p"&gt;|&lt;/span&gt; head -n &lt;span class="m"&gt;150&lt;/span&gt; &amp;gt; /root/ddos/banlist.txt
+
+&lt;span class="c1"&gt;#т.к. iptables полнейшее УГ, особенно внутри OpenVZ, баним ip вот таким извращенским методом... через nullroute&lt;/span&gt;
+&lt;span class="c1"&gt;#ip route flush type blackhole&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; ip in &lt;span class="k"&gt;$(&lt;/span&gt;cat /root/ddos/banlist.txt&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    ip route add blackhole &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ip&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/32
+&lt;span class="k"&gt;done&lt;/span&gt;
+
+&lt;span class="c1"&gt;#echo &amp;#39;записываем злобных ботов в csf.deny&amp;#39;&lt;/span&gt;
+&lt;span class="c1"&gt;#cat /etc/csf/csf.deny &amp;gt;&amp;gt; /root/ddos/banlist.txt&lt;/span&gt;
+&lt;span class="c1"&gt;#cat /root/ddos/banlist.txt | uniq | sort -nr &amp;gt; /etc/csf/csf.deny&lt;/span&gt;
+
+&lt;span class="c1"&gt;#echo &amp;#39;csf релоад, внесение в iptables ботов&amp;#39;&lt;/span&gt;
+&lt;span class="c1"&gt;#/usr/sbin/csf -r&lt;/span&gt;
+sleep &lt;span class="m"&gt;5&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;--  делаем ротацию лога--------&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;test&lt;/span&gt; -x /usr/sbin/logrotate &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+/usr/sbin/logrotate /etc/logrotate.conf
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;=====злобные боты в списке бана=====&amp;#39;&lt;/span&gt;
+
+sleep &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Для мониторинга состояния сервера используем такой скрипт:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="k"&gt;while&lt;/span&gt; true&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+&lt;span class="nv"&gt;netstat_str&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;netstat -an&lt;span class="k"&gt;)&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; -n &lt;span class="s1"&gt;&amp;#39;SYN_RECV: &amp;#39;&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$netstat_str&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="m"&gt;80&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep -c SYN_RECV
+        &lt;span class="nb"&gt;echo&lt;/span&gt; -n &lt;span class="s1"&gt;&amp;#39;TIME_WAIT: &amp;#39;&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$netstat_str&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="m"&gt;80&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep -c TIME_WAIT
+        &lt;span class="nb"&gt;echo&lt;/span&gt; -n &lt;span class="s1"&gt;&amp;#39;FIN_WAIT: &amp;#39;&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$netstat_str&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="m"&gt;80&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep -c FIN_WAI1
+        &lt;span class="nb"&gt;echo&lt;/span&gt; -n &lt;span class="s1"&gt;&amp;#39;ESTABLISHED: &amp;#39;&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$netstat_str&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="m"&gt;80&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep -c ESTABLISHED
+
+        &lt;span class="nb"&gt;echo&lt;/span&gt; -n &lt;span class="s1"&gt;&amp;#39;BLOCKED_IP to Black-route: &amp;#39;&lt;/span&gt;
+        ip route list &lt;span class="p"&gt;|&lt;/span&gt; grep -c blackhole
+
+        sleep &lt;span class="m"&gt;2&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;------------------------- for stop this script Press Ctrl+C&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Еще понадобится настроить ротацию логов, приводим файл &lt;code&gt;/etc/logrotate.d/nginx&lt;/code&gt; к такому виду:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/var/log/nginx/*.log &lt;span class="o"&gt;{&lt;/span&gt;
+    size 1M
+    missingok
+    rotate &lt;span class="m"&gt;52&lt;/span&gt;
+    compress
+    delaycompress
+    notifempty
+    create &lt;span class="m"&gt;640&lt;/span&gt; nginx adm
+    sharedscripts
+    postrotate
+        &lt;span class="o"&gt;[&lt;/span&gt; -f /var/run/nginx.pid &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;kill&lt;/span&gt; -USR1 &lt;span class="sb"&gt;`&lt;/span&gt;cat /var/run/nginx.pid&lt;span class="sb"&gt;`&lt;/span&gt;
+    endscript
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Поменялся метод ротации вместо &lt;code&gt;daily&lt;/code&gt; теперь используется &lt;code&gt;size 1M&lt;/code&gt;, это позволит уменьшить объем лог файла,
+ т.к. за сутки он может очень сильно вырасти в объеме, что замедлит парсинг и увеличит нагрузку на сервер,
+ а использование ротации по размеру исправит эту ситуацию.&lt;/p&gt;
+&lt;p&gt;Еще я использовал встроенные средства &lt;code&gt;iptables&lt;/code&gt; для борьбы с &lt;strong&gt;DDoS&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+iptables -F
+iptables -N syn_flood
+iptables -A INPUT -p tcp --syn -j syn_flood
+iptables -A syn_flood -m limit --limit &lt;span class="m"&gt;100&lt;/span&gt;/s --limit-burst &lt;span class="m"&gt;150&lt;/span&gt; -j RETURN
+iptables -A syn_flood -j DROP
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Данный скрипт спокойно блокировал &lt;strong&gt;DDoS&lt;/strong&gt; примерно в &lt;em&gt;10 000 ботов&lt;/em&gt;, при этом сайт был полностью доступен и атака вообще не чувствовалась.&lt;/p&gt;
+&lt;p&gt;Прошу обратить внимание на то, что скрипт запускается раз в минуту, и блокирует &lt;code&gt;ip&lt;/code&gt; адреса по заданным критериям в скрипте &lt;code&gt;/root/ddos/parse_nginx.log.sh&lt;/code&gt;.
+ В моем случае атака была "вялой" и одной минуты вполне хватало для сбора &lt;code&gt;ip&lt;/code&gt; адресов ботов.
+ В первые минуты сайт "туго" работал, но спустя &lt;em&gt;минут 10&lt;/em&gt;, когда список заблокированных вырос сайт начал свою штатную работу,
+ а список блокированных с течением времени увеличивался все медленнее и в итоге совсем перестал расти - у атакующего закончились боты.&lt;/p&gt;</content><category term="DDoS"></category><category term="SYN-flood"></category><category term="Linux"></category><category term="iptables"></category><category term="ip-route-blackhole"></category></entry><entry><title>Аналоги на sed для dos2unix и unix2dos</title><link href="http://blog.metajiji.tk/blog/sed-dos2unix-unix2dos/" rel="alternate"></link><published>2012-02-26T00:00:00+07:00</published><updated>2012-02-26T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-02-26:/blog/sed-dos2unix-unix2dos/</id><summary type="html">&lt;p&gt;Команда &lt;code&gt;dos2unix&lt;/code&gt; служит для преобразования форматов текстовых файлов &lt;strong&gt;MSDOS&lt;/strong&gt; к &lt;strong&gt;UNIX&lt;/strong&gt; формату,
+ а команда &lt;code&gt;unix2dos&lt;/code&gt; служит для преобразования форматов текстовых файлов &lt;strong&gt;UNIX&lt;/strong&gt; к формату &lt;strong&gt;MSDOS* и &lt;/strong&gt;&lt;em&gt;windows&lt;/em&gt;*.&lt;/p&gt;
+&lt;p&gt;Известно, что форматы текстовых файлов в &lt;strong&gt;DOS&lt;/strong&gt; и в &lt;strong&gt;UNIX&lt;/strong&gt; немного отличаются:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;В &lt;strong&gt;DOS&lt;/strong&gt; все строки заканчиваются парой символов &lt;code&gt;CR&lt;/code&gt; и &lt;code&gt;LF&lt;/code&gt; (возврат …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;Команда &lt;code&gt;dos2unix&lt;/code&gt; служит для преобразования форматов текстовых файлов &lt;strong&gt;MSDOS&lt;/strong&gt; к &lt;strong&gt;UNIX&lt;/strong&gt; формату,
+ а команда &lt;code&gt;unix2dos&lt;/code&gt; служит для преобразования форматов текстовых файлов &lt;strong&gt;UNIX&lt;/strong&gt; к формату &lt;strong&gt;MSDOS* и &lt;/strong&gt;&lt;em&gt;windows&lt;/em&gt;*.&lt;/p&gt;
+&lt;p&gt;Известно, что форматы текстовых файлов в &lt;strong&gt;DOS&lt;/strong&gt; и в &lt;strong&gt;UNIX&lt;/strong&gt; немного отличаются:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;В &lt;strong&gt;DOS&lt;/strong&gt; все строки заканчиваются парой символов &lt;code&gt;CR&lt;/code&gt; и &lt;code&gt;LF&lt;/code&gt; (возврат каретки &lt;code&gt;/r&lt;/code&gt; и перевод строки &lt;code&gt;/n&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;А *&lt;em&gt;UNIX&lt;/em&gt; использует только символ &lt;code&gt;LF&lt;/code&gt; перевод строки &lt;code&gt;/n&lt;/code&gt;, справедливо полагая, что второй символ совершенно излишен.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Чтобы не устанавливать эти консольные утилиты &lt;code&gt;dos2unix&lt;/code&gt; и &lt;code&gt;unix2dos&lt;/code&gt; можно воспользоваться вот такими несложными функциями написанными с использованием &lt;code&gt;sed&lt;/code&gt; в &lt;code&gt;sh&lt;/code&gt; или &lt;code&gt;bash&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+dos2unix&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+ sed -i &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;s/&amp;#39;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;printf&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;\015&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;$//&amp;#39;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+unix2dos&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+ sed -i &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;s|$|&amp;#39;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;printf&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;\015&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;|&amp;#39;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Сделать окончания строк LF (Unix)&lt;/span&gt;
+dos2unix file.test
+
+&lt;span class="c1"&gt;# Сделать окончания строк CR/LF (Win or Dos)&lt;/span&gt;
+unix2dos file.test
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Запустить аналог на &lt;code&gt;sed&lt;/code&gt; для &lt;code&gt;dos2unix&lt;/code&gt; прямо в консоли можно командой:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sed -i &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;s/&amp;#39;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;`printf &amp;#39;\015&amp;#39;`&amp;quot;&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;$//&amp;#39;&lt;/span&gt; file.name
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;А аналог на &lt;code&gt;sed&lt;/code&gt; для `unix2dos прямо в консоли выглядит так:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sed -i &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;s|$|&amp;#39;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;`printf &amp;#39;\015&amp;#39;`&amp;quot;&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;|&amp;#39;&lt;/span&gt; file.name
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Обработать рекурсивно все &lt;code&gt;php&lt;/code&gt; файлы в текущем каталоге:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find . -name &lt;span class="s2"&gt;&amp;quot;*.php&amp;quot;&lt;/span&gt; -type f -exec sed -i &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; -e &lt;span class="s1"&gt;&amp;#39;s/&amp;#39;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;`printf &amp;#39;\015&amp;#39;`&amp;quot;&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;$//&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;{}&lt;/span&gt; &lt;span class="se"&gt;\;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Причины НЕ устанавливать данные консольные утилиты могут быть разными, например невозможность их установить (случай с VPS или web хостингом), спортивный интерес ну или просто лень :)&lt;/p&gt;</content><category term="Linux"></category><category term="FreeBSD"></category><category term="bash"></category></entry><entry><title>FreeBSD, Linux узнать внешний ip адрес с консоли.</title><link href="http://blog.metajiji.tk/blog/freebsd-linux-external-ip/" rel="alternate"></link><published>2011-12-22T00:00:00+07:00</published><updated>2011-12-22T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2011-12-22:/blog/freebsd-linux-external-ip/</id><summary type="html">&lt;p&gt;Бывает необходимость быстро узнать через какой &lt;code&gt;ip&lt;/code&gt; выходит в интернет тот или иной сервер к которому вы подключены, ниже приведен простой способ решения данной задачи.&lt;/p&gt;
+&lt;p&gt;Так как во &lt;strong&gt;FreeBSD&lt;/strong&gt; в стандартной комплектации нет &lt;code&gt;wget&lt;/code&gt;, но зато есть &lt;code&gt;fetch&lt;/code&gt;, команда будет такой:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;fetch -qo - http://checkip.dyndns.org/ &lt;span class="p"&gt;|&lt;/span&gt; grep -Eo &lt;span class="s1"&gt;&amp;#39;\&amp;lt;[[:digit …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Бывает необходимость быстро узнать через какой &lt;code&gt;ip&lt;/code&gt; выходит в интернет тот или иной сервер к которому вы подключены, ниже приведен простой способ решения данной задачи.&lt;/p&gt;
+&lt;p&gt;Так как во &lt;strong&gt;FreeBSD&lt;/strong&gt; в стандартной комплектации нет &lt;code&gt;wget&lt;/code&gt;, но зато есть &lt;code&gt;fetch&lt;/code&gt;, команда будет такой:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;fetch -qo - http://checkip.dyndns.org/ &lt;span class="p"&gt;|&lt;/span&gt; grep -Eo &lt;span class="s1"&gt;&amp;#39;\&amp;lt;[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\&amp;gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;А для &lt;strong&gt;Linux&lt;/strong&gt; подойдет вариант с &lt;code&gt;wget&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget -qO- http://checkip.dyndns.org/ &lt;span class="p"&gt;|&lt;/span&gt; grep -Eo &lt;span class="s1"&gt;&amp;#39;\&amp;lt;[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\&amp;gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Еще один вариант с &lt;code&gt;curl&lt;/code&gt;, может подойти для обоих платформ, если конечно установлен:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -so- http://checkip.dyndns.org/ &lt;span class="p"&gt;|&lt;/span&gt; grep -Eo &lt;span class="s1"&gt;&amp;#39;\&amp;lt;[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\&amp;gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="FreeBSD"></category></entry><entry><title>Ubuntu 11.10 USB HDD NTFS только в режиме чтения</title><link href="http://blog.metajiji.tk/blog/ubuntu-usb-hdd-ntfs/" rel="alternate"></link><published>2011-12-15T00:00:00+07:00</published><updated>2011-12-15T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2011-12-15:/blog/ubuntu-usb-hdd-ntfs/</id><summary type="html">&lt;p&gt;Если при подключении внешнего &lt;strong&gt;USB HDD&lt;/strong&gt; с файловой системой &lt;strong&gt;ntfs&lt;/strong&gt; диск доступен только в режиме чтения, вероятнее всего не установлен пакет &lt;code&gt;ntfs-3g&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt-get -y install ntfs-3g
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;После этого &lt;strong&gt;USB HDD&lt;/strong&gt; с &lt;strong&gt;ntfs&lt;/strong&gt; на борту будут монтироваться автоматически и в режиме записи.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Если при подключении внешнего &lt;strong&gt;USB HDD&lt;/strong&gt; с файловой системой &lt;strong&gt;ntfs&lt;/strong&gt; диск доступен только в режиме чтения, вероятнее всего не установлен пакет &lt;code&gt;ntfs-3g&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt-get -y install ntfs-3g
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;После этого &lt;strong&gt;USB HDD&lt;/strong&gt; с &lt;strong&gt;ntfs&lt;/strong&gt; на борту будут монтироваться автоматически и в режиме записи.&lt;/p&gt;</content><category term="Linux"></category><category term="Ubuntu"></category></entry><entry><title>Ubuntu и русские man'ы</title><link href="http://blog.metajiji.tk/blog/ubuntu-man/" rel="alternate"></link><published>2011-11-12T00:00:00+07:00</published><updated>2011-11-12T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2011-11-12:/blog/ubuntu-man/</id><summary type="html">&lt;p&gt;В Ubuntu есть некоторые маны на других языках.&lt;/p&gt;
+&lt;p&gt;Все английские маны лежат в каталоге &lt;code&gt;/usr/share/man/man{1..8}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;А маны на других языках располагаются в &lt;code&gt;/usr/share/man/ЯЗЫК/man{1..8}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;У утилиты &lt;code&gt;man&lt;/code&gt; есть ключ &lt;code&gt;-L&lt;/code&gt;, которому передается нужный язык.&lt;/p&gt;
+&lt;p&gt;Почитаем &lt;code&gt;man mc&lt;/code&gt; на русском:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;man …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;В Ubuntu есть некоторые маны на других языках.&lt;/p&gt;
+&lt;p&gt;Все английские маны лежат в каталоге &lt;code&gt;/usr/share/man/man{1..8}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;А маны на других языках располагаются в &lt;code&gt;/usr/share/man/ЯЗЫК/man{1..8}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;У утилиты &lt;code&gt;man&lt;/code&gt; есть ключ &lt;code&gt;-L&lt;/code&gt;, которому передается нужный язык.&lt;/p&gt;
+&lt;p&gt;Почитаем &lt;code&gt;man mc&lt;/code&gt; на русском:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;man -L ru mc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В репозиториях есть даже специальный пакет &lt;code&gt;manpages-ru&lt;/code&gt;, установим его:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install manpages-ru
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Теперь у вас в системе русских &lt;strong&gt;man&lt;/strong&gt;'ов стало больше. :)&lt;/p&gt;</content><category term="Linux"></category><category term="Ubuntu"></category></entry></feed>

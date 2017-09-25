@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Centos7 LXC - For system administrator</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://blog.metajiji.tk/favicon.png" rel="icon">
+
+<link rel="canonical" href="http://blog.metajiji.tk/blog/centos7-lxc/">
+
+        <meta name="author" content="Denis Kadyshev" />
+        <meta name="keywords" content="Linux,Centos,Centos 7,LXC,python,rpm" />
+        <meta name="description" content="Сборка из исходных кодов стабильной версии lxc для Centos 7 с поддержкой python. Поддержка python необходима, например для работы команды lxc-ls --fancy Установка зависимостей: yum install -y epel-release yum install -y gcc git rpm-build automake make python34 python34-devel yum install -y libcap-devel docbook2X graphviz Согласно официальному сайту на момент написания …" />
+
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/bootstrap.custom.min.css" type="text/css"/>
+    <link href="http://blog.metajiji.tk/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://blog.metajiji.tk/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="http://blog.metajiji.tk/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/style.css" type="text/css"/>
+
+
+        <link href="http://blog.metajiji.tk/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator ATOM Feed"/>
+
+
+
+        <link href="http://blog.metajiji.tk/feeds/centos.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator CentOS ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://blog.metajiji.tk/" class="navbar-brand">
+For system administrator            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/">Blog</a></li>
+                         <li><a href="http://blog.metajiji.tk/about/">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="http://blog.metajiji.tk/archives/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="http://blog.metajiji.tk" title="For system administrator"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="http://blog.metajiji.tk/category/centos/" title="CentOS">CentOS</a></li>
+                <li class="active">Centos7 LXC</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://blog.metajiji.tk/blog/centos7-lxc/"
+                       rel="bookmark"
+                       title="Permalink to Centos7 LXC">
+                        Centos7 LXC
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-10-10T00:00:00+06:00"> Сб. 10 Октябрь 2015</time>
+    </span>
+          <span class="label label-default">Modified</span>
+            <span class="modified">
+                <i class="fa fa-calendar"></i><time datetime="2016-10-14T00:00:00+07:00"> Пт. 14 Октябрь 2016</time>
+            </span>
+
+
+            <span class="label label-default">By</span>
+            <a href="http://blog.metajiji.tk/author/denis-kadyshev.html"><i class="fa fa-user"></i> Denis Kadyshev</a>
+
+        <span class="label label-default">Category</span>
+        <a href="http://blog.metajiji.tk/category/centos/">CentOS</a>
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://blog.metajiji.tk/tag/linux/">Linux</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/centos/">Centos</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/centos-7/">Centos 7</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/lxc/">LXC</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/python/">python</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/rpm/">rpm</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Сборка из исходных кодов стабильной версии <code>lxc</code> для <strong>Centos 7</strong> с поддержкой <code>python</code>.
+Поддержка <code>python</code> необходима, например для работы команды <code>lxc-ls --fancy</code></p>
+<p>Установка зависимостей:</p>
+<div class="highlight"><pre><span></span>yum install -y epel-release
+yum install -y gcc git rpm-build automake make python34 python34-devel
+yum install -y libcap-devel docbook2X graphviz
+</pre></div>
+
+
+<p>Согласно официальному сайту на момент написания статьи доступно 3 версии <strong>LXC</strong>, я выбрал <code>LTS stable-1.0</code>
+Скачивание исходных кодов:</p>
+<div class="highlight"><pre><span></span>git clone git://github.com/lxc/lxc -b stable-1.0
+<span class="nb">cd</span> lxc
+</pre></div>
+
+
+<p>Почитав немного доку и исходники, получился такой порядок действий:</p>
+<div class="highlight"><pre><span></span>./autogen.sh
+./configure --enable-python <span class="nv">PYTHON</span><span class="o">=</span>/usr/bin/python3.4 <span class="nv">PYTHONDEV_CFLAGS</span><span class="o">=</span>-I/usr/include/python-3.4m <span class="nv">PYTHONDEV_LIBS</span><span class="o">=</span>-l/usr/include/python-3.4m
+</pre></div>
+
+
+<p>Как можно заметить, конфигурация происходит с явным указанием версии <code>python3.4</code>, он появился сравнительно недавно в <strong>EPEL</strong>, его и будем использовать далее.</p>
+<p>Т.к. у нас <strong>Centos</strong> и тут не все <s>как у людей</s> как в других дистрибутивах, изменим в исходниках путь до исполняемого файла <strong>Python</strong>, но сперва найдем файлы, которые нужно модифицировать:</p>
+<div class="highlight"><pre><span></span>grep -Rn <span class="s1">&#39;^#.*/python3&#39;</span>
+</pre></div>
+
+
+<p>В результате у меня получился такой небольшой скрипт:</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> f in config/apparmor/lxc-generate-aa-rules.py src/lxc/lxc-device src/lxc/lxc-ls.in src/lxc/lxc-start-ephemeral.in src/lxc/lxc-ls src/lxc/lxc-start-ephemeral src/python-lxc/examples/api_test.py src/python-lxc/examples/pyconsole-vte.py src/python-lxc/examples/pyconsole.py src/python-lxc/setup.py src/python-lxc/setup.py.in<span class="p">;</span> <span class="k">do</span>
+    sed -i <span class="s1">&#39;s|#!/usr/bin/python3|#!/usr/bin/python3.4|&#39;</span> <span class="nv">$f</span>
+<span class="k">done</span>
+
+sed -i <span class="s1">&#39;s|Requires: python3|Requires: python34|&#39;</span> lxc.spec
+sed -i <span class="s1">&#39;s|BuildRequires: python3-devel|BuildRequires: python34-devel|&#39;</span> lxc.spec
+sed -i <span class="s1">&#39;s|/python3.3/site-packages/|/python3.4/site-packages/|&#39;</span> lxc.spec
+</pre></div>
+
+
+<p>После изменений проверим результат:</p>
+<div class="highlight"><pre><span></span>grep -Rn <span class="s1">&#39;^#.*/python3&#39;</span>
+</pre></div>
+
+
+<p>Теперь соберем <code>rpm</code> пакеты используя <strong>Python3.4</strong>:</p>
+<div class="highlight"><pre><span></span>make rpm <span class="nv">PYTHON</span><span class="o">=</span>/usr/bin/python3.4 <span class="nv">PYTHONDEV_CFLAGS</span><span class="o">=</span>-I/usr/include/python-3.4m <span class="nv">PYTHONDEV_LIBS</span><span class="o">=</span>-l/usr/include/python-3.4m
+</pre></div>
+
+
+<p>Найти собранные пакеты можно в каталоге <code>cd /root/rpmbuild/RPMS/x86_64</code>, а установить командой:</p>
+<div class="highlight"><pre><span></span>yum localinstall lxc-libs-1.0.7-1.el7.centos.x86_64.rpm lxc-1.0.7-1.el7.centos.x86_64.rpm
+</pre></div>
+
+
+<p>Не будем останавливаться на этом!
+Для запуска <strong>Centos 7</strong> контейнера необходимо проделать еще несколько манипуляций:
+В файле <code>/usr/share/lxc/config/centos.common.conf</code> нужно найти опцию <code>lxc.cap.drop</code>, содержащую значения <code>setfcap</code> и <code>setpcap</code> их нужно убрать,
+ например для хоста <strong>Ubuntu 14.04</strong> нужно сделать примерно так:</p>
+<div class="highlight"><pre><span></span><span class="c1">#lxc.cap.drop = mac_admin mac_override setfcap setpcap</span>
+<span class="na">lxc.cap.drop</span> <span class="o">=</span> <span class="s">mac_admin mac_override</span>
+</pre></div>
+
+
+<p>Не зависимо от дистрибутива нужно в тот же файл еще добавить в конец сроки:</p>
+<div class="highlight"><pre><span></span><span class="c1"># This lets LXC SUSE containers run on hosts with apparmor.</span>
+<span class="c1"># It does nothing on hosts which do not have apparmor enabled.</span>
+<span class="na">lxc.aa_profile</span> <span class="o">=</span> <span class="s">unconfined</span>
+
+<span class="c1"># https://bugs.launchpad.net/ubuntu/+source/lxc/+bug/1347020</span>
+<span class="na">lxc.kmsg</span> <span class="o">=</span> <span class="s">0</span>
+</pre></div>
+
+
+<hr>
+<p>UPD: <strong>14.10.2016</strong></p>
+<p>Под <strong>Centos 7</strong> и начиная с <strong>Ubuntu 16.06</strong> для персистентных контейнеров лучше использовать <code>systemd-nspawn</code> и управлять ими через <code>machinectl</code>.</p>
+<hr>
+<p>Ссылки по теме:</p>
+<ol>
+<li><a href="https://bugzilla.redhat.com/show_bug.cgi?id=1176816">Bug 1176816 - booting a centos 7 container is extremely slow</a></li>
+<li><a href="https://bugs.launchpad.net/ubuntu/+source/lxc/+bug/1339781">centos 7 needs setpcap capability</a></li>
+<li><a href="https://bugs.launchpad.net/ubuntu/+source/lxc/+bug/1347020">systemd does not boot in a container</a></li>
+<li>[[lxc-devel] [PATCH] Various fixes for Fedora/CentOS/OpenSUSE templates and systemd.](https://lists.linuxcontainers.org/pipermail/lxc-devel/2014-September/010261.html)</li>
+<li><a href="https://github.com/lxc/lxc/issues/340">big big login delays in CentOS 7 systemd #340</a></li>
+<li><a href="https://linuxcontainers.org/lxc/downloads/">Linux Containers: Downloads</a></li>
+<li>[LXC 1.0: Troubleshooting and debugging <a href="http://www.stgraber.org/2014/02/18/lxc-1-0-troubleshooting-and-debugging/">10/10</a></li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://blog.metajiji.tk/blog/centos7-rh-python35-python/">CentOS 7 install python 3.5 rh sclo</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/centos7-rh-sclo-git/">CentOS 7 install modern git 2.x rh sclo</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/centos-7-broken-nfsdcltrack/">Centos 7 broken nfsdcltrack: sqlite_insert_client</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
+    </ul>
+</section>
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+                var disqus_url = 'http://blog.metajiji.tk/blog/centos7-lxc/';
+
+            var disqus_config = function () {
+                this.language = "ru";
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/METAJIJI/"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://stackoverflow.com/users/2020443/metajiji"><i class="fa fa-stack-overflow fa-lg"></i> stackoverflow</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/fedora-chromium-firefox-flashplayer/">Fedora 25 install adobe flashplayer</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/atlassian/"><i class="fa fa-folder-open fa-lg"></i>Atlassian</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bash/"><i class="fa fa-folder-open fa-lg"></i>Bash</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bat-cmd/"><i class="fa fa-folder-open fa-lg"></i>Bat-cmd</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bind/"><i class="fa fa-folder-open fa-lg"></i>Bind</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/blog/"><i class="fa fa-folder-open fa-lg"></i>Blog</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/centos/"><i class="fa fa-folder-open fa-lg"></i>CentOS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/docker/"><i class="fa fa-folder-open fa-lg"></i>Docker</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/fedora/"><i class="fa fa-folder-open fa-lg"></i>Fedora</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/freebsd/"><i class="fa fa-folder-open fa-lg"></i>FreeBSD</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/gitlab/"><i class="fa fa-folder-open fa-lg"></i>Gitlab</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/hardware/"><i class="fa fa-folder-open fa-lg"></i>Hardware</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/javascript/"><i class="fa fa-folder-open fa-lg"></i>JavaScript</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/linux/"><i class="fa fa-folder-open fa-lg"></i>Linux</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/macosx/"><i class="fa fa-folder-open fa-lg"></i>MacOSX</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/mikrotik/"><i class="fa fa-folder-open fa-lg"></i>Mikrotik</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/postgresql/"><i class="fa fa-folder-open fa-lg"></i>PostgreSQL</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/ubuntu/"><i class="fa fa-folder-open fa-lg"></i>Ubuntu</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/vcs/"><i class="fa fa-folder-open fa-lg"></i>VCS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/windows/"><i class="fa fa-folder-open fa-lg"></i>Windows</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zabbix/"><i class="fa fa-folder-open fa-lg"></i>Zabbix</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zimbra/"><i class="fa fa-folder-open fa-lg"></i>Zimbra</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 Denis Kadyshev
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://blog.metajiji.tk/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://blog.metajiji.tk/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://blog.metajiji.tk/theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+    <!-- Google Analytics Universal -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106896103-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics Universal Code -->
+
+
+</body>
+</html>

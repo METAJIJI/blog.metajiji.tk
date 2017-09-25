@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - Hardware</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/hardware.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2016-10-13T00:00:00+07:00</updated><entry><title>Сборка мощного домашнего сервера</title><link href="http://blog.metajiji.tk/blog/compact-home-powerful-server,minicase,noctua/" rel="alternate"></link><published>2015-07-26T00:00:00+06:00</published><updated>2016-10-13T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2015-07-26:/blog/compact-home-powerful-server,minicase,noctua/</id><summary type="html">&lt;p&gt;Стало не хватать домашнего сервера на &lt;code&gt;Atom D525&lt;/code&gt; с &lt;code&gt;4Гб&lt;/code&gt; оперативной памяти, вот такой он компактный:
+&lt;img alt="Mini-ITX Morex T3310" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/compact-home-powerful-server,minicase,noctua/26-07-2015_compact-home-powerful-server/1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Вон он в боевом положении, чтобы вы оценили насколько он компактный:
+&lt;img alt="Mini-ITX Morex T3310" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/compact-home-powerful-server,minicase,noctua/26-07-2015_compact-home-powerful-server/2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Это корпус &lt;code&gt;Mini-ITX Morex T3310&lt;/code&gt;, покупался еще в красноярском &lt;strong&gt;DNS-shop&lt;/strong&gt;, когда процессоры &lt;strong&gt;Atom&lt;/strong&gt; еще были в моде. :)
+ Процессор вместе с радиатором распаяны на …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Стало не хватать домашнего сервера на &lt;code&gt;Atom D525&lt;/code&gt; с &lt;code&gt;4Гб&lt;/code&gt; оперативной памяти, вот такой он компактный:
+&lt;img alt="Mini-ITX Morex T3310" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/compact-home-powerful-server,minicase,noctua/26-07-2015_compact-home-powerful-server/1.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Вон он в боевом положении, чтобы вы оценили насколько он компактный:
+&lt;img alt="Mini-ITX Morex T3310" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/compact-home-powerful-server,minicase,noctua/26-07-2015_compact-home-powerful-server/2.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Это корпус &lt;code&gt;Mini-ITX Morex T3310&lt;/code&gt;, покупался еще в красноярском &lt;strong&gt;DNS-shop&lt;/strong&gt;, когда процессоры &lt;strong&gt;Atom&lt;/strong&gt; еще были в моде. :)
+ Процессор вместе с радиатором распаяны на материнской плате, внутри нет ни одного вентилятора, и  2 HDD от старых ноутбуков, да я собирал его из того, что было под рукой! :)
+ Еще на плате имеется &lt;strong&gt;1 PCI&lt;/strong&gt; слот, куда вставлена вторая сетевая карточка, да, вы правильно догадались, это был домашний роутер!
+ Внутри есть &lt;strong&gt;Mini-PCIe&lt;/strong&gt; с &lt;strong&gt;Wi-Fi&lt;/strong&gt; адаптером, но как видно на фото (плохо видно, но статья не о нем же), у меня появился &lt;code&gt;Mikrotik RB951G-2HnD&lt;/code&gt; и необходимость во 2 карточке отпала,
+ но виртуалки с разными проектами остались, а так же файлопомойка, &lt;code&gt;PXE&lt;/code&gt; установщики и много других полезных вещей.&lt;/p&gt;
+&lt;p&gt;В общем железо сильно устарело и я решил его обновить, получился такой список деталей:
+&lt;table class="table table-striped table-bordered table-condensed table-hover"&gt;
+&lt;tr&gt;
+    &lt;th&gt;Наименование&lt;/th&gt;
+    &lt;th&gt;Модель и описание&lt;/th&gt;
+    &lt;th&gt;Цена&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Материнская плата&lt;/td&gt;
+    &lt;td&gt;ASRock H81TM-ITX, Scket1150, iH81, 2SODIMM DDRIII, 7.1-ch HDA, GLAN, USB 3.0, DVI, HDMI, Thin mini-ITX, Retail&lt;/td&gt;
+    &lt;td&gt;3807&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Блок питания&lt;/td&gt;
+    &lt;td&gt;HP-A1501A3B1 19V 7.9A 150W&lt;/td&gt;
+    &lt;td&gt;2400&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Кулер+доставка&lt;/td&gt;
+    &lt;td&gt;Dynatron K199 1U LGA115X&lt;/td&gt;
+    &lt;td&gt;1794+1090&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Память&lt;/td&gt;
+    &lt;td&gt;DDR3L SODIMM 16Gb (2x8Gb) PC12800 1600MHz CL9 Kingston HyperX Impact Black Series (HX316LS9IBK2/16)&lt;/td&gt;
+    &lt;td&gt;7650&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Процессор&lt;/td&gt;
+    &lt;td&gt;Intel Core i7-4790S 3200MHz 8Mb TDP-65W S1150 tray Haswell&lt;/td&gt;
+    &lt;td&gt;24050&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="warning"&gt;
+    &lt;td&gt;Процессор&lt;/td&gt;
+    &lt;td&gt;Intel Xeon E3-1246v3 3500MHz 8Mb 5GT/s TDP-84W S1150 tray&lt;/td&gt;
+    &lt;td&gt;20675&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Жесткий диск&lt;/td&gt;
+    &lt;td&gt;Hitachi (HGST) 1Tb HTS721010A9E630 Travelstar 7K1000 2.5" 7200rpm 32Mb SATA3&lt;/td&gt;
+    &lt;td&gt;4275+4275&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;Корпус&lt;/td&gt;
+    &lt;td&gt;Lian Li PC-Q05B Black Mini-ITX 47x284x307&lt;/td&gt;
+    &lt;td&gt;3663&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;strong&gt;53004 руб.&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;&lt;/p&gt;
+&lt;p&gt;Сервер старался делать максимально миниатюрным, поэтому кулер выбрал очень специфичный &lt;strong&gt;Dynatron K199&lt;/strong&gt;, т.к. процессор хочется мощный и в то же время, чтобы сервер остался бесшумным и компактным.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Dynatron K199" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/compact-home-powerful-server,minicase,noctua/26-07-2015_compact-home-powerful-server/3.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Выбранный кулер на момент покупки был доступен только в европейской части мира, аналогов в росии или китае я не нашел, поэтому пришлось заказать в штатах на *&lt;em&gt;Ebay&lt;/em&gt;,
+ тут я изрядно переплатил еще и доставка была платная, но &lt;s&gt;оно того стоит&lt;/s&gt;! (позже я выяснил, что он не очень тихий, турбинка сильно шумит, при нагрузках, взамен купил &lt;code&gt;Noctua NH-L9i&lt;/code&gt;)
+&lt;img alt="Noctua NH-L9i" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/compact-home-powerful-server,minicase,noctua/26-07-2015_compact-home-powerful-server/5.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;Выбранный процессор &lt;code&gt;E3-1246v3&lt;/code&gt; имеет &lt;code&gt;4&lt;/code&gt; ядра, &lt;code&gt;8&lt;/code&gt; потоков (&lt;strong&gt;Hyper Threading&lt;/strong&gt;) и встроенное видео, которое пока никак не планируется использоваться,
+ только для входа в &lt;strong&gt;BIOS&lt;/strong&gt; и при возможных неполадках, &lt;strong&gt;IPMI&lt;/strong&gt; решения или &lt;strong&gt;PCI-Ex&lt;/strong&gt; видеокарточки конечно вариант, но по деньгам дороже и в реализации сложнее,
+ проще процессор с видеокарточкой взять, но есть еще одна проблема рассеиваемая мощность &lt;code&gt;84Вт&lt;/code&gt; у кулера запаса хватает (&lt;code&gt;95Вт&lt;/code&gt;), а у материнской платы по паспорту написано &lt;code&gt;65Вт&lt;/code&gt;,
+ но думаю должно работать, если нет, то придется менять процессор на &lt;code&gt;E3-1286LV3&lt;/code&gt;, стоимостью в 2 раза дороже (примерно &lt;code&gt;$774&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;После долгих поисков, сравнений бенчмарков и технических характеристик, пришел к выводу, что наиболее подходящим будет процессор &lt;code&gt;Intel Core i7-4790S&lt;/code&gt; c &lt;code&gt;TDP 65W&lt;/code&gt;,
+ он вполне производительный и энергоэффективный, судя по бенчмаркам производительность на уровне выбранного ранее &lt;code&gt;E3-1286LV3&lt;/code&gt; с &lt;code&gt;TDP 84W&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;С блоком питания тоже не все так просто, в городе небыло таких мощных &lt;code&gt;150Вт&lt;/code&gt;, пришлось заказать в китае на &lt;strong&gt;Ebay&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;С выбором дисков одни разочарования, сперва выбрал то, что хотел &lt;code&gt;Seagate-ST2000NX0243&lt;/code&gt; Жесткий диск емкостью &lt;code&gt;2 ТБ&lt;/code&gt; с интерфейсом &lt;strong&gt;SAS/SATA&lt;/strong&gt; с низким энергопотреблением,
+ но когда узнал, что он стоит &lt;code&gt;21000 рублей&lt;/code&gt; в лучшем случае, начал искать аналоги, но и тут проблема стоят они в 2 раза меньше и в объеме тоже меньше, по скорости хуже,
+ поэтому взял самый простой вариант &lt;code&gt;Hitachi Travelstar 7K1000 HTS721010A9E630&lt;/code&gt;, а ведь я планирую &lt;code&gt;RAID1&lt;/code&gt;, значит диска нужно два!
+ А если мне вдруг действительно понадобятся быстрые, ёмкие и компактные диски, то я всегда успею их докупить.
+ Тем более у меня на материнской плате еще &lt;strong&gt;Mini-PCIe&lt;/strong&gt; пустой, можно туда купить &lt;strong&gt;SSD&lt;/strong&gt; с интерфейсом &lt;code&gt;M.2&lt;/code&gt; это будет дешевле и быстрее!&lt;/p&gt;
+&lt;p&gt;Память выбиралась очень просто, материнская плата не умеет &lt;code&gt;ECC&lt;/code&gt;, максимальный объем &lt;code&gt;16Гб&lt;/code&gt;, максимальная частота &lt;code&gt;1600&lt;/code&gt;, процессор все это поддерживает,
+ поэтому взял самую простую и дешевую с таймингами поменьше &lt;code&gt;CL9&lt;/code&gt;, разница с аналогичной, но с таймингами &lt;code&gt;CL11&lt;/code&gt; была небольшой.&lt;/p&gt;
+&lt;p&gt;Корпус, самое интересное оставил на десерт, пока планирую уместить все в старый корпус, но еще не все детали из списка куплены, поэтому я еще выбираю корпуса, присматириваюсь, так сказать.
+Пригляделся корпус &lt;s&gt;Lian Li PC-Q05B Black&lt;/s&gt; когда померял, оказалось, что такой корпус не подходит, по высоте не хватило 6мм :(&lt;/p&gt;
+&lt;p&gt;Немного погуглив заказал сразу два у китайцев &lt;a href="http://www.minicase.net/product_E-W80.html" title="minicase.net: E-W80"&gt;minicase.net: E-W80 [6]&lt;/a&gt;, они подошли идеально!
+&lt;img alt="E-W80" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/compact-home-powerful-server,minicase,noctua/26-07-2015_compact-home-powerful-server/4.jpg"&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://www.dynatron-corp.com/en/product_detail_1.aspx?id=191"&gt;Dynatron K199 Socket LGA1150 &amp;amp; Sandy Bridge LGA1155 &amp;amp; LGA1156&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.seagate.com/ru/ru/products/enterprise-servers-storage/nearline-storage/enterprise-capacity-2-5-hdd/?sku=ST2000NX0243#features"&gt;Жесткий диск Enterprise Capacity 2.5 HDD&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://ru.wikipedia.org/wiki/M.2"&gt;Интерфейс M.2 Next Generation Form Factor и NGFF&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://ark.intel.com/ru/compare/75124,80916,80914,75462,80909,80910"&gt;Сравнение процессоров Intel®&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.cpubenchmark.net/socketType.html#id7"&gt;CPU Mark by Socket Type: LGA 1150&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.minicase.net/product_E-W80.html" title="minicase.net: E-W80"&gt;minicase.net: E-W80&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.pridopia.co.uk/faq-1.html"&gt;Intel D525MW mother board Mini PCI express slot not detect our card?&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Home Server"></category><category term="HTPC"></category><category term="silent"></category><category term="powerful"></category><category term="compact"></category></entry><entry><title>Восстановление Seagate 1Tb ST31000528AS 7200.12</title><link href="http://blog.metajiji.tk/blog/seagate-1tb-st31000528as-720012/" rel="alternate"></link><published>2015-07-03T00:00:00+06:00</published><updated>2015-07-03T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2015-07-03:/blog/seagate-1tb-st31000528as-720012/</id><summary type="html">&lt;p&gt;Перестал определяться в BIOS &lt;strong&gt;ST31000528AS&lt;/strong&gt; (&lt;code&gt;CC35&lt;/code&gt;) &lt;code&gt;7200.12&lt;/code&gt;, первое что подумал - 1Tb данных пропал безвозвратно, но погуглив, понял, что не все так плохо,
+ как кажется и решил побороться за данные и &lt;strong&gt;HDD&lt;/strong&gt;, и так, подключаемся к &lt;strong&gt;HDD&lt;/strong&gt; через &lt;strong&gt;serial терминал&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="HDD Serial port" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/seagate-1tb-st31000528as-720012/07-03-2015_seagate-1tb-st31000528as-720012/1.jpg"&gt;
+Для подключения использовал &lt;strong&gt;FTDI232&lt;/strong&gt;, в распоряжении был еще &lt;strong&gt;BusPirate&lt;/strong&gt;, но …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Перестал определяться в BIOS &lt;strong&gt;ST31000528AS&lt;/strong&gt; (&lt;code&gt;CC35&lt;/code&gt;) &lt;code&gt;7200.12&lt;/code&gt;, первое что подумал - 1Tb данных пропал безвозвратно, но погуглив, понял, что не все так плохо,
+ как кажется и решил побороться за данные и &lt;strong&gt;HDD&lt;/strong&gt;, и так, подключаемся к &lt;strong&gt;HDD&lt;/strong&gt; через &lt;strong&gt;serial терминал&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="HDD Serial port" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/seagate-1tb-st31000528as-720012/07-03-2015_seagate-1tb-st31000528as-720012/1.jpg"&gt;
+Для подключения использовал &lt;strong&gt;FTDI232&lt;/strong&gt;, в распоряжении был еще &lt;strong&gt;BusPirate&lt;/strong&gt;, но до него дело не дошло, &lt;strong&gt;FTDI232&lt;/strong&gt; справился отлично.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# screen /dev/ttyUSB0 38400&lt;/span&gt;
+Rst 0x20M
+ASCII Diag mode
+
+F3 T&amp;gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Как видно, тут что-то не так &lt;code&gt;Rst 0x20M&lt;/code&gt; - происходит сброс, зайдем в терминал нажатием &lt;kbd&gt;Ctrl+z&lt;/kbd&gt; и попробуем проверить работу электроники и механики путём отключения/включения шпинделя:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;F3 F&amp;gt;Z
+Spin Down Complete
+Elapsed Time &lt;span class="m"&gt;513&lt;/span&gt;.285 msecs 
+F3 F&amp;gt;U
+ HighPowerMode 
+ExecuteSpinRequest
+
+Spin Up Complete
+Elapsed Time &lt;span class="m"&gt;5&lt;/span&gt;.776 secs 
+F3 F&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ошибок не было, значит с большей долей вероятности все живое и функционирует, поиск по интернету показал,
+ что проблема в &lt;strong&gt;SMART&lt;/strong&gt; данных (они хранятся на пластинах диска) - можно попробовать сбросить &lt;strong&gt;SMART&lt;/strong&gt; данные:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;F3 T&amp;gt;/1
+F3 &lt;span class="m"&gt;1&lt;/span&gt;&amp;gt;N1
+Init SMART Fail
+LED:000000CC FAddr:0024EE41
+LED:000000CC FAddr:0024EE41
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;А вот и ошибки, опять же поиск подсказывает, что необходимо форматировать пользовательскую зону с сертификацией, без записи, используя &lt;code&gt;Slip(V1)&lt;/code&gt;-лист, т.е. пересчитать транслятор,
+ пробуем, для этого я отключил кабель питания &lt;strong&gt;HDD&lt;/strong&gt;, дождался остановки шпинделя (почему-то я не отключил его) и включил снова:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# screen /dev/ttyUSB0 38400&lt;/span&gt;
+Rst 0x20M
+ASCII Diag mode
+
+F3 T&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Снова зашел в терминал диска нажатием &lt;kbd&gt;Ctrl+z&lt;/kbd&gt; и попробовал пересчитать транслятор, как рекомендуют на форуме:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;F3 T&amp;gt;V4
+Reassigned Sectors List
+Original     New    log log   log     phy     phy
+    LBA      PBA    cyl  hd  sctr zn  cyl hd  sctr     SFI
+
+         Alt   Pending  Total    Alted  Total
+       Entries Entries Entries    Alts   Alts
+Head &lt;span class="m"&gt;0&lt;/span&gt;              &lt;span class="m"&gt;0&lt;/span&gt;
+Head &lt;span class="m"&gt;1&lt;/span&gt;              &lt;span class="m"&gt;0&lt;/span&gt;
+Head &lt;span class="m"&gt;2&lt;/span&gt;              &lt;span class="m"&gt;0&lt;/span&gt;
+Head &lt;span class="m"&gt;3&lt;/span&gt;              &lt;span class="m"&gt;0&lt;/span&gt;
+Total        &lt;span class="m"&gt;0&lt;/span&gt;      &lt;span class="m"&gt;0&lt;/span&gt;       &lt;span class="m"&gt;0&lt;/span&gt;        &lt;span class="m"&gt;0&lt;/span&gt;      &lt;span class="m"&gt;0&lt;/span&gt;
+Total Alt Removals:    &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;span class="nv"&gt;Checksum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0000&lt;/span&gt;
+
+F3 T&amp;gt;V1
+ User Slip Defect List
+                         log log   log     phys   phys
+    LBA    span   cumm   cyl  hd  sctr zn   cyl   sctr     SFI      PBA
+       &lt;span class="m"&gt;0&lt;/span&gt;      &lt;span class="m"&gt;0&lt;/span&gt;      &lt;span class="m"&gt;0&lt;/span&gt;     &lt;span class="m"&gt;0&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt;     &lt;span class="m"&gt;0&lt;/span&gt;   &lt;span class="m"&gt;0&lt;/span&gt;      &lt;span class="m"&gt;0&lt;/span&gt;     &lt;span class="m"&gt;0&lt;/span&gt;        &lt;span class="m"&gt;4&lt;/span&gt;        &lt;span class="m"&gt;0&lt;/span&gt;
+
+Head &lt;span class="m"&gt;0&lt;/span&gt;: entries      &lt;span class="m"&gt;1&lt;/span&gt;        slips        &lt;span class="m"&gt;0&lt;/span&gt;
+Head &lt;span class="m"&gt;1&lt;/span&gt;: entries      &lt;span class="m"&gt;0&lt;/span&gt;        slips        &lt;span class="m"&gt;0&lt;/span&gt;
+Head &lt;span class="m"&gt;2&lt;/span&gt;: entries      &lt;span class="m"&gt;0&lt;/span&gt;        slips        &lt;span class="m"&gt;0&lt;/span&gt;
+Head &lt;span class="m"&gt;3&lt;/span&gt;: entries      &lt;span class="m"&gt;0&lt;/span&gt;        slips        &lt;span class="m"&gt;0&lt;/span&gt;
+  Total Entries      &lt;span class="m"&gt;1&lt;/span&gt;  Total Slips        &lt;span class="m"&gt;0&lt;/span&gt;
+
+F3 T&amp;gt;m0,2,2,,,,,22
+Max Wr &lt;span class="nv"&gt;Retries&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;00&lt;/span&gt;, Max Rd &lt;span class="nv"&gt;Retries&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;00&lt;/span&gt;, Max ECC T-Level &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;16&lt;/span&gt;, Max Certify Rewrite &lt;span class="nv"&gt;Retries&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 2DF8
+
+User Partition Format Successful - Elapsed Time &lt;span class="m"&gt;0&lt;/span&gt; mins &lt;span class="m"&gt;00&lt;/span&gt; secs
+Zone re-format was skipped.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ошибок не было, все прошло успешно, теперь необходимо обязательно отключить питание &lt;strong&gt;HDD&lt;/strong&gt; и можно пробовать подключать &lt;strong&gt;SATA&lt;/strong&gt; кабель и проверять данные!&lt;/p&gt;
+&lt;p&gt;Итак, после включения диск определился в &lt;strong&gt;BIOS&lt;/strong&gt;, после загрузки ос я увидел все свои данные в целости и сохранности, на всякий случай скопировал оттуда фотографии и видео на другой диск.&lt;/p&gt;
+&lt;p&gt;У меня был еще такой же диск, но с прошивкой поновее &lt;code&gt;CC38&lt;/code&gt;, поэтому я решил обновить её, делается это не так сложно,
+ на &lt;a href="http://knowledge.seagate.com/articles/en_US/FAQ/213891en" title="Barracuda 7200.12 Firmware Update"&gt;сайте производителя [2]&lt;/a&gt; есть необходимый софт,
+ мне очень подошел вариант с &lt;strong&gt;iso&lt;/strong&gt; образом - я загрузился по сети &lt;strong&gt;pxeboot&lt;/strong&gt; и произвел процедуру обновления, она не сложная.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://ab57.ru/hdd.html"&gt;Восстановление работоспособности жесткого диска&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://knowledge.seagate.com/articles/en_US/FAQ/213891en" title="Barracuda 7200.12 Firmware Update"&gt;Barracuda 7200.12 Firmware Update&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.ihdd.ru/forum/viewtopic.php?t=8998"&gt;Maxtor DiamondMax 23 STM3500418AS не определяется в BIOS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://xakep.ru/2014/11/02/exstence-standart-harddisk/"&gt;Расширяем стандартные возможности жесткого диска&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="HDD"></category><category term="Seagate"></category><category term="Recovery"></category><category term="Serial"></category><category term="7200.12"></category></entry></feed>

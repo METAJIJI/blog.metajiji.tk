@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>Мониторинг LSI MegaRAID в Zabbix - For system administrator</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://blog.metajiji.tk/favicon.png" rel="icon">
+
+<link rel="canonical" href="http://blog.metajiji.tk/blog/zabbix-lsi-megaraid/">
+
+        <meta name="author" content="Denis Kadyshev" />
+        <meta name="keywords" content="Zabbix,LSI,Megaraid,Monitoring" />
+        <meta name="description" content="Скрипт мониторит по-умолчанию адаптер 0, т.е. когда в системе только одна плата Raid контроллера (опция -a0), но можно указать конкретный номер адаптера, если это необходимо. Скрипт имеет встроенную справку: # ./lsimegaraid_discovery_trapper.sh help WARNING: Correctly setup &#39;Hostname=&#39; in config is REQUIRED! INFO: Number of array is default 0; Examples: Discovery …" />
+
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/bootstrap.custom.min.css" type="text/css"/>
+    <link href="http://blog.metajiji.tk/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://blog.metajiji.tk/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="http://blog.metajiji.tk/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/style.css" type="text/css"/>
+
+
+        <link href="http://blog.metajiji.tk/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator ATOM Feed"/>
+
+
+
+        <link href="http://blog.metajiji.tk/feeds/zabbix.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator Zabbix ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://blog.metajiji.tk/" class="navbar-brand">
+For system administrator            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/">Blog</a></li>
+                         <li><a href="http://blog.metajiji.tk/about/">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="http://blog.metajiji.tk/archives/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="http://blog.metajiji.tk" title="For system administrator"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="http://blog.metajiji.tk/category/zabbix/" title="Zabbix">Zabbix</a></li>
+                <li class="active">Мониторинг LSI MegaRAID в Zabbix</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://blog.metajiji.tk/blog/zabbix-lsi-megaraid/"
+                       rel="bookmark"
+                       title="Permalink to Мониторинг LSI MegaRAID в Zabbix">
+                        Мониторинг LSI MegaRAID в Zabbix
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-03-16T00:00:00+06:00"> Пн. 16 Март 2015</time>
+    </span>
+          <span class="label label-default">Modified</span>
+            <span class="modified">
+                <i class="fa fa-calendar"></i><time datetime="2015-03-16T00:00:00+06:00"> Пн. 16 Март 2015</time>
+            </span>
+
+
+            <span class="label label-default">By</span>
+            <a href="http://blog.metajiji.tk/author/denis-kadyshev.html"><i class="fa fa-user"></i> Denis Kadyshev</a>
+
+        <span class="label label-default">Category</span>
+        <a href="http://blog.metajiji.tk/category/zabbix/">Zabbix</a>
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://blog.metajiji.tk/tag/zabbix/">Zabbix</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/lsi/">LSI</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/megaraid/">Megaraid</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/monitoring/">Monitoring</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Скрипт мониторит по-умолчанию адаптер <code>0</code>, т.е. когда в системе только одна плата <strong>Raid</strong> контроллера (опция <code>-a0</code>), но можно указать конкретный номер адаптера, если это необходимо.</p>
+<p>Скрипт имеет встроенную справку:</p>
+<div class="highlight"><pre><span></span><span class="c1"># ./lsimegaraid_discovery_trapper.sh help</span>
+WARNING: Correctly setup <span class="s1">&#39;Hostname=&#39;</span> in config is REQUIRED!
+
+INFO: Number of array is default <span class="m">0</span><span class="p">;</span>
+ Examples:
+    Discovery is default action:
+        ./lsimegaraid_discovery_trapper.sh                            - physdiscovery disks <span class="k">for</span> default array <span class="m">0</span>.
+        ./lsimegaraid_discovery_trapper.sh discovery                  - physdiscovery disks <span class="k">for</span> default array <span class="m">0</span>.
+        ./lsimegaraid_discovery_trapper.sh discovery virtdiscovery    - virtdiscovery disks <span class="k">for</span> custom array <span class="m">0</span>.
+        ./lsimegaraid_discovery_trapper.sh discovery virtdiscovery <span class="m">1</span>  - virtdiscovery disks <span class="k">for</span> custom array <span class="m">1</span>.
+        ./lsimegaraid_discovery_trapper.sh discovery physdiscovery <span class="m">1</span>  - physdiscovery disks <span class="k">for</span> custom array <span class="m">1</span>.
+    Data sending to zabbix-server:
+        ./lsimegaraid_discovery_trapper.sh trapper    - send data to zabbix <span class="k">for</span> default array <span class="m">0</span>.
+        ./lsimegaraid_discovery_trapper.sh trapper <span class="m">1</span>  - send data to zabbix <span class="k">for</span> custom array <span class="m">1</span>.
+
+<span class="m">03</span>.2015 - metajiji@gmail.com
+</pre></div>
+
+
+<p>Скрипт поддерживает обнаружение (<code>discovery</code>) виртуальных и физических дисков в слотах. Отправка данных осуществляется через <code>zabbix_sender</code>.</p>
+<p>Установка довольно тривиальна:</p>
+<div class="highlight"><pre><span></span>mkdir /etc/zabbix/scripts
+chown root:zabbix -R /etc/zabbix/scripts
+chmod <span class="m">750</span> /etc/zabbix/scripts
+</pre></div>
+
+
+<p>Код скрипта <code>/etc/zabbix/scripts/lsimegaraid_discovery_trapper.sh</code>:</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="nv">MEGACLI</span><span class="o">=</span><span class="s1">&#39;/usr/local/sbin/MegaCli&#39;</span>
+<span class="nv">ZABBIX_SENDER</span><span class="o">=</span><span class="s1">&#39;/usr/local/bin/zabbix_sender&#39;</span>
+<span class="nv">CONFIG</span><span class="o">=</span><span class="s1">&#39;/etc/zabbix/zabbix_agentd.conf&#39;</span>
+
+usage<span class="o">()</span> <span class="o">{</span>
+    cat <span class="s">&lt;&lt;-_EOF</span>
+<span class="s">    WARNING: Correctly setup &#39;Hostname=&#39; in config is REQUIRED!</span>
+
+<span class="s">    INFO: Number of array is default 0;</span>
+<span class="s">    Examples:</span>
+
+<span class="s">    Discovery is default action:</span>
+<span class="s">        ./$(basename $0)                            - physdiscovery disks for default array 0.</span>
+<span class="s">        ./$(basename $0) discovery                  - physdiscovery disks for default array 0.</span>
+<span class="s">        ./$(basename $0) discovery virtdiscovery    - virtdiscovery disks for custom array 0.</span>
+<span class="s">        ./$(basename $0) discovery virtdiscovery 1  - virtdiscovery disks for custom array 1.</span>
+<span class="s">        ./$(basename $0) discovery physdiscovery 1  - physdiscovery disks for custom array 1.</span>
+
+<span class="s">    Data sending to zabbix-server:</span>
+<span class="s">        ./$(basename $0) trapper    - send data to zabbix for default array 0.</span>
+<span class="s">        ./$(basename $0) trapper 1  - send data to zabbix for custom array 1.</span>
+
+<span class="s">    03.2015 - metajiji@gmail.com</span>
+<span class="s">_EOF</span>
+<span class="o">}</span>
+
+<span class="nv">LC_ALL</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">LANG</span><span class="o">=</span><span class="s2">&quot;en_US.UTF-8&quot;</span>
+
+discovery<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">local</span> <span class="nv">TYPE</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="s1">&#39;physdiscovery&#39;</span><span class="si">}</span>  <span class="c1"># Set Default value to physdiscovery.</span>
+    <span class="nb">local</span> <span class="nv">ARRAY_NUM</span><span class="o">=</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="s1">&#39;0&#39;</span><span class="si">}</span>  <span class="c1"># Default value of array number is 0.</span>
+    <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$TYPE</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;virtdiscovery&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nv">$MEGACLI</span> -LDInfo -LAll -a<span class="nv">$ARRAY_NUM</span> -NoLog <span class="p">|</span> awk <span class="s1">&#39;</span>
+<span class="s1">            BEGIN {</span>
+<span class="s1">                out = &quot;{\n\t\&quot;data\&quot;:[\n&quot;</span>
+<span class="s1">                f = 0</span>
+<span class="s1">            }</span>
+<span class="s1">            /Virtual Drive:/ {</span>
+<span class="s1">                if (f == 1) out = out&quot;,\n&quot;</span>
+<span class="s1">                out=out &quot;\t\t{\&quot;{#VIRTNUM}\&quot;:\&quot;VirtualDrive&quot;$3&quot;\&quot;}&quot;</span>
+<span class="s1">                f = 1</span>
+<span class="s1">            }</span>
+<span class="s1">            END {</span>
+<span class="s1">                if (f == 0) {</span>
+<span class="s1">                print &quot;{}&quot;</span>
+<span class="s1">            } else {</span>
+<span class="s1">                print out&quot;\n\t]\n}&quot;</span>
+<span class="s1">            }</span>
+<span class="s1">        }&#39;</span>
+    <span class="k">elif</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$TYPE</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s1">&#39;physdiscovery&#39;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nv">$MEGACLI</span> -PDlist -a<span class="nv">$ARRAY_NUM</span> -NoLog <span class="p">|</span> awk -F <span class="s1">&#39;: &#39;</span> <span class="s1">&#39;</span>
+<span class="s1">            BEGIN {</span>
+<span class="s1">                out = &quot;{\n\t\&quot;data\&quot;:[\n&quot;</span>
+<span class="s1">                f = 0</span>
+<span class="s1">            }</span>
+<span class="s1">            /Slot Number:/ {</span>
+<span class="s1">                if (f == 1) out = out&quot;,\n&quot;</span>
+<span class="s1">                out=out &quot;\t\t{\&quot;{#PHYSNUM}\&quot;:\&quot;DriveSlot&quot;$2&quot;\&quot;}&quot;</span>
+<span class="s1">                f = 1</span>
+<span class="s1">            }</span>
+<span class="s1">            END {</span>
+<span class="s1">                if (f == 0) {</span>
+<span class="s1">                print &quot;{}&quot;</span>
+<span class="s1">            } else {</span>
+<span class="s1">                print out&quot;\n\t]\n}&quot;</span>
+<span class="s1">            }</span>
+<span class="s1">        }&#39;</span>
+    <span class="k">else</span>
+        &gt;<span class="p">&amp;</span><span class="m">2</span> <span class="nb">echo</span> <span class="s1">&#39;ERROR  : Discovery TYPE &quot;&#39;</span><span class="nv">$TYPE</span><span class="s1">&#39;&quot; is not correct!&#39;</span>
+        <span class="nb">echo</span> <span class="s1">&#39;{}&#39;</span>  <span class="c1"># Return empty json, if TYPE is not correct.</span>
+    <span class="k">fi</span>
+<span class="o">}</span>
+
+trapper<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">local</span> <span class="nv">ARRAY_NUM</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="s1">&#39;0&#39;</span><span class="si">}</span>  <span class="c1"># Default value of array number is 0.</span>
+    <span class="o">(</span><span class="nv">$MEGACLI</span> -PDlist -a<span class="nv">$ARRAY_NUM</span> -NoLog <span class="p">|</span> awk -F<span class="s1">&#39;:&#39;</span> <span class="s1">&#39;</span>
+<span class="s1">        function ltrim(s) {sub(/^[ \t]+/, &quot;&quot;, s);return s}</span>
+<span class="s1">        function rtrim(s) {sub(/[ \t]+$/, &quot;&quot;, s);return s}</span>
+<span class="s1">        function trim(s)  {return rtrim(ltrim(s))}</span>
+<span class="s1">        /Slot Number/              {slotcounter += 1; slot[slotcounter] = trim($2)}</span>
+<span class="s1">        /Firmware state/           {state[slotcounter]        = trim($2)}</span>
+<span class="s1">        /S.M.A.R.T/                {smart[slotcounter]        = trim($2)}</span>
+<span class="s1">        /Inquiry Data/             {inquiry[slotcounter]      = trim($2)}</span>
+<span class="s1">        /Media Error Count/        {mediaerror[slotcounter]   = trim($2)}</span>
+<span class="s1">        /Other Error Count/        {othererror[slotcounter]   = trim($2)}</span>
+<span class="s1">        /Drive Temperature/        {temperature[slotcounter]  = trim($2)}</span>
+<span class="s1">        /Predictive Failure Count/ {failurecount[slotcounter] = trim($2)}</span>
+<span class="s1">        END {</span>
+<span class="s1">            for (i = 1; i &lt;= slotcounter; i += 1) {</span>
+<span class="s1">                printf (&quot;- lsimegaraid.data[DriveSlot%d,state] %s\n&quot;,        slot[i], state[i])</span>
+<span class="s1">                printf (&quot;- lsimegaraid.data[DriveSlot%d,smart] %s\n&quot;,        slot[i], smart[i])</span>
+<span class="s1">                printf (&quot;- lsimegaraid.data[DriveSlot%d,inquiry] %s\n&quot;,      slot[i], inquiry[i])</span>
+<span class="s1">                printf (&quot;- lsimegaraid.data[DriveSlot%d,mediaerror] %d\n&quot;,   slot[i], mediaerror[i])</span>
+<span class="s1">                printf (&quot;- lsimegaraid.data[DriveSlot%d,othererror] %d\n&quot;,   slot[i], othererror[i])</span>
+<span class="s1">                printf (&quot;- lsimegaraid.data[DriveSlot%d,temperature] %d\n&quot;,  slot[i], temperature[i])</span>
+<span class="s1">                printf (&quot;- lsimegaraid.data[DriveSlot%d,failurecount] %d\n&quot;, slot[i], failurecount[i])</span>
+<span class="s1">            }</span>
+<span class="s1">        }&#39;</span><span class="p">;</span> <span class="o">[</span> <span class="nv">$?</span> -gt <span class="m">1</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">&#39;ERROR  : MegaCli failed while getting phusical drives data!&#39;</span> <span class="o">&amp;&amp;</span> <span class="nb">exit</span> <span class="m">1</span>
+
+    <span class="si">${</span><span class="nv">MEGACLI</span><span class="si">}</span> -LDInfo -LAll -a<span class="nv">$ARRAY_NUM</span> -NoLog <span class="p">|</span> awk -F<span class="s1">&#39;:&#39;</span> <span class="s1">&#39;</span>
+<span class="s1">        function ltrim(s) {sub(/^[ \t]+/, &quot;&quot;, s);return s}</span>
+<span class="s1">        function rtrim(s) {sub(/[ \t]+$/, &quot;&quot;, s);return s}</span>
+<span class="s1">        function trim(s)  {return rtrim(ltrim(s))}</span>
+<span class="s1">        /Virtual Drive:/  {drivecounter += 1; slot[drivecounter] = trim($2)}</span>
+<span class="s1">        /State/           {state[drivecounter]    = trim($2)}</span>
+<span class="s1">        /Bad Blocks/      {badblock[drivecounter] = trim($2)}</span>
+<span class="s1">        END {</span>
+<span class="s1">            for (i = 1; i &lt;= drivecounter; i += 1) {</span>
+<span class="s1">                printf (&quot;- lsimegaraid.data[VirtualDrive%d,state] %s\n&quot;, slot[i], state[i])</span>
+<span class="s1">                printf (&quot;- lsimegaraid.data[VirtualDrive%d,badblock] %s\n&quot;, slot[i], badblock[i]?badblock[i]:&quot;Unknown&quot;)</span>
+<span class="s1">            }</span>
+<span class="s1">        }&#39;</span><span class="p">;</span> <span class="o">[</span> <span class="nv">$?</span> -gt <span class="m">1</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s1">&#39;ERROR  : MegaCli failed while getting virtual drives data!&#39;</span> <span class="o">&amp;&amp;</span> <span class="nb">exit</span> <span class="m">1</span>
+    <span class="o">)</span> <span class="p">|</span> <span class="nv">$ZABBIX_SENDER</span> --config <span class="nv">$CONFIG</span> -vv --input-file - &gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+    <span class="o">[</span> <span class="nv">$?</span> -gt <span class="m">1</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="m">0</span> <span class="o">&amp;&amp;</span> <span class="nb">exit</span> <span class="m">1</span>
+    <span class="nb">echo</span> <span class="m">1</span> <span class="c1"># 1 - Ok | 0 - Fail</span>
+<span class="o">}</span>
+
+<span class="k">case</span> <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> in
+    help<span class="p">|</span>usage<span class="p">|</span>-h<span class="p">|</span>--help<span class="o">)</span> usage <span class="p">;;</span>
+    discovery<span class="o">)</span> discovery <span class="nv">$2</span> <span class="nv">$3</span> <span class="p">;;</span>
+    trapper<span class="o">)</span> trapper <span class="nv">$2</span> <span class="p">;;</span>
+    *<span class="o">)</span> discovery <span class="p">;;</span>
+<span class="k">esac</span>
+</pre></div>
+
+
+<p>Установка прав на скрипт:</p>
+<div class="highlight"><pre><span></span>chown root:zabbix /etc/zabbix/scripts/lsimegaraid_discovery_trapper.sh
+chmod <span class="m">750</span> /etc/zabbix/scripts/lsimegaraid_discovery_trapper.sh
+</pre></div>
+
+
+<p>Не забываем про настройки в скрипте, где нужно указать полные пути до необходимых программ и конфигурационных файлов:</p>
+<div class="highlight"><pre><span></span><span class="nv">MEGACLI</span><span class="o">=</span><span class="s1">&#39;/usr/local/sbin/MegaCli&#39;</span>
+<span class="nv">ZABBIX_SENDER</span><span class="o">=</span><span class="s1">&#39;/usr/local/bin/zabbix_sender&#39;</span>
+<span class="nv">CONFIG</span><span class="o">=</span><span class="s1">&#39;/etc/zabbix/zabbix_agentd.conf&#39;</span>
+</pre></div>
+
+
+<p>Конфигурационный файл <code>/etc/zabbix/zabbix_agentd.conf.d/lsimegaraid.conf</code>:</p>
+<div class="highlight"><pre><span></span><span class="nv">UserParameter</span><span class="o">=</span>lsimegaraid.discovery<span class="o">[</span>*<span class="o">]</span>,/usr/local/etc/zabbix24/scripts/lsimegaraid_discovery_trapper.sh <span class="s2">&quot;discovery&quot;</span> <span class="nv">$1</span> <span class="nv">$2</span>
+<span class="nv">UserParameter</span><span class="o">=</span>lsimegaraid.trapper<span class="o">[</span>*<span class="o">]</span>,/usr/local/etc/zabbix24/scripts/lsimegaraid_discovery_trapper.sh <span class="s2">&quot;trapper&quot;</span> <span class="nv">$1</span>
+</pre></div>
+
+
+<p>Шаблон для <strong>zabbix</strong>:</p>
+<div class="highlight"><pre><span></span><span class="nt">&lt;zabbix_export&gt;</span>
+    <span class="nt">&lt;version&gt;</span>2.0<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;date&gt;</span>2015-03-16T07:54:05Z<span class="nt">&lt;/date&gt;</span>
+    <span class="nt">&lt;groups&gt;</span>
+        <span class="nt">&lt;group&gt;</span>
+            <span class="nt">&lt;name&gt;</span>MyTemplates<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;/group&gt;</span>
+    <span class="nt">&lt;/groups&gt;</span>
+    <span class="nt">&lt;templates&gt;</span>
+        <span class="nt">&lt;template&gt;</span>
+            <span class="nt">&lt;template&gt;</span>Template LSIMegaRaid_trapper<span class="nt">&lt;/template&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Template LSIMegaRaid_trapper<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;description/&gt;</span>
+            <span class="nt">&lt;groups&gt;</span>
+                <span class="nt">&lt;group&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>MyTemplates<span class="nt">&lt;/name&gt;</span>
+                <span class="nt">&lt;/group&gt;</span>
+            <span class="nt">&lt;/groups&gt;</span>
+            <span class="nt">&lt;applications&gt;</span>
+                <span class="nt">&lt;application&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>LSI MegaRaid<span class="nt">&lt;/name&gt;</span>
+                <span class="nt">&lt;/application&gt;</span>
+            <span class="nt">&lt;/applications&gt;</span>
+            <span class="nt">&lt;items&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Trapper<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>lsimegaraid.trapper[0]<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>30<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units/&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSI MegaRaid<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                    <span class="nt">&lt;logtimefmt/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+            <span class="nt">&lt;/items&gt;</span>
+            <span class="nt">&lt;discovery_rules&gt;</span>
+                <span class="nt">&lt;discovery_rule&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>LSIMegaRaid: Physical disks slot discovery<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>lsimegaraid.discovery[physdiscovery,0]<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>3600<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;filter&gt;</span>
+                        <span class="nt">&lt;evaltype&gt;</span>0<span class="nt">&lt;/evaltype&gt;</span>
+                        <span class="nt">&lt;formula/&gt;</span>
+                        <span class="nt">&lt;conditions/&gt;</span>
+                    <span class="nt">&lt;/filter&gt;</span>
+                    <span class="nt">&lt;lifetime&gt;</span>30<span class="nt">&lt;/lifetime&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;item_prototypes&gt;</span>
+                        <span class="nt">&lt;item_prototype&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: $1 Firmware State<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                            <span class="nt">&lt;snmp_community/&gt;</span>
+                            <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                            <span class="nt">&lt;snmp_oid/&gt;</span>
+                            <span class="nt">&lt;key&gt;</span>lsimegaraid.data[{#PHYSNUM},state]<span class="nt">&lt;/key&gt;</span>
+                            <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                            <span class="nt">&lt;history&gt;</span>365<span class="nt">&lt;/history&gt;</span>
+                            <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;value_type&gt;</span>4<span class="nt">&lt;/value_type&gt;</span>
+                            <span class="nt">&lt;allowed_hosts/&gt;</span>
+                            <span class="nt">&lt;units/&gt;</span>
+                            <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                            <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                            <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                            <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                            <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                            <span class="nt">&lt;delay_flex/&gt;</span>
+                            <span class="nt">&lt;params/&gt;</span>
+                            <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                            <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                            <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                            <span class="nt">&lt;username/&gt;</span>
+                            <span class="nt">&lt;password/&gt;</span>
+                            <span class="nt">&lt;publickey/&gt;</span>
+                            <span class="nt">&lt;privatekey/&gt;</span>
+                            <span class="nt">&lt;port/&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                            <span class="nt">&lt;applications&gt;</span>
+                                <span class="nt">&lt;application&gt;</span>
+                                    <span class="nt">&lt;name&gt;</span>LSI MegaRaid<span class="nt">&lt;/name&gt;</span>
+                                <span class="nt">&lt;/application&gt;</span>
+                            <span class="nt">&lt;/applications&gt;</span>
+                            <span class="nt">&lt;valuemap/&gt;</span>
+                            <span class="nt">&lt;logtimefmt/&gt;</span>
+                        <span class="nt">&lt;/item_prototype&gt;</span>
+                        <span class="nt">&lt;item_prototype&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: $1 has flagged a S.M.A.R.T alert<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                            <span class="nt">&lt;snmp_community/&gt;</span>
+                            <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                            <span class="nt">&lt;snmp_oid/&gt;</span>
+                            <span class="nt">&lt;key&gt;</span>lsimegaraid.data[{#PHYSNUM},smart]<span class="nt">&lt;/key&gt;</span>
+                            <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                            <span class="nt">&lt;history&gt;</span>365<span class="nt">&lt;/history&gt;</span>
+                            <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;value_type&gt;</span>4<span class="nt">&lt;/value_type&gt;</span>
+                            <span class="nt">&lt;allowed_hosts/&gt;</span>
+                            <span class="nt">&lt;units/&gt;</span>
+                            <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                            <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                            <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                            <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                            <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                            <span class="nt">&lt;delay_flex/&gt;</span>
+                            <span class="nt">&lt;params/&gt;</span>
+                            <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                            <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                            <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                            <span class="nt">&lt;username/&gt;</span>
+                            <span class="nt">&lt;password/&gt;</span>
+                            <span class="nt">&lt;publickey/&gt;</span>
+                            <span class="nt">&lt;privatekey/&gt;</span>
+                            <span class="nt">&lt;port/&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                            <span class="nt">&lt;applications&gt;</span>
+                                <span class="nt">&lt;application&gt;</span>
+                                    <span class="nt">&lt;name&gt;</span>LSI MegaRaid<span class="nt">&lt;/name&gt;</span>
+                                <span class="nt">&lt;/application&gt;</span>
+                            <span class="nt">&lt;/applications&gt;</span>
+                            <span class="nt">&lt;valuemap/&gt;</span>
+                            <span class="nt">&lt;logtimefmt/&gt;</span>
+                        <span class="nt">&lt;/item_prototype&gt;</span>
+                        <span class="nt">&lt;item_prototype&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: $1 Inquiry Data<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                            <span class="nt">&lt;snmp_community/&gt;</span>
+                            <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                            <span class="nt">&lt;snmp_oid/&gt;</span>
+                            <span class="nt">&lt;key&gt;</span>lsimegaraid.data[{#PHYSNUM},inquiry]<span class="nt">&lt;/key&gt;</span>
+                            <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                            <span class="nt">&lt;history&gt;</span>365<span class="nt">&lt;/history&gt;</span>
+                            <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;value_type&gt;</span>4<span class="nt">&lt;/value_type&gt;</span>
+                            <span class="nt">&lt;allowed_hosts/&gt;</span>
+                            <span class="nt">&lt;units/&gt;</span>
+                            <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                            <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                            <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                            <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                            <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                            <span class="nt">&lt;delay_flex/&gt;</span>
+                            <span class="nt">&lt;params/&gt;</span>
+                            <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                            <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                            <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                            <span class="nt">&lt;username/&gt;</span>
+                            <span class="nt">&lt;password/&gt;</span>
+                            <span class="nt">&lt;publickey/&gt;</span>
+                            <span class="nt">&lt;privatekey/&gt;</span>
+                            <span class="nt">&lt;port/&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                            <span class="nt">&lt;applications&gt;</span>
+                                <span class="nt">&lt;application&gt;</span>
+                                    <span class="nt">&lt;name&gt;</span>LSI MegaRaid<span class="nt">&lt;/name&gt;</span>
+                                <span class="nt">&lt;/application&gt;</span>
+                            <span class="nt">&lt;/applications&gt;</span>
+                            <span class="nt">&lt;valuemap/&gt;</span>
+                            <span class="nt">&lt;logtimefmt/&gt;</span>
+                        <span class="nt">&lt;/item_prototype&gt;</span>
+                        <span class="nt">&lt;item_prototype&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: $1 Media Error Count<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                            <span class="nt">&lt;snmp_community/&gt;</span>
+                            <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                            <span class="nt">&lt;snmp_oid/&gt;</span>
+                            <span class="nt">&lt;key&gt;</span>lsimegaraid.data[{#PHYSNUM},mediaerror]<span class="nt">&lt;/key&gt;</span>
+                            <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                            <span class="nt">&lt;history&gt;</span>7<span class="nt">&lt;/history&gt;</span>
+                            <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                            <span class="nt">&lt;allowed_hosts/&gt;</span>
+                            <span class="nt">&lt;units/&gt;</span>
+                            <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                            <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                            <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                            <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                            <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                            <span class="nt">&lt;delay_flex/&gt;</span>
+                            <span class="nt">&lt;params/&gt;</span>
+                            <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                            <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                            <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                            <span class="nt">&lt;username/&gt;</span>
+                            <span class="nt">&lt;password/&gt;</span>
+                            <span class="nt">&lt;publickey/&gt;</span>
+                            <span class="nt">&lt;privatekey/&gt;</span>
+                            <span class="nt">&lt;port/&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                            <span class="nt">&lt;applications&gt;</span>
+                                <span class="nt">&lt;application&gt;</span>
+                                    <span class="nt">&lt;name&gt;</span>LSI MegaRaid<span class="nt">&lt;/name&gt;</span>
+                                <span class="nt">&lt;/application&gt;</span>
+                            <span class="nt">&lt;/applications&gt;</span>
+                            <span class="nt">&lt;valuemap/&gt;</span>
+                            <span class="nt">&lt;logtimefmt/&gt;</span>
+                        <span class="nt">&lt;/item_prototype&gt;</span>
+                        <span class="nt">&lt;item_prototype&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: $1 Other Error Count<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                            <span class="nt">&lt;snmp_community/&gt;</span>
+                            <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                            <span class="nt">&lt;snmp_oid/&gt;</span>
+                            <span class="nt">&lt;key&gt;</span>lsimegaraid.data[{#PHYSNUM},othererror]<span class="nt">&lt;/key&gt;</span>
+                            <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                            <span class="nt">&lt;history&gt;</span>7<span class="nt">&lt;/history&gt;</span>
+                            <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                            <span class="nt">&lt;allowed_hosts/&gt;</span>
+                            <span class="nt">&lt;units/&gt;</span>
+                            <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                            <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                            <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                            <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                            <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                            <span class="nt">&lt;delay_flex/&gt;</span>
+                            <span class="nt">&lt;params/&gt;</span>
+                            <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                            <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                            <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                            <span class="nt">&lt;username/&gt;</span>
+                            <span class="nt">&lt;password/&gt;</span>
+                            <span class="nt">&lt;publickey/&gt;</span>
+                            <span class="nt">&lt;privatekey/&gt;</span>
+                            <span class="nt">&lt;port/&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                            <span class="nt">&lt;applications&gt;</span>
+                                <span class="nt">&lt;application&gt;</span>
+                                    <span class="nt">&lt;name&gt;</span>LSI MegaRaid<span class="nt">&lt;/name&gt;</span>
+                                <span class="nt">&lt;/application&gt;</span>
+                            <span class="nt">&lt;/applications&gt;</span>
+                            <span class="nt">&lt;valuemap/&gt;</span>
+                            <span class="nt">&lt;logtimefmt/&gt;</span>
+                        <span class="nt">&lt;/item_prototype&gt;</span>
+                        <span class="nt">&lt;item_prototype&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: $1 Predictive Failure Count<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                            <span class="nt">&lt;snmp_community/&gt;</span>
+                            <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                            <span class="nt">&lt;snmp_oid/&gt;</span>
+                            <span class="nt">&lt;key&gt;</span>lsimegaraid.data[{#PHYSNUM},failurecount]<span class="nt">&lt;/key&gt;</span>
+                            <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                            <span class="nt">&lt;history&gt;</span>7<span class="nt">&lt;/history&gt;</span>
+                            <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                            <span class="nt">&lt;allowed_hosts/&gt;</span>
+                            <span class="nt">&lt;units/&gt;</span>
+                            <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                            <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                            <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                            <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                            <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                            <span class="nt">&lt;delay_flex/&gt;</span>
+                            <span class="nt">&lt;params/&gt;</span>
+                            <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                            <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                            <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                            <span class="nt">&lt;username/&gt;</span>
+                            <span class="nt">&lt;password/&gt;</span>
+                            <span class="nt">&lt;publickey/&gt;</span>
+                            <span class="nt">&lt;privatekey/&gt;</span>
+                            <span class="nt">&lt;port/&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                            <span class="nt">&lt;applications&gt;</span>
+                                <span class="nt">&lt;application&gt;</span>
+                                    <span class="nt">&lt;name&gt;</span>LSI MegaRaid<span class="nt">&lt;/name&gt;</span>
+                                <span class="nt">&lt;/application&gt;</span>
+                            <span class="nt">&lt;/applications&gt;</span>
+                            <span class="nt">&lt;valuemap/&gt;</span>
+                            <span class="nt">&lt;logtimefmt/&gt;</span>
+                        <span class="nt">&lt;/item_prototype&gt;</span>
+                        <span class="nt">&lt;item_prototype&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: $1 Temperature<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                            <span class="nt">&lt;snmp_community/&gt;</span>
+                            <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                            <span class="nt">&lt;snmp_oid/&gt;</span>
+                            <span class="nt">&lt;key&gt;</span>lsimegaraid.data[{#PHYSNUM},temperature]<span class="nt">&lt;/key&gt;</span>
+                            <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                            <span class="nt">&lt;history&gt;</span>7<span class="nt">&lt;/history&gt;</span>
+                            <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                            <span class="nt">&lt;allowed_hosts/&gt;</span>
+                            <span class="nt">&lt;units&gt;</span>C<span class="nt">&lt;/units&gt;</span>
+                            <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                            <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                            <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                            <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                            <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                            <span class="nt">&lt;delay_flex/&gt;</span>
+                            <span class="nt">&lt;params/&gt;</span>
+                            <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                            <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                            <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                            <span class="nt">&lt;username/&gt;</span>
+                            <span class="nt">&lt;password/&gt;</span>
+                            <span class="nt">&lt;publickey/&gt;</span>
+                            <span class="nt">&lt;privatekey/&gt;</span>
+                            <span class="nt">&lt;port/&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                            <span class="nt">&lt;applications&gt;</span>
+                                <span class="nt">&lt;application&gt;</span>
+                                    <span class="nt">&lt;name&gt;</span>LSI MegaRaid<span class="nt">&lt;/name&gt;</span>
+                                <span class="nt">&lt;/application&gt;</span>
+                            <span class="nt">&lt;/applications&gt;</span>
+                            <span class="nt">&lt;valuemap/&gt;</span>
+                            <span class="nt">&lt;logtimefmt/&gt;</span>
+                        <span class="nt">&lt;/item_prototype&gt;</span>
+                    <span class="nt">&lt;/item_prototypes&gt;</span>
+                    <span class="nt">&lt;trigger_prototypes&gt;</span>
+                        <span class="nt">&lt;trigger_prototype&gt;</span>
+                            <span class="nt">&lt;expression&gt;</span>{Template LSIMegaRaid_trapper:lsimegaraid.data[{#PHYSNUM},smart].str(No)}=0<span class="nt">&lt;/expression&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: {#PHYSNUM} has flagged a S.M.A.R.T alert on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;url/&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;priority&gt;</span>5<span class="nt">&lt;/priority&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                        <span class="nt">&lt;/trigger_prototype&gt;</span>
+                        <span class="nt">&lt;trigger_prototype&gt;</span>
+                            <span class="nt">&lt;expression&gt;</span>{Template LSIMegaRaid_trapper:lsimegaraid.data[{#PHYSNUM},inquiry].diff(0)}<span class="ni">&amp;gt;</span>0<span class="nt">&lt;/expression&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: {#PHYSNUM} inquiry data changed on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;url/&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;priority&gt;</span>1<span class="nt">&lt;/priority&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                        <span class="nt">&lt;/trigger_prototype&gt;</span>
+                        <span class="nt">&lt;trigger_prototype&gt;</span>
+                            <span class="nt">&lt;expression&gt;</span>{Template LSIMegaRaid_trapper:lsimegaraid.data[{#PHYSNUM},mediaerror].last(0)}<span class="ni">&amp;gt;</span>0<span class="nt">&lt;/expression&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: {#PHYSNUM} Media Error Count on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;url/&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;priority&gt;</span>5<span class="nt">&lt;/priority&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                        <span class="nt">&lt;/trigger_prototype&gt;</span>
+                        <span class="nt">&lt;trigger_prototype&gt;</span>
+                            <span class="nt">&lt;expression&gt;</span>{Template LSIMegaRaid_trapper:lsimegaraid.data[{#PHYSNUM},othererror].last(0)}<span class="ni">&amp;gt;</span>0<span class="nt">&lt;/expression&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: {#PHYSNUM} Other Error Count on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;url/&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;priority&gt;</span>5<span class="nt">&lt;/priority&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                        <span class="nt">&lt;/trigger_prototype&gt;</span>
+                        <span class="nt">&lt;trigger_prototype&gt;</span>
+                            <span class="nt">&lt;expression&gt;</span>{Template LSIMegaRaid_trapper:lsimegaraid.data[{#PHYSNUM},failurecount].last(0)}<span class="ni">&amp;gt;</span>0<span class="nt">&lt;/expression&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: {#PHYSNUM} Predictive Failure Count on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;url/&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;priority&gt;</span>5<span class="nt">&lt;/priority&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                        <span class="nt">&lt;/trigger_prototype&gt;</span>
+                        <span class="nt">&lt;trigger_prototype&gt;</span>
+                            <span class="nt">&lt;expression&gt;</span>{Template LSIMegaRaid_trapper:lsimegaraid.data[{#PHYSNUM},state].str(Online)}=0<span class="nt">&lt;/expression&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: {#PHYSNUM} state is not online on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;url/&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;priority&gt;</span>5<span class="nt">&lt;/priority&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                        <span class="nt">&lt;/trigger_prototype&gt;</span>
+                        <span class="nt">&lt;trigger_prototype&gt;</span>
+                            <span class="nt">&lt;expression&gt;</span>{Template LSIMegaRaid_trapper:lsimegaraid.data[{#PHYSNUM},temperature].last(0)}<span class="ni">&amp;gt;</span>45<span class="nt">&lt;/expression&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: {#PHYSNUM} temperature is high on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;url/&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;priority&gt;</span>4<span class="nt">&lt;/priority&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                        <span class="nt">&lt;/trigger_prototype&gt;</span>
+                        <span class="nt">&lt;trigger_prototype&gt;</span>
+                            <span class="nt">&lt;expression&gt;</span>{Template LSIMegaRaid_trapper:lsimegaraid.data[{#PHYSNUM},temperature].last(0)}<span class="ni">&amp;gt;</span>49<span class="nt">&lt;/expression&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: {#PHYSNUM} temperature is very high on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;url/&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;priority&gt;</span>5<span class="nt">&lt;/priority&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                        <span class="nt">&lt;/trigger_prototype&gt;</span>
+                    <span class="nt">&lt;/trigger_prototypes&gt;</span>
+                    <span class="nt">&lt;graph_prototypes/&gt;</span>
+                    <span class="nt">&lt;host_prototypes/&gt;</span>
+                <span class="nt">&lt;/discovery_rule&gt;</span>
+                <span class="nt">&lt;discovery_rule&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>LSIMegaRaid: Virtual disks discovery<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>lsimegaraid.discovery[virtdiscovery,0]<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>3600<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;filter&gt;</span>
+                        <span class="nt">&lt;evaltype&gt;</span>0<span class="nt">&lt;/evaltype&gt;</span>
+                        <span class="nt">&lt;formula/&gt;</span>
+                        <span class="nt">&lt;conditions/&gt;</span>
+                    <span class="nt">&lt;/filter&gt;</span>
+                    <span class="nt">&lt;lifetime&gt;</span>30<span class="nt">&lt;/lifetime&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;item_prototypes&gt;</span>
+                        <span class="nt">&lt;item_prototype&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: $1 Bad Blocks Exist<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                            <span class="nt">&lt;snmp_community/&gt;</span>
+                            <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                            <span class="nt">&lt;snmp_oid/&gt;</span>
+                            <span class="nt">&lt;key&gt;</span>lsimegaraid.data[{#VIRTNUM},badblock]<span class="nt">&lt;/key&gt;</span>
+                            <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                            <span class="nt">&lt;history&gt;</span>365<span class="nt">&lt;/history&gt;</span>
+                            <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;value_type&gt;</span>1<span class="nt">&lt;/value_type&gt;</span>
+                            <span class="nt">&lt;allowed_hosts/&gt;</span>
+                            <span class="nt">&lt;units/&gt;</span>
+                            <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                            <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                            <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                            <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                            <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                            <span class="nt">&lt;delay_flex/&gt;</span>
+                            <span class="nt">&lt;params/&gt;</span>
+                            <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                            <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                            <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                            <span class="nt">&lt;username/&gt;</span>
+                            <span class="nt">&lt;password/&gt;</span>
+                            <span class="nt">&lt;publickey/&gt;</span>
+                            <span class="nt">&lt;privatekey/&gt;</span>
+                            <span class="nt">&lt;port/&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                            <span class="nt">&lt;applications&gt;</span>
+                                <span class="nt">&lt;application&gt;</span>
+                                    <span class="nt">&lt;name&gt;</span>LSI MegaRaid<span class="nt">&lt;/name&gt;</span>
+                                <span class="nt">&lt;/application&gt;</span>
+                            <span class="nt">&lt;/applications&gt;</span>
+                            <span class="nt">&lt;valuemap/&gt;</span>
+                            <span class="nt">&lt;logtimefmt/&gt;</span>
+                        <span class="nt">&lt;/item_prototype&gt;</span>
+                        <span class="nt">&lt;item_prototype&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: $1 State<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                            <span class="nt">&lt;snmp_community/&gt;</span>
+                            <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                            <span class="nt">&lt;snmp_oid/&gt;</span>
+                            <span class="nt">&lt;key&gt;</span>lsimegaraid.data[{#VIRTNUM},state]<span class="nt">&lt;/key&gt;</span>
+                            <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                            <span class="nt">&lt;history&gt;</span>365<span class="nt">&lt;/history&gt;</span>
+                            <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;value_type&gt;</span>1<span class="nt">&lt;/value_type&gt;</span>
+                            <span class="nt">&lt;allowed_hosts/&gt;</span>
+                            <span class="nt">&lt;units/&gt;</span>
+                            <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                            <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                            <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                            <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                            <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                            <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                            <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                            <span class="nt">&lt;delay_flex/&gt;</span>
+                            <span class="nt">&lt;params/&gt;</span>
+                            <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                            <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                            <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                            <span class="nt">&lt;username/&gt;</span>
+                            <span class="nt">&lt;password/&gt;</span>
+                            <span class="nt">&lt;publickey/&gt;</span>
+                            <span class="nt">&lt;privatekey/&gt;</span>
+                            <span class="nt">&lt;port/&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                            <span class="nt">&lt;applications&gt;</span>
+                                <span class="nt">&lt;application&gt;</span>
+                                    <span class="nt">&lt;name&gt;</span>LSI MegaRaid<span class="nt">&lt;/name&gt;</span>
+                                <span class="nt">&lt;/application&gt;</span>
+                            <span class="nt">&lt;/applications&gt;</span>
+                            <span class="nt">&lt;valuemap/&gt;</span>
+                            <span class="nt">&lt;logtimefmt/&gt;</span>
+                        <span class="nt">&lt;/item_prototype&gt;</span>
+                    <span class="nt">&lt;/item_prototypes&gt;</span>
+                    <span class="nt">&lt;trigger_prototypes&gt;</span>
+                        <span class="nt">&lt;trigger_prototype&gt;</span>
+                            <span class="nt">&lt;expression&gt;</span>{Template LSIMegaRaid_trapper:lsimegaraid.data[{#VIRTNUM},badblock].str(No)}=0<span class="nt">&lt;/expression&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: {#VIRTNUM} Bad Blocks Exist on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;url/&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;priority&gt;</span>5<span class="nt">&lt;/priority&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                        <span class="nt">&lt;/trigger_prototype&gt;</span>
+                        <span class="nt">&lt;trigger_prototype&gt;</span>
+                            <span class="nt">&lt;expression&gt;</span>{Template LSIMegaRaid_trapper:lsimegaraid.data[{#VIRTNUM},state].str(Optimal)}=0<span class="nt">&lt;/expression&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>LSIMegaRaid: {#VIRTNUM} state is not optimal on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+                            <span class="nt">&lt;url/&gt;</span>
+                            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                            <span class="nt">&lt;priority&gt;</span>5<span class="nt">&lt;/priority&gt;</span>
+                            <span class="nt">&lt;description/&gt;</span>
+                            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                        <span class="nt">&lt;/trigger_prototype&gt;</span>
+                    <span class="nt">&lt;/trigger_prototypes&gt;</span>
+                    <span class="nt">&lt;graph_prototypes/&gt;</span>
+                    <span class="nt">&lt;host_prototypes/&gt;</span>
+                <span class="nt">&lt;/discovery_rule&gt;</span>
+            <span class="nt">&lt;/discovery_rules&gt;</span>
+            <span class="nt">&lt;macros/&gt;</span>
+            <span class="nt">&lt;templates/&gt;</span>
+            <span class="nt">&lt;screens/&gt;</span>
+        <span class="nt">&lt;/template&gt;</span>
+    <span class="nt">&lt;/templates&gt;</span>
+<span class="nt">&lt;/zabbix_export&gt;</span>
+</pre></div>
+
+
+<hr>
+<p>Ссылки по теме:</p>
+<ol>
+<li><a href="http://wiki.enchtex.info/howto/zabbix/zabbix_megaraid_monitoring">Мониторинг LSI MegaRAID в Zabbix</a></li>
+<li><a href="https://ru.intel.com/business/community/?automodule=blog&amp;blogid=44433&amp;showentry=2452">Мониторинг состояния HDD в RAID контроллере LSI MegaRAID под Linux, средствами Nagios.</a></li>
+<li><a href="https://odesk.by/archives/1922">Intel Raid Controller RS2BL040 Slow Performance – BBU problems.</a></li>
+<li><a href="https://twiki.cern.ch/twiki/bin/view/FIOgroup/DiskRefPerc">Perc RAID Controllers</a></li>
+<li><a href="https://community.mcafee.com/docs/DOC-5318">Adding a Hard Drive back into RAID on a Web Gateway 5000 or 5500 Intel based Appliance</a></li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://blog.metajiji.tk/blog/zabbix-in-linux/">zabbix in linux</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/zabbix-tcp-connections/">Zabbix: TCP connections</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/zabbix-supervisord/">Zabbix: supervisord автообнаружение программ и мониторинг статуса.</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/freebsd_asterisk-18-snmp-zabbix/">Asterisk 1.8 и статистика по SNMP в zabbix</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/zabbix-nginx-status/">zabbix: мониторинг nginx status</a></li>
+    </ul>
+</section>
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+                var disqus_url = 'http://blog.metajiji.tk/blog/zabbix-lsi-megaraid/';
+
+            var disqus_config = function () {
+                this.language = "ru";
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/METAJIJI/"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://stackoverflow.com/users/2020443/metajiji"><i class="fa fa-stack-overflow fa-lg"></i> stackoverflow</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/fedora-chromium-firefox-flashplayer/">Fedora 25 install adobe flashplayer</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/atlassian/"><i class="fa fa-folder-open fa-lg"></i>Atlassian</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bash/"><i class="fa fa-folder-open fa-lg"></i>Bash</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bat-cmd/"><i class="fa fa-folder-open fa-lg"></i>Bat-cmd</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bind/"><i class="fa fa-folder-open fa-lg"></i>Bind</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/blog/"><i class="fa fa-folder-open fa-lg"></i>Blog</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/centos/"><i class="fa fa-folder-open fa-lg"></i>CentOS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/docker/"><i class="fa fa-folder-open fa-lg"></i>Docker</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/fedora/"><i class="fa fa-folder-open fa-lg"></i>Fedora</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/freebsd/"><i class="fa fa-folder-open fa-lg"></i>FreeBSD</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/gitlab/"><i class="fa fa-folder-open fa-lg"></i>Gitlab</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/hardware/"><i class="fa fa-folder-open fa-lg"></i>Hardware</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/javascript/"><i class="fa fa-folder-open fa-lg"></i>JavaScript</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/linux/"><i class="fa fa-folder-open fa-lg"></i>Linux</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/macosx/"><i class="fa fa-folder-open fa-lg"></i>MacOSX</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/mikrotik/"><i class="fa fa-folder-open fa-lg"></i>Mikrotik</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/postgresql/"><i class="fa fa-folder-open fa-lg"></i>PostgreSQL</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/ubuntu/"><i class="fa fa-folder-open fa-lg"></i>Ubuntu</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/vcs/"><i class="fa fa-folder-open fa-lg"></i>VCS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/windows/"><i class="fa fa-folder-open fa-lg"></i>Windows</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zabbix/"><i class="fa fa-folder-open fa-lg"></i>Zabbix</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zimbra/"><i class="fa fa-folder-open fa-lg"></i>Zimbra</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 Denis Kadyshev
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://blog.metajiji.tk/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://blog.metajiji.tk/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://blog.metajiji.tk/theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+    <!-- Google Analytics Universal -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106896103-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics Universal Code -->
+
+
+</body>
+</html>

@@ -1,0 +1,1034 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - Ubuntu</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/ubuntu.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2015-12-30T00:00:00+06:00</updated><entry><title>Ubuntu add-architecture i386 ia32-libs</title><link href="http://blog.metajiji.tk/blog/ubuntu-add-architecture-i386-ia32-libs/" rel="alternate"></link><published>2015-12-30T00:00:00+06:00</published><updated>2015-12-30T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2015-12-30:/blog/ubuntu-add-architecture-i386-ia32-libs/</id><summary type="html">&lt;p&gt;В частности при попытке выполнить в командной строке файл, предназначенный для &lt;code&gt;32-х&lt;/code&gt; битной системы, может возникать ошибка вида:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./somefile: Нет такого файла или каталога &lt;span class="o"&gt;(&lt;/span&gt;No such file or directory&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Чтобы &lt;code&gt;32-х&lt;/code&gt; битные приложения могли запускаться в &lt;code&gt;64-х&lt;/code&gt; битной системе &lt;strong&gt;Linux&lt;/strong&gt; нужно установить соответствующие библиотеки, например для &lt;strong&gt;Ubuntu 14.04&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;В частности при попытке выполнить в командной строке файл, предназначенный для &lt;code&gt;32-х&lt;/code&gt; битной системы, может возникать ошибка вида:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./somefile: Нет такого файла или каталога &lt;span class="o"&gt;(&lt;/span&gt;No such file or directory&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Чтобы &lt;code&gt;32-х&lt;/code&gt; битные приложения могли запускаться в &lt;code&gt;64-х&lt;/code&gt; битной системе &lt;strong&gt;Linux&lt;/strong&gt; нужно установить соответствующие библиотеки, например для &lt;strong&gt;Ubuntu 14.04&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dpkg --add-architecture i386
+sudo apt-get update
+sudo apt-get install lib32z1 lib32ncurses5 lib32bz2-1.0
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Удаление в обратном порядке:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo dpkg --remove-architecture i386
+sudo apt-get update
+sudo apt-get purge lib32z1 lib32ncurses5 lib32bz2-1.0
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://askubuntu.com/questions/107230/what-happened-to-the-ia32-libs-package"&gt;Multiarch: What happened to the ia32-libs package?&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Ubuntu"></category><category term="Linux"></category><category term="dpkg"></category><category term="architecture"></category><category term="add-architecture"></category><category term="i386"></category><category term="ia32-libs"></category></entry><entry><title>Ubuntu prevent open thunderbird mailto links, xdg-open, xdg-mime, xdg-mail</title><link href="http://blog.metajiji.tk/blog/ubuntu-prevent-open-thunderbird-mailto-links/" rel="alternate"></link><published>2015-12-18T00:00:00+06:00</published><updated>2015-12-18T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2015-12-18:/blog/ubuntu-prevent-open-thunderbird-mailto-links/</id><summary type="html">&lt;p&gt;Люблю выделять/копировать пароли/строки текста тройным ли двойным кликом мышки, но есть проблема со словами в которых есть символ &lt;code&gt;@&lt;/code&gt;,
+ &lt;strong&gt;Ubuntu&lt;/strong&gt; распознает это как &lt;code&gt;email&lt;/code&gt; адрес и запускает &lt;strong&gt;Thunderbird&lt;/strong&gt;, что не желательно, недолго &lt;s&gt;погуглив рамблером в яндексе&lt;/s&gt; нашел такой хак:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo sed -i &lt;span class="s1"&gt;&amp;#39;2 i exit 0&amp;#39;&lt;/span&gt; /usr/bin/xdg-email …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Люблю выделять/копировать пароли/строки текста тройным ли двойным кликом мышки, но есть проблема со словами в которых есть символ &lt;code&gt;@&lt;/code&gt;,
+ &lt;strong&gt;Ubuntu&lt;/strong&gt; распознает это как &lt;code&gt;email&lt;/code&gt; адрес и запускает &lt;strong&gt;Thunderbird&lt;/strong&gt;, что не желательно, недолго &lt;s&gt;погуглив рамблером в яндексе&lt;/s&gt; нашел такой хак:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo sed -i &lt;span class="s1"&gt;&amp;#39;2 i exit 0&amp;#39;&lt;/span&gt; /usr/bin/xdg-email
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Как легально отключить это поведение, через пользовательские настройки пока не нашел и остановился на этом варианте.&lt;/p&gt;</content><category term="Linux"></category><category term="Ubuntu"></category><category term="xdg-open"></category><category term="xdg-mime"></category><category term="xdg-mail"></category><category term="mail to links"></category><category term="thunderbird"></category></entry><entry><title>Ubuntu 14.04 LTS php5-fpm reload logrotate</title><link href="http://blog.metajiji.tk/blog/ubuntu-1404-lts-php5-fpm-reload/" rel="alternate"></link><published>2015-08-04T00:00:00+06:00</published><updated>2015-08-04T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2015-08-04:/blog/ubuntu-1404-lts-php5-fpm-reload/</id><summary type="html">&lt;p&gt;При установке &lt;code&gt;php-fpm&lt;/code&gt; под &lt;strong&gt;Ubuntu 14.04&lt;/strong&gt; обнаружились проблемы с логами, не работала ротация, а так же не работал &lt;code&gt;reload&lt;/code&gt; демона, демон завершал &lt;code&gt;master&lt;/code&gt; процесс,
+ при этом оставляя свои дочерние процессы, в следствие чего дальнейшая работа с &lt;code&gt;php-fpm&lt;/code&gt; становилась невозможной, без ручной остановки каждого процесса &lt;code&gt;php-fpm&lt;/code&gt; и последующим запуском,
+ в …&lt;/p&gt;</summary><content type="html">&lt;p&gt;При установке &lt;code&gt;php-fpm&lt;/code&gt; под &lt;strong&gt;Ubuntu 14.04&lt;/strong&gt; обнаружились проблемы с логами, не работала ротация, а так же не работал &lt;code&gt;reload&lt;/code&gt; демона, демон завершал &lt;code&gt;master&lt;/code&gt; процесс,
+ при этом оставляя свои дочерние процессы, в следствие чего дальнейшая работа с &lt;code&gt;php-fpm&lt;/code&gt; становилась невозможной, без ручной остановки каждого процесса &lt;code&gt;php-fpm&lt;/code&gt; и последующим запуском,
+ в общем надоело это безобразие, решил навести порядок.&lt;/p&gt;
+&lt;p&gt;Создаем папку для логов:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir /var/log/php5-fpm
+chmod &lt;span class="m"&gt;777&lt;/span&gt; /var/log/php5-fpm
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;chmod 777&lt;/code&gt; сделан намерено, потому, что у меня &lt;code&gt;php-fpm&lt;/code&gt; пулы запускаются от разных пользователей и от разных групп.&lt;/p&gt;
+&lt;p&gt;Затем переложим лог ошибок &lt;code&gt;php-fpm&lt;/code&gt; в созданную только что папку с логами, для этого в файле: &lt;code&gt;/etc/php5/fpm/php-fpm.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;error_log&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /var/log/php5-fpm/error.log
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Теперь займемся правильной ротацией логов, файл &lt;code&gt;/etc/logrotate.d/php5-fpm&lt;/code&gt; к такому виду:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/var/log/php5-fpm/*.log &lt;span class="o"&gt;{&lt;/span&gt;
+        rotate &lt;span class="m"&gt;5&lt;/span&gt;
+&lt;span class="c1"&gt;#       weekly  # Не стоит терять логи, обнуляя файл раз в неделю!&lt;/span&gt;
+        size 1k
+        missingok
+        notifempty
+        compress
+        delaycompress
+        postrotate
+                &lt;span class="c1"&gt;# http://stackoverflow.com/questions/19998526/ubuntu-php5-fpm-throws-unknown-instance-on-reload&lt;/span&gt;
+                &lt;span class="c1"&gt;# The original reload command did never work&lt;/span&gt;
+                &lt;span class="c1"&gt;#invoke-rc.d php5-fpm reopen-logs &amp;gt; /dev/null&lt;/span&gt;
+
+                &lt;span class="c1"&gt;# Workaround for cases when the reload command fails for some reason&lt;/span&gt;
+                service php5-fpm reload &amp;gt; /dev/null &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt;&lt;span class="p"&gt;&amp;amp;&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+                &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$?&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt; service php5-fpm stop&lt;span class="p"&gt;;&lt;/span&gt; killall php5-fpm&lt;span class="p"&gt;;&lt;/span&gt; service php5-fpm start &lt;span class="o"&gt;)&lt;/span&gt; &amp;gt; /dev/null
+        endscript
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Так же рекомендую привести в порядок логи каждого пула например для пула &lt;code&gt;www&lt;/code&gt; в файле &lt;code&gt;/etc/php5/fpm/pool.d/www.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;access.log &lt;span class="o"&gt;=&lt;/span&gt; /var/log/php5-fpm/&lt;span class="nv"&gt;$pool&lt;/span&gt;-access.log
+&lt;span class="nv"&gt;slowlog&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /var/log/php5-fpm/&lt;span class="nv"&gt;$pool&lt;/span&gt;-slow.log
+php_admin_value&lt;span class="o"&gt;[&lt;/span&gt;error_log&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; /var/log/php5-fpm/&lt;span class="nv"&gt;$pool&lt;/span&gt;-error.log
+php_admin_flag&lt;span class="o"&gt;[&lt;/span&gt;log_errors&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; on
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Обратите внимание в имени файла используется переменная &lt;code&gt;$pool&lt;/code&gt;, которая позволяет избавиться от рутины, прописывания имени пула в каждой строчке в каждом пуле.&lt;/p&gt;
+&lt;p&gt;Теперь решим проблему с &lt;code&gt;reload&lt;/code&gt; и с удобным хранением &lt;code&gt;php-fpm&lt;/code&gt; пулов приводим файл &lt;code&gt;/etc/init/php5-fpm.conf&lt;/code&gt; к такому виду:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# php5-fpm - The PHP FastCGI Process Manager&lt;/span&gt;
+
+description &lt;span class="s2"&gt;&amp;quot;The PHP FastCGI Process Manager&amp;quot;&lt;/span&gt;
+author &lt;span class="s2"&gt;&amp;quot;Ondřej Surý &amp;lt;ondrej@debian.org&amp;gt;&amp;quot;&lt;/span&gt;
+
+start on runlevel &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2345&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+stop on runlevel &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;016&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Precise upstart does not support reload signal, and thus rejects the&lt;/span&gt;
+&lt;span class="c1"&gt;# job. We&amp;#39;d rather start the daemon, instead of forcing users to&lt;/span&gt;
+&lt;span class="c1"&gt;# reboot https://bugs.launchpad.net/ubuntu/+source/php5/+bug/1272788&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+reload signal USR2
+
+pre-start script
+        &lt;span class="o"&gt;[&lt;/span&gt; -d /var/run/php5-fpm &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; install -m &lt;span class="m"&gt;777&lt;/span&gt; -o www-data -g root -d /var/run/php5-fpm
+        /usr/lib/php5/php5-fpm-checkconf
+end script
+
+respawn
+&lt;span class="nb"&gt;exec&lt;/span&gt; /usr/sbin/php5-fpm --nodaemonize --fpm-config /etc/php5/fpm/php-fpm.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Для применения изменений в &lt;code&gt;upstart&lt;/code&gt;, необходимо выполнить команды, &lt;a href="auto-create-dir-var-run-php5-fpm.html" title="Автоматическое создание директории /var/run/php5-fpm после перезагрузки"&gt; подробнее [2]&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;root@Ubuntu# initctl reload-configuration
+root@Ubuntu# initctl stop php5-fpm
+initctl: Unknown instance: 
+root@Ubuntu# initctl start php5-fpm
+php5-fpm start/running, process &lt;span class="m"&gt;18467&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В файле &lt;code&gt;/etc/init.d/php5-fpm&lt;/code&gt;, добавим вверху, после переменной &lt;code&gt;SCRIPTNAME&lt;/code&gt; строчку:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;SOCKETDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/var/run/&lt;span class="nv"&gt;$NAME&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;А затем, внутри функции &lt;code&gt;do_start() {&lt;/code&gt; добавим еще одну строчку:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt; -d &lt;span class="nv"&gt;$SOCKETDIR&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; install -m &lt;span class="m"&gt;777&lt;/span&gt; -o www-data -g root -d &lt;span class="nv"&gt;$SOCKETDIR&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;-m 777&lt;/code&gt; я указал намеренно, как я уже упоминал ранее, у меня &lt;code&gt;php-fpm&lt;/code&gt; пулы запускаются от разных &lt;code&gt;uid:gid&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Итак после всего этого:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Сокеты пулов лежат в ожидаемом месте: &lt;code&gt;/var/run/php5-fpm/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Логи пулов, и лог ошибок демона &lt;code&gt;php-fpm&lt;/code&gt; в: &lt;code&gt;/var/log/php5-fpm/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Логи не обнуляются раз в неделю, а ротация логов производится при достижении &lt;strong&gt;размера&lt;/strong&gt; файла в &lt;code&gt;1Кб&lt;/code&gt; и главное она &lt;strong&gt;работает&lt;/strong&gt;!&lt;/li&gt;
+&lt;li&gt;Команда &lt;code&gt;service php5-fpm reload&lt;/code&gt; теперь ничего не ломает и работает корректно.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://stackoverflow.com/questions/19998526/ubuntu-php5-fpm-throws-unknown-instance-on-reload"&gt;Ubuntu php5-fpm throws unknown instance on reload&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="auto-create-dir-var-run-php5-fpm.html" title="Автоматическое создание директории /var/run/php5-fpm после перезагрузки"&gt;Автоматическое создание директории &lt;code&gt;/var/run/php5-fpm&lt;/code&gt; после перезагрузки&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Ubuntu"></category><category term="Linux"></category><category term="php-fpm"></category><category term="php5-fpm"></category><category term="reload"></category></entry><entry><title>Ubuntu красивый motd при подключении по ssh.</title><link href="http://blog.metajiji.tk/blog/ubuntu-motd-ssh/" rel="alternate"></link><published>2015-08-03T00:00:00+06:00</published><updated>2015-08-03T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2015-08-03:/blog/ubuntu-motd-ssh/</id><summary type="html">&lt;p&gt;При подключении по ssh к Ubuntu серверу, при установленном пакете: &lt;code&gt;update-notifier-common&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt-get install update-notifier-common
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В &lt;code&gt;motd&lt;/code&gt; будет добавлено примерно следующее:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="m"&gt;12&lt;/span&gt; packages can be updated.
+&lt;span class="m"&gt;0&lt;/span&gt; updates are security updates.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Но не все так гладко, ценой за это будет небольшая задержка при подключении...&lt;/p&gt;
+&lt;p&gt;Есть приятные полезности, например, если вызывать скрипт …&lt;/p&gt;</summary><content type="html">&lt;p&gt;При подключении по ssh к Ubuntu серверу, при установленном пакете: &lt;code&gt;update-notifier-common&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt-get install update-notifier-common
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В &lt;code&gt;motd&lt;/code&gt; будет добавлено примерно следующее:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="m"&gt;12&lt;/span&gt; packages can be updated.
+&lt;span class="m"&gt;0&lt;/span&gt; updates are security updates.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Но не все так гладко, ценой за это будет небольшая задержка при подключении...&lt;/p&gt;
+&lt;p&gt;Есть приятные полезности, например, если вызывать скрипт напрямую, то он выдаст информацию о доступных обновлениях, которую можно использовать где угодно в своих целях.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;/usr/lib/update-notifier/apt-check
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Результат команды будет примерно таким &lt;code&gt;12;0&lt;/code&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Где цифры до &lt;code&gt;;&lt;/code&gt; - количество доступных пакетов для обновления в моем случае &lt;code&gt;12&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;А после &lt;code&gt;;&lt;/code&gt; - количество пакетов обновления безопасности.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Кому этого мало, то можно еще установить пакет &lt;code&gt;landscape-common&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt-get install landscape-common
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Этот пакет выдаст более подробную информацию о сервера, но при условии, что сервер не сильно загружен и в чрезвычайной ситуации этот скрипт не помешает админу подключаться по &lt;code&gt;ssh&lt;/code&gt;.&lt;/p&gt;</content><category term="Ubuntu"></category><category term="motd"></category><category term="ssh"></category></entry><entry><title>Ubuntu 14.04: Ускоряем работу Dash</title><link href="http://blog.metajiji.tk/blog/ubuntu-1404-dash-boost/" rel="alternate"></link><published>2015-07-24T00:00:00+06:00</published><updated>2015-07-24T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2015-07-24:/blog/ubuntu-1404-dash-boost/</id><summary type="html">&lt;p&gt;На мой взгляд &lt;strong&gt;Unity Dash&lt;/strong&gt; в &lt;strong&gt;Ubuntu&lt;/strong&gt; перегружен лишним функционалом, например искать файлы удобнее в &lt;strong&gt;Nautilus&lt;/strong&gt;, а приложения, доступные для установки лучше искать в &lt;strong&gt;Software Center&lt;/strong&gt;,
+ и самое важное выполнять онлайн поиск лучше в браузере. А вот установленные приложения вполне удобно искать в &lt;strong&gt;Dash&lt;/strong&gt;.
+Скрипт ниже выключает онлайн поиск и …&lt;/p&gt;</summary><content type="html">&lt;p&gt;На мой взгляд &lt;strong&gt;Unity Dash&lt;/strong&gt; в &lt;strong&gt;Ubuntu&lt;/strong&gt; перегружен лишним функционалом, например искать файлы удобнее в &lt;strong&gt;Nautilus&lt;/strong&gt;, а приложения, доступные для установки лучше искать в &lt;strong&gt;Software Center&lt;/strong&gt;,
+ и самое важное выполнять онлайн поиск лучше в браузере. А вот установленные приложения вполне удобно искать в &lt;strong&gt;Dash&lt;/strong&gt;.
+Скрипт ниже выключает онлайн поиск и все линзы, кроме установленных приложений.&lt;/p&gt;
+&lt;p&gt;Код скрипта &lt;code&gt;disable_all_scopes_enable_listed.sh&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="k"&gt;$(&lt;/span&gt;id -u&lt;span class="k"&gt;)&lt;/span&gt; -eq &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Please run from NOT root user!&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Delete unwanted packages.&lt;/span&gt;
+sudo apt-get purge -y unity-lens-shopping unity-lens-friends unity-scope-video-remote unity-lens-music unity-lens-photos unity-webapps-common
+
+&lt;span class="c1"&gt;# Disable online search.&lt;/span&gt;
+gsettings &lt;span class="nb"&gt;set&lt;/span&gt; com.canonical.Unity.Lenses remote-content-search none
+
+&lt;span class="c1"&gt;# Manually remove the link from dash.&lt;/span&gt;
+sudo rm /usr/share/applications/ubuntu-amazon-default.desktop
+
+get_application&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+ find /usr/share/unity/scopes/ &lt;span class="se"&gt;\(&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+   -name &lt;span class="s2"&gt;&amp;quot;*.scope&amp;quot;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+   -not -name &lt;span class="s1"&gt;&amp;#39;applications.scope&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+  &lt;span class="se"&gt;\)&lt;/span&gt; -printf &lt;span class="s2"&gt;&amp;quot;&amp;#39;%P&amp;#39;,&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sed &lt;span class="s1"&gt;&amp;#39;s/\//-/g;s/,$//&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Disabling the scopes.&lt;/span&gt;
+gsettings &lt;span class="nb"&gt;set&lt;/span&gt; com.canonical.Unity.Lenses disabled-scopes &lt;span class="s2"&gt;&amp;quot;[&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;get_application&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;]&amp;quot;&lt;/span&gt;
+gsettings get com.canonical.Unity.Lenses disabled-scopes
+
+gsettings &lt;span class="nb"&gt;set&lt;/span&gt; com.canonical.Unity.Lenses always-search &lt;span class="s2"&gt;&amp;quot;[&amp;#39;applications.scope&amp;#39;]&amp;quot;&lt;/span&gt;
+gsettings &lt;span class="nb"&gt;set&lt;/span&gt; com.canonical.Unity.Dash scopes &lt;span class="s2"&gt;&amp;quot;[&amp;#39;home.scope&amp;#39;, &amp;#39;applications.scope&amp;#39;]&amp;quot;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Disable available apps.&lt;/span&gt;
+gsettings &lt;span class="nb"&gt;set&lt;/span&gt; com.canonical.Unity.ApplicationsLens display-available-apps &lt;span class="s2"&gt;&amp;quot;false&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Посмотреть что еще можно покрутить в &lt;strong&gt;Unity&lt;/strong&gt; на свой вкус можно простой командой:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gsettings list-recursively &lt;span class="p"&gt;|&lt;/span&gt; grep Unity
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Названия опций и их значения вполне интуитивно понятные, можно быстро разобраться что к чему.&lt;/p&gt;
+&lt;p&gt;Например отключить показ доступных приложений:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gsettings &lt;span class="nb"&gt;set&lt;/span&gt; com.canonical.Unity.ApplicationsLens display-available-apps &lt;span class="s2"&gt;&amp;quot;false&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Проверить результат можно так:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gsettings get com.canonical.Unity.ApplicationsLens display-available-apps
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Сбросить настройки на дефолт можно например так:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gsettings reset-recursively com.canonical.Unity.Dash
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://askubuntu.com/questions/192269/how-can-i-remove-amazon-search-results-from-the-dash-or-disable-the-feature"&gt;How can I remove Amazon search results from the dash or disable the feature?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.helplinux.ru/wiki/en:kb:make-ubuntu-safe"&gt;Remove unsafe packages from Ubuntu&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Ubuntu"></category><category term="Linux"></category><category term="Dash"></category><category term="Unity"></category></entry><entry><title>Ubuntu 14.04 Rhythmbox перестал реагировать на кнопки в indicator-sound</title><link href="http://blog.metajiji.tk/blog/ubuntu-1404-rhythmbox-indicator-sound/" rel="alternate"></link><published>2015-06-15T00:00:00+06:00</published><updated>2015-06-15T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2015-06-15:/blog/ubuntu-1404-rhythmbox-indicator-sound/</id><summary type="html">&lt;p&gt;Столкнулся с проблемой, перестал работать индикатор звука в &lt;strong&gt;Ubuntu 14.04&lt;/strong&gt;, а именно кнопка &lt;strong&gt;Play/Pause&lt;/strong&gt; в &lt;strong&gt;Rhythmbox&lt;/strong&gt;, поискал в интернете подобные проблемы и кое-что нашел:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gdbus call --session --dest org.mpris.MediaPlayer2.rhythmbox --object-path /org/mpris/MediaPlayer2 --method org.freedesktop.DBus.Properties.GetAll &lt;span class="s1"&gt;&amp;#39;org.mpris.MediaPlayer2.Player&amp;#39;&lt;/span&gt;
+Ошибка: GDBus …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Столкнулся с проблемой, перестал работать индикатор звука в &lt;strong&gt;Ubuntu 14.04&lt;/strong&gt;, а именно кнопка &lt;strong&gt;Play/Pause&lt;/strong&gt; в &lt;strong&gt;Rhythmbox&lt;/strong&gt;, поискал в интернете подобные проблемы и кое-что нашел:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ gdbus call --session --dest org.mpris.MediaPlayer2.rhythmbox --object-path /org/mpris/MediaPlayer2 --method org.freedesktop.DBus.Properties.GetAll &lt;span class="s1"&gt;&amp;#39;org.mpris.MediaPlayer2.Player&amp;#39;&lt;/span&gt;
+Ошибка: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.mpris.MediaPlayer2.rhythmbox was not provided by any .service files
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Как оказалось, я копался в плагинах &lt;strong&gt;Rhythmbox&lt;/strong&gt; и отключил &lt;code&gt;Интерфейс MPRIS D-Bus&lt;/code&gt;, не зная для чего он, но теперь я узнал &lt;a href="https://bugs.launchpad.net/ubuntu/+source/indicator-sound/+bug/1245495" title="Rhythmbox controls and track info broken"&gt;зачем он нужен из [2]&lt;/a&gt; и включил, после чего индикатор заработал в штатном режиме.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://askubuntu.com/questions/481713/vlc-sound-menu-integration-broken-14-04"&gt;vlc sound menu integration broken 14.04&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://bugs.launchpad.net/ubuntu/+source/indicator-sound/+bug/1245495" title="Rhythmbox controls and track info broken"&gt;Rhythmbox controls and track info broken&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Ubuntu"></category><category term="Linux"></category><category term="Rhythmbox"></category><category term="D-Bus"></category><category term="indicator-sound"></category></entry><entry><title>Wireshark не видит сетевой интерфейс в Ubuntu</title><link href="http://blog.metajiji.tk/blog/wireshark-ubuntu/" rel="alternate"></link><published>2014-07-30T00:00:00+07:00</published><updated>2014-07-30T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-07-30:/blog/wireshark-ubuntu/</id><summary type="html">&lt;p&gt;По умолчанию &lt;code&gt;wireshark&lt;/code&gt; запускается с правами пользователя и не видит сетевые интерфейсы, использование данной возможности влияет на безопасность, поэтому приходится запускать от &lt;code&gt;root&lt;/code&gt;.
+ Если сомневаетесь, то используйте запуск &lt;code&gt;wireshark&lt;/code&gt; от &lt;code&gt;root&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Dumpcap&lt;/code&gt; можно установить таким образом, что члены группы &lt;code&gt;wireshark&lt;/code&gt; смогут захватывать пакеты - это более рекомендуемый способ захвата пакетов с …&lt;/p&gt;</summary><content type="html">&lt;p&gt;По умолчанию &lt;code&gt;wireshark&lt;/code&gt; запускается с правами пользователя и не видит сетевые интерфейсы, использование данной возможности влияет на безопасность, поэтому приходится запускать от &lt;code&gt;root&lt;/code&gt;.
+ Если сомневаетесь, то используйте запуск &lt;code&gt;wireshark&lt;/code&gt; от &lt;code&gt;root&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Dumpcap&lt;/code&gt; можно установить таким образом, что члены группы &lt;code&gt;wireshark&lt;/code&gt; смогут захватывать пакеты - это более рекомендуемый способ захвата пакетов с помощью &lt;strong&gt;Wireshark&lt;/strong&gt;/&lt;strong&gt;Tshark&lt;/strong&gt;,
+ чем запуск самого &lt;strong&gt;Wireshark&lt;/strong&gt;/&lt;strong&gt;Tshark&lt;/strong&gt; с правами &lt;code&gt;root&lt;/code&gt;, так как это позволяет выполнять почти весь код с меньшими правами.&lt;/p&gt;
+&lt;p&gt;Чтобы &lt;strong&gt;Wireshark&lt;/strong&gt; начал видеть интерфейсы нужно разрешить группе &lt;code&gt;wireshark&lt;/code&gt; использовать &lt;code&gt;Dumpcap&lt;/code&gt;,
+ для этого настраиваем пакет &lt;code&gt;wireshark-common&lt;/code&gt; и добавляем своего пользователя в группу &lt;code&gt;wireshark&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dpkg-reconfigure wireshark-common
+usermod -aG wireshark &lt;span class="nv"&gt;$USER&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://toster.ru/q/111581"&gt;Toster: Wireshark не видит сетевой интерфейс в Ubuntu 14.04, что делать?&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="Ubuntu"></category><category term="Wireshark"></category><category term="dumpcap"></category><category term="usermod"></category></entry><entry><title>Ubuntu 14.04 и Windows zip архивы - исправляем проблему с кодировками.</title><link href="http://blog.metajiji.tk/blog/ubuntu-1404-windows-zip-fix-codepage/" rel="alternate"></link><published>2014-06-20T00:00:00+07:00</published><updated>2014-06-20T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-06-20:/blog/ubuntu-1404-windows-zip-fix-codepage/</id><summary type="html">&lt;p&gt;Исправляем проблему с &lt;code&gt;zip&lt;/code&gt; архивами между &lt;strong&gt;Ubuntu 14.04&lt;/strong&gt; и &lt;strong&gt;Windows&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo add-apt-repository ppa:frol/zip-i18n
+sudo sed -i&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;s/trusty/precise/g&amp;#39;&lt;/span&gt; /etc/apt/sources.list.d/frol-zip-i18n-trusty.list
+sudo apt-get update
+sudo apt-get install zip unzip p7zip-full
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В добавляемом репозитории пока нет пакетов для &lt;strong&gt;Ubuntu 14.04&lt;/strong&gt; (&lt;strong&gt;trusty …&lt;/strong&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Исправляем проблему с &lt;code&gt;zip&lt;/code&gt; архивами между &lt;strong&gt;Ubuntu 14.04&lt;/strong&gt; и &lt;strong&gt;Windows&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo add-apt-repository ppa:frol/zip-i18n
+sudo sed -i&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;s/trusty/precise/g&amp;#39;&lt;/span&gt; /etc/apt/sources.list.d/frol-zip-i18n-trusty.list
+sudo apt-get update
+sudo apt-get install zip unzip p7zip-full
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В добавляемом репозитории пока нет пакетов для &lt;strong&gt;Ubuntu 14.04&lt;/strong&gt; (&lt;strong&gt;trusty&lt;/strong&gt;), но есть для &lt;strong&gt;Ubuntu 12.04&lt;/strong&gt; (&lt;strong&gt;precise&lt;/strong&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sed&lt;/code&gt;'ом вручную переключаемся на ветку &lt;strong&gt;precise&lt;/strong&gt; - пакеты совместимы с &lt;strong&gt;trusty&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Должны будут установиться пакеты &lt;code&gt;libnatspec0&lt;/code&gt; и &lt;code&gt;p7zip-full&lt;/code&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://launchpad.net/~frol/+archive/ubuntu/zip-i18n"&gt;Zip/unzip internationalization PPA&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Ubuntu"></category><category term="Linux"></category><category term="zip"></category><category term="codepage"></category><category term="cp866"></category><category term="dos-866"></category><category term="1251"></category><category term="cp1251"></category><category term="windows-1251"></category><category term="utf-8"></category><category term="utf8"></category></entry><entry><title>Remmina - ошибка "Невозможно подключиться к серверу RDP" при подключении к windows</title><link href="http://blog.metajiji.tk/blog/remmina-rdp-windows/" rel="alternate"></link><published>2014-06-08T00:00:00+07:00</published><updated>2014-06-08T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-06-08:/blog/remmina-rdp-windows/</id><summary type="html">&lt;p&gt;Перестала подключатся &lt;strong&gt;Remmina&lt;/strong&gt; по &lt;strong&gt;RDP&lt;/strong&gt;, пишет &lt;code&gt;Невозможно подключиться к серверу RDP&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Решилось все просто, &lt;strong&gt;Remmina&lt;/strong&gt; использует &lt;code&gt;freerdp&lt;/code&gt; для работы по протоколу &lt;strong&gt;RDP&lt;/strong&gt;, и все хосты добавляются в файл &lt;code&gt;~/.freerdp/known_hosts&lt;/code&gt;,
+ наподобие как в &lt;code&gt;ssh&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Проблема аналогичная как и в &lt;code&gt;ssh&lt;/code&gt; - если сменился ключ/сертификат - значит невозможно подключиться к серверу - в …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Перестала подключатся &lt;strong&gt;Remmina&lt;/strong&gt; по &lt;strong&gt;RDP&lt;/strong&gt;, пишет &lt;code&gt;Невозможно подключиться к серверу RDP&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Решилось все просто, &lt;strong&gt;Remmina&lt;/strong&gt; использует &lt;code&gt;freerdp&lt;/code&gt; для работы по протоколу &lt;strong&gt;RDP&lt;/strong&gt;, и все хосты добавляются в файл &lt;code&gt;~/.freerdp/known_hosts&lt;/code&gt;,
+ наподобие как в &lt;code&gt;ssh&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Проблема аналогичная как и в &lt;code&gt;ssh&lt;/code&gt; - если сменился ключ/сертификат - значит невозможно подключиться к серверу - в &lt;code&gt;ssh&lt;/code&gt; нам рекомендуют удалить
+ запись о сервере куда подключаемся из файла &lt;code&gt;known_hosts&lt;/code&gt;, аналогично делаем и с &lt;code&gt;freerdp&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mcedit ~/.freerdp/known_hosts
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Формат записей аналогичный - 1 строка - 1 сервер. Удаляем нужную нам запись, сохраняем файл и подключаемся.&lt;/p&gt;</content><category term="Linux"></category><category term="Ubuntu"></category><category term="Remmina"></category><category term="RDP"></category></entry><entry><title>Автоматическое создание директории /var/run/php5-fpm после перезагрузки</title><link href="http://blog.metajiji.tk/blog/auto-create-dir-var-run-php5-fpm/" rel="alternate"></link><published>2014-05-21T00:00:00+07:00</published><updated>2014-10-15T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-05-21:/blog/auto-create-dir-var-run-php5-fpm/</id><summary type="html">&lt;p&gt;После установки &lt;code&gt;php-fpm&lt;/code&gt;, иногда бывает удобно хранить все его сокеты в отдельной папке, например &lt;code&gt;/var/run/php5-fpm&lt;/code&gt;,
+ но если вручную создать такую папку, то после перезагрузки система ее удаляет, а в логе можно увидеть типа:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ERROR: unable to &lt;span class="nb"&gt;bind&lt;/span&gt; listening socket &lt;span class="k"&gt;for&lt;/span&gt; address &lt;span class="s1"&gt;&amp;#39;/var/run/php5-fpm/default.sock&amp;#39;&lt;/span&gt;: No such …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;После установки &lt;code&gt;php-fpm&lt;/code&gt;, иногда бывает удобно хранить все его сокеты в отдельной папке, например &lt;code&gt;/var/run/php5-fpm&lt;/code&gt;,
+ но если вручную создать такую папку, то после перезагрузки система ее удаляет, а в логе можно увидеть типа:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ERROR: unable to &lt;span class="nb"&gt;bind&lt;/span&gt; listening socket &lt;span class="k"&gt;for&lt;/span&gt; address &lt;span class="s1"&gt;&amp;#39;/var/run/php5-fpm/default.sock&amp;#39;&lt;/span&gt;: No such file or directory.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Это связано с тем, что &lt;code&gt;/var/run&lt;/code&gt; монтируется с опцией &lt;code&gt;--bind&lt;/code&gt; из &lt;a href="http://www.opennet.ru/opennews/art.shtml?num=30080" title="30.03.2011 18:55  В Fedora и других Linux-дистрибутивах появится директория /run"&gt;&lt;code&gt;/run&lt;/code&gt; [1]&lt;/a&gt;, где файловая система &lt;code&gt;tmpfs&lt;/code&gt;, логично, что после перезагрузки все, что создавал пользователь - удаляется!
+ Но не проблема, значит перед запуском демона, нужно проверять, существует ли каталог, если нет, то создавать.&lt;/p&gt;
+&lt;p&gt;Для решения данной проблемы нужно отредактировать &lt;strong&gt;init-скрипт&lt;/strong&gt; &lt;code&gt;/etc/init.d/php5-fpm&lt;/code&gt;, добавив вверху, после переменной &lt;code&gt;SCRIPTNAME&lt;/code&gt; строчку:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;SOCKETDIR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/var/run/&lt;span class="nv"&gt;$NAME&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;А затем, под &lt;code&gt;do_start() {&lt;/code&gt; добавить еще одну строчку:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt; -d &lt;span class="nv"&gt;$SOCKETDIR&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; install -m &lt;span class="m"&gt;777&lt;/span&gt; -o www-data -g root -d &lt;span class="nv"&gt;$SOCKETDIR&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;-m 777&lt;/code&gt; я указал намеренно, т.к. у меня &lt;code&gt;fpm пулы&lt;/code&gt; запускаются от разных &lt;code&gt;uid:gid&lt;/code&gt;, если у вас все пулы работают от 1 пользователя, то можете указать &lt;code&gt;-m 755&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Теперь, при запуске &lt;code&gt;php-fpm&lt;/code&gt; демона, каталог с сокетами в &lt;code&gt;/var/run&lt;/code&gt; будет создаваться автоматически.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;UPDATE:&lt;/strong&gt; 15.10.2014&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Для тех кто пользуется &lt;code&gt;upstart&lt;/code&gt;, приводим файл &lt;code&gt;/etc/init/php5-fpm.conf&lt;/code&gt; к такому виду:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# php5-fpm - The PHP FastCGI Process Manager&lt;/span&gt;
+
+description &lt;span class="s2"&gt;&amp;quot;The PHP FastCGI Process Manager&amp;quot;&lt;/span&gt;
+author &lt;span class="s2"&gt;&amp;quot;Ondřej Surý &amp;lt;ondrej@debian.org&amp;gt;&amp;quot;&lt;/span&gt;
+
+start on runlevel &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;2345&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+stop on runlevel &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;016&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Precise upstart does not support reload signal, and thus rejects the&lt;/span&gt;
+&lt;span class="c1"&gt;# job. We&amp;#39;d rather start the daemon, instead of forcing users to&lt;/span&gt;
+&lt;span class="c1"&gt;# reboot https://bugs.launchpad.net/ubuntu/+source/php5/+bug/1272788&lt;/span&gt;
+&lt;span class="c1"&gt;#&lt;/span&gt;
+&lt;span class="c1"&gt;# reload signal USR2&lt;/span&gt;
+
+pre-start script
+    &lt;span class="o"&gt;[&lt;/span&gt; -d /var/run/php5-fpm &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; install -m &lt;span class="m"&gt;777&lt;/span&gt; -o www-data -g root -d /var/run/php5-fpm
+    /usr/lib/php5/php5-fpm-checkconf
+end script
+
+respawn
+&lt;span class="nb"&gt;exec&lt;/span&gt; /usr/sbin/php5-fpm --nodaemonize --fpm-config /etc/php5/fpm/php-fpm.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Изменился блок &lt;code&gt;pre-start&lt;/code&gt;, теперь там &lt;code&gt;script&lt;/code&gt;, в котором собственно и стоит проверка каталога &lt;code&gt;/var/run/php5-fpm&lt;/code&gt;, идея подсмотрена в &lt;code&gt;/etc/init/mysql.conf&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Для применения изменений в &lt;code&gt;upstart&lt;/code&gt; скрипты, необходимо выполнить команды:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;root@Ubuntu# initctl reload-configuration
+root@Ubuntu# initctl stop php5-fpm
+initctl: Unknown instance: 
+root@Ubuntu# initctl start php5-fpm
+php5-fpm start/running, process &lt;span class="m"&gt;18467&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Обязательно &lt;code&gt;stop&lt;/code&gt; (если был запущен демон &lt;code&gt;php5-fpm&lt;/code&gt;), а затем &lt;code&gt;start&lt;/code&gt;. Если демон &lt;code&gt;php-fpm&lt;/code&gt; не был запущен, то &lt;code&gt;restart&lt;/code&gt; скажет вам &lt;code&gt;initctl: Unknown instance:&lt;/code&gt;" и не запустит демона.
+ Так что лучше сперва &lt;code&gt;stop&lt;/code&gt; и затем &lt;code&gt;start&lt;/code&gt; - это избавит от лишних раздумий, как устроена система &lt;code&gt;upstart&lt;/code&gt; и почему &lt;code&gt;restart&lt;/code&gt; не запускает демона.&lt;/p&gt;
+&lt;p&gt;Логи запуска через &lt;code&gt;upstart&lt;/code&gt; можно подглядеть в &lt;code&gt;dmesg&lt;/code&gt;, &lt;code&gt;/var/log/upstart/php5-fpm.log&lt;/code&gt;.
+P.S. команды &lt;code&gt;service php5-fpm start&lt;/code&gt; будут обработаны &lt;code&gt;upstart&lt;/code&gt;, а &lt;code&gt;init.d&lt;/code&gt; скрипты проигнорированы, так вот запутано все в &lt;strong&gt;Ubuntu&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://www.opennet.ru/opennews/art.shtml?num=30080" title="30.03.2011 18:55  В Fedora и других Linux-дистрибутивах появится директория /run"&gt;Opennet.ru: В Fedora и других Linux-дистрибутивах появится директория /run&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://aione.ru/sozdanie-direktorii-var-run-php5-fpm-posle-perezagruzki/"&gt;Создание директории /var/run/php5-fpm после перезагрузки&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="Ubuntu"></category><category term="upstart"></category><category term="php-fpm"></category><category term="php5-fpm"></category></entry><entry><title>Скрипт для исправления проблем в Ubuntu GRUB в 1 клик.</title><link href="http://blog.metajiji.tk/blog/ubuntu-fix-all-grub-bugs-in-one-script/" rel="alternate"></link><published>2014-05-09T00:00:00+07:00</published><updated>2014-05-09T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-05-09:/blog/ubuntu-fix-all-grub-bugs-in-one-script/</id><summary type="html">&lt;p&gt;Скрипт для исправления проблем в &lt;strong&gt;GRUB&lt;/strong&gt; в 1 клик. Возможно применение в автоматизированных скриптах.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+load_default_grub&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    . /etc/default/grub
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+get_yes_no&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; -n &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt; (Y/N) ? &amp;quot;&lt;/span&gt;
+        &lt;span class="nb"&gt;read&lt;/span&gt; a
+        &lt;span class="nb"&gt;echo&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$?&lt;/span&gt; !&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+            &lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;No&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;fi&lt;/span&gt;
+        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="nv"&gt;$a&lt;/span&gt; in
+            &lt;span class="o"&gt;[&lt;/span&gt;Yy&lt;span class="o"&gt;][&lt;/span&gt;Ee&lt;span class="o"&gt;][&lt;/span&gt;Ss&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;Yy&lt;span class="o"&gt;])&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Yes&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;;&lt;/span&gt;
+            &lt;span class="o"&gt;[&lt;/span&gt;Nn …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Скрипт для исправления проблем в &lt;strong&gt;GRUB&lt;/strong&gt; в 1 клик. Возможно применение в автоматизированных скриптах.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+load_default_grub&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    . /etc/default/grub
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+get_yes_no&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; -n &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt; (Y/N) ? &amp;quot;&lt;/span&gt;
+        &lt;span class="nb"&gt;read&lt;/span&gt; a
+        &lt;span class="nb"&gt;echo&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$?&lt;/span&gt; !&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+            &lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;No&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;fi&lt;/span&gt;
+        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="nv"&gt;$a&lt;/span&gt; in
+            &lt;span class="o"&gt;[&lt;/span&gt;Yy&lt;span class="o"&gt;][&lt;/span&gt;Ee&lt;span class="o"&gt;][&lt;/span&gt;Ss&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;Yy&lt;span class="o"&gt;])&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Yes&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;;&lt;/span&gt;
+            &lt;span class="o"&gt;[&lt;/span&gt;Nn&lt;span class="o"&gt;][&lt;/span&gt;Oo&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;Nn&lt;span class="o"&gt;])&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;No&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="p"&gt;;;&lt;/span&gt;
+            *&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+        &lt;span class="k"&gt;esac&lt;/span&gt;
+    &lt;span class="k"&gt;done&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Load config and uncomment variable.&lt;/span&gt;
+load_default_grub
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;grep -qwai &lt;span class="s1"&gt;&amp;#39;^#GRUB_DISABLE_RECOVERY=&amp;#39;&lt;/span&gt; /etc/default/grub &amp;gt;/dev/null&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;INFO: Uncomment the GRUB_DISABLE_RECOVERY variable.&amp;#39;&lt;/span&gt;
+    sed -i &lt;span class="s1"&gt;&amp;#39;s/^#GRUB_DISABLE_RECOVERY=\(.*\)/GRUB_DISABLE_RECOVERY=\1/&amp;#39;&lt;/span&gt; /etc/default/grub
+&lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;span class="c1"&gt;# Load config again, check value and set if need.&lt;/span&gt;
+load_default_grub
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$GRUB_DISABLE_RECOVERY&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; !&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;true&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -z &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$GRUB_DISABLE_RECOVERY&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;INFO: Add GRUB_DISABLE_RECOVERY=&amp;quot;true&amp;quot;&amp;#39;&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;GRUB_DISABLE_RECOVERY=&amp;quot;true&amp;quot;&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /etc/default/grub
+    &lt;span class="k"&gt;else&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;INFO: Set GRUB_DISABLE_RECOVERY to &amp;quot;true&amp;quot;&amp;#39;&lt;/span&gt;
+        sed -i &lt;span class="s1"&gt;&amp;#39;s/^GRUB_DISABLE_RECOVERY=.*/GRUB_DISABLE_RECOVERY=&amp;quot;true&amp;quot;/&amp;#39;&lt;/span&gt; /etc/default/grub
+    &lt;span class="k"&gt;fi&lt;/span&gt;
+&lt;span class="k"&gt;fi&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Delete deprecated options GRUB_HIDDEN_TIMEOUT*.&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;grep -qwai &lt;span class="s1"&gt;&amp;#39;^GRUB_HIDDEN_TIMEOUT.*&amp;#39;&lt;/span&gt; /etc/default/grub &amp;gt;/dev/null&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;INFO: Delete deprecated options GRUB_HIDDEN_TIMEOUT*&amp;#39;&lt;/span&gt;
+    sed -i &lt;span class="s1"&gt;&amp;#39;/^GRUB_HIDDEN_TIMEOUT.*/d&amp;#39;&lt;/span&gt; /etc/default/grub
+&lt;span class="k"&gt;fi&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Add option GRUB_RECORDFAIL_TIMEOUT=15 for automatic boot on fail.&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; ! &lt;span class="o"&gt;(&lt;/span&gt;grep -qwai &lt;span class="s1"&gt;&amp;#39;^GRUB_RECORDFAIL_TIMEOUT=.*&amp;#39;&lt;/span&gt; /etc/default/grub &amp;gt;/dev/null&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;INFO: Add option GRUB_RECORDFAIL_TIMEOUT=15 for automatic boot on fail.&amp;#39;&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;GRUB_RECORDFAIL_TIMEOUT=15&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /etc/default/grub
+&lt;span class="k"&gt;fi&lt;/span&gt;
+
+
+&lt;span class="c1"&gt;# GRUB_CMDLINE_LINUX_DEFAULT=&amp;quot;quiet splash&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;grep -qwai &lt;span class="s1"&gt;&amp;#39;^GRUB_CMDLINE_LINUX_DEFAULT=.*&amp;#39;&lt;/span&gt; /etc/default/grub &amp;gt;/dev/null&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+    &lt;span class="c1"&gt;# Load config again, check value and set if need.&lt;/span&gt;
+    load_default_grub
+    &lt;span class="k"&gt;for&lt;/span&gt; i in &lt;span class="nv"&gt;$GRUB_CMDLINE_LINUX_DEFAULT&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; in
+            &lt;span class="s1"&gt;&amp;#39;splash&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;nosplash&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+            &lt;span class="s1"&gt;&amp;#39;quiet&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;i&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;noquiet&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+        &lt;span class="k"&gt;esac&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -n &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$GRUB_CMDLINE_LINUX_DEFAULT_OUT&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; -a -n &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+            &lt;span class="nv"&gt;GRUB_CMDLINE_LINUX_DEFAULT_OUT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$GRUB_CMDLINE_LINUX_DEFAULT_OUT&lt;/span&gt;&lt;span class="s2"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;
+            &lt;span class="nv"&gt;GRUB_CMDLINE_LINUX_DEFAULT_OUT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;fi&lt;/span&gt;
+    &lt;span class="k"&gt;done&lt;/span&gt;
+    sed -i -e &lt;span class="s2"&gt;&amp;quot;s/^GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT=\&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$GRUB_CMDLINE_LINUX_DEFAULT_OUT&lt;/span&gt;&lt;span class="s2"&gt;\&amp;quot;/&amp;quot;&lt;/span&gt; /etc/default/grub
+&lt;span class="k"&gt;fi&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Finnaly re-generate grub.cfg.&lt;/span&gt;
+get_yes_no &lt;span class="s2"&gt;&amp;quot;Do you want to run update-grub&amp;quot;&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Yes&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; update-grub
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="Ubuntu"></category><category term="Grub"></category></entry><entry><title>Ubuntu 12.04 не запускается автоматически samba на bridge интерфейсе.</title><link href="http://blog.metajiji.tk/blog/ubuntu-1204-samba-bridge/" rel="alternate"></link><published>2014-05-05T00:00:00+07:00</published><updated>2014-05-05T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-05-05:/blog/ubuntu-1204-samba-bridge/</id><summary type="html">&lt;p&gt;При старте системы демон &lt;strong&gt;Samba&lt;/strong&gt; не запускался самостоятельно, точнее он запускался, но был недоступен,
+ а если вручную перезапустить его, то все ок. Сетевые интерфейсы у меня объединены в &lt;strong&gt;Bridge&lt;/strong&gt; &lt;code&gt;br0&lt;/code&gt; из &lt;code&gt;wlan0&lt;/code&gt; и &lt;code&gt;eth0&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;После недолгих расследований логов загрузки, стало ясно, демон &lt;code&gt;smbd&lt;/code&gt; успевает запуститься, до того, как &lt;strong&gt;bridge&lt;/strong&gt; сконфигурируется …&lt;/p&gt;</summary><content type="html">&lt;p&gt;При старте системы демон &lt;strong&gt;Samba&lt;/strong&gt; не запускался самостоятельно, точнее он запускался, но был недоступен,
+ а если вручную перезапустить его, то все ок. Сетевые интерфейсы у меня объединены в &lt;strong&gt;Bridge&lt;/strong&gt; &lt;code&gt;br0&lt;/code&gt; из &lt;code&gt;wlan0&lt;/code&gt; и &lt;code&gt;eth0&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;После недолгих расследований логов загрузки, стало ясно, демон &lt;code&gt;smbd&lt;/code&gt; успевает запуститься, до того, как &lt;strong&gt;bridge&lt;/strong&gt; сконфигурируется, отсюда и проблема.&lt;/p&gt;
+&lt;p&gt;Конфигурационный &lt;code&gt;upstart&lt;/code&gt; файл &lt;code&gt;/etc/init/smbd.conf&lt;/code&gt; привел к такому виду:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;description &lt;span class="s2"&gt;&amp;quot;SMB/CIFS File Server&amp;quot;&lt;/span&gt;
+author      &lt;span class="s2"&gt;&amp;quot;Steve Langasek &amp;lt;steve.langasek@ubuntu.com&amp;gt;&amp;quot;&lt;/span&gt;
+
+start on &lt;span class="o"&gt;(&lt;/span&gt;local-filesystems and net-device-up IFACE!&lt;span class="o"&gt;=&lt;/span&gt;lo&lt;span class="o"&gt;)&lt;/span&gt;
+start on &lt;span class="o"&gt;(&lt;/span&gt;local-filesystems and net-device-up &lt;span class="nv"&gt;IFACE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;br0&lt;span class="o"&gt;)&lt;/span&gt;
+stop on runlevel &lt;span class="o"&gt;[&lt;/span&gt;!2345&lt;span class="o"&gt;]&lt;/span&gt;
+
+respawn
+
+pre-start script
+ &lt;span class="nv"&gt;RUN_MODE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;daemons&amp;quot;&lt;/span&gt;
+
+ &lt;span class="o"&gt;[&lt;/span&gt; -r /etc/default/samba &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; . /etc/default/samba
+
+ &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$RUN_MODE&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; inetd &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; stop&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+
+ install -o root -g root -m &lt;span class="m"&gt;755&lt;/span&gt; -d /var/run/samba
+end script
+
+&lt;span class="nb"&gt;exec&lt;/span&gt; smbd -F
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;А именно, добавил опцию &lt;code&gt;IFACE=br0&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;start on &lt;span class="o"&gt;(&lt;/span&gt;local-filesystems and net-device-up &lt;span class="nv"&gt;IFACE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;br0&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Теперь, при загрузке сервера, демон &lt;code&gt;smbd&lt;/code&gt; запускается самостоятельно.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://www.ashep.org/2009/linux-upstart/#.U2awRN-K89U"&gt;Что такое UpStart&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="Ubuntu"></category><category term="samba"></category><category term="bridge"></category><category term="upstart"></category></entry><entry><title>Ubuntu GRUB2 отключить подтверждение при перезагрузке</title><link href="http://blog.metajiji.tk/blog/ubuntu-grub2-recordfail/" rel="alternate"></link><published>2014-04-08T00:00:00+07:00</published><updated>2014-04-08T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-04-08:/blog/ubuntu-grub2-recordfail/</id><summary type="html">&lt;p&gt;В &lt;strong&gt;Ubuntu&lt;/strong&gt; есть проблема - в случае нештатного отключения компьютера (вырубили свет, потом включили) &lt;strong&gt;GRUB2&lt;/strong&gt; доходит до меню и ждет выбора.
+ Хотелось, чтобы компьютер рестартовал сам при включении света. Как оказалось за это отвечает переменная &lt;code&gt;recordfail&lt;/code&gt;, которая по умолчанию выставляется &lt;code&gt;recordfail=1&lt;/code&gt;,
+ а после успешной загрузки системы она обнуляется через &lt;code&gt;init …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;В &lt;strong&gt;Ubuntu&lt;/strong&gt; есть проблема - в случае нештатного отключения компьютера (вырубили свет, потом включили) &lt;strong&gt;GRUB2&lt;/strong&gt; доходит до меню и ждет выбора.
+ Хотелось, чтобы компьютер рестартовал сам при включении света. Как оказалось за это отвечает переменная &lt;code&gt;recordfail&lt;/code&gt;, которая по умолчанию выставляется &lt;code&gt;recordfail=1&lt;/code&gt;,
+ а после успешной загрузки системы она обнуляется через &lt;code&gt;init.d&lt;/code&gt; скрипт &lt;code&gt;/etc/init.d/grub-common&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;При загрузке &lt;strong&gt;GRUB2&lt;/strong&gt; в файле &lt;code&gt;/boot/grub/grub.cfg&lt;/code&gt; идет проверка:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;recordfail&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+  &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;timeout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;-1
+&lt;span class="k"&gt;else&lt;/span&gt;
+  &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;timeout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Таким образом &lt;strong&gt;GRUB2&lt;/strong&gt; в случае если система была выключена не штатно принудительно выводит меню загрузки и ждет пока администратор в ручную выберет что грузить.
+ Это делается для предотвращения зацикливания загрузки системы, если там что-то серьезно навернулось.&lt;/p&gt;
+&lt;p&gt;Прямое редактирование &lt;code&gt;/boot/grub/grub.cfg&lt;/code&gt; смысла не имеет, т.к. все изменения затрутся, при запуске команды &lt;code&gt;update-grub&lt;/code&gt;, поиск по скриптам &lt;strong&gt;GRUB2&lt;/strong&gt; показал,
+ что в файле &lt;code&gt;/etc/grub.d/00_header&lt;/code&gt; есть описание функции &lt;code&gt;recordfail&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; recordfail &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;recordfail&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+EOF
+    &lt;span class="nv"&gt;FS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;grub-probe --target&lt;span class="o"&gt;=&lt;/span&gt;fs &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;grubdir&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$FS&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; in
+      btrfs &lt;span class="p"&gt;|&lt;/span&gt; cpiofs &lt;span class="p"&gt;|&lt;/span&gt; newc &lt;span class="p"&gt;|&lt;/span&gt; odc &lt;span class="p"&gt;|&lt;/span&gt; romfs &lt;span class="p"&gt;|&lt;/span&gt; squash4 &lt;span class="p"&gt;|&lt;/span&gt; tarfs &lt;span class="p"&gt;|&lt;/span&gt; zfs&lt;span class="o"&gt;)&lt;/span&gt;
+ cat &lt;span class="s"&gt;&amp;lt;&amp;lt;EOF&lt;/span&gt;
+&lt;span class="s"&gt;  # GRUB lacks write support for $FS, so recordfail support is disabled.&lt;/span&gt;
+&lt;span class="s"&gt;EOF&lt;/span&gt;
+ &lt;span class="p"&gt;;;&lt;/span&gt;
+      *&lt;span class="o"&gt;)&lt;/span&gt;
+ cat &lt;span class="s"&gt;&amp;lt;&amp;lt;EOF&lt;/span&gt;
+&lt;span class="s"&gt;  if [ -n &amp;quot;\${have_grubenv}&amp;quot; ]; then if [ -z &amp;quot;\${boot_once}&amp;quot; ]; then save_env recordfail; fi; fi&lt;/span&gt;
+&lt;span class="s"&gt;EOF&lt;/span&gt;
+    &lt;span class="k"&gt;esac&lt;/span&gt;
+    cat &amp;lt;&amp;lt;EOF
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Затем ниже проверка значения переменной &lt;code&gt;recordfail&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;make_timeout &lt;span class="o"&gt;()&lt;/span&gt;
+&lt;span class="o"&gt;{&lt;/span&gt;
+    cat &lt;span class="s"&gt;&amp;lt;&amp;lt; EOF&lt;/span&gt;
+&lt;span class="s"&gt;if [ &amp;quot;\${recordfail}&amp;quot; = 1 ] ; then&lt;/span&gt;
+&lt;span class="s"&gt;  set timeout=${GRUB_RECORDFAIL_TIMEOUT:--1}&lt;/span&gt;
+&lt;span class="s"&gt;else&lt;/span&gt;
+&lt;span class="s"&gt;EOF&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Решение проблемы напрашивается сам собой - установить переменную &lt;code&gt;GRUB_RECORDFAIL_TIMEOUT&lt;/code&gt; (таймаут при срабатывании &lt;code&gt;recordfail&lt;/code&gt;) в конфигурационном файле &lt;strong&gt;GRUB2&lt;/strong&gt; &lt;code&gt;/etc/default/grub&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;GRUB_RECORDFAIL_TIMEOUT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;15&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;После чего выполнить обновление конфигурации командой:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;update-grub
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://www.linux.org.ru/forum/general/7755404"&gt;правильное выключение + GRUB2 отключить подтверждение при перезагрузке&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://forum.ubuntu.ru/index.php?topic=78389.0"&gt;recordfail в grub2 [РЕШЕНО]&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="Ubuntu"></category><category term="grub"></category><category term="grub2"></category><category term="recordfail"></category></entry><entry><title>Ubuntu 12.04 - transmission и samba</title><link href="http://blog.metajiji.tk/blog/ubuntu-1204-transmission-samba/" rel="alternate"></link><published>2013-09-16T00:00:00+07:00</published><updated>2013-09-16T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-09-16:/blog/ubuntu-1204-transmission-samba/</id><summary type="html">&lt;p&gt;Для успешной с файлами по &lt;code&gt;samba&lt;/code&gt;, скаченными при помощи свежеустановленного &lt;code&gt;transmission&lt;/code&gt; нужно изменить &lt;code&gt;umask&lt;/code&gt; для вновь создаваемых файлов и каталогов демоном &lt;code&gt;transmission&lt;/code&gt; и для этого первым делом останавливаем демона:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Ubuntu$ sudo service transmission-daemon stop
+ * Stopping bittorrent daemon transmission-daemon      &lt;span class="o"&gt;[&lt;/span&gt; OK &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Если демона не остановить, то все изменения в конфиге не сохранятся …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Для успешной с файлами по &lt;code&gt;samba&lt;/code&gt;, скаченными при помощи свежеустановленного &lt;code&gt;transmission&lt;/code&gt; нужно изменить &lt;code&gt;umask&lt;/code&gt; для вновь создаваемых файлов и каталогов демоном &lt;code&gt;transmission&lt;/code&gt; и для этого первым делом останавливаем демона:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Ubuntu$ sudo service transmission-daemon stop
+ * Stopping bittorrent daemon transmission-daemon      &lt;span class="o"&gt;[&lt;/span&gt; OK &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Если демона не остановить, то все изменения в конфиге не сохранятся, т.к. при перезапуске &lt;code&gt;transmission&lt;/code&gt; перезапишет свой файл из памяти и все изменения пропадут.&lt;/p&gt;
+&lt;p&gt;Убедившись, что демон &lt;code&gt;transmission&lt;/code&gt; не запущен - открываем файл настроек:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo nano /etc/transmission-daemon/settings.json
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Находим там параметр &lt;code&gt;"umask": 18,&lt;/code&gt; и изменяем значение на &lt;code&gt;"umask": 2,&lt;/code&gt;, затем сохраняем файл.&lt;/p&gt;
+&lt;p&gt;С таким значением &lt;code&gt;umask&lt;/code&gt; демон &lt;code&gt;transmission&lt;/code&gt; будет создавать:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Каталоги с маской &lt;code&gt;775&lt;/code&gt; - читать, писать, исполнять (заходить в каталог) владельцу и группе, остальным только читать и исполнять(заходить в каталог).&lt;/li&gt;
+&lt;li&gt;Файлы с маской &lt;code&gt;664&lt;/code&gt; - читать, писать владельцу и группе, остальным только читать.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Теперь добавляем пользователя, под которым подключаемся к &lt;code&gt;samba&lt;/code&gt; шарам, в группу &lt;code&gt;debian-transmission&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Ubuntu$ id metajiji
+&lt;span class="nv"&gt;uid&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1000&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;metajiji&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;gid&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1000&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;metajiji&lt;span class="o"&gt;)&lt;/span&gt; группы&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1000&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;metajiji&lt;span class="o"&gt;)&lt;/span&gt;,4&lt;span class="o"&gt;(&lt;/span&gt;adm&lt;span class="o"&gt;)&lt;/span&gt;,27&lt;span class="o"&gt;(&lt;/span&gt;sudo&lt;span class="o"&gt;)&lt;/span&gt;,109&lt;span class="o"&gt;(&lt;/span&gt;sambashare&lt;span class="o"&gt;)&lt;/span&gt;
+Ubuntu$ sudo usermod metajiji -aG debian-transmission
+Ubuntu$ id metajiji
+&lt;span class="nv"&gt;uid&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1000&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;metajiji&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;gid&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1000&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;metajiji&lt;span class="o"&gt;)&lt;/span&gt; группы&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1000&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;metajiji&lt;span class="o"&gt;)&lt;/span&gt;,4&lt;span class="o"&gt;(&lt;/span&gt;adm&lt;span class="o"&gt;)&lt;/span&gt;,27&lt;span class="o"&gt;(&lt;/span&gt;sudo&lt;span class="o"&gt;)&lt;/span&gt;,109&lt;span class="o"&gt;(&lt;/span&gt;sambashare&lt;span class="o"&gt;)&lt;/span&gt;,111&lt;span class="o"&gt;(&lt;/span&gt;debian-transmission&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Как видим, командой &lt;code&gt;id&lt;/code&gt; можно проверить список групп, а так же увидеть &lt;code&gt;uid/gid&lt;/code&gt; в которых состоит пользователь.&lt;/p&gt;
+&lt;p&gt;Запускаем демона &lt;code&gt;transmission&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo service transmission-daemon start
+ * Starting bittorrent daemon transmission-daemon      &lt;span class="o"&gt;[&lt;/span&gt; OK &lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;P.S. Если все сделано правильно, то &lt;code&gt;transmission&lt;/code&gt; будет скачивать файлы с правильными правами, так, что их можно будет удалять, перемещать, редактировать через &lt;code&gt;samba&lt;/code&gt;,
+ не прибегая к редактированию системных файлов(&lt;code&gt;/etc/init.d/transmission-daemon&lt;/code&gt;) и т.п. ухищрений - так делать не нужно, ведь после обновления есть большая вероятность,
+ что этот файл обновится и вам придется заново редактировать его вручную, в то время, как можно было сделать все менее радикально :)&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://ru.wikipedia.org/wiki/Umask"&gt;Wiki - Umask&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://forum.ubuntu.ru/index.php?PHPSESSID=inpalst5qltu2ks7ar4l0gd756&amp;amp;topic=211438.0"&gt;Ubuntu server 12.04 Transmission-daemon error: Permission denied...&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Ubuntu"></category><category term="Linux"></category><category term="transmission"></category><category term="samba"></category></entry><entry><title>Ubuntu 12.04 samba не работает при старте системы</title><link href="http://blog.metajiji.tk/blog/ubuntu-1204-samba/" rel="alternate"></link><published>2013-08-25T00:00:00+07:00</published><updated>2013-08-25T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-08-25:/blog/ubuntu-1204-samba/</id><summary type="html">&lt;p&gt;После установки &lt;code&gt;samba&lt;/code&gt; обнаружил проблему - после перезагрузки системы демон &lt;code&gt;smbd&lt;/code&gt; запускается, но пользователи не могут получить доступ к шарам.
+Поиск по интернетам особо не дал результатов, пришлось разбираться самому.
+Проблема заключалась в том, что демон стартует после инициализации файловых систем и поднятия сетевых интерфейсов.
+И похоже &lt;code&gt;smbd&lt;/code&gt; стартовал сразу, как …&lt;/p&gt;</summary><content type="html">&lt;p&gt;После установки &lt;code&gt;samba&lt;/code&gt; обнаружил проблему - после перезагрузки системы демон &lt;code&gt;smbd&lt;/code&gt; запускается, но пользователи не могут получить доступ к шарам.
+Поиск по интернетам особо не дал результатов, пришлось разбираться самому.
+Проблема заключалась в том, что демон стартует после инициализации файловых систем и поднятия сетевых интерфейсов.
+И похоже &lt;code&gt;smbd&lt;/code&gt; стартовал сразу, как только поднимался &lt;code&gt;lo0&lt;/code&gt;, не дожидаясь пока остальные интерфейсы получат &lt;strong&gt;ip&lt;/strong&gt; адреса по &lt;strong&gt;DHCP&lt;/strong&gt; и тоже перейдут в состояние &lt;code&gt;up&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Подсмотел в скрипт запуска &lt;code&gt;nmbd&lt;/code&gt; и обнаружил, что группа интерфейсов &lt;code&gt;lo&lt;/code&gt; игнорируется.
+Этот же прием применил и для &lt;code&gt;smbd&lt;/code&gt;, отредактировав файл &lt;code&gt;/etc/init/smbd.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;start on &lt;span class="o"&gt;(&lt;/span&gt;local-filesystems and net-device-up IFACE!&lt;span class="o"&gt;=&lt;/span&gt;lo&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;#start on (local-filesystems and net-device-up)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Ubuntu"></category><category term="Linux"></category><category term="samba"></category></entry><entry><title>Ubuntu установка VNC сервера не зависимого от пользователей.</title><link href="http://blog.metajiji.tk/blog/ubuntu-system-vnc/" rel="alternate"></link><published>2012-09-27T00:00:00+07:00</published><updated>2012-09-27T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-09-27:/blog/ubuntu-system-vnc/</id><summary type="html">&lt;p&gt;Выкладываю функцию добавления &lt;strong&gt;VNC&lt;/strong&gt; сервиса. Данная функция используется в моем скрипте &lt;code&gt;lentayka_14.04.sh&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Функция была проверена на &lt;strong&gt;Ubuntu 12.04 LTS&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;install_vnc_service&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    apt-get purge vino
+    apt-get install x11vnc
+
+    mkdir /etc/x11vnc
+    chmod &lt;span class="m"&gt;755&lt;/span&gt; /etc/x11vnc
+
+    sudo x11vnc -storepasswd YouPasswordHere /etc/x11vnc/passwd
+    chmod &lt;span class="m"&gt;644&lt;/span&gt; /etc/x11vnc/passwd
+
+    cat &amp;gt; /etc …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Выкладываю функцию добавления &lt;strong&gt;VNC&lt;/strong&gt; сервиса. Данная функция используется в моем скрипте &lt;code&gt;lentayka_14.04.sh&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Функция была проверена на &lt;strong&gt;Ubuntu 12.04 LTS&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;install_vnc_service&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    apt-get purge vino
+    apt-get install x11vnc
+
+    mkdir /etc/x11vnc
+    chmod &lt;span class="m"&gt;755&lt;/span&gt; /etc/x11vnc
+
+    sudo x11vnc -storepasswd YouPasswordHere /etc/x11vnc/passwd
+    chmod &lt;span class="m"&gt;644&lt;/span&gt; /etc/x11vnc/passwd
+
+    cat &amp;gt; /etc/init/x11vnc.conf &lt;span class="s"&gt;&amp;lt;&amp;lt;-_EOF&lt;/span&gt;
+&lt;span class="s"&gt;    start on login-session-start&lt;/span&gt;
+&lt;span class="s"&gt;    script&lt;/span&gt;
+&lt;span class="s"&gt;    x11vnc -xkb -bg \&lt;/span&gt;
+&lt;span class="s"&gt;        -noxrecord \&lt;/span&gt;
+&lt;span class="s"&gt;        -noxfixes \&lt;/span&gt;
+&lt;span class="s"&gt;        -noxdamage \&lt;/span&gt;
+&lt;span class="s"&gt;        -display :0 \&lt;/span&gt;
+&lt;span class="s"&gt;        -auth /var/run/lightdm/root/:0 \&lt;/span&gt;
+&lt;span class="s"&gt;        -rfbauth /etc/x11vnc/passwd \&lt;/span&gt;
+&lt;span class="s"&gt;        -forever \&lt;/span&gt;
+&lt;span class="s"&gt;        -o /var/log/x11vnc.log&lt;/span&gt;
+&lt;span class="s"&gt;    end script&lt;/span&gt;
+&lt;span class="s"&gt;_EOF&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Данная функция настраивает запуск &lt;code&gt;x11vnc&lt;/code&gt; через &lt;code&gt;upstart&lt;/code&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://cisight.com/how-to-setup-vnc-server-remote-desktop-in-ubuntu-11-10-oneiric/"&gt;How to setup VNC server for remote desktop in Ubuntu 11.10 Oneiric&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://mlepicki.com/2011/10/remote-vnc-login-to-ubuntu-11-10/"&gt;Remote VNC login to Ubuntu 11.10&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.ara1307.info/index.php/2011/10/21/?p=18/"&gt;Запуск VNC-сервера в Ubuntu 11.10 (LightDM)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://oss-it.ru/23"&gt;Быстрая настройка x11vnc&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Ubuntu"></category><category term="Linux"></category><category term="VNC"></category></entry><entry><title>Ubuntu и DNS-Суффикс, /etc/nsswitch.conf, NetworkManager</title><link href="http://blog.metajiji.tk/blog/ubuntu-dns-suffix_etc-nsswitch.conf/" rel="alternate"></link><published>2012-08-27T00:00:00+07:00</published><updated>2012-08-27T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-08-27:/blog/ubuntu-dns-suffix_etc-nsswitch.conf/</id><summary type="html">&lt;p&gt;Столкнулся с проблемой, когда &lt;strong&gt;Ubuntu&lt;/strong&gt; при работе по &lt;strong&gt;DHCP&lt;/strong&gt; неправильно работала с &lt;strong&gt;DNS&lt;/strong&gt;-суффиксом,
+ а именно работала только с суффиксами, а полные доменные имена (&lt;strong&gt;FQDN&lt;/strong&gt;) не понимала,
+ как следствие некорректно работали некоторые локальные сайты в браузерах, да и банальные пинги работали как-то не совсем правильно:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ping server
+PING server.local …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Столкнулся с проблемой, когда &lt;strong&gt;Ubuntu&lt;/strong&gt; при работе по &lt;strong&gt;DHCP&lt;/strong&gt; неправильно работала с &lt;strong&gt;DNS&lt;/strong&gt;-суффиксом,
+ а именно работала только с суффиксами, а полные доменные имена (&lt;strong&gt;FQDN&lt;/strong&gt;) не понимала,
+ как следствие некорректно работали некоторые локальные сайты в браузерах, да и банальные пинги работали как-то не совсем правильно:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ping server
+PING server.local &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;192&lt;/span&gt;.168.0.2&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="m"&gt;56&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;84&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; bytes of data.
+&lt;span class="m"&gt;64&lt;/span&gt; bytes from server.local &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;192&lt;/span&gt;.168.0.2&lt;span class="o"&gt;)&lt;/span&gt;: &lt;span class="nv"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="nv"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;64&lt;/span&gt; &lt;span class="nv"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.131 ms
+^C
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ping server.local
+ping: unknown host server.local
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;При этом &lt;strong&gt;DNS&lt;/strong&gt; сервер отлично обрабатывает запросы:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;nslookup server
+Server:  &lt;span class="m"&gt;192&lt;/span&gt;.168.0.254
+Address: &lt;span class="m"&gt;192&lt;/span&gt;.168.0.254#53
+
+Name: server.local
+Address: &lt;span class="m"&gt;192&lt;/span&gt;.168.0.2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;И для доменного имени полностью:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;nslookup server.local
+Server:  &lt;span class="m"&gt;192&lt;/span&gt;.168.0.254
+Address: &lt;span class="m"&gt;192&lt;/span&gt;.168.0.254#53
+
+Name: server.local
+Address: &lt;span class="m"&gt;192&lt;/span&gt;.168.0.2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Погуглив немного, решил, что проблема в &lt;strong&gt;NetworkManager&lt;/strong&gt;'е, на старых версиях &lt;strong&gt;Ubuntu&lt;/strong&gt; он неправильно генерировал &lt;code&gt;/etc/resolv.conf&lt;/code&gt;, проверил свой:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat /etc/resolv.conf
+&lt;span class="c1"&gt;# Dynamic resolv.conf(5) file for glibc resolver(3) generated by resolvconf(8)&lt;/span&gt;
+&lt;span class="c1"&gt;#     DO NOT EDIT THIS FILE BY HAND -- YOUR CHANGES WILL BE OVERWRITTEN&lt;/span&gt;
+nameserver &lt;span class="m"&gt;192&lt;/span&gt;.168.0.254
+search &lt;span class="nb"&gt;local&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Как оказалось, в моем случае &lt;strong&gt;NetworkManager&lt;/strong&gt; вовсе не виноват! Но в чем же тогда проблема?
+ Еще раз погуглил яндексом в рамблере и пришел к выводу, что виноват конфиг &lt;code&gt;/etc/nsswitch.conf&lt;/code&gt;, сравнил его с &lt;strong&gt;FreeBSD&lt;/strong&gt;'шным,
+ где все работает как надо и пришел к выводу, что нужно строку &lt;code&gt;hosts:&lt;/code&gt; привести к такому виду:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# НЕ работает!&lt;/span&gt;
+&lt;span class="c1"&gt;#hosts:          files mdns4_minimal [NOTFOUND=return] dns mdns4&lt;/span&gt;
+
+&lt;span class="c1"&gt;# работает!&lt;/span&gt;
+hosts:          files dns
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Что такое &lt;code&gt;mdns4&lt;/code&gt; разбираться не стал (позже узнал, что это &lt;strong&gt;avahi&lt;/strong&gt; так делает), без него все работает так, как надо и это главное.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://forum.oszone.net/thread-159390.html"&gt;Debian/Ubuntu - [решено] Не распознаёт имя контроллера домена&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Ubuntu"></category><category term="Networkmanager"></category><category term="nsswitch.conf"></category><category term="dns-suffix"></category></entry><entry><title>Ubuntu и Midnight Commander, mc и Unity 3D исправляем проблему с F10 в терминале</title><link href="http://blog.metajiji.tk/blog/ubuntu-midnight-commander/" rel="alternate"></link><published>2012-05-30T00:00:00+07:00</published><updated>2012-05-30T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-05-30:/blog/ubuntu-midnight-commander/</id><summary type="html">&lt;p&gt;Вот такой нехитрый скрипт установит и избавит от проблем с &lt;code&gt;F10&lt;/code&gt; при работе в терминале с &lt;code&gt;mc&lt;/code&gt; в &lt;strong&gt;Ubuntu&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+sudo apt-get install mc
+gconftool-2 --set --type string &lt;span class="s2"&gt;&amp;quot;/apps/compiz-1/plugins/unityshell/screen0/options/panel_first_menu&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Disabled&amp;quot;&lt;/span&gt; &lt;span class="c1"&gt;# Unity Panel 3D&lt;/span&gt;
+
+gconftool-2 --set --type bool &lt;span class="s2"&gt;&amp;quot;/apps/gnome-terminal/global/use_menu_accelerators&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;false&amp;quot;&lt;/span&gt; &lt;span class="c1"&gt;# Gnome-Terminal …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Вот такой нехитрый скрипт установит и избавит от проблем с &lt;code&gt;F10&lt;/code&gt; при работе в терминале с &lt;code&gt;mc&lt;/code&gt; в &lt;strong&gt;Ubuntu&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+sudo apt-get install mc
+gconftool-2 --set --type string &lt;span class="s2"&gt;&amp;quot;/apps/compiz-1/plugins/unityshell/screen0/options/panel_first_menu&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Disabled&amp;quot;&lt;/span&gt; &lt;span class="c1"&gt;# Unity Panel 3D&lt;/span&gt;
+
+gconftool-2 --set --type bool &lt;span class="s2"&gt;&amp;quot;/apps/gnome-terminal/global/use_menu_accelerators&amp;quot;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;false&amp;quot;&lt;/span&gt; &lt;span class="c1"&gt;# Gnome-Terminal&lt;/span&gt;
+
+&lt;span class="c1"&gt;# И последний штрих для Ubuntu 12.04-LTS&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; ! -d ~/.config/gtk-3.0/ &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; mkdir -p ~/.config/gtk-3.0/
+cat &amp;gt;~/.config/gtk-3.0/gtk.css &lt;span class="s"&gt;&amp;lt;&amp;lt;_EOF&lt;/span&gt;
+&lt;span class="s"&gt;@binding-set NoKeyboardNavigation {&lt;/span&gt;
+&lt;span class="s"&gt; unbind &amp;quot;&amp;lt;shift&amp;gt;F10&amp;quot;&lt;/span&gt;
+&lt;span class="s"&gt;}&lt;/span&gt;
+
+&lt;span class="s"&gt;* {&lt;/span&gt;
+&lt;span class="s"&gt; gtk-key-bindings: NoKeyboardNavigation&lt;/span&gt;
+&lt;span class="s"&gt;}&lt;/span&gt;
+&lt;span class="s"&gt;_EOF&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;После чего придется закрыть все открытые окна терминала, чтобы изменения вступили в силу.&lt;/p&gt;</content><category term="ubuntu"></category><category term="linux"></category><category term="mc"></category><category term="midnight-commander"></category></entry><entry><title>Custom user fonts in Ubuntu Linux</title><link href="http://blog.metajiji.tk/blog/custom-user-fonts-in-ubuntu-linux/" rel="alternate"></link><published>2012-05-09T00:00:00+07:00</published><updated>2012-05-09T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-05-09:/blog/custom-user-fonts-in-ubuntu-linux/</id><summary type="html">&lt;p&gt;Extract the &lt;code&gt;ttf&lt;/code&gt; file and copy into &lt;code&gt;.fonts&lt;/code&gt; via:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Go to your home folder&lt;/li&gt;
+&lt;li&gt;Enable "&lt;strong&gt;Show Hidden Files&lt;/strong&gt;" option from Nautilus View menu&lt;/li&gt;
+&lt;li&gt;Then create new folder with name &lt;code&gt;.fonts&lt;/code&gt; (with dot in front)&lt;/li&gt;
+&lt;li&gt;Now in new folder copy all your true type fonts. If you want to copy your …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Extract the &lt;code&gt;ttf&lt;/code&gt; file and copy into &lt;code&gt;.fonts&lt;/code&gt; via:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Go to your home folder&lt;/li&gt;
+&lt;li&gt;Enable "&lt;strong&gt;Show Hidden Files&lt;/strong&gt;" option from Nautilus View menu&lt;/li&gt;
+&lt;li&gt;Then create new folder with name &lt;code&gt;.fonts&lt;/code&gt; (with dot in front)&lt;/li&gt;
+&lt;li&gt;Now in new folder copy all your true type fonts. If you want to copy your Windows fonts, you can find it in &lt;code&gt;Windows/Fonts&lt;/code&gt; folder.&lt;/li&gt;
+&lt;li&gt;Now restart and new fonts will be in use.&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Ubuntu"></category><category term="Linux"></category><category term="Fonts"></category><category term="Ubuntu Custom Fonts"></category></entry><entry><title>Отключение ipv6 в Ubuntu</title><link href="http://blog.metajiji.tk/blog/disable-ipv6-ubuntu/" rel="alternate"></link><published>2012-05-06T00:00:00+07:00</published><updated>2012-05-06T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-05-06:/blog/disable-ipv6-ubuntu/</id><summary type="html">&lt;p&gt;Для начала открываем, а если его еще нет, то создаем файл &lt;code&gt;/etc/modprobe.d/aliases&lt;/code&gt; и добавляем такие строки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;alias&lt;/span&gt; net-pf-10 ipv6 off
+&lt;span class="nb"&gt;alias&lt;/span&gt; net-pf-10 off
+&lt;span class="nb"&gt;alias&lt;/span&gt; ipv6 off
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Далее правим &lt;code&gt;/etc/modprobe.d/blacklist.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;blacklist ipv6&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/modprobe.d/blacklist.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;И наконец редактируем файл &lt;code&gt;/etc/default …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Для начала открываем, а если его еще нет, то создаем файл &lt;code&gt;/etc/modprobe.d/aliases&lt;/code&gt; и добавляем такие строки:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;alias&lt;/span&gt; net-pf-10 ipv6 off
+&lt;span class="nb"&gt;alias&lt;/span&gt; net-pf-10 off
+&lt;span class="nb"&gt;alias&lt;/span&gt; ipv6 off
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Далее правим &lt;code&gt;/etc/modprobe.d/blacklist.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;blacklist ipv6&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/modprobe.d/blacklist.conf
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;И наконец редактируем файл &lt;code&gt;/etc/default/grub&lt;/code&gt;, добавляя в конец опции &lt;code&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/code&gt; строку &lt;code&gt;ipv6.disable=1&lt;/code&gt;, в итоге получаем:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;GRUB_CMDLINE_LINUX_DEFAULT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;quiet splash ipv6.disable=1&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;После чего даем команду &lt;code&gt;sudo update-grub&lt;/code&gt; и перезагружаем систему.&lt;/p&gt;
+&lt;p&gt;На этом все, &lt;code&gt;ipv6&lt;/code&gt; будет отключен в системе.&lt;/p&gt;
+&lt;p&gt;Для проверки отключен ли &lt;code&gt;ipv6&lt;/code&gt; выполняем:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo netstat -npl &lt;span class="p"&gt;|&lt;/span&gt; grep -E &lt;span class="s2"&gt;&amp;quot;tcp6|udp6&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; wc -l
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Если видим &lt;code&gt;0&lt;/code&gt;, значит все сделано правильно.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:
+1.  &lt;a href="http://debianworld.ru/articles/otklyuchenie-ipv6-v-ubuntu-debian/"&gt;Отключение ipv6 в Ubuntu / Debian&lt;/a&gt;&lt;/p&gt;</content><category term="Linux"></category><category term="Ubuntu"></category><category term="ipv6"></category></entry><entry><title>Проблема с grub и русской локализацией в Ubuntu</title><link href="http://blog.metajiji.tk/blog/grub-ubuntu/" rel="alternate"></link><published>2012-02-05T00:00:00+07:00</published><updated>2012-02-05T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-02-05:/blog/grub-ubuntu/</id><summary type="html">&lt;p&gt;В некоторых версиях &lt;strong&gt;Ubuntu&lt;/strong&gt; почему-то отсутствует файл локализации &lt;code&gt;ru.mo&lt;/code&gt; в &lt;strong&gt;Grub&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ls /boot/grub/locale/
+en_AU.mo  en_CA.mo  en_GB.mo
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В результате мы видим меню граба на английском языке, хотя при этом язык установлен правильно:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat /boot/grub/grub.cfg &lt;span class="p"&gt;|&lt;/span&gt; grep lang
+  &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;lang&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ru_RU
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;ВНИМАНИЕ&lt;/strong&gt;, перед дальнейшими …&lt;/p&gt;</summary><content type="html">&lt;p&gt;В некоторых версиях &lt;strong&gt;Ubuntu&lt;/strong&gt; почему-то отсутствует файл локализации &lt;code&gt;ru.mo&lt;/code&gt; в &lt;strong&gt;Grub&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ls /boot/grub/locale/
+en_AU.mo  en_CA.mo  en_GB.mo
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В результате мы видим меню граба на английском языке, хотя при этом язык установлен правильно:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat /boot/grub/grub.cfg &lt;span class="p"&gt;|&lt;/span&gt; grep lang
+  &lt;span class="nb"&gt;set&lt;/span&gt; &lt;span class="nv"&gt;lang&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ru_RU
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;ВНИМАНИЕ&lt;/strong&gt;, перед дальнейшими действиями сделайте резервные копии всех модифицированных вами файлов от &lt;strong&gt;Grub&lt;/strong&gt;'а, например &lt;code&gt;/etc/default/grub&lt;/code&gt; или &lt;code&gt;/etc/grub.d/00_header&lt;/code&gt;,
+ если вы счастливый обладатель нетбука с чипсетом &lt;code&gt;i915&lt;/code&gt; &lt;a href="http://metajiji.blogspot.com/2011/12/ubuntu-1110-eeepc-1024x600-grub2.html" title="Ubuntu 11.10 на EeePC разрешение экрана 1024x600 в меню GRUB2"&gt;Ubuntu 11.10 на EeePC разрешение экрана 1024x600 в меню GRUB2 [1]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Чтобы меню граба снова стало на русском, нужно сперва удалить пакет &lt;code&gt;grub-pc&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get purge grub-pc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Затем снова установить:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install grub-pc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Теперь проверяем появился ли &lt;code&gt;ru.mo&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ls /boot/grub/locale/
+en_AU.mo  en_CA.mo  en_GB.mo  ru.mo
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Теперь можно перезагрузиться и проверить, что все нормально.&lt;/p&gt;
+&lt;p&gt;P.S. думаю и обычное копирование этого файла с "рабочей" системы так же исправит ситуацию, но я такой метод не проверял.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://metajiji.blogspot.com/2011/12/ubuntu-1110-eeepc-1024x600-grub2.html" title="Ubuntu 11.10 на EeePC разрешение экрана 1024x600 в меню GRUB2"&gt;Ubuntu 11.10 на EeePC разрешение экрана 1024x600 в меню GRUB2&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="Ubuntu"></category><category term="Grub"></category></entry><entry><title>Jupiter на Ubuntu 11.10 и исправление проблем с ним.</title><link href="http://blog.metajiji.tk/blog/jupiter-ubuntu-1110/" rel="alternate"></link><published>2011-12-25T00:00:00+07:00</published><updated>2011-12-25T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2011-12-25:/blog/jupiter-ubuntu-1110/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Jupiter&lt;/strong&gt; — апплет, разработанный для нетбуков и ноутбуков. Он позволяет переключаться между максимальной/высокой производительностью
+ и энергосберегающим режимом, менять разрешение экрана и ориентацию, включать/отключать &lt;strong&gt;bluetooth&lt;/strong&gt;, тачпад, &lt;strong&gt;WiFi&lt;/strong&gt; и т.д. 
+Если вы владелец нетбука &lt;strong&gt;ASUS EeePC&lt;/strong&gt;, вам будет полезен отдельный пакет, добавляющий поддержку &lt;strong&gt;SHE&lt;/strong&gt; (&lt;strong&gt;ASUS Super Hybrid Engine&lt;/strong&gt;) 
+и ряда …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;Jupiter&lt;/strong&gt; — апплет, разработанный для нетбуков и ноутбуков. Он позволяет переключаться между максимальной/высокой производительностью
+ и энергосберегающим режимом, менять разрешение экрана и ориентацию, включать/отключать &lt;strong&gt;bluetooth&lt;/strong&gt;, тачпад, &lt;strong&gt;WiFi&lt;/strong&gt; и т.д. 
+Если вы владелец нетбука &lt;strong&gt;ASUS EeePC&lt;/strong&gt;, вам будет полезен отдельный пакет, добавляющий поддержку &lt;strong&gt;SHE&lt;/strong&gt; (&lt;strong&gt;ASUS Super Hybrid Engine&lt;/strong&gt;) 
+и ряда тонких настроек &lt;strong&gt;EeePC&lt;/strong&gt;. Но в нем есть одна проблема, при включении/отключении &lt;strong&gt;WiFi&lt;/strong&gt; отображается неверный статус - &lt;code&gt;WIFI Radio Off&lt;/code&gt;.
+ Проблема заключается в том, что разработчики программы &lt;strong&gt;Jupiter&lt;/strong&gt; используют неверные пути &lt;code&gt;/sbin/rfkill&lt;/code&gt; в скриптах &lt;code&gt;/usr/lib/jupiter/scripts/bluetooth&lt;/code&gt;,
+ &lt;code&gt;/usr/lib/jupiter/scripts/wifi&lt;/code&gt; чтобы исправить ошибку в &lt;strong&gt;Jupiter&lt;/strong&gt; при работе с &lt;strong&gt;Wi-Fi&lt;/strong&gt; в &lt;strong&gt;Ubuntu 11.10&lt;/strong&gt; нужно исправить в скриптах пути до &lt;code&gt;rfkill&lt;/code&gt;,
+ а лучше заменить &lt;code&gt;/sbin/rfkill&lt;/code&gt; на &lt;code&gt;$(which rfkill)&lt;/code&gt; - это более универсальный способ и работа скриптов не будет зависеть от версии &lt;strong&gt;Linux&lt;/strong&gt;,
+ либо смириться с текущим положением дел и выполнить в терминале такую команду:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo ln -s /usr/sbin/rfkill /sbin/rfkill
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Такой вариант пока предпочтительнее, потому как при обновлении ОС, ваши изменения могут быть потеряны, и придется все повторить.&lt;/p&gt;
+&lt;p&gt;Теперь исправляем проблему с файлом &lt;code&gt;/usr/lib/jupiter/scripts/notify&lt;/code&gt;. Проблема связана с командой &lt;code&gt;who&lt;/code&gt;  в &lt;strong&gt;Ubuntu 11.10&lt;/strong&gt;,
+ которая работает несколько иначе, чем в предыдущих выпусках.&lt;/p&gt;
+&lt;p&gt;Открываем файл &lt;code&gt;/usr/lib/jupiter/scripts/notify&lt;/code&gt; и ищем строку:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;who -u &lt;span class="p"&gt;|&lt;/span&gt; sed -n &lt;span class="s1"&gt;&amp;#39;/ (:0[\.0]*)$\| :0 /{s/ .*//p;q}&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Заменяем ее на:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;users /var/log/wtmp &lt;span class="p"&gt;|&lt;/span&gt; sed &lt;span class="s1"&gt;&amp;#39;s| |\n|g&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; uniq&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;И еще одну строку:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;USERCNT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;who &lt;span class="p"&gt;|&lt;/span&gt; wc -l&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;заменяем на:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;USERCNT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;users /var/log/wtmp &lt;span class="p"&gt;|&lt;/span&gt; sed &lt;span class="s1"&gt;&amp;#39;s| |\n|g&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; uniq &lt;span class="p"&gt;|&lt;/span&gt; wc -l&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Открываем еще один файл &lt;code&gt;/etc/acpi/actions/eeepc-actions.sh&lt;/code&gt; и ищем строку:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;EEE_USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;who &lt;span class="p"&gt;|&lt;/span&gt; sed -n &lt;span class="s1"&gt;&amp;#39;/ (:0[\.0]*)$\| :0 /{s/ .*//p;q}&amp;#39;&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Приводим к такому виду:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;EEE_USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;users /var/log/wtmp &lt;span class="p"&gt;|&lt;/span&gt; sed &lt;span class="s1"&gt;&amp;#39;s| |\n|g&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; uniq&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Теперь при отключении &lt;strong&gt;Wi-Fi&lt;/strong&gt; будут отображаться верные статусы:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Wifi On" src="http://blog.metajiji.tk/blog/jupiter-ubuntu-1110/25-12-2011_jupiter-ubuntu-1110/wifi_on.png" title="Wifi On"&gt;
+&lt;img alt="Wifi Off" src="http://blog.metajiji.tk/blog/jupiter-ubuntu-1110/25-12-2011_jupiter-ubuntu-1110/wifi_off.png" title="Wifi Off"&gt;
+&lt;img alt="Bluetooth On" src="http://blog.metajiji.tk/blog/jupiter-ubuntu-1110/25-12-2011_jupiter-ubuntu-1110/bt_on.png" title="Bluetooth On"&gt;
+&lt;img alt="Bluetooth Off" src="http://blog.metajiji.tk/blog/jupiter-ubuntu-1110/25-12-2011_jupiter-ubuntu-1110/bt_off.png" title="Bluetooth Off"&gt;
+&lt;img alt="Touchpad On" src="http://blog.metajiji.tk/blog/jupiter-ubuntu-1110/25-12-2011_jupiter-ubuntu-1110/tp_on.png" title="Touchpad On"&gt;
+&lt;img alt="Touchpad Off" src="http://blog.metajiji.tk/blog/jupiter-ubuntu-1110/25-12-2011_jupiter-ubuntu-1110/tp_off.png" title="Touchpad Off"&gt;&lt;/p&gt;
+&lt;p&gt;Очень надеюсь, что разработчики этой программки, исправят ситуацию, и данный прием не нужно будет применять.&lt;/p&gt;
+&lt;p&gt;Если у вас нетбук &lt;strong&gt;Asus EeePC&lt;/strong&gt;, также установите пакет &lt;code&gt;jupiter-support-eee&lt;/code&gt; — необходимо для &lt;strong&gt;SHE&lt;/strong&gt; (&lt;strong&gt;Super Hybrid Engine&lt;/strong&gt;):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install jupiter-support-eee
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Если вы работаете в &lt;strong&gt;Unity&lt;/strong&gt;, после первого запуска &lt;strong&gt;Jupiter&lt;/strong&gt; вам необходимо перезайти, чтобы увидеть иконку апплета в области уведомлений.
+ Конечно, в том случае, если в &lt;strong&gt;whitelist&lt;/strong&gt; не занесен весь системный трей.&lt;/p&gt;</content><category term="Ubuntu"></category><category term="jupiter"></category></entry><entry><title>Список контактов qutim 0.2 в Ubuntu 11.10</title><link href="http://blog.metajiji.tk/blog/qutim-02-ubuntu-1110/" rel="alternate"></link><published>2011-12-24T00:00:00+07:00</published><updated>2011-12-24T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2011-12-24:/blog/qutim-02-ubuntu-1110/</id><summary type="html">&lt;p&gt;У &lt;strong&gt;qutim 0.2&lt;/strong&gt; в &lt;strong&gt;Ubuntu 11.10 Oneric Ocelot&lt;/strong&gt; есть одна серьезная проблема,
+ при закрытии окна со списком контактов его невозможно вызвать стандартными средствами.
+ Контекстное меню &lt;s&gt;трея&lt;/s&gt; панели индикаторов позволяет лишь открыть окно настроек или сменить статус.
+ Опции "&lt;strong&gt;показать список контактов&lt;/strong&gt;" или "&lt;strong&gt;Открыть&lt;/strong&gt;" или чего-либо подобного нету. 
+Контекстное меню …&lt;/p&gt;</summary><content type="html">&lt;p&gt;У &lt;strong&gt;qutim 0.2&lt;/strong&gt; в &lt;strong&gt;Ubuntu 11.10 Oneric Ocelot&lt;/strong&gt; есть одна серьезная проблема,
+ при закрытии окна со списком контактов его невозможно вызвать стандартными средствами.
+ Контекстное меню &lt;s&gt;трея&lt;/s&gt; панели индикаторов позволяет лишь открыть окно настроек или сменить статус.
+ Опции "&lt;strong&gt;показать список контактов&lt;/strong&gt;" или "&lt;strong&gt;Открыть&lt;/strong&gt;" или чего-либо подобного нету. 
+Контекстное меню открывается одинаковое и по правой, и по левой кнопке мыши.&lt;/p&gt;
+&lt;p&gt;Фишка в том что &lt;strong&gt;qt&lt;/strong&gt;-приложения в юнити рисуют иконку в трее через &lt;code&gt;dbus&lt;/code&gt; и являются уже не обычными иконками в трее,
+ а "&lt;strong&gt;индикаторами&lt;/strong&gt;" гнома, отсюда и проблемы с исчезновениями иконки. Помогает либо перезапуск &lt;code&gt;qutIM&lt;/code&gt;, либо стараться не закрывать,
+ а сворачивать список контактов, что весьма неудобно в работе.&lt;/p&gt;
+&lt;p&gt;Чтобы исправить ситуацию - нужно создать файл &lt;code&gt;~/.config/sni-qt.conf&lt;/code&gt; со следующим содержимым:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[need-activate-action]&lt;/span&gt;
+&lt;span class="na"&gt;qutim&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;После чего придется перезапустить &lt;code&gt;qutim&lt;/code&gt;, в контекстном меню появится пункт "&lt;strong&gt;Активировать&lt;/strong&gt;",
+ который будет работать как клик левой кнопкой мыши в обычном трее.&lt;/p&gt;</content><category term="Ubuntu"></category><category term="qutim"></category></entry><entry><title>Ubuntu 11.10 на EeePC разрешение экрана 1024x600 в меню GRUB2</title><link href="http://blog.metajiji.tk/blog/grub-linux-intel-915-1024x600/" rel="alternate"></link><published>2011-12-23T00:00:00+07:00</published><updated>2011-12-23T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2011-12-23:/blog/grub-linux-intel-915-1024x600/</id><summary type="html">&lt;p&gt;Как известно в нетбуках &lt;strong&gt;EeePC 1000&lt;/strong&gt; и им подобным используется чипсет &lt;code&gt;i915&lt;/code&gt;, максимальное разрешение матрицы такого нетбука &lt;code&gt;1024x600&lt;/code&gt;.
+По умолчанию &lt;strong&gt;GRUB&lt;/strong&gt; не умеет работать с таким разрешением, но ситуацию можно исправить, для этого существует специальный модуль &lt;strong&gt;GRUB&lt;/strong&gt;'а &lt;code&gt;915resolution.mod&lt;/code&gt;, с ним и будем работать.
+Чтобы установить разрешение экрана в …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Как известно в нетбуках &lt;strong&gt;EeePC 1000&lt;/strong&gt; и им подобным используется чипсет &lt;code&gt;i915&lt;/code&gt;, максимальное разрешение матрицы такого нетбука &lt;code&gt;1024x600&lt;/code&gt;.
+По умолчанию &lt;strong&gt;GRUB&lt;/strong&gt; не умеет работать с таким разрешением, но ситуацию можно исправить, для этого существует специальный модуль &lt;strong&gt;GRUB&lt;/strong&gt;'а &lt;code&gt;915resolution.mod&lt;/code&gt;, с ним и будем работать.
+Чтобы установить разрешение экрана в меню &lt;strong&gt;GRUB&lt;/strong&gt;'а &lt;code&gt;1024x600&lt;/code&gt; на &lt;strong&gt;EeePC 1000&lt;/strong&gt; и им подобным, выполняем следующее:&lt;/p&gt;
+&lt;p&gt;Открываем файл &lt;code&gt;/etc/grub.d/00_header&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mcedit /etc/grub.d/00_header
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Находим кусок кода:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    cat &lt;span class="s"&gt;&amp;lt;&amp;lt; EOF&lt;/span&gt;
+&lt;span class="s"&gt;if loadfont `make_system_path_relative_to_its_root &amp;quot;${GRUB_FONT_PATH}&amp;quot;` ; then&lt;/span&gt;
+&lt;span class="s"&gt;  set gfxmode=${GRUB_GFXMODE}&lt;/span&gt;
+&lt;span class="s"&gt;  load_video&lt;/span&gt;
+&lt;span class="s"&gt;  insmod gfxterm&lt;/span&gt;
+&lt;span class="s"&gt;EOF&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;И приводим его к такому виду:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    cat &lt;span class="s"&gt;&amp;lt;&amp;lt; EOF&lt;/span&gt;
+&lt;span class="s"&gt;if loadfont `make_system_path_relative_to_its_root &amp;quot;${GRUB_FONT_PATH}&amp;quot;` ; then&lt;/span&gt;
+&lt;span class="s"&gt;  # Fix resolution for EeePC: BEGIN&lt;/span&gt;
+&lt;span class="s"&gt;  insmod 915resolution&lt;/span&gt;
+&lt;span class="s"&gt;  915resolution 5c 1024 600&lt;/span&gt;
+&lt;span class="s"&gt;  # Fix resolution for EeePC: END&lt;/span&gt;
+&lt;span class="s"&gt;  set gfxmode=${GRUB_GFXMODE}&lt;/span&gt;
+&lt;span class="s"&gt;  load_video&lt;/span&gt;
+&lt;span class="s"&gt;  insmod gfxterm&lt;/span&gt;
+&lt;span class="s"&gt;EOF&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Затем нужно обновить конфигурацию &lt;strong&gt;GRUB&lt;/strong&gt;'a командой:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;update-grub
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;После проделанных манипуляций меню &lt;strong&gt;GRUB&lt;/strong&gt;'а будет иметь разрешение &lt;code&gt;1024x600&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Если просто загружать модуль &lt;code&gt;915resolution.mod&lt;/code&gt;, то разрешение не будет установлено,
+ так как модуль будет просто загружен, а вот команда &lt;strong&gt;GRUB&lt;/strong&gt;'а &lt;code&gt;915resolution 5c 1024 600&lt;/code&gt; выполнена не будет,
+ а значит и разрешение не будет установлено, хотя оно станет доступным для ручной установки из командной строки &lt;strong&gt;GRUB&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Способ с загрузкой модуля через конфиг &lt;strong&gt;НЕ&lt;/strong&gt; подходит:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;GRUB_PRELOAD_MODULES&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;915resolution&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Бонус!&lt;/p&gt;
+&lt;p&gt;Теперь самое время установить фоновую картинку в меню.
+Создаем картинку &lt;code&gt;my_image.png&lt;/code&gt; размером &lt;code&gt;1024x600&lt;/code&gt; и сохраняем ее в домашнем каталоге.&lt;/p&gt;
+&lt;p&gt;Затем в терминале выполняем команды:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo mkdir -p &lt;span class="s2"&gt;&amp;quot;/usr/share/images/desktop-base/&amp;quot;&lt;/span&gt;
+sudo cp my_image.png &lt;span class="s2"&gt;&amp;quot;/usr/share/images/desktop-base/desktop-grub.png&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;После этих команд картинку из домашнего каталога по желанию можно удалить, это никак не скажется на работе &lt;strong&gt;GRUB&lt;/strong&gt;'a.&lt;/p&gt;
+&lt;p&gt;P.S. путь до картинки подсмотрел командой:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat /etc/grub.d/05_debian_theme &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s1"&gt;&amp;#39;.png&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; grep &lt;span class="s1"&gt;&amp;#39;usr&amp;#39;&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; set_background_image &lt;span class="s2"&gt;&amp;quot;/usr/share/images/desktop-base/desktop-grub.png&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Или можно воспользоваться более человечным способом:
+Добавляем в файл &lt;code&gt;/etc/default/grub&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Grub Background&lt;/span&gt;
+&lt;span class="nv"&gt;GRUB_BACKGROUND&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/путь/до/картинки
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;P.S. Данный способ подошел и для ноутбука &lt;strong&gt;HP Compaq 6710b&lt;/strong&gt; с разрешением &lt;code&gt;1280x800&lt;/code&gt; и графическим адаптером &lt;code&gt;GM965/GL960&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Про &lt;code&gt;/etc/grub.d/40_custom&lt;/code&gt; знаю, но вот беда, как &lt;a href="https://help.ubuntu.com/community/AspireOne/AO751h" title="AspireOne/AO751h"&gt;пишут тут [1]&lt;/a&gt; у меня не заработало. Скорей всего потому, что все необходимые модули для работы видео в &lt;strong&gt;GRUB&lt;/strong&gt; были загружены прежде (как раз то место, где я добавлял строки в &lt;code&gt;/etc/grub.d/00_head&lt;/code&gt;), чем сработал скрипт &lt;code&gt;/etc/grub.d/40_custom&lt;/code&gt;, т.к. строки из него добавляются в самом конце &lt;code&gt;grub.cfg&lt;/code&gt;. Поэтому мой метод наиболее предпочтителен, но при обновлении скрипта &lt;code&gt;/etc/grub.d/00_head&lt;/code&gt; потребуется вновь его отредактировать.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://help.ubuntu.com/community/AspireOne/AO751h" title="AspireOne/AO751h"&gt;AspireOne/AO751h&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="Ubuntu"></category><category term="Grub"></category></entry></feed>

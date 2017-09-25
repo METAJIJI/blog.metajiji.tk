@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - Windows</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/windows.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2014-12-23T00:00:00+06:00</updated><entry><title>taskhost.exe "Thread exit" CPU high usage</title><link href="http://blog.metajiji.tk/blog/taskhost-exe-thread-exit-cpu-high-usage/" rel="alternate"></link><published>2014-12-23T00:00:00+06:00</published><updated>2014-12-23T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-12-23:/blog/taskhost-exe-thread-exit-cpu-high-usage/</id><summary type="html">&lt;p&gt;Обнаружил, что &lt;strong&gt;Windows 8.1&lt;/strong&gt;, установленная в &lt;strong&gt;Linux KVM&lt;/strong&gt; со всеми необходимыми &lt;strong&gt;kvm драйверами&lt;/strong&gt; после небольшого простоя начинает необоснованно потреблять процессор - &lt;code&gt;100%&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Решение было не сложным - проблема в одной из штатных запланированных задач &lt;strong&gt;Windows&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;Go to &lt;code&gt;Task Scheduler&lt;/code&gt; -&amp;gt; &lt;code&gt;Microsoft&lt;/code&gt; -&amp;gt; &lt;code&gt;Windows&lt;/code&gt; -&amp;gt; &lt;code&gt;DiskFootPrint&lt;/code&gt; and &lt;strong&gt;disable&lt;/strong&gt; the &lt;code&gt;Diagnostics&lt;/code&gt; Task.&lt;/p&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://answers.microsoft.com/en-us/windows/forum/windows8_1-performance/taskhostexe-dfpcommondll-thread-high-cpu/c16ce12f-5bc4-4f59-9e08-7404c554a8e5"&gt;&lt;code&gt;taskhost.exe&lt;/code&gt; &lt;code&gt;DfpCommon.dll …&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Обнаружил, что &lt;strong&gt;Windows 8.1&lt;/strong&gt;, установленная в &lt;strong&gt;Linux KVM&lt;/strong&gt; со всеми необходимыми &lt;strong&gt;kvm драйверами&lt;/strong&gt; после небольшого простоя начинает необоснованно потреблять процессор - &lt;code&gt;100%&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Решение было не сложным - проблема в одной из штатных запланированных задач &lt;strong&gt;Windows&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;Go to &lt;code&gt;Task Scheduler&lt;/code&gt; -&amp;gt; &lt;code&gt;Microsoft&lt;/code&gt; -&amp;gt; &lt;code&gt;Windows&lt;/code&gt; -&amp;gt; &lt;code&gt;DiskFootPrint&lt;/code&gt; and &lt;strong&gt;disable&lt;/strong&gt; the &lt;code&gt;Diagnostics&lt;/code&gt; Task.&lt;/p&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://answers.microsoft.com/en-us/windows/forum/windows8_1-performance/taskhostexe-dfpcommondll-thread-high-cpu/c16ce12f-5bc4-4f59-9e08-7404c554a8e5"&gt;&lt;code&gt;taskhost.exe&lt;/code&gt; &lt;code&gt;DfpCommon.dll&lt;/code&gt; thread high CPU utilization&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Windows"></category><category term="taskhost"></category><category term="tasknost.exe"></category><category term="threat"></category><category term="high cpu usage"></category></entry><entry><title>Запуск и адаптация МАРК-SQL 1.5.4 для MySQL 5.x</title><link href="http://blog.metajiji.tk/blog/marc-sql-1.5.4-mysql-5.x/" rel="alternate"></link><published>2014-07-04T00:00:00+07:00</published><updated>2014-07-04T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-07-04:/blog/marc-sql-1.5.4-mysql-5.x/</id><summary type="html">&lt;p&gt;Столкнулся с проблемой, &lt;strong&gt;АИБС "МАРК-SQL" для школьных библиотек 1.5.4&lt;/strong&gt; не работала с &lt;strong&gt;MySQL&lt;/strong&gt;, а разработчики заверяли, что программа не совместима с &lt;strong&gt;MySQL&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Решил проанализировать запросы, которые ходят между программой и сервером при помощи &lt;a href="http://dev.mysql.com/downloads/mysql-proxy/" title="Download MySQL Proxy"&gt;MySQL-Proxy [2]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;И сразу увидел некорректный запрос с использованием зарезервированного слова &lt;code&gt;SEPARATOR&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TAG&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;SUBTAG …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Столкнулся с проблемой, &lt;strong&gt;АИБС "МАРК-SQL" для школьных библиотек 1.5.4&lt;/strong&gt; не работала с &lt;strong&gt;MySQL&lt;/strong&gt;, а разработчики заверяли, что программа не совместима с &lt;strong&gt;MySQL&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Решил проанализировать запросы, которые ходят между программой и сервером при помощи &lt;a href="http://dev.mysql.com/downloads/mysql-proxy/" title="Download MySQL Proxy"&gt;MySQL-Proxy [2]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;И сразу увидел некорректный запрос с использованием зарезервированного слова &lt;code&gt;SEPARATOR&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TAG&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;SUBTAG&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;FLAGS&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;SEPARATOR&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;CAPTION&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;TAG&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;После добавления обратных кавычек к &lt;a href="http://dev.mysql.com/doc/mysqld-version-reference/en/mysqld-version-reference-reservedwords-5-0.html" title="Reserved Words in MySQL 5.0"&gt;зарезервированному слову &lt;code&gt;SEPARATOR&lt;/code&gt; [1]&lt;/a&gt; запрос выполнился в &lt;strong&gt;MySQL&lt;/strong&gt; без проблем:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="n"&gt;TAG&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;SUBTAG&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;FLAGS&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;SEPARATOR&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;CAPTION&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;TAG&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Значит для нормальной работы программы &lt;strong&gt;АИБС "МАРК-SQL" для школьных библиотек 1.5.4&lt;/strong&gt; нужно ловить каждый запрос, и если требуется, экранировать зарезервированные слова &lt;strong&gt;MySQL&lt;/strong&gt; на лету. С этой задачей вполне успешно справится &lt;a href="http://dev.mysql.com/downloads/mysql-proxy/" title="Download MySQL Proxy"&gt;MySQL-Proxy [2]&lt;/a&gt; с поддержкой &lt;a href="http://www.lua.org/pil/20.1.html" title="Programming in Lua"&gt;lua скриптов [4]&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;После установки, запуска &lt;strong&gt;MySQL-Proxy&lt;/strong&gt; и подключения &lt;code&gt;lua&lt;/code&gt; скрипта:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kr"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;MyDebug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="c1"&gt;-- enable\disable debug messages print to stdout.&lt;/span&gt;
+        &lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="n"&gt;dbg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="kr"&gt;if&lt;/span&gt; &lt;span class="n"&gt;dbg&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="kr"&gt;then&lt;/span&gt;
+                &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;[DEBUG] &amp;#39;&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="kr"&gt;end&lt;/span&gt;
+&lt;span class="kr"&gt;end&lt;/span&gt;
+
+&lt;span class="kr"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;read_query&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;packet&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;io.open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/var/log/mysql-proxy.log&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;string.sub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;packet&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="n"&gt;MyDebug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Orig. Query: &amp;#39;&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Orig. Query: &amp;#39;&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;-- Таблица зарезервированных слов MySQL.&lt;/span&gt;
+        &lt;span class="c1"&gt;-- http://dev.mysql.com/doc/mysqld-version-reference/en/mysqld-version-reference-reservedwords-5-7.html&lt;/span&gt;
+
+        &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;string.gsub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;(SEPARATOR)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;`%1`&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;string.gsub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;(INT%d)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;`%1`&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;-- Исправление поискового запроса (захардкоженного в marcp.exe) и регистронезависимый поиск.&lt;/span&gt;
+        &lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;str1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;str2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;str3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;string.find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;SELECT TERM,CNT FROM (.-) WHERE TERM%s*&amp;gt;=%s*(&amp;#39;.-&amp;#39;)%s(.*)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;-- TODO: проверить всегда ли передаются кавычки в поле WHERE TERM &amp;gt;= &amp;#39;&amp;#39;.&lt;/span&gt;
+        &lt;span class="kr"&gt;if&lt;/span&gt; &lt;span class="n"&gt;str1&lt;/span&gt; &lt;span class="o"&gt;~=&lt;/span&gt; &lt;span class="kc"&gt;nil&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;str2&lt;/span&gt; &lt;span class="o"&gt;~=&lt;/span&gt; &lt;span class="kc"&gt;nil&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;str3&lt;/span&gt; &lt;span class="o"&gt;~=&lt;/span&gt; &lt;span class="kc"&gt;nil&lt;/span&gt; &lt;span class="kr"&gt;then&lt;/span&gt;
+                &lt;span class="n"&gt;MyDebug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;str1: &amp;#39;&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="n"&gt;str1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="n"&gt;MyDebug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;str2: &amp;#39;&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="n"&gt;str2&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="n"&gt;MyDebug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;str3: &amp;#39;&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="n"&gt;str3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;str2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;string.gsub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;^&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;-- Delete start &amp;#39;.&lt;/span&gt;
+                &lt;span class="n"&gt;str2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;string.gsub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;str2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;#39;$&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;-- Delete end &amp;#39;.&lt;/span&gt;
+                &lt;span class="n"&gt;MyDebug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Fixed str2: &amp;#39;&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="n"&gt;str2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;string.format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;SELECT TERM,CNT FROM %s WHERE LOWER(TERM) LIKE LOWER(&amp;#39;%s%%&amp;#39;) %s&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;str1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;str2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;str3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="kr"&gt;end&lt;/span&gt;
+
+        &lt;span class="c1"&gt;-- Исправляем кавычки в запросе.&lt;/span&gt;
+        &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;string.gsub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;SELECT CODE,NAME FROM%s+&amp;quot;(.+)&amp;quot;%s*(.*)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;SELECT CODE,NAME FROM `%1` %2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;-- Del start &amp;#39;.&lt;/span&gt;
+
+        &lt;span class="n"&gt;MyDebug&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Fixed query: &amp;#39;&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Fixed query: &amp;#39;&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="n"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;queries&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;string.char&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;COM_QUERY&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;resultset_is_needed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+
+        &lt;span class="kr"&gt;return&lt;/span&gt; &lt;span class="n"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PROXY_SEND_QUERY&lt;/span&gt;
+&lt;span class="kr"&gt;end&lt;/span&gt;
+
+&lt;span class="kr"&gt;function&lt;/span&gt; &lt;span class="nf"&gt;read_query_result&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;inj&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="kr"&gt;if&lt;/span&gt; &lt;span class="n"&gt;inj&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;inj&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;resultset&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rows&lt;/span&gt; &lt;span class="o"&gt;~=&lt;/span&gt; &lt;span class="kc"&gt;nil&lt;/span&gt; &lt;span class="kr"&gt;then&lt;/span&gt;
+                &lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;io.open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/var/log/mysql-proxy.log&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="kr"&gt;for&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="kr"&gt;in&lt;/span&gt; &lt;span class="n"&gt;inj&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;resultset&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rows&lt;/span&gt; &lt;span class="kr"&gt;do&lt;/span&gt;
+                &lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+                &lt;span class="kd"&gt;local&lt;/span&gt; &lt;span class="n"&gt;fields&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+                &lt;span class="kr"&gt;while&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="kr"&gt;do&lt;/span&gt;
+                        &lt;span class="kr"&gt;if&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt; &lt;span class="kr"&gt;then&lt;/span&gt; &lt;span class="kr"&gt;break&lt;/span&gt; &lt;span class="kr"&gt;end&lt;/span&gt;
+                                &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Response field: &amp;#39;&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="n"&gt;inj&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;resultset&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fields&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39; =&amp;gt; &amp;#39;&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="n"&gt;row&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                                &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+                        &lt;span class="kr"&gt;end&lt;/span&gt;
+                &lt;span class="kr"&gt;end&lt;/span&gt;
+                &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+                &lt;span class="kr"&gt;return&lt;/span&gt; &lt;span class="n"&gt;proxy&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PROXY_IGNORE_RESULT&lt;/span&gt;
+        &lt;span class="kr"&gt;end&lt;/span&gt;
+&lt;span class="kr"&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В ходе экспериментов для подключения к БД был получен такой конфиг &lt;code&gt;dns.ini&lt;/code&gt; для работы с &lt;strong&gt;MySQL&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="na"&gt;Универс|DRIVER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;MySQL ODBC 5.2 Unicode Driver;NO_SSPS=1;MULTI_STATEMENTS=1;AUTO_RECONNECT=1;LOG_QUERY=0;IGNORE_SPACE=1;COMPRESSED_PROTO=1;NO_PROMPT=1;CHARSET=cp1251;DATABASE=marcsql;SERVER=192.168.4.26;PORT=4040;UID=marcsql;PASSWORD=password;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Описание некоторых опций:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;NO_SSPS=1;&lt;/code&gt; - Включение подстановок на стороне клиента, а не сервера (т.е. запросы в которых есть знаки "?").&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;COMPRESSED_PROTO=1;&lt;/code&gt; - Включение сжатия (немного повышается скорость работы с большими результатами запросов).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NO_PROMPT=1;&lt;/code&gt; - Отключение окна запроса, при переподключении к БД.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CHARSET=cp1251;&lt;/code&gt; - Кодировка в которой будет идти обмен между сервером и клиентом (программа для &lt;strong&gt;Windows&lt;/strong&gt; и работает в &lt;code&gt;cp1251&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BASE=marcsql;&lt;/code&gt; - Имя базы.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SERVER=192.168.4.26;&lt;/code&gt; - Адрес сервера &lt;strong&gt;MySQL-Proxy&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PORT=4040;&lt;/code&gt; - Порт на котором работает &lt;strong&gt;MySQL-Proxy&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;UID=marcsql;&lt;/code&gt; - Логин, для подключения к БД.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PASSWORD=password;&lt;/code&gt; - Пароль, для подключения к БД.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Но на этом рано останавливаться, нужно еще привести в порядок запросы в файлах программы да и самой программе объяснить, что мы будем использовать &lt;strong&gt;MySQL&lt;/strong&gt;, а не &lt;strong&gt;MS Access&lt;/strong&gt;:
+Добавляем в конец информацию о &lt;code&gt;MySQL&lt;/code&gt; в &lt;code&gt;bin/db.ini&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Mysql]&lt;/span&gt;
+
+&lt;span class="na"&gt;ScriptPath&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;..\sql\Mysql&lt;/span&gt;
+&lt;span class="na"&gt;CreateTempTable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;CREATE TABLE &amp;amp;Table&amp;amp;TabSuf(DOC_ID INTEGER PRIMARY KEY)&lt;/span&gt;
+&lt;span class="na"&gt;DictQuery&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;SELECT TERM,CNT FROM &amp;amp;Table&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В файле &lt;code&gt;DbmsParams.ini&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Mysql]&lt;/span&gt;
+
+&lt;span class="na"&gt;$VARCHAR&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;VARCHAR&lt;/span&gt;
+&lt;span class="na"&gt;$COUNTER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;INT AUTO_INCREMENT&lt;/span&gt;
+&lt;span class="na"&gt;$DOUBLE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;FLOAT&lt;/span&gt;
+&lt;span class="na"&gt;$LONGTEXT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;TEXT&lt;/span&gt;
+&lt;span class="na"&gt;$LONGBINARY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;TEXT&lt;/span&gt;
+&lt;span class="na"&gt;$MIDTEXT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;TEXT&lt;/span&gt;
+&lt;span class="na"&gt;$TEXT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;TEXT&lt;/span&gt;
+&lt;span class="na"&gt;$DBPREF_&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;marcsql.&lt;/span&gt;
+&lt;span class="na"&gt;$COLUMN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="na"&gt;$TOP1000&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="na"&gt;$ALTERCOLUMN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;ALTER COLUMN&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Добавляем информацию о возрастном маркере в &lt;code&gt;EditMap.ini&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[333a]&lt;/span&gt;
+&lt;span class="na"&gt;EditForm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;TECombo&lt;/span&gt;
+&lt;span class="na"&gt;ComboValues&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;0+  Для дошкольного возраста,6+  Для младшего школьного возраста,12+ Для среднего школьного возраста,16+ Для старшего школьного возраста,18+ Для взрослых&lt;/span&gt;
+&lt;span class="na"&gt;TagValues&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Для дошкольного возраста,Для младшего школьного возраста,Для среднего школьного возраста,Для старшего школьного возраста,Для взрослых&lt;/span&gt;
+&lt;span class="na"&gt;Separator&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;,&lt;/span&gt;
+&lt;span class="na"&gt;OnlyFormEdit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Yes&lt;/span&gt;
+&lt;span class="na"&gt;DefaultMenu&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;NO&lt;/span&gt;
+
+&lt;span class="k"&gt;[200e]&lt;/span&gt;
+&lt;span class="na"&gt;EditForm&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;TECombo&lt;/span&gt;
+&lt;span class="na"&gt;ComboValues&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;[0+],[6+],[12+],[16+],[18+]&lt;/span&gt;
+&lt;span class="na"&gt;TagValues&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;[0+],[6+],[12+],[16+],[18+]&lt;/span&gt;
+&lt;span class="na"&gt;Separator&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;,&lt;/span&gt;
+&lt;span class="na"&gt;OnlyFormEdit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;Yes&lt;/span&gt;
+&lt;span class="na"&gt;DefaultMenu&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;NO&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Добавляем редактор &lt;strong&gt;LibreOffice&lt;/strong&gt; в файле &lt;code&gt;marc.ini&lt;/code&gt; в секцию &lt;code&gt;[Editors]&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Editors]&lt;/span&gt;
+
+&lt;span class="na"&gt;LibreOffice&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;swriter.exe&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Изменяем файл &lt;code&gt;phase.ini&lt;/code&gt; под потребности нашей школы:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[Книги]&lt;/span&gt;
+
+&lt;span class="na"&gt;CreateTags&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;245anpbco,100ae,700ae,653a,520a,020ac,090ax,084a,110a,260abc,440a,650a,200e,300ab,333a,952be,526cde,250a,998а,773b,773d,773t,773g,013ddee&lt;/span&gt;
+&lt;span class="na"&gt;EditTags&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;245,100,700,653,520,020,090,084,110,200,260,440,650,300,333,952,526,250,998,773&lt;/span&gt;
+&lt;span class="na"&gt;ViewTags&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;100a,100e,700a,700e,245a,245b,245o,245p,245n,260a,260b,260c,300a,300b,333a,440a,020a,020c,650a,090a,090x,084a&lt;/span&gt;
+&lt;span class="na"&gt;ShowAllTags&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;YES&lt;/span&gt;
+&lt;span class="na"&gt;RecType&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;a&lt;/span&gt;
+&lt;span class="na"&gt;BibLevel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;m&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;В файле &lt;code&gt;RdrData.ini&lt;/code&gt;, в секции &lt;code&gt;[Common]&lt;/code&gt; исправляем запрос &lt;code&gt;LastReaderQuery&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="na"&gt;LastReaderQuery&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;SELECT RDR_ID FROM &amp;amp;ReadersPrefREADERS ORDER BY LEN(RDR_ID) DESC, RDR_ID DESC LIMIT 1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Теперь &lt;strong&gt;SQL файлы&lt;/strong&gt;, заходим в каталог &lt;code&gt;sql&lt;/code&gt;:
+Была проблема при удалении записей из таблиц словарей, исправляется в файле &lt;code&gt;delidx.sql&lt;/code&gt;:
+Ищем строку:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;DELETE&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;Table&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;CNT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Заменяем её на:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;DELETE&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;Table&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;CNT&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Исправляем проблему с удалением данных из таблицы &lt;code&gt;METAIDX&lt;/code&gt; ищем в файле &lt;code&gt;dropdict.sql&lt;/code&gt; строку:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;DELETE&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;METAIDX&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;NAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;amp;Table.TERM&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Заменяем её на:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;DELETE&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;METAIDX&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;NAME&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;amp;Table.`TERM`&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;DELETE&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;METAIDX&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;NAME&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;amp;Table.TERM&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Теперь создаем каталог &lt;code&gt;Mysql&lt;/code&gt; и копируем все файлы из каталога &lt;code&gt;Access&lt;/code&gt; в созданный каталог &lt;code&gt;Mysql&lt;/code&gt; (напоминаю, мы должны быть в каталоге &lt;code&gt;sql&lt;/code&gt;). Другими словами мы должны получить копию папки &lt;code&gt;sql/Acess&lt;/code&gt;, но по адресу &lt;code&gt;sql/Mysql&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;И приводим в порядок файлы в каталоге &lt;code&gt;sql/Mysql&lt;/code&gt;:
+Файл &lt;code&gt;crdict.sql&lt;/code&gt; приводим к такому виду:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;INSERT&lt;/span&gt; &lt;span class="k"&gt;INTO&lt;/span&gt; &lt;span class="n"&gt;METAIDX&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;NAME&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="k"&gt;TYPE&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;MAXLEN&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;TAGS&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;CAPTION&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;SEP&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;VALUES&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;amp;Table.`TERM`&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;amp;Type&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;MaxLen&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;amp;Taglist&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;amp;Caption&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;amp;Sep&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;TABLE&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;Table&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+ &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;IDX_ID&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt; &lt;span class="nb"&gt;INT&lt;/span&gt; &lt;span class="n"&gt;AUTO_INCREMENT&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt; &lt;span class="k"&gt;PRIMARY&lt;/span&gt; &lt;span class="k"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+ &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;TERM&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt; &lt;span class="nb"&gt;VARCHAR&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;MaxLen&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+ &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;CNT&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt; &lt;span class="nb"&gt;INTEGER&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;TABLE&lt;/span&gt; &lt;span class="o"&gt;`&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;TableX&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+ &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;IDX_ID&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt; &lt;span class="nb"&gt;INTEGER&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+ &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;DOC_ID&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt; &lt;span class="nb"&gt;INTEGER&lt;/span&gt; &lt;span class="k"&gt;NOT&lt;/span&gt; &lt;span class="k"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+ &lt;span class="k"&gt;FOREIGN&lt;/span&gt; &lt;span class="k"&gt;KEY&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;IDX_ID&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;REFERENCES&lt;/span&gt; &lt;span class="o"&gt;`&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;Table&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;IDX_ID&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;));&lt;/span&gt;
+
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;INDEX&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;TableXB&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;TableX&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;DOC_ID&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;INDEX&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;TableXC&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;TableX&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;IDX_ID&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Файл &lt;code&gt;rebuild.sql&lt;/code&gt; приводим к такому виду:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;DROP&lt;/span&gt; &lt;span class="k"&gt;TABLE&lt;/span&gt; &lt;span class="k"&gt;IF&lt;/span&gt; &lt;span class="k"&gt;EXISTS&lt;/span&gt; &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;IDXTEMP&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;TABLE&lt;/span&gt; &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;IDXTEMP&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;DOC_ID&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt; &lt;span class="nb"&gt;INTEGER&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;Term&lt;/span&gt; &lt;span class="nb"&gt;Text&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;BUILD&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="err"&gt;$Инициализация&lt;/span&gt; &lt;span class="err"&gt;таблицы&lt;/span&gt; &lt;span class="err"&gt;индексов&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;DELETE&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;TableX&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;DELETE&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;Table&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="err"&gt;$Заполнение&lt;/span&gt; &lt;span class="err"&gt;таблицы&lt;/span&gt; &lt;span class="err"&gt;индексов&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;INSERT&lt;/span&gt; &lt;span class="k"&gt;INTO&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;Table&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;Term&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;CNT&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;Term&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;Count&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;Term&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;IDXTEMP&lt;/span&gt; &lt;span class="k"&gt;GROUP&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;Term&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="err"&gt;$Заполнение&lt;/span&gt; &lt;span class="err"&gt;таблицы&lt;/span&gt; &lt;span class="err"&gt;перекрестных&lt;/span&gt; &lt;span class="err"&gt;ссылок&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;INSERT&lt;/span&gt; &lt;span class="k"&gt;INTO&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;TableX&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IDX_ID&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;DOC_ID&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;Table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;IDX_ID&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;IDXTEMP&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DOC_ID&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;Table&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;IDXTEMP&lt;/span&gt;
+&lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;IDXTEMP&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;Term&lt;/span&gt;&lt;span class="o"&gt;=&amp;amp;&lt;/span&gt;&lt;span class="k"&gt;Table&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;Term&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="err"&gt;$Удаление&lt;/span&gt; &lt;span class="err"&gt;временной&lt;/span&gt; &lt;span class="err"&gt;таблицы&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;DROP&lt;/span&gt; &lt;span class="k"&gt;TABLE&lt;/span&gt; &lt;span class="n"&gt;IDXTEMP&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;На этом изменения в файлах программы окончены. Пришло время конвертировать базу, я конвертировал при помощи &lt;a href="http://www.bullzip.com/products/a2m/info.php" title="BullZip Access To MySQL"&gt;BullZip Access To MySQL [6]&lt;/a&gt;, на выходе получил &lt;code&gt;.sql&lt;/code&gt; файл, который был скопирован на сервер и залит в БД. На этом все.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://dev.mysql.com/doc/mysqld-version-reference/en/mysqld-version-reference-reservedwords-5-0.html" title="Reserved Words in MySQL 5.0"&gt;Reserved Words in MySQL 5.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://dev.mysql.com/downloads/mysql-proxy/" title="Download MySQL Proxy"&gt;Download MySQL Proxy&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://dev.mysql.com/downloads/connector/odbc/"&gt;Download Connector/ODBC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.lua.org/pil/20.1.html" title="Programming in Lua"&gt;20.1 – Pattern-Matching Functions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://habrahabr.ru/post/177057/"&gt;MySQL On air. Мониторим SQL запросы&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.bullzip.com/products/a2m/info.php" title="BullZip Access To MySQL"&gt;BullZip Access To MySQL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://forum.informsystema.ru/viewtopic.php?f=2&amp;amp;t=52"&gt;MySQL и MarcSQL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://informsystema.ru/Software.aspx?id=14"&gt;Версия АИБС "МАРК-SQL" для школьных библиотек находится в свободном доступе для российских школ.&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="FreeBSD"></category><category term="Linux"></category><category term="MySQL"></category><category term="marc sql"></category><category term="МАРК-SQL"></category><category term="АИБС"></category></entry><entry><title>Настройка NTP клиента в Windows из cmd, cli, bat</title><link href="http://blog.metajiji.tk/blog/windows-cli-ntp-cmd-bat/" rel="alternate"></link><published>2014-06-27T00:00:00+07:00</published><updated>2014-06-27T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-06-27:/blog/windows-cli-ntp-cmd-bat/</id><summary type="html">&lt;p&gt;Короткая заметка про настройку &lt;strong&gt;NTP&lt;/strong&gt; клиента в &lt;strong&gt;Windows&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Для настройки вручную из &lt;code&gt;cmd&lt;/code&gt; можно воспользоваться командами:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;C&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;\&lt;/span&gt;&lt;span class="c1"&gt;&amp;gt;net time /setsntp:&amp;lt;IP-адрес или FQDN-имя NTP-сервера локальной сети&amp;gt;&lt;/span&gt;
+The command completed successfully.
+C&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;\&lt;/span&gt;&lt;span class="c1"&gt;&amp;gt;net stop w32time&lt;/span&gt;
+The Windows Time service is stopping.
+The Windows Time service was stopped successfully.
+C&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;\&lt;/span&gt;&lt;span class="c1"&gt;&amp;gt;net start …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Короткая заметка про настройку &lt;strong&gt;NTP&lt;/strong&gt; клиента в &lt;strong&gt;Windows&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Для настройки вручную из &lt;code&gt;cmd&lt;/code&gt; можно воспользоваться командами:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;C&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;\&lt;/span&gt;&lt;span class="c1"&gt;&amp;gt;net time /setsntp:&amp;lt;IP-адрес или FQDN-имя NTP-сервера локальной сети&amp;gt;&lt;/span&gt;
+The command completed successfully.
+C&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;\&lt;/span&gt;&lt;span class="c1"&gt;&amp;gt;net stop w32time&lt;/span&gt;
+The Windows Time service is stopping.
+The Windows Time service was stopped successfully.
+C&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;\&lt;/span&gt;&lt;span class="c1"&gt;&amp;gt;net start w32time&lt;/span&gt;
+The Windows Time service is starting.
+The Windows Time service was started successfully.
+C&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="nl"&gt;\&lt;/span&gt;&lt;span class="c1"&gt;&amp;gt;net time /querysntp&lt;/span&gt;
+The current SNTP value is: &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;IP-адрес или FQDN-имя NTP-сервера локальной сети&amp;gt;
+The command completed successfully.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Или объединить их в &lt;code&gt;bat&lt;/code&gt; или &lt;code&gt;cmd&lt;/code&gt; скрипт:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;ECHO&lt;/span&gt; OFF
+
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;: IP-адрес или FQDN-имя NTP-сервера локальной сети.&lt;/span&gt;
+&lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;NTP_SRV=ntp.domain.ltd&amp;quot;&lt;/span&gt;
+
+net time /setsntp:&lt;span class="nv"&gt;%NTP_SRV%&lt;/span&gt;
+net stop w32time
+net start w32time
+net time /querysntp
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://www.k-max.name/linux/ntp-server-na-linux/"&gt;NTP Server на Linux (ntpd)&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Windows"></category><category term="NTP"></category><category term="cmd"></category><category term="bat"></category></entry><entry><title>Putty и непечатаемые символы табуляции() и поробела(.)</title><link href="http://blog.metajiji.tk/blog/putty-non-printable-tab-and-space/" rel="alternate"></link><published>2014-03-23T00:00:00+07:00</published><updated>2014-03-23T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-03-23:/blog/putty-non-printable-tab-and-space/</id><summary type="html">&lt;p&gt;После обновления &lt;strong&gt;Putty&lt;/strong&gt; до &lt;code&gt;0.63&lt;/code&gt; столкнулся с проблемой, не отображались непечатаемые символы (табуляция &lt;code&gt;&amp;lt;----&amp;gt;&lt;/code&gt; и пробел &lt;code&gt;.&lt;/code&gt;),
+ исправляется установкой опции &lt;strong&gt;Change Settings&lt;/strong&gt;-&amp;gt;&lt;strong&gt;Window&lt;/strong&gt;-&amp;gt;&lt;strong&gt;Colours&lt;/strong&gt; &lt;strong&gt;Indicate bolded text by changing&lt;/strong&gt;: в "&lt;strong&gt;True Color&lt;/strong&gt;".
+ Не забываем сохранить настройки в стандартную сессию (&lt;strong&gt;Default Session&lt;/strong&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Optional title" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/putty-non-printable-tab-and-space/23-03-2014_putty-non-printable-tab-and-space/Putty_Fix_font.png" title="Optional title"&gt;&lt;/p&gt;
+&lt;p&gt;Результат:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Fixed putty options" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/putty-non-printable-tab-and-space/23-03-2014_putty-non-printable-tab-and-space/Putty_tab_fixed.png" title="Fixed putty options"&gt;&lt;/p&gt;
+&lt;p&gt;А вот так выглядит тот же файл, с проблемными …&lt;/p&gt;</summary><content type="html">&lt;p&gt;После обновления &lt;strong&gt;Putty&lt;/strong&gt; до &lt;code&gt;0.63&lt;/code&gt; столкнулся с проблемой, не отображались непечатаемые символы (табуляция &lt;code&gt;&amp;lt;----&amp;gt;&lt;/code&gt; и пробел &lt;code&gt;.&lt;/code&gt;),
+ исправляется установкой опции &lt;strong&gt;Change Settings&lt;/strong&gt;-&amp;gt;&lt;strong&gt;Window&lt;/strong&gt;-&amp;gt;&lt;strong&gt;Colours&lt;/strong&gt; &lt;strong&gt;Indicate bolded text by changing&lt;/strong&gt;: в "&lt;strong&gt;True Color&lt;/strong&gt;".
+ Не забываем сохранить настройки в стандартную сессию (&lt;strong&gt;Default Session&lt;/strong&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Optional title" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/putty-non-printable-tab-and-space/23-03-2014_putty-non-printable-tab-and-space/Putty_Fix_font.png" title="Optional title"&gt;&lt;/p&gt;
+&lt;p&gt;Результат:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Fixed putty options" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/putty-non-printable-tab-and-space/23-03-2014_putty-non-printable-tab-and-space/Putty_tab_fixed.png" title="Fixed putty options"&gt;&lt;/p&gt;
+&lt;p&gt;А вот так выглядит тот же файл, с проблемными, стандартными настройками &lt;strong&gt;Putty&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Default putty options" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/putty-non-printable-tab-and-space/23-03-2014_putty-non-printable-tab-and-space/Putty_tab_notfixed.png" title="Default putty options"&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Q: При копировании из редактора в буфер обмена тект вставляется с точками &lt;code&gt;.&lt;/code&gt; и &lt;code&gt;&amp;lt;----&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;A: Убрать подсветку пробелов и табуляции в &lt;code&gt;mc&lt;/code&gt; можно, нажав &lt;kbd&gt;Alt+Shift+-&lt;/kbd&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://www.midnight-commander.org/wiki/ru/faq"&gt;Ответы на часто задаваемые вопросы&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Putty"></category><category term="Windows"></category><category term="non printable characters"></category><category term="tab"></category><category term="space"></category></entry><entry><title>Windows 7 ошибочно полагает что нет доступа к internet или желтый восклицательный знак в трее</title><link href="http://blog.metajiji.tk/blog/windows-7-internet-connectivity/" rel="alternate"></link><published>2013-06-06T00:00:00+07:00</published><updated>2013-06-06T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-06-06:/blog/windows-7-internet-connectivity/</id><summary type="html">&lt;p&gt;После установки контент фильтра по статье &lt;a href="squid-rejik-ipcad-free-sa-nginx.html"&gt;Контент фильтр и статистика посещенных сайтов Squid + rejik + ipcad + Free-SA + nginx&lt;/a&gt; у пользователей &lt;strong&gt;Windows 7&lt;/strong&gt; возникли проблемы с сетевым апплетом в трее - он стал ошибочно показывать, что подключение к интернету отсутствует, хотя интернет работает.&lt;/p&gt;
+&lt;p&gt;После недолгих поисков в интернете было найдено 2 решения.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://technet.microsoft.com/ru-ru/library/ee126135%28v=ws.10%29.aspx" title="1"&gt;Первое …&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;После установки контент фильтра по статье &lt;a href="squid-rejik-ipcad-free-sa-nginx.html"&gt;Контент фильтр и статистика посещенных сайтов Squid + rejik + ipcad + Free-SA + nginx&lt;/a&gt; у пользователей &lt;strong&gt;Windows 7&lt;/strong&gt; возникли проблемы с сетевым апплетом в трее - он стал ошибочно показывать, что подключение к интернету отсутствует, хотя интернет работает.&lt;/p&gt;
+&lt;p&gt;После недолгих поисков в интернете было найдено 2 решения.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://technet.microsoft.com/ru-ru/library/ee126135%28v=ws.10%29.aspx" title="1"&gt;Первое [1]&lt;/a&gt; связано с разблокировкой сайта &lt;code&gt;msftncsi.com&lt;/code&gt;, который &lt;strong&gt;windows 7&lt;/strong&gt; проверяет на доступность и в случае,
+ если она не смогла получить к этому сайту доступ - выдает пользователю, что интернета нет! :) А так же &lt;strong&gt;Windows 7&lt;/strong&gt; проверяет резолв доменого имени &lt;code&gt;dns.msftncsi.com&lt;/code&gt; - оно должно быть 
+&lt;code&gt;131.107.255.255&lt;/code&gt;. Хоть и &lt;a href="http://technet.microsoft.com/ru-ru/library/ee126135%28v=ws.10%29.aspx" title="1"&gt;пишут в [1]&lt;/a&gt;, что &lt;strong&gt;Windows 7&lt;/strong&gt; проверяет оба варианта и, если хотябы один из них пройдет проверку, то &lt;strong&gt;Windows 7&lt;/strong&gt; определит, что интернет есть,
+ но у меня это на всех машинах не работало, пока не занес адрес &lt;code&gt;msftncsi.com&lt;/code&gt; в список исключений на &lt;strong&gt;Rejik&lt;/strong&gt;'e.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Для любителей поковырять и оптимизировать свою ОС в интернете предлагается &lt;a href="http://did5.ru/it/windows/kak-ubrat-vosklicatelnyj-znak-so-znachka-podklyucheniya-k-seti-v-tree-v-windows-7.html" title="2"&gt;[2 вариант]&lt;/a&gt; - отключить в самой ОС проверки интернета и апплет всегда будет считать, что интернет есть.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://technet.microsoft.com/ru-ru/library/ee126135%28v=ws.10%29.aspx" title="1"&gt;Appendix H: Network Connectivity Status Indicator and Resulting Internet Communication in Windows 7 and Windows Server 2008 R2&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://did5.ru/it/windows/kak-ubrat-vosklicatelnyj-znak-so-znachka-podklyucheniya-k-seti-v-tree-v-windows-7.html" title="2"&gt;Как убрать восклицательный знак со значка подключения к сети в трее в Windows 7&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.msftncsi.com/ncsi.txt"&gt;http://www.msftncsi.com/ncsi.txt&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Windows"></category><category term="internet connectivity"></category><category term="error"></category></entry><entry><title>Восстановление ассоциаций офисных документов в Microsoft Office Starter 2010</title><link href="http://blog.metajiji.tk/blog/microsoft-office-starter-2010-file-associations/" rel="alternate"></link><published>2013-03-10T00:00:00+07:00</published><updated>2013-03-10T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-03-10:/blog/microsoft-office-starter-2010-file-associations/</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;ECHO&lt;/span&gt; OFF
+
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;: http://support.microsoft.com/KB/323526&lt;/span&gt;
+
+&lt;span class="k"&gt;ASSOC&lt;/span&gt; .doc=Word.Document.8
+&lt;span class="k"&gt;ASSOC&lt;/span&gt; .docx=Word.Document.12
+&lt;span class="k"&gt;ASSOC&lt;/span&gt; .xls=Excel.Sheet.8
+&lt;span class="k"&gt;ASSOC&lt;/span&gt; .xlsx=Excel.Sheet.12
+
+&lt;span class="k"&gt;PAUSE&lt;/span&gt;
+
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;:.mdb=Access.MDBFile&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;:.ppt=PowerPoint.Show.8&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;:.doc=Word.Document.8&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;:.docx=Word.Document.12&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;:.xls=Excel.Sheet.8&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;:.xlsx=Excel …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="k"&gt;ECHO&lt;/span&gt; OFF
+
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;: http://support.microsoft.com/KB/323526&lt;/span&gt;
+
+&lt;span class="k"&gt;ASSOC&lt;/span&gt; .doc=Word.Document.8
+&lt;span class="k"&gt;ASSOC&lt;/span&gt; .docx=Word.Document.12
+&lt;span class="k"&gt;ASSOC&lt;/span&gt; .xls=Excel.Sheet.8
+&lt;span class="k"&gt;ASSOC&lt;/span&gt; .xlsx=Excel.Sheet.12
+
+&lt;span class="k"&gt;PAUSE&lt;/span&gt;
+
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;:.mdb=Access.MDBFile&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;:.ppt=PowerPoint.Show.8&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;:.doc=Word.Document.8&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;:.docx=Word.Document.12&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;:.xls=Excel.Sheet.8&lt;/span&gt;
+&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="c1"&gt;:.xlsx=Excel.Sheet.12&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://support.microsoft.com/KB/323526"&gt;ПРАКТИЧЕСКОЕ руководство: Использование команды ASSOC для отображения и изменения связей расширений имен файлов в Windows 2000&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Windows"></category><category term="Office"></category><category term="file associations"></category><category term="ASSOC"></category></entry><entry><title>Перенос Windows на RAID контроллер.</title><link href="http://blog.metajiji.tk/blog/windows-migrate-to-hardware-raid/" rel="alternate"></link><published>2012-10-14T00:00:00+07:00</published><updated>2012-10-14T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-10-14:/blog/windows-migrate-to-hardware-raid/</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;Уменьшить размер раздела через &lt;strong&gt;Gparted&lt;/strong&gt; через &lt;strong&gt;Ubuntu Live CD&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Загрузиться и проверить, что все ОК. Скорей всего запустится &lt;code&gt;chkdsk&lt;/code&gt; и будет испрвлять ошибки.&lt;/li&gt;
+&lt;li&gt;Сделать образ &lt;strong&gt;РАЗДЕЛОВ&lt;/strong&gt; в &lt;strong&gt;clonezilla&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Собрать рейд и установить винду на рейд, используя драйвера.&lt;/li&gt;
+&lt;li&gt;Отключить рейд контроллер и подключить винты в материнскую плату.&lt;/li&gt;
+&lt;li&gt;Восстановить из образа &lt;strong&gt;clonezilla …&lt;/strong&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;Уменьшить размер раздела через &lt;strong&gt;Gparted&lt;/strong&gt; через &lt;strong&gt;Ubuntu Live CD&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Загрузиться и проверить, что все ОК. Скорей всего запустится &lt;code&gt;chkdsk&lt;/code&gt; и будет испрвлять ошибки.&lt;/li&gt;
+&lt;li&gt;Сделать образ &lt;strong&gt;РАЗДЕЛОВ&lt;/strong&gt; в &lt;strong&gt;clonezilla&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Собрать рейд и установить винду на рейд, используя драйвера.&lt;/li&gt;
+&lt;li&gt;Отключить рейд контроллер и подключить винты в материнскую плату.&lt;/li&gt;
+&lt;li&gt;Восстановить из образа &lt;strong&gt;clonezilla&lt;/strong&gt; содержимое разделов, не трогая &lt;strong&gt;MBR&lt;/strong&gt;!
+    Возможно &lt;strong&gt;100Мб&lt;/strong&gt; раздел не нужно восстанавливать, т.к. туда были установлены драйвера для рейда, а в сохраненном образе их НЕТ!
+    Следовательно средство восстановления запуска не получится запустить в дальнейшем...
+    Чтобы избежать этой проблемы лучше не восстаналивать &lt;strong&gt;100Мб&lt;/strong&gt; раздел... Хотя не уверен! Нужно проверить.&lt;/li&gt;
+&lt;li&gt;Подключить обратно рейд контроллер и винты.&lt;/li&gt;
+&lt;li&gt;Загрузиться и проверить, что все работает :) Скорей всего запустится &lt;code&gt;chkdsk&lt;/code&gt; и будет испрвлять ошибки.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;P.S. Это сырая статья.&lt;/p&gt;</content><category term="Windows"></category><category term="Raid"></category></entry><entry><title>RDP Windows, перенаправленные принтеры, Easy Print Driver.</title><link href="http://blog.metajiji.tk/blog/rdp-windows-easy-print-driver/" rel="alternate"></link><published>2012-08-31T00:00:00+07:00</published><updated>2012-08-31T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-08-31:/blog/rdp-windows-easy-print-driver/</id><summary type="html">&lt;p&gt;Для работы перенаправленных принтеров через &lt;strong&gt;RDP&lt;/strong&gt; сессию в &lt;strong&gt;Windows 2008&lt;/strong&gt; нужно, чтобы у клиента были установлены:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Microsoft .NET Framework 3.5.&lt;/li&gt;
+&lt;li&gt;Клиент служб терминалов версии 6.1, для Windows XP (KB952155).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;В этом случае принтеры имеющиеся у клиента, будут автоматически перенаправлены через &lt;strong&gt;RDP&lt;/strong&gt; сессию на сервер терминалов.&lt;/p&gt;
+&lt;p&gt;ВАЖНО! Чтобы не …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Для работы перенаправленных принтеров через &lt;strong&gt;RDP&lt;/strong&gt; сессию в &lt;strong&gt;Windows 2008&lt;/strong&gt; нужно, чтобы у клиента были установлены:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Microsoft .NET Framework 3.5.&lt;/li&gt;
+&lt;li&gt;Клиент служб терминалов версии 6.1, для Windows XP (KB952155).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;В этом случае принтеры имеющиеся у клиента, будут автоматически перенаправлены через &lt;strong&gt;RDP&lt;/strong&gt; сессию на сервер терминалов.&lt;/p&gt;
+&lt;p&gt;ВАЖНО! Чтобы не расшаривать каждый принтер у клиента, нужно &lt;strong&gt;включить Брандмауэр&lt;/strong&gt; и выбрать тип сети - "&lt;strong&gt;Сеть Предприятия&lt;/strong&gt;".&lt;/p&gt;
+&lt;p&gt;P.S. Что самое &lt;s&gt;замечательное&lt;/s&gt;, у клиентов видны только их принтеры, и они не смогут распечатать случайно на чужом принтере!&lt;/p&gt;
+&lt;p&gt;И еще больше всего мне понравилось то, надобность установки драйверов отпадает для многих принтеров - практически все заводятся через &lt;strong&gt;Easy Print&lt;/strong&gt; драйвер.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://www.microsoft.com/ru-ru/download/details.aspx?id=7208"&gt;Подключение к удаленному рабочему столу (клиент служб терминалов версии 6.1) для Windows XP (KB952155)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.microsoft.com/en-us/download/details.aspx?id=21"&gt;Microsoft .NET Framework 3.5&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Windows"></category><category term="Easy Print Driver"></category><category term="RDP"></category></entry><entry><title>Запуск КИАСУО 1252 на Windows Server x64, corflags.exe, NetFramework 3.5</title><link href="http://blog.metajiji.tk/blog/KIASUO-1252-windows-server-x64-corflags-exe/" rel="alternate"></link><published>2012-08-29T00:00:00+07:00</published><updated>2012-08-29T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-08-29:/blog/KIASUO-1252-windows-server-x64-corflags-exe/</id><summary type="html">&lt;p&gt;Дело в том, что программа &lt;strong&gt;КИАСУО&lt;/strong&gt; ниже версии &lt;strong&gt;1280&lt;/strong&gt; откомпилирована с опцией "для всех архитектур",
+ и при запуске на &lt;strong&gt;64&lt;/strong&gt; разрядных ОС не запускается. Лечится это довольно просто, ниже описана методика.&lt;/p&gt;
+&lt;p&gt;Смотрим статус:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;C:\Users\Администратор&amp;gt;cd &amp;quot;C:\Program Files (x86)\КИАСУО3\OuServer\bin\Release&amp;quot;
+C:\Program Files (x86)\КИАСУО3 …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Дело в том, что программа &lt;strong&gt;КИАСУО&lt;/strong&gt; ниже версии &lt;strong&gt;1280&lt;/strong&gt; откомпилирована с опцией "для всех архитектур",
+ и при запуске на &lt;strong&gt;64&lt;/strong&gt; разрядных ОС не запускается. Лечится это довольно просто, ниже описана методика.&lt;/p&gt;
+&lt;p&gt;Смотрим статус:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;C:\Users\Администратор&amp;gt;cd &amp;quot;C:\Program Files (x86)\КИАСУО3\OuServer\bin\Release&amp;quot;
+C:\Program Files (x86)\КИАСУО3\OuServer\bin\Release&amp;gt;CorFlags.exe OuServer.exe
+Microsoft (R) .NET Framework CorFlags Conversion Tool.  Version  2.0.50727.42
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Version   : v2.0.50727
+CLR Header: 2.5
+PE        : PE32
+CorFlags  : 9
+ILONLY    : 1
+32BIT     : 0
+Signed    : 1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Видим, что флаг &lt;code&gt;32BIT     : 0&lt;/code&gt; не установлен.&lt;/p&gt;
+&lt;p&gt;Для запуска &lt;strong&gt;КИАСУО&lt;/strong&gt; на &lt;strong&gt;Windows Server 2008 X64&lt;/strong&gt; нужно найти утилитку &lt;a href="http://up.optizone.ru/657449/"&gt;CorFlags.exe — 73.7 КБ&lt;/a&gt;,
+ скопировать ее в папку с файлом &lt;code&gt;OuServer.exe&lt;/code&gt; и проделать следующее:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;C:\Users\Администратор&amp;gt;cd &amp;quot;C:\Program Files (x86)\КИАСУО3\OuServer\bin\Release&amp;quot;
+C:\Program Files (x86)\КИАСУО3\OuServer\bin\Release&amp;gt;CorFlags.exe OuServer.exe /32BIT+ /Force
+Microsoft (R) .NET Framework CorFlags Conversion Tool.  Version  2.0.50727.42
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+corflags : warning CF011 : The specified file is strong name signed.  Using /For
+ce will invalidate the signature of this image and will require the assembly to
+be resigned.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Проверяем результат:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;C:\Program Files (x86)\КИАСУО3\OuServer\bin\Release&amp;gt;CorFlags.exe OuServer.exe
+Microsoft (R) .NET Framework CorFlags Conversion Tool.  Version  2.0.50727.42
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Version   : v2.0.50727
+CLR Header: 2.5
+PE        : PE32
+CorFlags  : 11
+ILONLY    : 1
+32BIT     : 1
+Signed    : 1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Видим флаг &lt;code&gt;32BIT     : 1&lt;/code&gt; установлен, приятной работы!&lt;/p&gt;
+&lt;p&gt;После этого сервер запускается нормально. У меня заработал как в ручном режиме запуска, так и в режиме сервиса.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://msdn.microsoft.com/en-us/library/ms164699.aspx"&gt;CorFlags.exe (CorFlags Conversion Tool)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blogs.msdn.com/b/joshwil/archive/2005/05/06/415191.aspx"&gt;Flipping bits on managed images to make them load with the right bitness...&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="КИАСУО"></category><category term="windows-x64"></category><category term="windows-server"></category><category term="windows"></category></entry><entry><title>Перенос Windows 7 с одного HDD на другой HDD меньшего объема. (dd + Gparted)</title><link href="http://blog.metajiji.tk/blog/windows-hdd2hdd-gparted-dd/" rel="alternate"></link><published>2012-02-08T00:00:00+07:00</published><updated>2012-02-08T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2012-02-08:/blog/windows-hdd2hdd-gparted-dd/</id><summary type="html">&lt;p&gt;На работе часто бывает необходимо перенести или скопировать &lt;strong&gt;Windows 7&lt;/strong&gt; с одного &lt;strong&gt;HDD&lt;/strong&gt; на другой по разным причинам,
+ умирает &lt;strong&gt;HDD&lt;/strong&gt; или нужно установить &lt;strong&gt;HDD&lt;/strong&gt; с меньшим или наоборот с бОльшим объемом,
+ в общем проблема решается довольно просто, при помощи 2 утилит &lt;code&gt;dd&lt;/code&gt; и &lt;strong&gt;Gparted&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Загружаемся в &lt;strong&gt;Ubuntu LiveCD&lt;/strong&gt;, у меня …&lt;/p&gt;</summary><content type="html">&lt;p&gt;На работе часто бывает необходимо перенести или скопировать &lt;strong&gt;Windows 7&lt;/strong&gt; с одного &lt;strong&gt;HDD&lt;/strong&gt; на другой по разным причинам,
+ умирает &lt;strong&gt;HDD&lt;/strong&gt; или нужно установить &lt;strong&gt;HDD&lt;/strong&gt; с меньшим или наоборот с бОльшим объемом,
+ в общем проблема решается довольно просто, при помощи 2 утилит &lt;code&gt;dd&lt;/code&gt; и &lt;strong&gt;Gparted&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Загружаемся в &lt;strong&gt;Ubuntu LiveCD&lt;/strong&gt;, у меня была загрузка по сети образа &lt;strong&gt;Ubuntu 12.04 LTS Desktop&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;И первым делом копируем главную загрузочную запись (&lt;strong&gt;MBR&lt;/strong&gt;):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sda &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sdb &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt; &lt;span class="nv"&gt;count&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;После чего запускаем &lt;strong&gt;Ggparted&lt;/strong&gt; и копируем разделы (она имеется в обычном &lt;strong&gt;ISO&lt;/strong&gt;).&lt;/p&gt;
+&lt;p&gt;Не забываем проверить флаг &lt;code&gt;boot&lt;/code&gt; на &lt;code&gt;100М&lt;/code&gt;байтном разделе.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Немного об утилите &lt;code&gt;dd&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;if=/dev/sda&lt;/code&gt; -- &lt;code&gt;i&lt;/code&gt;nput &lt;code&gt;f&lt;/code&gt;ile (входной файл, в данном случае диск с &lt;strong&gt;Windows 7&lt;/strong&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;of=/dev/sdb&lt;/code&gt; -- &lt;code&gt;o&lt;/code&gt;utput &lt;code&gt;f&lt;/code&gt;ile (выходной файл, в данном случае диск куда копируем)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bs=512&lt;/code&gt; -- &lt;strong&gt;b&lt;/strong&gt;lock &lt;strong&gt;s&lt;/strong&gt;ize (&lt;strong&gt;Внимание&lt;/strong&gt;! Операнд &lt;code&gt;count&lt;/code&gt; работает с блоками, а не с байтами! &lt;code&gt;512&lt;/code&gt; блоков)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;count=1&lt;/code&gt; -- &lt;code&gt;count&lt;/code&gt; (количество раз проведения операции копирования буфером)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;MBR&lt;/strong&gt; находится в &lt;code&gt;0&lt;/code&gt; секторе первого раздела жесткого диска и занимает вместе с таблицей разделов ровно &lt;code&gt;512&lt;/code&gt; байт.
+ Поэтому и размер блока выбираем &lt;code&gt;512&lt;/code&gt;, а количество &lt;code&gt;count&lt;/code&gt; единица - получаем &lt;code&gt;512&lt;/code&gt; байт.&lt;/p&gt;
+&lt;p&gt;А если нам нужно не весь &lt;strong&gt;MBR&lt;/strong&gt;, а только загрузочный код, который занимает первые &lt;code&gt;446&lt;/code&gt; байт &lt;code&gt;0&lt;/code&gt; сектора, то придется изменить размер блока:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sda &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;boot-code.mbr &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;446&lt;/span&gt; &lt;span class="nv"&gt;count&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Обратите внимание, на то, что сохраняем в файл, т.к. в устройство записать такой объем не получится, как уже говорилось выше, запись на устройства производится блоками по &lt;code&gt;512&lt;/code&gt; байт.&lt;/p&gt;
+&lt;p&gt;Чтобы теперь записать сохраненный загрузчик, нужно получить блок размером в &lt;code&gt;512&lt;/code&gt; байт,
+ для этого сохраняем в другой файл таблицу разделов - это оставшиеся &lt;code&gt;66&lt;/code&gt; байт после загрузочного кода - &lt;code&gt;446&lt;/code&gt; байт.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sdb &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;part-table.mbr &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="nv"&gt;count&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;66&lt;/span&gt; &lt;span class="nv"&gt;skip&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;446&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;skip=n&lt;/code&gt;(блоков) Этот операнд пропускает n блоков от начала входного (&lt;code&gt;if&lt;/code&gt;) файла(устройства), а затем копирует указанное количество блоков.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Внимание&lt;/strong&gt;! Операнд &lt;code&gt;skip&lt;/code&gt; (как и &lt;code&gt;count&lt;/code&gt;) имеет дело с блоками, а не с байтами! Поэтому размер блока следует выбирать вдумчиво.
+И еще обратите внимание на то, что сейчас мы выбрали устройство &lt;code&gt;/dev/sdb&lt;/code&gt;, т.к. нам нужна таблица разделов именно этого устройства,
+ ведь мы туда собираемся копировать загрузчик с устройства &lt;code&gt;/dev/sda&lt;/code&gt; :)&lt;/p&gt;
+&lt;p&gt;Теперь нужно "собрать" &lt;strong&gt;MBR&lt;/strong&gt; из имеющихся кусочков:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cat boot-code.mbr &amp;gt; mbr
+cat part-table.mbr &amp;gt;&amp;gt; mbr
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Теперь наконец-то мы можем записать загрузочный код на устройство!&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;dd &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;mbr &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/dev/sdb &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt; &lt;span class="nv"&gt;count&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://www.youisbee.ru/index.php/documents/25-linux/62-dd.pdf"&gt;Команда dd и её использование.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://asplinux.net/node/5548"&gt;Как мне скопировать загрузочную запись линуха на дискету?&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="windows"></category><category term="gparted"></category><category term="dd"></category></entry></feed>

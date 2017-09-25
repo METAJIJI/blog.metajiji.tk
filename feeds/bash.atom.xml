@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>For system administrator - Bash</title><link href="http://blog.metajiji.tk/" rel="alternate"></link><link href="http://blog.metajiji.tk/feeds/bash.atom.xml" rel="self"></link><id>http://blog.metajiji.tk/</id><updated>2017-03-16T00:00:00+07:00</updated><entry><title>Openssl for check services</title><link href="http://blog.metajiji.tk/blog/openssl_for_check_services/" rel="alternate"></link><published>2017-03-16T00:00:00+07:00</published><updated>2017-03-16T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2017-03-16:/blog/openssl_for_check_services/</id><summary type="html">&lt;h1&gt;Проверка шифрования SSL/TLS.&lt;/h1&gt;
+&lt;p&gt;Для шифрования трафика в почтовых протоколах между клиентом и сервером используется SSL/TLS в двух вариантах.
+ Использование специальных портов, при соединении с которым сначала осуществляется установка SSL/TLS, после чего уже поверх него идет обычный почтовый трафик.
+Этот метод, кстати, признан устаревшим (deprecated), относительно SMTP точно …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Проверка шифрования SSL/TLS.&lt;/h1&gt;
+&lt;p&gt;Для шифрования трафика в почтовых протоколах между клиентом и сервером используется SSL/TLS в двух вариантах.
+ Использование специальных портов, при соединении с которым сначала осуществляется установка SSL/TLS, после чего уже поверх него идет обычный почтовый трафик.
+Этот метод, кстати, признан устаревшим (deprecated), относительно SMTP точно. Второй вариант, более предпочтительный — соединение с обычным портом для сервиса 
+и переход сессии в зашифрованный вид с использованием расширения STARTTLS.&lt;/p&gt;
+&lt;p&gt;Для проверки работы почтового сервера поверх SSL/TLS можно использовать утилиту &lt;code&gt;openssl&lt;/code&gt;, дальше действуя, как при обычной сессии через &lt;code&gt;telnet&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;SMTP&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;openssl s_client -starttls smtp -crlf -connect mail.example.com:25
+openssl s_client -starttls smtp -crlf -connect mail.example.com:587
+openssl s_client -crlf -connect mail.example.com:465
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;POP3&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;openssl s_client -connect mail.example.com:995
+openssl s_client -starttls pop3 -crlf -connect mail.example.com:110
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;IMAP&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;openssl s_client -crlf -connect mail.example.com:993
+openssl s_client -starttls imap -crlf -connect mail.example.com:143
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Можно явным образом указать, что использовать для шифрования, ssl3 или tls1, а также конкретные алгоритмы:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;openssl s_client -ssl3 -starttls smtp -crlf -connect mail.example.com:25
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Посмотреть перечень поддерживаемых протоколов в вашей версии &lt;code&gt;openssl&lt;/code&gt;:&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;openssl ciphers -ssl3
+openssl ciphers -tls1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://habrahabr.ru/company/truevds/blog/262819/"&gt;Диагностика почтовых протоколов&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="openssl"></category><category term="bash"></category><category term="Linux"></category></entry><entry><title>Screen cheatsheet</title><link href="http://blog.metajiji.tk/blog/screen-cheatsheet/" rel="alternate"></link><published>2016-10-16T00:00:00+07:00</published><updated>2016-10-16T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2016-10-16:/blog/screen-cheatsheet/</id><summary type="html">&lt;p&gt;&lt;code&gt;~/.screenrc&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;startup_message off
+hardstatus alwayslastline
+hardstatus alwayslastline &amp;#39;%{gk}[ %{G}%H %{g}]%{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{W}[%1]&amp;#39;
+vbell_msg &amp;quot; *beep* &amp;quot;
+
+# Bind Shift+Arrow Left/Right for switch via screen-tab&amp;#39;s
+bindkey ^[[1;2C next
+bindkey ^[[1;2D prev
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://habrahabr.ru/company/mailru/blog/206814/"&gt;VIM …&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;code&gt;~/.screenrc&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;startup_message off
+hardstatus alwayslastline
+hardstatus alwayslastline &amp;#39;%{gk}[ %{G}%H %{g}]%{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{W}[%1]&amp;#39;
+vbell_msg &amp;quot; *beep* &amp;quot;
+
+# Bind Shift+Arrow Left/Right for switch via screen-tab&amp;#39;s
+bindkey ^[[1;2C next
+bindkey ^[[1;2D prev
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://habrahabr.ru/company/mailru/blog/206814/"&gt;VIM + screen. Организация удаленной среды web-разработки&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="screen"></category><category term="cheatsheet"></category></entry><entry><title>PostgreSQL &amp; MySQL создать базу и пользователя</title><link href="http://blog.metajiji.tk/blog/postgresql-mysql-create-database-and-user/" rel="alternate"></link><published>2016-01-15T00:00:00+06:00</published><updated>2016-01-15T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2016-01-15:/blog/postgresql-mysql-create-database-and-user/</id><summary type="html">&lt;h1&gt;PostgreSQL&lt;/h1&gt;
+&lt;p&gt;Создать базу и пользователя в &lt;strong&gt;PostgreSQL&lt;/strong&gt;, а так же установить пароль для этого пользователя:&lt;/p&gt;
+&lt;p&gt;Запускаем &lt;strong&gt;PostgreSQL&lt;/strong&gt; клиент &lt;code&gt;psql&lt;/code&gt; от пользователя &lt;code&gt;postgres&lt;/code&gt;, используя &lt;code&gt;sudo&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo -u postgres psql
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Либо через &lt;code&gt;su&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;su - postgres -c psql
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;USER&lt;/span&gt; &lt;span class="n"&gt;someuser&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="n"&gt;PASSWORD&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;somepassword&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;CREATEDB&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;DATABASE&lt;/span&gt; &lt;span class="n"&gt;somedb&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="k"&gt;encoding&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;UNICODE&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;OWNER&lt;/span&gt; &lt;span class="n"&gt;someuser …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h1&gt;PostgreSQL&lt;/h1&gt;
+&lt;p&gt;Создать базу и пользователя в &lt;strong&gt;PostgreSQL&lt;/strong&gt;, а так же установить пароль для этого пользователя:&lt;/p&gt;
+&lt;p&gt;Запускаем &lt;strong&gt;PostgreSQL&lt;/strong&gt; клиент &lt;code&gt;psql&lt;/code&gt; от пользователя &lt;code&gt;postgres&lt;/code&gt;, используя &lt;code&gt;sudo&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo -u postgres psql
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Либо через &lt;code&gt;su&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;su - postgres -c psql
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;USER&lt;/span&gt; &lt;span class="n"&gt;someuser&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="n"&gt;PASSWORD&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;somepassword&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;CREATEDB&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;DATABASE&lt;/span&gt; &lt;span class="n"&gt;somedb&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="k"&gt;encoding&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;UNICODE&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;OWNER&lt;/span&gt; &lt;span class="n"&gt;someuser&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;ALL&lt;/span&gt; &lt;span class="k"&gt;PRIVILEGES&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="k"&gt;DATABASE&lt;/span&gt; &lt;span class="n"&gt;somedb&lt;/span&gt; &lt;span class="k"&gt;TO&lt;/span&gt; &lt;span class="n"&gt;someuser&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Сменить пароль уже существующему пользователю:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;ALTER&lt;/span&gt; &lt;span class="k"&gt;USER&lt;/span&gt; &lt;span class="n"&gt;someuser&lt;/span&gt; &lt;span class="n"&gt;PASSWORD&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;superpassword&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;MySQL&lt;/h1&gt;
+&lt;p&gt;Создать базу и пользователя в &lt;strong&gt;MySQL&lt;/strong&gt;, а так же установить пароль для этого пользователя:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;USER&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;someuser&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;127.0.%.%&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;IDENTIFIED&lt;/span&gt; &lt;span class="k"&gt;BY&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;somepasswd&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;CREATE&lt;/span&gt; &lt;span class="k"&gt;DATABASE&lt;/span&gt; &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;somedb&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt; &lt;span class="nb"&gt;CHARACTER&lt;/span&gt; &lt;span class="k"&gt;SET&lt;/span&gt; &lt;span class="n"&gt;utf8&lt;/span&gt; &lt;span class="k"&gt;COLLATE&lt;/span&gt; &lt;span class="n"&gt;utf8_general_ci&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;ALL&lt;/span&gt; &lt;span class="k"&gt;PRIVILEGES&lt;/span&gt; &lt;span class="k"&gt;ON&lt;/span&gt; &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="n"&gt;somedb&lt;/span&gt;&lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;TO&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;someuser&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;@&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;10.135.%.%&amp;#39;&lt;/span&gt; &lt;span class="k"&gt;WITH&lt;/span&gt; &lt;span class="k"&gt;GRANT&lt;/span&gt; &lt;span class="k"&gt;OPTION&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;FLUSH&lt;/span&gt; &lt;span class="k"&gt;PRIVILEGES&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="PostgreSQL"></category><category term="MySQL"></category><category term="create database"></category><category term="create user"></category></entry><entry><title>Просмотр Markdown в MidnightCommander</title><link href="http://blog.metajiji.tk/blog/markdown-midnight-commander/" rel="alternate"></link><published>2015-03-17T00:00:00+06:00</published><updated>2015-03-17T00:00:00+06:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2015-03-17:/blog/markdown-midnight-commander/</id><summary type="html">&lt;p&gt;Для просмотра &lt;strong&gt;MarkDown&lt;/strong&gt; файлов в &lt;strong&gt;Midnight Commander&lt;/strong&gt; необходимо добавить тип файлов &lt;code&gt;.md&lt;/code&gt;, для этого в файл &lt;code&gt;/etc/mc/mc.ext&lt;/code&gt; добавить следующий код:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# md&lt;/span&gt;
+regex/&lt;span class="se"&gt;\.&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;Mm&lt;span class="o"&gt;][&lt;/span&gt;Dd&lt;span class="o"&gt;]&lt;/span&gt;$
+    &lt;span class="nv"&gt;View&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;%view&lt;span class="o"&gt;{&lt;/span&gt;ascii,nroff&lt;span class="o"&gt;}&lt;/span&gt; iconv -t utf-8 %p &lt;span class="p"&gt;|&lt;/span&gt; pandoc -f markdown -t html &lt;span class="p"&gt;|&lt;/span&gt; iconv -f utf-8 &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;w3m -dump -T text/html &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt;/dev …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Для просмотра &lt;strong&gt;MarkDown&lt;/strong&gt; файлов в &lt;strong&gt;Midnight Commander&lt;/strong&gt; необходимо добавить тип файлов &lt;code&gt;.md&lt;/code&gt;, для этого в файл &lt;code&gt;/etc/mc/mc.ext&lt;/code&gt; добавить следующий код:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# md&lt;/span&gt;
+regex/&lt;span class="se"&gt;\.&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;Mm&lt;span class="o"&gt;][&lt;/span&gt;Dd&lt;span class="o"&gt;]&lt;/span&gt;$
+    &lt;span class="nv"&gt;View&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;%view&lt;span class="o"&gt;{&lt;/span&gt;ascii,nroff&lt;span class="o"&gt;}&lt;/span&gt; iconv -t utf-8 %p &lt;span class="p"&gt;|&lt;/span&gt; pandoc -f markdown -t html &lt;span class="p"&gt;|&lt;/span&gt; iconv -f utf-8 &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;w3m -dump -T text/html &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt;/dev/null &lt;span class="o"&gt;||&lt;/span&gt; lynx -force_html -stdin -dump -nolist &lt;span class="m"&gt;2&lt;/span&gt;&amp;gt;/dev/null&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Для конвертирования &lt;code&gt;md&lt;/code&gt; в &lt;code&gt;html&lt;/code&gt; используется утилита &lt;code&gt;pandoc&lt;/code&gt;, она мне показалась более предпочтительной, чем &lt;code&gt;markdown&lt;/code&gt;,
+ т.к. последний не умел обрабатывать теги с подобным кодом &lt;code&gt;```bash&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pandoc&lt;/code&gt; необходимо установить, например для &lt;strong&gt;ubuntu&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;apt-get install pandoc
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Если нет желания ставить &lt;code&gt;w3m&lt;/code&gt; или &lt;code&gt;lynx&lt;/code&gt; браузер, то можно воспользоваться форматом &lt;code&gt;man&lt;/code&gt; (&lt;code&gt;pandoc&lt;/code&gt; по прежнему необходим):&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# md&lt;/span&gt;
+regex/&lt;span class="se"&gt;\.&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;Mm&lt;span class="o"&gt;][&lt;/span&gt;Dd&lt;span class="o"&gt;]&lt;/span&gt;$
+    &lt;span class="nv"&gt;View&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;%view&lt;span class="o"&gt;{&lt;/span&gt;ascii,nroff&lt;span class="o"&gt;}&lt;/span&gt; iconv -t utf-8 %p &lt;span class="p"&gt;|&lt;/span&gt; pandoc -s -f markdown -t man &lt;span class="p"&gt;|&lt;/span&gt; iconv -f utf-8 &lt;span class="p"&gt;|&lt;/span&gt; man -l -
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;P.S. &lt;code&gt;iconv&lt;/code&gt; используется на всякий случай, если вдруг по какой-то причине у вас не &lt;strong&gt;UTF8&lt;/strong&gt; локаль, а &lt;code&gt;pandoc&lt;/code&gt; обрабатывает по умолчанию в &lt;strong&gt;UTF8&lt;/strong&gt; и результат отдает тоже в &lt;strong&gt;UTF8&lt;/strong&gt;,
+ поэтому сперва конвертируем исходный текст из вашей локали в &lt;strong&gt;UTF8&lt;/strong&gt;, отдаем на обработку в &lt;code&gt;pandoc&lt;/code&gt; и конвертируем из &lt;strong&gt;UTF8&lt;/strong&gt; обратно в текущую локаль.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://dillinger.io/"&gt;Online MarkDown Editor&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Markdown"></category><category term="Midnight commander"></category></entry><entry><title>Приводим документ к одному типу indent - expand, unexpand и немного про alignment.</title><link href="http://blog.metajiji.tk/blog/indent-expand-unexpand-alignment/" rel="alternate"></link><published>2014-08-28T00:00:00+07:00</published><updated>2014-08-28T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-08-28:/blog/indent-expand-unexpand-alignment/</id><summary type="html">&lt;p&gt;Создадим файл с табуляцией:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; -e &lt;span class="s2"&gt;&amp;quot;\t1\n         2&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; unexpand -t8 &amp;gt; &lt;span class="m"&gt;1&lt;/span&gt;.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Получим в &lt;code&gt;1.txt&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;------&amp;gt;1
+&amp;lt;------&amp;gt; 2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Где &lt;code&gt;&amp;lt;------&amp;gt;&lt;/code&gt; - 1 таб.&lt;/p&gt;
+&lt;p&gt;Приведем &lt;code&gt;indent&lt;/code&gt; к одному виду - пробелам, где 1 таб равен 8 пробелам:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;expand -t8 &lt;span class="m"&gt;1&lt;/span&gt;.txt &amp;gt; &lt;span class="m"&gt;2&lt;/span&gt;.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Получим в &lt;code&gt;2.txt&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;        1
+         2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Получаем некий аналог &lt;code&gt;dos2unix …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Создадим файл с табуляцией:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; -e &lt;span class="s2"&gt;&amp;quot;\t1\n         2&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; unexpand -t8 &amp;gt; &lt;span class="m"&gt;1&lt;/span&gt;.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Получим в &lt;code&gt;1.txt&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;------&amp;gt;1
+&amp;lt;------&amp;gt; 2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Где &lt;code&gt;&amp;lt;------&amp;gt;&lt;/code&gt; - 1 таб.&lt;/p&gt;
+&lt;p&gt;Приведем &lt;code&gt;indent&lt;/code&gt; к одному виду - пробелам, где 1 таб равен 8 пробелам:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;expand -t8 &lt;span class="m"&gt;1&lt;/span&gt;.txt &amp;gt; &lt;span class="m"&gt;2&lt;/span&gt;.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Получим в &lt;code&gt;2.txt&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;        1
+         2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Получаем некий аналог &lt;code&gt;dos2unix&lt;/code&gt; и &lt;code&gt;unix2dos&lt;/code&gt;, только для табов и пробелов.&lt;/p&gt;
+&lt;p&gt;Теперь о применении такого на практике, до недавнего времени я тоже не знал разницу между &lt;code&gt;indentation&lt;/code&gt; и &lt;code&gt;alignment&lt;/code&gt;. Приведу примеры о чем идет речь.&lt;/p&gt;
+&lt;p&gt;Это — &lt;code&gt;indentation&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;do_something&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;А вот это — &lt;code&gt;alignment&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;some_variable&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;v1&lt;/span&gt;            &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Соль в том, что &lt;code&gt;indentation&lt;/code&gt; не поплывет в разных редакторах, с разными размерами таба, а вот &lt;code&gt;alignment&lt;/code&gt; с табами поплывет 100%.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Следовательно, если хотим использовать табы, используем только в &lt;code&gt;indentation&lt;/code&gt;, но &lt;code&gt;alignment&lt;/code&gt; делаем исключительно пробелами.
+В таком случае использовать &lt;code&gt;expand&lt;/code&gt; и &lt;code&gt;unexpand&lt;/code&gt; нужно с особой осторожностью, чтобы не задеть &lt;code&gt;aligement&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://habrahabr.ru/post/118208/"&gt;Пора завязывать использовать пробелы вместо табуляции в коде&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://habrahabr.ru/post/118924/"&gt;Примиряем любителей пробелов и табов&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="bash"></category><category term="indent"></category><category term="alignment"></category><category term="expand"></category><category term="unexpand"></category></entry><entry><title>Инвертируем поведение tail и head</title><link href="http://blog.metajiji.tk/blog/inverted-tail-head/" rel="alternate"></link><published>2014-08-28T00:00:00+07:00</published><updated>2014-08-28T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2014-08-28:/blog/inverted-tail-head/</id><summary type="html">&lt;p&gt;Очень короткая заметка про &lt;code&gt;tail&lt;/code&gt; и &lt;code&gt;head&lt;/code&gt;. Как известно &lt;code&gt;head&lt;/code&gt; и &lt;code&gt;tail&lt;/code&gt; работают с 10 первыми или последними строками соответственно.
+ Но бывает необходимость получить все строки, кроме, например первых трех, или наоборот кроме последних 3.&lt;/p&gt;
+&lt;p&gt;Приведу пример работы, вот простой файл:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;user@Ubuntu:~$ cat /etc/lsb-release
+&lt;span class="nv"&gt;DISTRIB_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Ubuntu
+&lt;span class="nv"&gt;DISTRIB_RELEASE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;14 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Очень короткая заметка про &lt;code&gt;tail&lt;/code&gt; и &lt;code&gt;head&lt;/code&gt;. Как известно &lt;code&gt;head&lt;/code&gt; и &lt;code&gt;tail&lt;/code&gt; работают с 10 первыми или последними строками соответственно.
+ Но бывает необходимость получить все строки, кроме, например первых трех, или наоборот кроме последних 3.&lt;/p&gt;
+&lt;p&gt;Приведу пример работы, вот простой файл:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;user@Ubuntu:~$ cat /etc/lsb-release
+&lt;span class="nv"&gt;DISTRIB_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Ubuntu
+&lt;span class="nv"&gt;DISTRIB_RELEASE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;14&lt;/span&gt;.04
+&lt;span class="nv"&gt;DISTRIB_CODENAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;trusty
+&lt;span class="nv"&gt;DISTRIB_DESCRIPTION&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Ubuntu 14.04.1 LTS&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Получим из него все строки, кроме первой:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;user@Ubuntu:~$ tail -n+2 /etc/lsb-release
+&lt;span class="nv"&gt;DISTRIB_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;Ubuntu
+&lt;span class="nv"&gt;DISTRIB_RELEASE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;14&lt;/span&gt;.04
+&lt;span class="nv"&gt;DISTRIB_CODENAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;trusty
+&lt;span class="nv"&gt;DISTRIB_DESCRIPTION&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Ubuntu 14.04.1 LTS&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;А теперь все кроме последних двух:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;bash
+user@Ubuntu:~$ head -n+3 /etc/lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=14.04
+DISTRIB_CODENAME=trusty
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;И живой пример использования, нужно получить из &lt;code&gt;netstat&lt;/code&gt; количество соединений сгруппированных по типу, исключив первые 2 строки заголовка:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;user@Ubuntu:~$ netstat -ant &lt;span class="p"&gt;|&lt;/span&gt; tail -n +3 &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print $6}&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sort &lt;span class="p"&gt;|&lt;/span&gt; uniq -c
+      &lt;span class="m"&gt;1&lt;/span&gt; CLOSE_WAIT
+     &lt;span class="m"&gt;34&lt;/span&gt; ESTABLISHED
+      &lt;span class="m"&gt;8&lt;/span&gt; LISTEN
+      &lt;span class="m"&gt;2&lt;/span&gt; SYN_SENT
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Или для удобства в цикле:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;user@Ubuntu:~$ &lt;span class="k"&gt;while&lt;/span&gt; true&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; netstat -ant &lt;span class="p"&gt;|&lt;/span&gt; tail -n +3 &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;{print $6}&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; sort &lt;span class="p"&gt;|&lt;/span&gt; uniq -c&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; -----------&lt;span class="p"&gt;;&lt;/span&gt; sleep &lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;done&lt;/span&gt;
+      &lt;span class="m"&gt;1&lt;/span&gt; CLOSE_WAIT
+     &lt;span class="m"&gt;32&lt;/span&gt; ESTABLISHED
+      &lt;span class="m"&gt;8&lt;/span&gt; LISTEN
+-----------
+      &lt;span class="m"&gt;1&lt;/span&gt; CLOSE_WAIT
+     &lt;span class="m"&gt;32&lt;/span&gt; ESTABLISHED
+      &lt;span class="m"&gt;8&lt;/span&gt; LISTEN
+-----------
+^C
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Остановить цикл можно клавишами &lt;kbd&gt;Ctrl+c&lt;/kbd&gt;.&lt;/p&gt;</content><category term="Bash"></category><category term="tail"></category><category term="head"></category><category term="inverted"></category><category term="inverse"></category></entry><entry><title>Скрипт генерации сертификатов SSL для nginx.</title><link href="http://blog.metajiji.tk/blog/generate-ssl-certificates/" rel="alternate"></link><published>2013-10-09T00:00:00+07:00</published><updated>2013-10-09T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-10-09:/blog/generate-ssl-certificates/</id><summary type="html">&lt;p&gt;Скрипт генерации &lt;code&gt;ssl&lt;/code&gt; сертификатов и ключей для &lt;code&gt;nginx&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+error&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ERROR detected! Exiting...&amp;#39;&lt;/span&gt;
+    &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;#################################################&lt;/span&gt;
+&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;domain.com&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;EMAIL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;admin@domain.com&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;ORGANISATION&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Organisation&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;CITY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;you city&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;RSA_BIT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2048&lt;/span&gt;
+&lt;span class="nv"&gt;DAYS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;99365&lt;/span&gt;
+&lt;span class="c1"&gt;#################################################&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Генерируем пароль для ключей.&lt;/span&gt;
+&lt;span class="nv"&gt;PASS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;tr -cd A-Za-z &amp;lt; /dev/urandom &lt;span class="p"&gt;|&lt;/span&gt; head -c8&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Generated Password: &amp;#39;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;PASS&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Проверим …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Скрипт генерации &lt;code&gt;ssl&lt;/code&gt; сертификатов и ключей для &lt;code&gt;nginx&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+error&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ERROR detected! Exiting...&amp;#39;&lt;/span&gt;
+    &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;#################################################&lt;/span&gt;
+&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;domain.com&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;EMAIL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;admin@domain.com&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;ORGANISATION&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Organisation&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;CITY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;you city&amp;#39;&lt;/span&gt;
+&lt;span class="nv"&gt;RSA_BIT&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2048&lt;/span&gt;
+&lt;span class="nv"&gt;DAYS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;99365&lt;/span&gt;
+&lt;span class="c1"&gt;#################################################&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Генерируем пароль для ключей.&lt;/span&gt;
+&lt;span class="nv"&gt;PASS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;tr -cd A-Za-z &amp;lt; /dev/urandom &lt;span class="p"&gt;|&lt;/span&gt; head -c8&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Generated Password: &amp;#39;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;PASS&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Проверим, если не существует каталог для домена, то создаем его.&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; ! -d &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; mkdir &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Create directory: &amp;#39;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# http://linuxcmd.ru/openssl-genrsa-sozdanie-fayla-klyuchey&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Now create the server private key, you&amp;#39;ll be asked for a passphrase:&amp;quot;&lt;/span&gt;
+openssl genrsa -des3 -out &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.key -passout pass:&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;PASS&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;RSA_BIT&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$?&lt;/span&gt; -eq &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; error
+
+&lt;span class="c1"&gt;# http://linuxcmd.ru/openssl-req-sozdanie-csr-zaprosa&lt;/span&gt;
+&lt;span class="c1"&gt;# В пункте Common Name (eg, YOUR name) []: надо указать именно имя домена (без http, https, /): имя.домена&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Create the Certificate Signing Request (CSR):&amp;#39;&lt;/span&gt;
+openssl req -out &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.csr -new -newkey rsa:&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;RSA_BIT&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    -subj /C&lt;span class="o"&gt;=&lt;/span&gt;RU/ST&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CITY&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/L&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;CITY&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/O&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ORGANISATION&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/OU&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;ORGANISATION&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/CN&lt;span class="o"&gt;=&lt;/span&gt;*.&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/emailAddress&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;EMAIL&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    -nodes -keyout &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.key -passout pass:&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;PASS&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$?&lt;/span&gt; -eq &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; error
+
+&lt;span class="c1"&gt;# Starting up nginx with SSL using the above private key:&lt;/span&gt;
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Remove the necessity of entering a passphrase for:&amp;#39;&lt;/span&gt;
+cp &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.key &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.key.org
+openssl rsa -in &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.key.org -out &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.key
+&lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$?&lt;/span&gt; -eq &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; error
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Finally sign the certificate using the above private key and CSR:&amp;#39;&lt;/span&gt;
+openssl x509 -req -days &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DAYS&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt; -in &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.csr -signkey &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.key -out &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;/&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;DOMAIN&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.crt
+&lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$?&lt;/span&gt; -eq &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; error
+
+
+&lt;span class="c1"&gt;# http://wiki.nginx.org/HttpSslModule&lt;/span&gt;
+cat &lt;span class="s"&gt;&amp;lt;&amp;lt;_EOF&lt;/span&gt;
+&lt;span class="s"&gt;# Update Nginx configuration by including the newly signed certificate and private key:&lt;/span&gt;
+&lt;span class="s"&gt;server {&lt;/span&gt;
+&lt;span class="s"&gt;    listen 443;&lt;/span&gt;
+&lt;span class="s"&gt;    server_name YOUR_DOMAINNAME_HERE;&lt;/span&gt;
+
+&lt;span class="s"&gt;    ssl on;&lt;/span&gt;
+&lt;span class="s"&gt;    ssl_certificate /usr/local/nginx/conf/server.crt;&lt;/span&gt;
+&lt;span class="s"&gt;    ssl_certificate_key /usr/local/nginx/conf/server.key;&lt;/span&gt;
+&lt;span class="s"&gt;}&lt;/span&gt;
+&lt;span class="s"&gt;_EOF&lt;/span&gt;
+
+&lt;span class="c1"&gt;#Убедиться в том, что сервер присылает полную цепочку сертификатов,&lt;/span&gt;
+&lt;span class="c1"&gt;#можно при помощи утилиты командной строки openssl, например:&lt;/span&gt;
+&lt;span class="c1"&gt;#openssl s_client -connect www.godaddy.com:443&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;hr&gt;
+&lt;p&gt;Ссылки по теме:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://linuxcmd.ru/openssl-req-sozdanie-csr-zaprosa"&gt;openssl req - создание CSR-запроса&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://linuxcmd.ru/openssl-genrsa-sozdanie-fayla-klyuchey"&gt;openssl genrsa - создание файла ключей&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Bash"></category><category term="SSL"></category><category term="certificate"></category><category term="nginx"></category></entry><entry><title>sh скрипт для поиска и удаления одинаковых файлов по md5. (script for delete duplicates files by md5 hash).</title><link href="http://blog.metajiji.tk/blog/sh-md5-script-for-delete-duplicates/" rel="alternate"></link><published>2013-08-26T00:00:00+07:00</published><updated>2013-08-26T00:00:00+07:00</updated><author><name>Denis Kadyshev</name></author><id>tag:blog.metajiji.tk,2013-08-26:/blog/sh-md5-script-for-delete-duplicates/</id><summary type="html">&lt;p&gt;Скрипт для поиска и удаления одинаковых файлов по &lt;code&gt;md5&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="c1"&gt;#TODO - проверить наличие необходимых утилит&lt;/span&gt;
+&lt;span class="c1"&gt;#md5&lt;/span&gt;
+&lt;span class="c1"&gt;#find&lt;/span&gt;
+&lt;span class="c1"&gt;#getopts&lt;/span&gt;
+&lt;span class="c1"&gt;#grep&lt;/span&gt;
+
+get_yes_no&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; -n &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt; (Y/N) ? &amp;quot;&lt;/span&gt;
+        &lt;span class="nb"&gt;read&lt;/span&gt; a
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$?&lt;/span&gt; !&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+            &lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;No&amp;#39;&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt;
+        &lt;span class="k"&gt;fi&lt;/span&gt;
+        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="nv"&gt;$a&lt;/span&gt; in
+            &lt;span class="o"&gt;[&lt;/span&gt;Yy&lt;span class="o"&gt;])&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Yes&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+            &lt;span class="o"&gt;[&lt;/span&gt;Nn&lt;span class="o"&gt;])&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;No&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+            *&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+        &lt;span class="k"&gt;esac …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Скрипт для поиска и удаления одинаковых файлов по &lt;code&gt;md5&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="c1"&gt;#TODO - проверить наличие необходимых утилит&lt;/span&gt;
+&lt;span class="c1"&gt;#md5&lt;/span&gt;
+&lt;span class="c1"&gt;#find&lt;/span&gt;
+&lt;span class="c1"&gt;#getopts&lt;/span&gt;
+&lt;span class="c1"&gt;#grep&lt;/span&gt;
+
+get_yes_no&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; -n &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt; (Y/N) ? &amp;quot;&lt;/span&gt;
+        &lt;span class="nb"&gt;read&lt;/span&gt; a
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$?&lt;/span&gt; !&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+            &lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;No&amp;#39;&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt;
+        &lt;span class="k"&gt;fi&lt;/span&gt;
+        &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="nv"&gt;$a&lt;/span&gt; in
+            &lt;span class="o"&gt;[&lt;/span&gt;Yy&lt;span class="o"&gt;])&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Yes&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+            &lt;span class="o"&gt;[&lt;/span&gt;Nn&lt;span class="o"&gt;])&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;No&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+            *&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+        &lt;span class="k"&gt;esac&lt;/span&gt;
+    &lt;span class="k"&gt;done&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+build_hash_db&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+&lt;span class="c1"&gt;# Проверяем существует ли указанный файл БД, если да, то спрашиваем что делать - удалить и создать новый или выйти.&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Запущено построение базы хешей каталога: &amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -f &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$db_FILE&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+        get_yes_no &lt;span class="s1"&gt;&amp;#39;Файл БД уже существует, удалить и создать новый?&amp;#39;&lt;/span&gt;
+        &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;No&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Аварийное завершение.&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+        &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Yes&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Файл БД удален и будет создан заново.&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; rm -f &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$db_FILE&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;fi&lt;/span&gt;
+
+    find &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; -type f -print &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;read&lt;/span&gt; file&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;`md5 -q &amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;`  &lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; &lt;span class="nv"&gt;$db_FILE&lt;/span&gt;
+    &lt;span class="k"&gt;done&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+find_and_delete_duplicates_by_hash_from_db&lt;span class="o"&gt;(){&lt;/span&gt;
+    &lt;span class="c1"&gt;# Если база не создана, то предлагаем создать её.&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Запущен поиск дубликатов в каталоге &lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt; по базе хешей &lt;/span&gt;&lt;span class="nv"&gt;$db_FILE&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="o"&gt;[&lt;/span&gt; ! -f &lt;span class="nv"&gt;$db_FILE&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; get_yes_no &lt;span class="s1"&gt;&amp;#39;Файл БД не существует, создать новый?&amp;#39;&lt;/span&gt;
+    &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;No&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Аварийное завершение.&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Yes&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+        &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Создание файла БД: &amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$db_FILE&lt;/span&gt;
+        &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+            &lt;span class="nb"&gt;echo&lt;/span&gt; -n &lt;span class="s1"&gt;&amp;#39;Введите путь до каталога по которому будет создаваться файл БД: &amp;#39;&lt;/span&gt;
+            &lt;span class="nb"&gt;read&lt;/span&gt; b
+            &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$?&lt;/span&gt; !&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; -d &lt;span class="nv"&gt;$b&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+                build_hash_db &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$b&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+                &lt;span class="k"&gt;return&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;
+                &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Вы ввели неверный путь. Повторите попытку.&amp;#39;&lt;/span&gt;
+            &lt;span class="k"&gt;fi&lt;/span&gt;
+        &lt;span class="k"&gt;done&lt;/span&gt;
+    &lt;span class="k"&gt;fi&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Ищем дубликаты в каталоге $1 по БД хешей $db_FILE.&lt;/span&gt;
+    &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;#--------------------------- &amp;#39;&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;date &lt;span class="s2"&gt;&amp;quot;+%d.%m.%Y %H:%M:%S&amp;quot;&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt; &amp;gt; &lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;db_FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;.log
+    find &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; -type f -print &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;read&lt;/span&gt; file&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+        &lt;span class="nv"&gt;hash&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;md5 -q &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="sb"&gt;`&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; grep -q &lt;span class="nv"&gt;$hash&lt;/span&gt; &lt;span class="nv"&gt;$db_FILE&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt;
+            &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; is a duplicate and has been removed.&amp;#39;&lt;/span&gt;
+            &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="nv"&gt;$hash&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;     &amp;#39;&lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt; &amp;gt;&amp;gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;${&lt;/span&gt;&lt;span class="nv"&gt;db_FILE&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;.log&amp;quot;&lt;/span&gt;
+            rm -vf &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$file&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;fi&lt;/span&gt;
+    &lt;span class="k"&gt;done&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+usage&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="o"&gt;[&lt;/span&gt; -n &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    cat &lt;span class="s"&gt;&amp;lt;&amp;lt;-_EOF&lt;/span&gt;
+&lt;span class="s"&gt;        Usage: &lt;/span&gt;
+&lt;span class="s"&gt;        -c Режим построения базы хешей.&lt;/span&gt;
+&lt;span class="s"&gt;        -d Режим поиска и удаления повторяющихся файлов на основе построенной ранее базы хешей.&lt;/span&gt;
+&lt;span class="s"&gt;        -f Имя файла БД с хешами, если не будет указан, то будет использоваться значение по умолчанию - file.csv&lt;/span&gt;
+&lt;span class="s"&gt;        -h | --help Справка.&lt;/span&gt;
+
+&lt;span class="s"&gt;        Пример использования:&lt;/span&gt;
+&lt;span class="s"&gt;        1. Создать базу хешей каталога 1:&lt;/span&gt;
+&lt;span class="s"&gt;            $(basename $0) -c -f my_file.csv /path/to/folder&lt;/span&gt;
+&lt;span class="s"&gt;        2. Найти и удалить дубликаты по созданной базе хешей в каталоге 2:&lt;/span&gt;
+&lt;span class="s"&gt;            $(basename $0) -d -f my_file.csv /path/to/folder&lt;/span&gt;
+&lt;span class="s"&gt;_EOF&lt;/span&gt;
+    &lt;span class="nb"&gt;exit&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Проверяем на пустые аргументы.&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$#&lt;/span&gt; -lt &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; usage
+
+&lt;span class="nv"&gt;c_FLG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nv"&gt;d_FLG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="nb"&gt;getopts&lt;/span&gt; hcdf: a&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+    &lt;span class="k"&gt;case&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$a&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; in
+        c&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$d_FLG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; usage &lt;span class="s1"&gt;&amp;#39;ОШИБКА! Нельзя использовать одновременно опции -c и -d.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nv"&gt;c_FLG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+        d&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$c_FLG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; usage &lt;span class="s1"&gt;&amp;#39;ОШИБКА! Нельзя использовать одновременно опции -c и -d.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nv"&gt;d_FLG&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+        f&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;db_FILE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$OPTARG&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+        ?&lt;span class="p"&gt;|&lt;/span&gt;h&lt;span class="o"&gt;)&lt;/span&gt; usage &lt;span class="p"&gt;;;&lt;/span&gt;
+    &lt;span class="k"&gt;esac&lt;/span&gt;
+&lt;span class="k"&gt;done&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Сдвигаем ряд аргументов на количество уже разобранных аргументов и оставляем последний.&lt;/span&gt;
+&lt;span class="nb"&gt;shift&lt;/span&gt; &lt;span class="k"&gt;$((&lt;/span&gt;&lt;span class="nv"&gt;$OPTIND&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="k"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;#shift `expr  $OPTIND - 1`&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Проверка аргументов и важных переменных.&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; -z &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; usage &lt;span class="s1"&gt;&amp;#39;ОШИБКА! Не задан каталог для обработки.&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; -z &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$db_FILE&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; usage &lt;span class="s1"&gt;&amp;#39;ОШИБКА! Не задана опция -f.&amp;#39;&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="nv"&gt;$c_FLG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; -a &lt;span class="nv"&gt;$d_FLG&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; usage &lt;span class="s1"&gt;&amp;#39;ОШИБКА! Не указана ни одна из опций -c или -d.&amp;#39;&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Запуск фукций в зависимости от установленных переменных.&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$c_FLG&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; build_hash_db &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="o"&gt;[&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$d_FLG&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="m"&gt;1&lt;/span&gt; &lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; find_and_delete_duplicates_by_hash_from_db &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;$1&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Bash"></category><category term="checksumm"></category><category term="delete duplicates"></category></entry></feed>

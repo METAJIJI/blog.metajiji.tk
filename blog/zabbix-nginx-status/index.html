@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>zabbix: мониторинг nginx status - For system administrator</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://blog.metajiji.tk/favicon.png" rel="icon">
+
+<link rel="canonical" href="http://blog.metajiji.tk/blog/zabbix-nginx-status/">
+
+        <meta name="author" content="Denis Kadyshev" />
+        <meta name="keywords" content="Zabbix,nginx,status,stub_status,ngx_http_stub_status_module" />
+        <meta name="description" content="Скрипты и файлы конфигурации для мониторинга состояния Nginx. Шаблон для Zabbix 2.2: &lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt; &lt;zabbix_export&gt; &lt;version&gt;2.0&lt;/version&gt; &lt;date&gt;2015-11-07T18:31:03Z&lt;/date&gt; &lt;groups&gt; &lt;group&gt; &lt;name&gt;Templates&lt;/name&gt; &lt;/group&gt; &lt;/groups&gt; &lt;templates&gt; &lt;template&gt; &lt;template&gt;Template App nginx&lt;/template&gt; &lt;name&gt;Template App nginx&lt;/name&gt; &lt;groups&gt; &lt;group …" />
+
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/bootstrap.custom.min.css" type="text/css"/>
+    <link href="http://blog.metajiji.tk/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://blog.metajiji.tk/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="http://blog.metajiji.tk/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/style.css" type="text/css"/>
+
+
+        <link href="http://blog.metajiji.tk/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator ATOM Feed"/>
+
+
+
+        <link href="http://blog.metajiji.tk/feeds/zabbix.atom.xml" type="application/atom+xml" rel="alternate"
+              title="For system administrator Zabbix ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://blog.metajiji.tk/" class="navbar-brand">
+For system administrator            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/">Blog</a></li>
+                         <li><a href="http://blog.metajiji.tk/about/">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="http://blog.metajiji.tk/archives/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="http://blog.metajiji.tk" title="For system administrator"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="http://blog.metajiji.tk/category/zabbix/" title="Zabbix">Zabbix</a></li>
+                <li class="active">zabbix: мониторинг nginx status</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://blog.metajiji.tk/blog/zabbix-nginx-status/"
+                       rel="bookmark"
+                       title="Permalink to zabbix: мониторинг nginx status">
+                        zabbix: мониторинг nginx status
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2015-05-31T00:00:00+06:00"> Вс. 31 Май 2015</time>
+    </span>
+          <span class="label label-default">Modified</span>
+            <span class="modified">
+                <i class="fa fa-calendar"></i><time datetime="2015-05-31T00:00:00+06:00"> Вс. 31 Май 2015</time>
+            </span>
+
+
+            <span class="label label-default">By</span>
+            <a href="http://blog.metajiji.tk/author/denis-kadyshev.html"><i class="fa fa-user"></i> Denis Kadyshev</a>
+
+        <span class="label label-default">Category</span>
+        <a href="http://blog.metajiji.tk/category/zabbix/">Zabbix</a>
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://blog.metajiji.tk/tag/zabbix/">Zabbix</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/nginx/">nginx</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/status/">status</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/stub_status/">stub_status</a>
+        /
+	<a href="http://blog.metajiji.tk/tag/ngx_http_stub_status_module/">ngx_http_stub_status_module</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Скрипты и файлы конфигурации для мониторинга состояния <strong>Nginx</strong>.</p>
+<p>Шаблон для <strong>Zabbix 2.2</strong>:</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;zabbix_export&gt;</span>
+    <span class="nt">&lt;version&gt;</span>2.0<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;date&gt;</span>2015-11-07T18:31:03Z<span class="nt">&lt;/date&gt;</span>
+    <span class="nt">&lt;groups&gt;</span>
+        <span class="nt">&lt;group&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Templates<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;/group&gt;</span>
+    <span class="nt">&lt;/groups&gt;</span>
+    <span class="nt">&lt;templates&gt;</span>
+        <span class="nt">&lt;template&gt;</span>
+            <span class="nt">&lt;template&gt;</span>Template App nginx<span class="nt">&lt;/template&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Template App nginx<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;groups&gt;</span>
+                <span class="nt">&lt;group&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Templates<span class="nt">&lt;/name&gt;</span>
+                <span class="nt">&lt;/group&gt;</span>
+            <span class="nt">&lt;/groups&gt;</span>
+            <span class="nt">&lt;applications&gt;</span>
+                <span class="nt">&lt;application&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                <span class="nt">&lt;/application&gt;</span>
+            <span class="nt">&lt;/applications&gt;</span>
+            <span class="nt">&lt;items&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx accepts per second<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>1<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.accepts<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>0<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units&gt;</span>r/s<span class="nt">&lt;/units&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>1<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx active connections<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.connections.active<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units/&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx handled per second<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>1<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.handled<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>0<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units&gt;</span>r/s<span class="nt">&lt;/units&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>1<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx latency<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.ping[{HOST.HOST}]<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>2<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units/&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx memory allocated<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>proc.mem[nginx,nginx]<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>60<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units/&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx process count<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>proc.num[nginx]<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>60<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units/&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx reading state connection count<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.connections.reading<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units/&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx requests per second<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.requests<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>0<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units&gt;</span>r/s<span class="nt">&lt;/units&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>1<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx waiting state connection count<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.connections.waiting<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units/&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx writing state connection count<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.connections.writing<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units/&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+            <span class="nt">&lt;/items&gt;</span>
+            <span class="nt">&lt;discovery_rules/&gt;</span>
+            <span class="nt">&lt;macros/&gt;</span>
+            <span class="nt">&lt;templates/&gt;</span>
+            <span class="nt">&lt;screens/&gt;</span>
+        <span class="nt">&lt;/template&gt;</span>
+    <span class="nt">&lt;/templates&gt;</span>
+    <span class="nt">&lt;triggers&gt;</span>
+        <span class="nt">&lt;trigger&gt;</span>
+            <span class="nt">&lt;expression&gt;</span>{Template App nginx:proc.num[nginx].last(0)}=0<span class="nt">&lt;/expression&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Nginx is down on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url/&gt;</span>
+            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+            <span class="nt">&lt;priority&gt;</span>4<span class="nt">&lt;/priority&gt;</span>
+            <span class="nt">&lt;description/&gt;</span>
+            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;dependencies/&gt;</span>
+        <span class="nt">&lt;/trigger&gt;</span>
+        <span class="nt">&lt;trigger&gt;</span>
+            <span class="nt">&lt;expression&gt;</span>{Template App nginx:nginx.ping[{HOST.HOST}].min(#10)}<span class="ni">&amp;gt;</span>0.01<span class="nt">&lt;/expression&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Nginx is slow to respond on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url/&gt;</span>
+            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+            <span class="nt">&lt;priority&gt;</span>2<span class="nt">&lt;/priority&gt;</span>
+            <span class="nt">&lt;description/&gt;</span>
+            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;dependencies/&gt;</span>
+        <span class="nt">&lt;/trigger&gt;</span>
+        <span class="nt">&lt;trigger&gt;</span>
+            <span class="nt">&lt;expression&gt;</span>{Template App nginx:nginx.ping[{HOST.HOST}].last()}<span class="ni">&amp;lt;</span>0<span class="nt">&lt;/expression&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Nginx response is invalid on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url/&gt;</span>
+            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+            <span class="nt">&lt;priority&gt;</span>3<span class="nt">&lt;/priority&gt;</span>
+            <span class="nt">&lt;description&gt;</span>Nginx is not available via configured url<span class="nt">&lt;/description&gt;</span>
+            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;dependencies/&gt;</span>
+        <span class="nt">&lt;/trigger&gt;</span>
+    <span class="nt">&lt;/triggers&gt;</span>
+    <span class="nt">&lt;graphs&gt;</span>
+        <span class="nt">&lt;graph&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Nginx ping<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;width&gt;</span>900<span class="nt">&lt;/width&gt;</span>
+            <span class="nt">&lt;height&gt;</span>200<span class="nt">&lt;/height&gt;</span>
+            <span class="nt">&lt;yaxismin&gt;</span>0.0000<span class="nt">&lt;/yaxismin&gt;</span>
+            <span class="nt">&lt;yaxismax&gt;</span>100.0000<span class="nt">&lt;/yaxismax&gt;</span>
+            <span class="nt">&lt;show_work_period&gt;</span>1<span class="nt">&lt;/show_work_period&gt;</span>
+            <span class="nt">&lt;show_triggers&gt;</span>1<span class="nt">&lt;/show_triggers&gt;</span>
+            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;show_legend&gt;</span>1<span class="nt">&lt;/show_legend&gt;</span>
+            <span class="nt">&lt;show_3d&gt;</span>0<span class="nt">&lt;/show_3d&gt;</span>
+            <span class="nt">&lt;percent_left&gt;</span>0.0000<span class="nt">&lt;/percent_left&gt;</span>
+            <span class="nt">&lt;percent_right&gt;</span>0.0000<span class="nt">&lt;/percent_right&gt;</span>
+            <span class="nt">&lt;ymin_type_1&gt;</span>1<span class="nt">&lt;/ymin_type_1&gt;</span>
+            <span class="nt">&lt;ymax_type_1&gt;</span>0<span class="nt">&lt;/ymax_type_1&gt;</span>
+            <span class="nt">&lt;ymin_item_1&gt;</span>0<span class="nt">&lt;/ymin_item_1&gt;</span>
+            <span class="nt">&lt;ymax_item_1&gt;</span>0<span class="nt">&lt;/ymax_item_1&gt;</span>
+            <span class="nt">&lt;graph_items&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>0<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>2<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>009900<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template App nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.ping[{HOST.HOST}]<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+            <span class="nt">&lt;/graph_items&gt;</span>
+        <span class="nt">&lt;/graph&gt;</span>
+        <span class="nt">&lt;graph&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Nginx status<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;width&gt;</span>900<span class="nt">&lt;/width&gt;</span>
+            <span class="nt">&lt;height&gt;</span>200<span class="nt">&lt;/height&gt;</span>
+            <span class="nt">&lt;yaxismin&gt;</span>0.0000<span class="nt">&lt;/yaxismin&gt;</span>
+            <span class="nt">&lt;yaxismax&gt;</span>100.0000<span class="nt">&lt;/yaxismax&gt;</span>
+            <span class="nt">&lt;show_work_period&gt;</span>0<span class="nt">&lt;/show_work_period&gt;</span>
+            <span class="nt">&lt;show_triggers&gt;</span>0<span class="nt">&lt;/show_triggers&gt;</span>
+            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;show_legend&gt;</span>1<span class="nt">&lt;/show_legend&gt;</span>
+            <span class="nt">&lt;show_3d&gt;</span>0<span class="nt">&lt;/show_3d&gt;</span>
+            <span class="nt">&lt;percent_left&gt;</span>0.0000<span class="nt">&lt;/percent_left&gt;</span>
+            <span class="nt">&lt;percent_right&gt;</span>0.0000<span class="nt">&lt;/percent_right&gt;</span>
+            <span class="nt">&lt;ymin_type_1&gt;</span>0<span class="nt">&lt;/ymin_type_1&gt;</span>
+            <span class="nt">&lt;ymax_type_1&gt;</span>0<span class="nt">&lt;/ymax_type_1&gt;</span>
+            <span class="nt">&lt;ymin_item_1&gt;</span>0<span class="nt">&lt;/ymin_item_1&gt;</span>
+            <span class="nt">&lt;ymax_item_1&gt;</span>0<span class="nt">&lt;/ymax_item_1&gt;</span>
+            <span class="nt">&lt;graph_items&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>1<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>0<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>FF3333<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template App nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.connections.writing<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>0<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>0<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>009900<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template App nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.connections.active<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>3<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>0<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>0000FF<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template App nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.connections.reading<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>2<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>0<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>FF33FF<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template App nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.connections.waiting<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+            <span class="nt">&lt;/graph_items&gt;</span>
+        <span class="nt">&lt;/graph&gt;</span>
+        <span class="nt">&lt;graph&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Nginx workload<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;width&gt;</span>900<span class="nt">&lt;/width&gt;</span>
+            <span class="nt">&lt;height&gt;</span>200<span class="nt">&lt;/height&gt;</span>
+            <span class="nt">&lt;yaxismin&gt;</span>0.0000<span class="nt">&lt;/yaxismin&gt;</span>
+            <span class="nt">&lt;yaxismax&gt;</span>100.0000<span class="nt">&lt;/yaxismax&gt;</span>
+            <span class="nt">&lt;show_work_period&gt;</span>1<span class="nt">&lt;/show_work_period&gt;</span>
+            <span class="nt">&lt;show_triggers&gt;</span>1<span class="nt">&lt;/show_triggers&gt;</span>
+            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;show_legend&gt;</span>1<span class="nt">&lt;/show_legend&gt;</span>
+            <span class="nt">&lt;show_3d&gt;</span>0<span class="nt">&lt;/show_3d&gt;</span>
+            <span class="nt">&lt;percent_left&gt;</span>0.0000<span class="nt">&lt;/percent_left&gt;</span>
+            <span class="nt">&lt;percent_right&gt;</span>0.0000<span class="nt">&lt;/percent_right&gt;</span>
+            <span class="nt">&lt;ymin_type_1&gt;</span>0<span class="nt">&lt;/ymin_type_1&gt;</span>
+            <span class="nt">&lt;ymax_type_1&gt;</span>0<span class="nt">&lt;/ymax_type_1&gt;</span>
+            <span class="nt">&lt;ymin_item_1&gt;</span>0<span class="nt">&lt;/ymin_item_1&gt;</span>
+            <span class="nt">&lt;ymax_item_1&gt;</span>0<span class="nt">&lt;/ymax_item_1&gt;</span>
+            <span class="nt">&lt;graph_items&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>2<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>0<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>009900<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template App nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.accepts<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>0<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>0<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>C80000<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template App nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.requests<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>1<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>0<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>3333FF<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template App nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.handled<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+            <span class="nt">&lt;/graph_items&gt;</span>
+        <span class="nt">&lt;/graph&gt;</span>
+    <span class="nt">&lt;/graphs&gt;</span>
+<span class="nt">&lt;/zabbix_export&gt;</span>
+</pre></div>
+
+
+<p>Шаблон для <strong>Zabbix 2.4</strong>:</p>
+<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;zabbix_export&gt;</span>
+    <span class="nt">&lt;version&gt;</span>2.0<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;date&gt;</span>2015-05-31T06:58:40Z<span class="nt">&lt;/date&gt;</span>
+    <span class="nt">&lt;groups&gt;</span>
+        <span class="nt">&lt;group&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Templates<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;/group&gt;</span>
+    <span class="nt">&lt;/groups&gt;</span>
+    <span class="nt">&lt;templates&gt;</span>
+        <span class="nt">&lt;template&gt;</span>
+            <span class="nt">&lt;template&gt;</span>Template APP nginx<span class="nt">&lt;/template&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Template APP nginx<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;description/&gt;</span>
+            <span class="nt">&lt;groups&gt;</span>
+                <span class="nt">&lt;group&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Templates<span class="nt">&lt;/name&gt;</span>
+                <span class="nt">&lt;/group&gt;</span>
+            <span class="nt">&lt;/groups&gt;</span>
+            <span class="nt">&lt;applications&gt;</span>
+                <span class="nt">&lt;application&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                <span class="nt">&lt;/application&gt;</span>
+            <span class="nt">&lt;/applications&gt;</span>
+            <span class="nt">&lt;items&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx accepts per second<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>1<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.accepts<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>0<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units&gt;</span>r/s<span class="nt">&lt;/units&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>1<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                    <span class="nt">&lt;logtimefmt/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx active connections<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.connections.active<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units/&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                    <span class="nt">&lt;logtimefmt/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx handled per second<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>1<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.handled<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>0<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units&gt;</span>r/s<span class="nt">&lt;/units&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>1<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                    <span class="nt">&lt;logtimefmt/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx latency<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.ping[{HOST.HOST}]<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>60<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>0<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units&gt;</span>s<span class="nt">&lt;/units&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                    <span class="nt">&lt;logtimefmt/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx memory allocated<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>proc.mem[nginx,nginx]<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>60<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units&gt;</span>B<span class="nt">&lt;/units&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                    <span class="nt">&lt;logtimefmt/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx process count<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>proc.num[nginx]<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>30<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units/&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                    <span class="nt">&lt;logtimefmt/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx reading state connection count<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.connections.reading<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units/&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                    <span class="nt">&lt;logtimefmt/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx requests per second<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>1<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.requests<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>0<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units&gt;</span>r/s<span class="nt">&lt;/units&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>1<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                    <span class="nt">&lt;logtimefmt/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx waiting state connection count<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.connections.waiting<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units/&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                    <span class="nt">&lt;logtimefmt/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;item&gt;</span>
+                    <span class="nt">&lt;name&gt;</span>Nginx writing state connection count<span class="nt">&lt;/name&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>2<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;snmp_community/&gt;</span>
+                    <span class="nt">&lt;multiplier&gt;</span>0<span class="nt">&lt;/multiplier&gt;</span>
+                    <span class="nt">&lt;snmp_oid/&gt;</span>
+                    <span class="nt">&lt;key&gt;</span>nginx.connections.writing<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;delay&gt;</span>0<span class="nt">&lt;/delay&gt;</span>
+                    <span class="nt">&lt;history&gt;</span>90<span class="nt">&lt;/history&gt;</span>
+                    <span class="nt">&lt;trends&gt;</span>365<span class="nt">&lt;/trends&gt;</span>
+                    <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+                    <span class="nt">&lt;value_type&gt;</span>3<span class="nt">&lt;/value_type&gt;</span>
+                    <span class="nt">&lt;allowed_hosts/&gt;</span>
+                    <span class="nt">&lt;units/&gt;</span>
+                    <span class="nt">&lt;delta&gt;</span>0<span class="nt">&lt;/delta&gt;</span>
+                    <span class="nt">&lt;snmpv3_contextname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securityname/&gt;</span>
+                    <span class="nt">&lt;snmpv3_securitylevel&gt;</span>0<span class="nt">&lt;/snmpv3_securitylevel&gt;</span>
+                    <span class="nt">&lt;snmpv3_authprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_authprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_authpassphrase/&gt;</span>
+                    <span class="nt">&lt;snmpv3_privprotocol&gt;</span>0<span class="nt">&lt;/snmpv3_privprotocol&gt;</span>
+                    <span class="nt">&lt;snmpv3_privpassphrase/&gt;</span>
+                    <span class="nt">&lt;formula&gt;</span>1<span class="nt">&lt;/formula&gt;</span>
+                    <span class="nt">&lt;delay_flex/&gt;</span>
+                    <span class="nt">&lt;params/&gt;</span>
+                    <span class="nt">&lt;ipmi_sensor/&gt;</span>
+                    <span class="nt">&lt;data_type&gt;</span>0<span class="nt">&lt;/data_type&gt;</span>
+                    <span class="nt">&lt;authtype&gt;</span>0<span class="nt">&lt;/authtype&gt;</span>
+                    <span class="nt">&lt;username/&gt;</span>
+                    <span class="nt">&lt;password/&gt;</span>
+                    <span class="nt">&lt;publickey/&gt;</span>
+                    <span class="nt">&lt;privatekey/&gt;</span>
+                    <span class="nt">&lt;port/&gt;</span>
+                    <span class="nt">&lt;description/&gt;</span>
+                    <span class="nt">&lt;inventory_link&gt;</span>0<span class="nt">&lt;/inventory_link&gt;</span>
+                    <span class="nt">&lt;applications&gt;</span>
+                        <span class="nt">&lt;application&gt;</span>
+                            <span class="nt">&lt;name&gt;</span>App nginx<span class="nt">&lt;/name&gt;</span>
+                        <span class="nt">&lt;/application&gt;</span>
+                    <span class="nt">&lt;/applications&gt;</span>
+                    <span class="nt">&lt;valuemap/&gt;</span>
+                    <span class="nt">&lt;logtimefmt/&gt;</span>
+                <span class="nt">&lt;/item&gt;</span>
+            <span class="nt">&lt;/items&gt;</span>
+            <span class="nt">&lt;discovery_rules/&gt;</span>
+            <span class="nt">&lt;macros/&gt;</span>
+            <span class="nt">&lt;templates/&gt;</span>
+            <span class="nt">&lt;screens/&gt;</span>
+        <span class="nt">&lt;/template&gt;</span>
+    <span class="nt">&lt;/templates&gt;</span>
+    <span class="nt">&lt;triggers&gt;</span>
+        <span class="nt">&lt;trigger&gt;</span>
+            <span class="nt">&lt;expression&gt;</span>{Template APP nginx:proc.num[nginx].last(0)}=0<span class="nt">&lt;/expression&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Nginx is down on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url/&gt;</span>
+            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+            <span class="nt">&lt;priority&gt;</span>4<span class="nt">&lt;/priority&gt;</span>
+            <span class="nt">&lt;description/&gt;</span>
+            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;dependencies/&gt;</span>
+        <span class="nt">&lt;/trigger&gt;</span>
+        <span class="nt">&lt;trigger&gt;</span>
+            <span class="nt">&lt;expression&gt;</span>{Template APP nginx:nginx.ping[{HOST.HOST}].min(#10)}<span class="ni">&amp;gt;</span>0.01<span class="nt">&lt;/expression&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Nginx is slow to respond on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url/&gt;</span>
+            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+            <span class="nt">&lt;priority&gt;</span>2<span class="nt">&lt;/priority&gt;</span>
+            <span class="nt">&lt;description/&gt;</span>
+            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;dependencies/&gt;</span>
+        <span class="nt">&lt;/trigger&gt;</span>
+        <span class="nt">&lt;trigger&gt;</span>
+            <span class="nt">&lt;expression&gt;</span>{Template APP nginx:nginx.ping[{HOST.HOST}].last()}<span class="ni">&amp;lt;</span>0<span class="nt">&lt;/expression&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Nginx responce is invalid on {HOST.NAME}<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;url/&gt;</span>
+            <span class="nt">&lt;status&gt;</span>0<span class="nt">&lt;/status&gt;</span>
+            <span class="nt">&lt;priority&gt;</span>3<span class="nt">&lt;/priority&gt;</span>
+            <span class="nt">&lt;description&gt;</span>Nginx is not available via configured url<span class="nt">&lt;/description&gt;</span>
+            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;dependencies/&gt;</span>
+        <span class="nt">&lt;/trigger&gt;</span>
+    <span class="nt">&lt;/triggers&gt;</span>
+    <span class="nt">&lt;graphs&gt;</span>
+        <span class="nt">&lt;graph&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Nginx ping<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;width&gt;</span>900<span class="nt">&lt;/width&gt;</span>
+            <span class="nt">&lt;height&gt;</span>200<span class="nt">&lt;/height&gt;</span>
+            <span class="nt">&lt;yaxismin&gt;</span>0.0000<span class="nt">&lt;/yaxismin&gt;</span>
+            <span class="nt">&lt;yaxismax&gt;</span>100.0000<span class="nt">&lt;/yaxismax&gt;</span>
+            <span class="nt">&lt;show_work_period&gt;</span>1<span class="nt">&lt;/show_work_period&gt;</span>
+            <span class="nt">&lt;show_triggers&gt;</span>1<span class="nt">&lt;/show_triggers&gt;</span>
+            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;show_legend&gt;</span>1<span class="nt">&lt;/show_legend&gt;</span>
+            <span class="nt">&lt;show_3d&gt;</span>0<span class="nt">&lt;/show_3d&gt;</span>
+            <span class="nt">&lt;percent_left&gt;</span>0.0000<span class="nt">&lt;/percent_left&gt;</span>
+            <span class="nt">&lt;percent_right&gt;</span>0.0000<span class="nt">&lt;/percent_right&gt;</span>
+            <span class="nt">&lt;ymin_type_1&gt;</span>1<span class="nt">&lt;/ymin_type_1&gt;</span>
+            <span class="nt">&lt;ymax_type_1&gt;</span>0<span class="nt">&lt;/ymax_type_1&gt;</span>
+            <span class="nt">&lt;ymin_item_1&gt;</span>0<span class="nt">&lt;/ymin_item_1&gt;</span>
+            <span class="nt">&lt;ymax_item_1&gt;</span>0<span class="nt">&lt;/ymax_item_1&gt;</span>
+            <span class="nt">&lt;graph_items&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>0<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>2<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>009900<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template APP nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.ping[{HOST.HOST}]<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+            <span class="nt">&lt;/graph_items&gt;</span>
+        <span class="nt">&lt;/graph&gt;</span>
+        <span class="nt">&lt;graph&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Nginx status<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;width&gt;</span>900<span class="nt">&lt;/width&gt;</span>
+            <span class="nt">&lt;height&gt;</span>200<span class="nt">&lt;/height&gt;</span>
+            <span class="nt">&lt;yaxismin&gt;</span>0.0000<span class="nt">&lt;/yaxismin&gt;</span>
+            <span class="nt">&lt;yaxismax&gt;</span>100.0000<span class="nt">&lt;/yaxismax&gt;</span>
+            <span class="nt">&lt;show_work_period&gt;</span>0<span class="nt">&lt;/show_work_period&gt;</span>
+            <span class="nt">&lt;show_triggers&gt;</span>0<span class="nt">&lt;/show_triggers&gt;</span>
+            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;show_legend&gt;</span>1<span class="nt">&lt;/show_legend&gt;</span>
+            <span class="nt">&lt;show_3d&gt;</span>0<span class="nt">&lt;/show_3d&gt;</span>
+            <span class="nt">&lt;percent_left&gt;</span>0.0000<span class="nt">&lt;/percent_left&gt;</span>
+            <span class="nt">&lt;percent_right&gt;</span>0.0000<span class="nt">&lt;/percent_right&gt;</span>
+            <span class="nt">&lt;ymin_type_1&gt;</span>0<span class="nt">&lt;/ymin_type_1&gt;</span>
+            <span class="nt">&lt;ymax_type_1&gt;</span>0<span class="nt">&lt;/ymax_type_1&gt;</span>
+            <span class="nt">&lt;ymin_item_1&gt;</span>0<span class="nt">&lt;/ymin_item_1&gt;</span>
+            <span class="nt">&lt;ymax_item_1&gt;</span>0<span class="nt">&lt;/ymax_item_1&gt;</span>
+            <span class="nt">&lt;graph_items&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>1<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>0<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>FF3333<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template APP nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.connections.writing<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>0<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>2<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>009900<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template APP nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.connections.active<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>2<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>0<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>FF33FF<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template APP nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.connections.waiting<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>3<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>0<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>0000FF<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template APP nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.connections.reading<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+            <span class="nt">&lt;/graph_items&gt;</span>
+        <span class="nt">&lt;/graph&gt;</span>
+        <span class="nt">&lt;graph&gt;</span>
+            <span class="nt">&lt;name&gt;</span>Nginx workload<span class="nt">&lt;/name&gt;</span>
+            <span class="nt">&lt;width&gt;</span>900<span class="nt">&lt;/width&gt;</span>
+            <span class="nt">&lt;height&gt;</span>200<span class="nt">&lt;/height&gt;</span>
+            <span class="nt">&lt;yaxismin&gt;</span>0.0000<span class="nt">&lt;/yaxismin&gt;</span>
+            <span class="nt">&lt;yaxismax&gt;</span>100.0000<span class="nt">&lt;/yaxismax&gt;</span>
+            <span class="nt">&lt;show_work_period&gt;</span>1<span class="nt">&lt;/show_work_period&gt;</span>
+            <span class="nt">&lt;show_triggers&gt;</span>1<span class="nt">&lt;/show_triggers&gt;</span>
+            <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+            <span class="nt">&lt;show_legend&gt;</span>1<span class="nt">&lt;/show_legend&gt;</span>
+            <span class="nt">&lt;show_3d&gt;</span>0<span class="nt">&lt;/show_3d&gt;</span>
+            <span class="nt">&lt;percent_left&gt;</span>0.0000<span class="nt">&lt;/percent_left&gt;</span>
+            <span class="nt">&lt;percent_right&gt;</span>0.0000<span class="nt">&lt;/percent_right&gt;</span>
+            <span class="nt">&lt;ymin_type_1&gt;</span>0<span class="nt">&lt;/ymin_type_1&gt;</span>
+            <span class="nt">&lt;ymax_type_1&gt;</span>0<span class="nt">&lt;/ymax_type_1&gt;</span>
+            <span class="nt">&lt;ymin_item_1&gt;</span>0<span class="nt">&lt;/ymin_item_1&gt;</span>
+            <span class="nt">&lt;ymax_item_1&gt;</span>0<span class="nt">&lt;/ymax_item_1&gt;</span>
+            <span class="nt">&lt;graph_items&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>2<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>0<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>009900<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template APP nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.accepts<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>1<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>0<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>3333FF<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template APP nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.handled<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+                <span class="nt">&lt;graph_item&gt;</span>
+                    <span class="nt">&lt;sortorder&gt;</span>0<span class="nt">&lt;/sortorder&gt;</span>
+                    <span class="nt">&lt;drawtype&gt;</span>0<span class="nt">&lt;/drawtype&gt;</span>
+                    <span class="nt">&lt;color&gt;</span>FF0000<span class="nt">&lt;/color&gt;</span>
+                    <span class="nt">&lt;yaxisside&gt;</span>0<span class="nt">&lt;/yaxisside&gt;</span>
+                    <span class="nt">&lt;calc_fnc&gt;</span>2<span class="nt">&lt;/calc_fnc&gt;</span>
+                    <span class="nt">&lt;type&gt;</span>0<span class="nt">&lt;/type&gt;</span>
+                    <span class="nt">&lt;item&gt;</span>
+                        <span class="nt">&lt;host&gt;</span>Template APP nginx<span class="nt">&lt;/host&gt;</span>
+                        <span class="nt">&lt;key&gt;</span>nginx.requests<span class="nt">&lt;/key&gt;</span>
+                    <span class="nt">&lt;/item&gt;</span>
+                <span class="nt">&lt;/graph_item&gt;</span>
+            <span class="nt">&lt;/graph_items&gt;</span>
+        <span class="nt">&lt;/graph&gt;</span>
+    <span class="nt">&lt;/graphs&gt;</span>
+<span class="nt">&lt;/zabbix_export&gt;</span>
+</pre></div>
+
+
+<p>Для удобства установки различных нестандартных метрик для мониторинга я использую директиву <code>Include=/etc/zabbix/zabbix_agentd.conf.d/</code> после чего можно добавлять отдельные файлы,
+ в которых будут все опции, необходимые для работы необходимой метрики, в данном случае: <code>/etc/zabbix/zabbix_agentd.conf.d/nginx_status.conf</code>:</p>
+<div class="highlight"><pre><span></span><span class="nv">UserParameter</span><span class="o">=</span>nginx.ping,sh /etc/zabbix/scripts/nginx_status.sh
+</pre></div>
+
+
+<p>Конфигурация для <strong>Nginx</strong> файл <code>nginx_status_http.conf</code>:</p>
+<div class="highlight"><pre><span></span><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">listen</span> <span class="n">127.0.0.1</span><span class="p">:</span><span class="mi">80</span><span class="p">;</span>
+    <span class="kn">server_name</span> <span class="s">localhost</span><span class="p">;</span>
+
+    <span class="kn">keepalive_timeout</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kn">location</span> <span class="p">=</span> <span class="s">/nginx_status</span> <span class="p">{</span>
+        <span class="kn">stub_status</span> <span class="no">on</span><span class="p">;</span>
+        <span class="c1">#access_log off;</span>
+
+        <span class="kn">allow</span> <span class="mi">127</span><span class="s">.0.0.1</span><span class="p">;</span>
+        <span class="kn">deny</span> <span class="s">all</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">access_log</span> <span class="s">/var/log/nginx/nginx_status_http.access.log</span><span class="p">;</span>
+    <span class="kn">error_log</span> <span class="s">/var/log/nginx/nginx_status_http.error.log</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Нужно положить этот конфигурационный файл nginx в <code>/etc/nginx/sites-available/nginx_status_http.conf</code>:</p>
+<div class="highlight"><pre><span></span>ln -s /etc/nginx/sites-available/nginx_status_http.conf /etc/nginx/sites-enabled/nginx_status_http.conf
+service nginx reload
+</pre></div>
+
+
+<p>Затем необходимо создать скрипт, который осуществляет доставку данных в <strong>Zabbix</strong> - <code>/etc/zabbix/scripts/nginx_status.sh</code>:</p>
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="nv">URL</span><span class="o">=</span><span class="s1">&#39;http://localhost/nginx_status&#39;</span>
+<span class="nv">TMP</span><span class="o">=</span><span class="s1">&#39;/tmp/nginx-ping.tmp&#39;</span>
+<span class="nv">ZABBIX_SENDER</span><span class="o">=</span><span class="s1">&#39;/usr/bin/env zabbix_sender&#39;</span>
+<span class="nv">CONFIG</span><span class="o">=</span><span class="s1">&#39;/etc/zabbix/zabbix_agentd.conf&#39;</span>
+
+<span class="c1"># WARNING: Correctly setup &#39;Hostname=&#39; in config is REQUIRED!</span>
+<span class="c1"># REQUIRED binaries: GNU time, wget, awk, zabbix_sender.</span>
+
+<span class="o">(</span>/usr/bin/env <span class="nb">time</span> -f %e /usr/bin/env wget --no-http-keep-alive --quiet --timeout <span class="m">9</span> -O - <span class="nv">$URL</span><span class="o">)</span> <span class="m">2</span>&gt;<span class="nv">$TMP</span> <span class="p">|</span> <span class="se">\</span>
+awk <span class="s1">&#39;/Active connections/ {active=int($NF)}</span>
+<span class="s1">    / ([0-9]+) ([0-9]+) ([0-9]+)/ {accepts=int($1); handled=int($2); requests=int($3)}</span>
+<span class="s1">    /Reading:/ {reading=int($2); writing=int($4); waiting=int($6)}</span>
+<span class="s1">    END {</span>
+<span class="s1">        print &quot;- nginx.connections.active&quot;, active;</span>
+<span class="s1">        print &quot;- nginx.connections.reading&quot;, reading;</span>
+<span class="s1">        print &quot;- nginx.connections.writing&quot;, writing;</span>
+<span class="s1">        print &quot;- nginx.connections.waiting&quot;, waiting;</span>
+
+<span class="s1">        print &quot;- nginx.accepts&quot;, accepts;</span>
+<span class="s1">        print &quot;- nginx.handled&quot;, handled;</span>
+<span class="s1">        print &quot;- nginx.requests&quot;, requests;</span>
+<span class="s1">    }&#39;</span> <span class="p">|</span> <span class="nv">$ZABBIX_SENDER</span> <span class="se">\</span>
+        --config <span class="nv">$CONFIG</span> <span class="se">\</span>
+        --input-file - &gt;/dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+
+<span class="o">[</span> -f <span class="nv">$TMP</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> cat <span class="nv">$TMP</span> <span class="o">&amp;&amp;</span> rm <span class="nv">$TMP</span>
+
+<span class="nb">exit</span> <span class="m">1</span>
+</pre></div>
+
+
+<p>И сразу выставляем правильные права на скрипт:</p>
+<div class="highlight"><pre><span></span>chmod <span class="m">600</span> /etc/zabbix/scripts/nginx_status.sh
+chown zabbix:zabbix /etc/zabbix/scripts/nginx_status.sh
+</pre></div>
+
+
+<p>Если каталога <code>/etc/zabbix/scripts</code> у вас еще нет, то его нужно создать:</p>
+<div class="highlight"><pre><span></span>mkdir /etc/zabbix/scripts
+chmod <span class="m">700</span> /etc/zabbix/scripts
+chown zabbix:zabbix /etc/zabbix/scripts
+</pre></div>
+
+
+<p>Для корректной работы необходимо вызывать напрямую бинарный файл <code>/usr/bin/time</code>, не путать со встроенной <code>bash</code> функцией <code>time</code>, в <strong>Linux</strong> есть с этим большая,
+ на мой взгляд, проблема, т.к. <code>bash time</code> работает некорректно, в отличие от <code>/usr/bin/time</code>, к тому же и формат ответа разный, установить можно:</p>
+<p>Для <strong>Ubuntu</strong>, <strong>Debian</strong>:</p>
+<div class="highlight"><pre><span></span>apt-get install <span class="nb">time</span>
+</pre></div>
+
+
+<p>Для CentoOS и подобных:</p>
+<div class="highlight"><pre><span></span>yum install <span class="nb">time</span>
+</pre></div>
+
+
+<p>Все почти готово, теперь можно зайти в панель <strong>Zabbix</strong> и добавить нужному хосту новый шаблон <strong>Template APP nginx</strong>.</p>
+<hr>
+<ol>
+<li><a href="https://github.com/METAJIJI/zabbix_nginx">Github repo:zabbix_nginx</a></li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="http://blog.metajiji.tk/blog/zabbix-in-linux/">zabbix in linux</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/zabbix-lsi-megaraid/">Мониторинг LSI MegaRAID в Zabbix</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/zabbix-tcp-connections/">Zabbix: TCP connections</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/generate-ssl-certificates/">Скрипт генерации сертификатов SSL для nginx.</a></li>
+        <li><a href="http://blog.metajiji.tk/blog/squid-rejik-ipcad-free-sa-nginx/">Контент фильтр и статистика посещенных сайтов Squid + rejik + ipcad + Free-SA + nginx</a></li>
+    </ul>
+</section>
+    <hr/>
+    <section class="comments" id="comments">
+        <h2>Comments</h2>
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+                var disqus_url = 'http://blog.metajiji.tk/blog/zabbix-nginx-status/';
+
+            var disqus_config = function () {
+                this.language = "ru";
+            };
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function () {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    </section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/METAJIJI/"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://stackoverflow.com/users/2020443/metajiji"><i class="fa fa-stack-overflow fa-lg"></i> stackoverflow</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/fedora-chromium-firefox-flashplayer/">Fedora 25 install adobe flashplayer</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
+    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Categories -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
+  <ul class="list-group" id="categories">
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/atlassian/"><i class="fa fa-folder-open fa-lg"></i>Atlassian</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bash/"><i class="fa fa-folder-open fa-lg"></i>Bash</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bat-cmd/"><i class="fa fa-folder-open fa-lg"></i>Bat-cmd</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/bind/"><i class="fa fa-folder-open fa-lg"></i>Bind</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/blog/"><i class="fa fa-folder-open fa-lg"></i>Blog</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/centos/"><i class="fa fa-folder-open fa-lg"></i>CentOS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/docker/"><i class="fa fa-folder-open fa-lg"></i>Docker</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/fedora/"><i class="fa fa-folder-open fa-lg"></i>Fedora</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/freebsd/"><i class="fa fa-folder-open fa-lg"></i>FreeBSD</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/gitlab/"><i class="fa fa-folder-open fa-lg"></i>Gitlab</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/hardware/"><i class="fa fa-folder-open fa-lg"></i>Hardware</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/javascript/"><i class="fa fa-folder-open fa-lg"></i>JavaScript</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/linux/"><i class="fa fa-folder-open fa-lg"></i>Linux</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/macosx/"><i class="fa fa-folder-open fa-lg"></i>MacOSX</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/mikrotik/"><i class="fa fa-folder-open fa-lg"></i>Mikrotik</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/postgresql/"><i class="fa fa-folder-open fa-lg"></i>PostgreSQL</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/ubuntu/"><i class="fa fa-folder-open fa-lg"></i>Ubuntu</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/vcs/"><i class="fa fa-folder-open fa-lg"></i>VCS</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/windows/"><i class="fa fa-folder-open fa-lg"></i>Windows</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zabbix/"><i class="fa fa-folder-open fa-lg"></i>Zabbix</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://blog.metajiji.tk/category/zimbra/"><i class="fa fa-folder-open fa-lg"></i>Zimbra</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Categories -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 Denis Kadyshev
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>                <p><small>  <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+    Content
+  licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>, except where indicated otherwise.
+</small></p>
+         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://blog.metajiji.tk/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://blog.metajiji.tk/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://blog.metajiji.tk/theme/js/respond.min.js"></script>
+
+
+    <!-- Disqus -->
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'metajiji-blog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function () {
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    <!-- End Disqus Code -->
+    <!-- Google Analytics Universal -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-106896103-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics Universal Code -->
+
+
+</body>
+</html>
