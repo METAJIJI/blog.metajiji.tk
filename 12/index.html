@@ -8,24 +8,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <link href="http://blog.metajiji.tk/favicon.png" rel="icon">
+    <link href="../favicon.png" rel="icon">
 
-<link rel="canonical" href="http://blog.metajiji.tk">
+<link rel="canonical" href="..">
         <meta name="author" content="Denis Kadyshev" />
 
 
 
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/bootstrap.custom.min.css" type="text/css"/>
-    <link href="http://blog.metajiji.tk/theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../theme/css/bootstrap.custom.min.css" type="text/css"/>
+    <link href="../theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="http://blog.metajiji.tk/theme/css/pygments/monokai.css" rel="stylesheet">
-    <link href="http://blog.metajiji.tk/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://blog.metajiji.tk/theme/css/style.css" type="text/css"/>
+    <link href="../theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="../theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="../theme/css/style.css" type="text/css"/>
 
 
-        <link href="http://blog.metajiji.tk/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+        <link href="../feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="For system administrator ATOM Feed"/>
 
 
@@ -43,13 +43,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="http://blog.metajiji.tk/" class="navbar-brand">
+            <a href="../" class="navbar-brand">
 For system administrator            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                     <li><a href="/">Blog</a></li>
-                         <li><a href="http://blog.metajiji.tk/about/">
+                         <li><a href="../about/">
                              About
                           </a></li>
             </ul>
@@ -59,7 +59,7 @@ For system administrator            </a>
                   <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
                 </form></span>
               </li>
-              <li><a href="http://blog.metajiji.tk/archives/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+              <li><a href="../archives/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -71,50 +71,50 @@ For system administrator            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
-                <h2><a href="http://blog.metajiji.tk/blog/grub_hidden_timeout-no-longer-supported/">GRUB_HIDDEN_TIMEOUT no longer supported, (deprecated).</a></h2>
+                <h2><a href="../blog/grub_hidden_timeout-no-longer-supported/">GRUB_HIDDEN_TIMEOUT no longer supported, (deprecated).</a></h2>
                 <div class="summary"><p>Столкнулся с проблемой после обновления системы <strong>Ubuntu 12.04</strong>, а так же <strong>Ubuntu 14.04</strong> и <strong>Ubuntu 16.04</strong>:</p>
 <div class="highlight"><pre><span></span>root@Ubuntu:/# update-grub
 Generating grub configuration file ...
 Найден фон: /home/metall/Изображения/grub/about_1600px.png
 Предупреждение: Setting GRUB_TIMEOUT to a non-zero value when GRUB_HIDDEN_TIMEOUT is <span class="nb">set</span> is no longer supported.
 Found …</pre></div>
-                    <a class="btn btn-default btn-xs" href="http://blog.metajiji.tk/blog/grub_hidden_timeout-no-longer-supported/">more ...</a>
+                    <a class="btn btn-default btn-xs" href="../blog/grub_hidden_timeout-no-longer-supported/">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="http://blog.metajiji.tk/blog/ubuntu-grub2-recordfail/">Ubuntu GRUB2 отключить подтверждение при перезагрузке</a></h2>
+                <h2><a href="../blog/ubuntu-grub2-recordfail/">Ubuntu GRUB2 отключить подтверждение при перезагрузке</a></h2>
                 <div class="summary"><p>В <strong>Ubuntu</strong> есть проблема - в случае нештатного отключения компьютера (вырубили свет, потом включили) <strong>GRUB2</strong> доходит до меню и ждет выбора.
  Хотелось, чтобы компьютер рестартовал сам при включении света. Как оказалось за это отвечает переменная <code>recordfail</code>, которая по умолчанию выставляется <code>recordfail=1</code>,
  а после успешной загрузки системы она обнуляется через <code>init …</code></p>
-                    <a class="btn btn-default btn-xs" href="http://blog.metajiji.tk/blog/ubuntu-grub2-recordfail/">more ...</a>
+                    <a class="btn btn-default btn-xs" href="../blog/ubuntu-grub2-recordfail/">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="http://blog.metajiji.tk/blog/flock-crontab/">flock - предотвращение повторного запуска программы/скрипта из crontab.</a></h2>
+                <h2><a href="../blog/flock-crontab/">flock - предотвращение повторного запуска программы/скрипта из crontab.</a></h2>
                 <div class="summary"><p>Столкнулся с проблемой, написанный мною бот для сайта запускался раз в минуту и однажды на сервере, где работал бот интернет канал сильно просел,
  как результат за минуту бот не успел завершить свою работу.</p>
 <p><code>crontab</code> запустил его еще раз, бот снова не успел, а <code>crontab</code> продолжал беспощадно запускать копии бота - последствия …</p>
-                    <a class="btn btn-default btn-xs" href="http://blog.metajiji.tk/blog/flock-crontab/">more ...</a>
+                    <a class="btn btn-default btn-xs" href="../blog/flock-crontab/">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="http://blog.metajiji.tk/blog/putty-non-printable-tab-and-space/">Putty и непечатаемые символы табуляции(<----->) и поробела(.)</a></h2>
+                <h2><a href="../blog/putty-non-printable-tab-and-space/">Putty и непечатаемые символы табуляции(<----->) и поробела(.)</a></h2>
                 <div class="summary"><p>После обновления <strong>Putty</strong> до <code>0.63</code> столкнулся с проблемой, не отображались непечатаемые символы (табуляция <code>&lt;----&gt;</code> и пробел <code>.</code>),
  исправляется установкой опции <strong>Change Settings</strong>-&gt;<strong>Window</strong>-&gt;<strong>Colours</strong> <strong>Indicate bolded text by changing</strong>: в "<strong>True Color</strong>".
  Не забываем сохранить настройки в стандартную сессию (<strong>Default Session</strong>).</p>
-<p><img alt="Optional title" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/putty-non-printable-tab-and-space/23-03-2014_putty-non-printable-tab-and-space/Putty_Fix_font.png" title="Optional title"></p>
+<p><img alt="Optional title" class="mfp-image center-block" src="../blog/putty-non-printable-tab-and-space/23-03-2014_putty-non-printable-tab-and-space/Putty_Fix_font.png" title="Optional title"></p>
 <p>Результат:</p>
-<p><img alt="Fixed putty options" class="mfp-image center-block" src="http://blog.metajiji.tk/blog/putty-non-printable-tab-and-space/23-03-2014_putty-non-printable-tab-and-space/Putty_tab_fixed.png" title="Fixed putty options"></p>
+<p><img alt="Fixed putty options" class="mfp-image center-block" src="../blog/putty-non-printable-tab-and-space/23-03-2014_putty-non-printable-tab-and-space/Putty_tab_fixed.png" title="Fixed putty options"></p>
 <p>А вот так выглядит тот же файл, с проблемными …</p>
-                    <a class="btn btn-default btn-xs" href="http://blog.metajiji.tk/blog/putty-non-printable-tab-and-space/">more ...</a>
+                    <a class="btn btn-default btn-xs" href="../blog/putty-non-printable-tab-and-space/">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="http://blog.metajiji.tk/blog/generate-ssl-certificates/">Скрипт генерации сертификатов SSL для nginx.</a></h2>
+                <h2><a href="../blog/generate-ssl-certificates/">Скрипт генерации сертификатов SSL для nginx.</a></h2>
                 <div class="summary"><p>Скрипт генерации <code>ssl</code> сертификатов и ключей для <code>nginx</code>:</p>
 <div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
 
@@ -137,58 +137,58 @@ error<span class="o">()</span> <span class="o">{</span>
 <span class="nb">echo</span> <span class="s1">&#39;Generated Password: &#39;</span><span class="si">${</span><span class="nv">PASS</span><span class="si">}</span>
 
 <span class="c1"># Проверим …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="http://blog.metajiji.tk/blog/generate-ssl-certificates/">more ...</a>
+                    <a class="btn btn-default btn-xs" href="../blog/generate-ssl-certificates/">more ...</a>
                 </div>
             </article>
             <hr/>
 
         <ul class="pagination">
-                <li class="prev"><a href="http://blog.metajiji.tk/11/">&laquo;</a>
+                <li class="prev"><a href="../11/">&laquo;</a>
                 </li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/">1</a></li>
+                            href="../">1</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/2/">2</a></li>
+                            href="../2/">2</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/3/">3</a></li>
+                            href="../3/">3</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/4/">4</a></li>
+                            href="../4/">4</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/5/">5</a></li>
+                            href="../5/">5</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/6/">6</a></li>
+                            href="../6/">6</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/7/">7</a></li>
+                            href="../7/">7</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/8/">8</a></li>
+                            href="../8/">8</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/9/">9</a></li>
+                            href="../9/">9</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/10/">10</a></li>
+                            href="../10/">10</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/11/">11</a></li>
+                            href="../11/">11</a></li>
                     <li class="active"><a
-                            href="http://blog.metajiji.tk/12/">12</a></li>
+                            href="../12/">12</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/13/">13</a></li>
+                            href="../13/">13</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/14/">14</a></li>
+                            href="../14/">14</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/15/">15</a></li>
+                            href="../15/">15</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/16/">16</a></li>
+                            href="../16/">16</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/17/">17</a></li>
+                            href="../17/">17</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/18/">18</a></li>
+                            href="../18/">18</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/19/">19</a></li>
+                            href="../19/">19</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/20/">20</a></li>
+                            href="../20/">20</a></li>
                     <li class=""><a
-                            href="http://blog.metajiji.tk/21/">21</a></li>
+                            href="../21/">21</a></li>
                 <li class="next"><a
-                        href="http://blog.metajiji.tk/13/">&raquo;</a></li>
+                        href="../13/">&raquo;</a></li>
         </ul>
         </div>
         <div class="col-sm-3" id="sidebar">
@@ -211,9 +211,9 @@ error<span class="o">()</span> <span class="o">{</span>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
-    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/fedora-chromium-firefox-flashplayer/">Fedora 25 install adobe flashplayer</a></li>
-    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
-    <li class="list-group-item"><a href="http://blog.metajiji.tk/blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
+    <li class="list-group-item"><a href="../blog/fedora-chromium-firefox-flashplayer/">Fedora 25 install adobe flashplayer</a></li>
+    <li class="list-group-item"><a href="../blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
+    <li class="list-group-item"><a href="../blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -223,67 +223,67 @@ error<span class="o">()</span> <span class="o">{</span>
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
   <ul class="list-group" id="categories">
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/atlassian/"><i class="fa fa-folder-open fa-lg"></i>Atlassian</a>
+      <a href="../category/atlassian/"><i class="fa fa-folder-open fa-lg"></i>Atlassian</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/bash/"><i class="fa fa-folder-open fa-lg"></i>Bash</a>
+      <a href="../category/bash/"><i class="fa fa-folder-open fa-lg"></i>Bash</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/bat-cmd/"><i class="fa fa-folder-open fa-lg"></i>Bat-cmd</a>
+      <a href="../category/bat-cmd/"><i class="fa fa-folder-open fa-lg"></i>Bat-cmd</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/bind/"><i class="fa fa-folder-open fa-lg"></i>Bind</a>
+      <a href="../category/bind/"><i class="fa fa-folder-open fa-lg"></i>Bind</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/blog/"><i class="fa fa-folder-open fa-lg"></i>Blog</a>
+      <a href="../category/blog/"><i class="fa fa-folder-open fa-lg"></i>Blog</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/centos/"><i class="fa fa-folder-open fa-lg"></i>CentOS</a>
+      <a href="../category/centos/"><i class="fa fa-folder-open fa-lg"></i>CentOS</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/docker/"><i class="fa fa-folder-open fa-lg"></i>Docker</a>
+      <a href="../category/docker/"><i class="fa fa-folder-open fa-lg"></i>Docker</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/fedora/"><i class="fa fa-folder-open fa-lg"></i>Fedora</a>
+      <a href="../category/fedora/"><i class="fa fa-folder-open fa-lg"></i>Fedora</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/freebsd/"><i class="fa fa-folder-open fa-lg"></i>FreeBSD</a>
+      <a href="../category/freebsd/"><i class="fa fa-folder-open fa-lg"></i>FreeBSD</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/gitlab/"><i class="fa fa-folder-open fa-lg"></i>Gitlab</a>
+      <a href="../category/gitlab/"><i class="fa fa-folder-open fa-lg"></i>Gitlab</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/hardware/"><i class="fa fa-folder-open fa-lg"></i>Hardware</a>
+      <a href="../category/hardware/"><i class="fa fa-folder-open fa-lg"></i>Hardware</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/javascript/"><i class="fa fa-folder-open fa-lg"></i>JavaScript</a>
+      <a href="../category/javascript/"><i class="fa fa-folder-open fa-lg"></i>JavaScript</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/linux/"><i class="fa fa-folder-open fa-lg"></i>Linux</a>
+      <a href="../category/linux/"><i class="fa fa-folder-open fa-lg"></i>Linux</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/macosx/"><i class="fa fa-folder-open fa-lg"></i>MacOSX</a>
+      <a href="../category/macosx/"><i class="fa fa-folder-open fa-lg"></i>MacOSX</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/mikrotik/"><i class="fa fa-folder-open fa-lg"></i>Mikrotik</a>
+      <a href="../category/mikrotik/"><i class="fa fa-folder-open fa-lg"></i>Mikrotik</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/postgresql/"><i class="fa fa-folder-open fa-lg"></i>PostgreSQL</a>
+      <a href="../category/postgresql/"><i class="fa fa-folder-open fa-lg"></i>PostgreSQL</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/ubuntu/"><i class="fa fa-folder-open fa-lg"></i>Ubuntu</a>
+      <a href="../category/ubuntu/"><i class="fa fa-folder-open fa-lg"></i>Ubuntu</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/vcs/"><i class="fa fa-folder-open fa-lg"></i>VCS</a>
+      <a href="../category/vcs/"><i class="fa fa-folder-open fa-lg"></i>VCS</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/windows/"><i class="fa fa-folder-open fa-lg"></i>Windows</a>
+      <a href="../category/windows/"><i class="fa fa-folder-open fa-lg"></i>Windows</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/zabbix/"><i class="fa fa-folder-open fa-lg"></i>Zabbix</a>
+      <a href="../category/zabbix/"><i class="fa fa-folder-open fa-lg"></i>Zabbix</a>
     </li>
     <li class="list-group-item">
-      <a href="http://blog.metajiji.tk/category/zimbra/"><i class="fa fa-folder-open fa-lg"></i>Zimbra</a>
+      <a href="../category/zimbra/"><i class="fa fa-folder-open fa-lg"></i>Zimbra</a>
     </li>
   </ul>
 </li>
@@ -310,13 +310,13 @@ error<span class="o">()</span> <span class="o">{</span>
       </div>
    </div>
 </footer>
-<script src="http://blog.metajiji.tk/theme/js/jquery.min.js"></script>
+<script src="../theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="http://blog.metajiji.tk/theme/js/bootstrap.min.js"></script>
+<script src="../theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="http://blog.metajiji.tk/theme/js/respond.min.js"></script>
+<script src="../theme/js/respond.min.js"></script>
 
 
     <!-- Disqus -->
