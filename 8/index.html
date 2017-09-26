@@ -8,24 +8,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <link href="../favicon.png" rel="icon">
+    <link href="https://metajiji.github.io/favicon.png" rel="icon">
 
-<link rel="canonical" href="..">
+<link rel="canonical" href="https://metajiji.github.io">
         <meta name="author" content="Denis Kadyshev" />
 
 
 
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="../theme/css/bootstrap.custom.min.css" type="text/css"/>
-    <link href="../theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://metajiji.github.io/theme/css/bootstrap.custom.min.css" type="text/css"/>
+    <link href="https://metajiji.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="../theme/css/pygments/monokai.css" rel="stylesheet">
-    <link href="../theme/tipuesearch/tipuesearch.css" rel="stylesheet">
-    <link rel="stylesheet" href="../theme/css/style.css" type="text/css"/>
+    <link href="https://metajiji.github.io/theme/css/pygments/monokai.css" rel="stylesheet">
+    <link href="https://metajiji.github.io/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://metajiji.github.io/theme/css/style.css" type="text/css"/>
 
 
-        <link href="../feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+        <link href="https://metajiji.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="For system administrator ATOM Feed"/>
 
 
@@ -43,13 +43,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="../" class="navbar-brand">
+            <a href="https://metajiji.github.io/" class="navbar-brand">
 For system administrator            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                     <li><a href="/">Blog</a></li>
-                         <li><a href="../about/">
+                         <li><a href="https://metajiji.github.io/about/">
                              About
                           </a></li>
             </ul>
@@ -59,7 +59,7 @@ For system administrator            </a>
                   <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
                 </form></span>
               </li>
-              <li><a href="../archives/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+              <li><a href="https://metajiji.github.io/archives/"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -71,17 +71,17 @@ For system administrator            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
-                <h2><a href="../blog/markdown-midnight-commander/">Просмотр Markdown в MidnightCommander</a></h2>
+                <h2><a href="https://metajiji.github.io/blog/markdown-midnight-commander/">Просмотр Markdown в MidnightCommander</a></h2>
                 <div class="summary"><p>Для просмотра <strong>MarkDown</strong> файлов в <strong>Midnight Commander</strong> необходимо добавить тип файлов <code>.md</code>, для этого в файл <code>/etc/mc/mc.ext</code> добавить следующий код:</p>
 <div class="highlight"><pre><span></span><span class="c1"># md</span>
 regex/<span class="se">\.</span><span class="o">[</span>Mm<span class="o">][</span>Dd<span class="o">]</span>$
     <span class="nv">View</span><span class="o">=</span>%view<span class="o">{</span>ascii,nroff<span class="o">}</span> iconv -t utf-8 %p <span class="p">|</span> pandoc -f markdown -t html <span class="p">|</span> iconv -f utf-8 <span class="p">|</span> <span class="o">(</span>w3m -dump -T text/html <span class="m">2</span>&gt;/dev …</pre></div>
-                    <a class="btn btn-default btn-xs" href="../blog/markdown-midnight-commander/">more ...</a>
+                    <a class="btn btn-default btn-xs" href="https://metajiji.github.io/blog/markdown-midnight-commander/">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../blog/zabbix-supervisord/">Zabbix: supervisord автообнаружение программ и мониторинг статуса.</a></h2>
+                <h2><a href="https://metajiji.github.io/blog/zabbix-supervisord/">Zabbix: supervisord автообнаружение программ и мониторинг статуса.</a></h2>
                 <div class="summary"><p>Скрипт поддерживает обнаружение (<code>discovery</code>) всех программ, которые сконфигурированы для запуска.</p>
 <p>Отправка данных осуществляется через <code>zabbix_sender</code>.</p>
 <p>Установка довольно тривиальна:</p>
@@ -96,12 +96,12 @@ chmod <span class="m">750</span> /etc/zabbix/scripts
 
 <span class="nv">ZABBIX_SENDER</span><span class="o">=</span><span class="s1">&#39;/usr/bin/env zabbix_sender&#39;</span>
 <span class="nv">ZBX_CONFIG</span><span class="o">=</span><span class="s1">&#39;/etc …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../blog/zabbix-supervisord/">more ...</a>
+                    <a class="btn btn-default btn-xs" href="https://metajiji.github.io/blog/zabbix-supervisord/">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../blog/zabbix-lsi-megaraid/">Мониторинг LSI MegaRAID в Zabbix</a></h2>
+                <h2><a href="https://metajiji.github.io/blog/zabbix-lsi-megaraid/">Мониторинг LSI MegaRAID в Zabbix</a></h2>
                 <div class="summary"><p>Скрипт мониторит по-умолчанию адаптер <code>0</code>, т.е. когда в системе только одна плата <strong>Raid</strong> контроллера (опция <code>-a0</code>), но можно указать конкретный номер адаптера, если это необходимо.</p>
 <p>Скрипт имеет встроенную справку:</p>
 <div class="highlight"><pre><span></span><span class="c1"># ./lsimegaraid_discovery_trapper.sh help</span>
@@ -110,12 +110,12 @@ WARNING: Correctly setup <span class="s1">&#39;Hostname=&#39;</span> in config i
 INFO: Number of array is default <span class="m">0</span><span class="p">;</span>
  Examples:
     Discovery …</pre></div>
-                    <a class="btn btn-default btn-xs" href="../blog/zabbix-lsi-megaraid/">more ...</a>
+                    <a class="btn btn-default btn-xs" href="https://metajiji.github.io/blog/zabbix-lsi-megaraid/">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../blog/find-all-hardlinks/">Найти все хардлинки(hardlinks) файла</a></h2>
+                <h2><a href="https://metajiji.github.io/blog/find-all-hardlinks/">Найти все хардлинки(hardlinks) файла</a></h2>
                 <div class="summary"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
 
 <span class="o">[</span> -z <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> cat <span class="s">&lt;&lt;-_EOF_ &amp;&amp; exit 1</span>
@@ -127,12 +127,12 @@ INFO: Number of array is default <span class="m">0</span><span class="p">;</span
 <span class="o">[</span> ! -f <span class="s2">&quot;</span><span class="nv">$FILE</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;File </span><span class="nv">$FILE</span><span class="s2"> not exists! Exiting...&quot;</span> <span class="o">&amp;&amp;</span> <span class="nb">exit</span> <span class="m">1</span>
 <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="k">$(</span>ls -ld <span class="s2">&quot;</span><span class="nv">$FILE</span><span class="s2">&quot;</span> <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span><span class="s2">&quot;</span> -ne <span class="m">1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
     find <span class="sb">`</span>df <span class="s2">&quot;</span><span class="nv">$FILE</span><span class="s2">&quot;</span> <span class="p">|</span> tail -n+2 <span class="p">|</span> awk <span class="s1">&#39;{print $6}&#39;</span><span class="sb">`</span> -xdev -inum <span class="sb">`</span>ls -i <span class="s2">&quot;</span><span class="nv">$FILE</span><span class="s2">&quot;</span> <span class="p">|</span> awk …</pre></div>
-                    <a class="btn btn-default btn-xs" href="../blog/find-all-hardlinks/">more ...</a>
+                    <a class="btn btn-default btn-xs" href="https://metajiji.github.io/blog/find-all-hardlinks/">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../blog/zabbix-tcp-connections/">Zabbix: TCP connections</a></h2>
+                <h2><a href="https://metajiji.github.io/blog/zabbix-tcp-connections/">Zabbix: TCP connections</a></h2>
                 <div class="summary"><p>Скрипты и файлы конфигурации для мониторинга состояния TCP соединений.</p>
 <p>Шаблон для <strong>zabbix</strong>:</p>
 <div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
@@ -151,58 +151,58 @@ INFO: Number of array is default <span class="m">0</span><span class="p">;</span
             <span class="nt">&lt;groups&gt;</span>
                 <span class="nt">&lt;group&gt;</span>
                     <span class="nt">&lt;name&gt;</span>Linux …</pre></div>
-                    <a class="btn btn-default btn-xs" href="../blog/zabbix-tcp-connections/">more ...</a>
+                    <a class="btn btn-default btn-xs" href="https://metajiji.github.io/blog/zabbix-tcp-connections/">more ...</a>
                 </div>
             </article>
             <hr/>
 
         <ul class="pagination">
-                <li class="prev"><a href="../7/">&laquo;</a>
+                <li class="prev"><a href="https://metajiji.github.io/7/">&laquo;</a>
                 </li>
                     <li class=""><a
-                            href="../">1</a></li>
+                            href="https://metajiji.github.io/">1</a></li>
                     <li class=""><a
-                            href="../2/">2</a></li>
+                            href="https://metajiji.github.io/2/">2</a></li>
                     <li class=""><a
-                            href="../3/">3</a></li>
+                            href="https://metajiji.github.io/3/">3</a></li>
                     <li class=""><a
-                            href="../4/">4</a></li>
+                            href="https://metajiji.github.io/4/">4</a></li>
                     <li class=""><a
-                            href="../5/">5</a></li>
+                            href="https://metajiji.github.io/5/">5</a></li>
                     <li class=""><a
-                            href="../6/">6</a></li>
+                            href="https://metajiji.github.io/6/">6</a></li>
                     <li class=""><a
-                            href="../7/">7</a></li>
+                            href="https://metajiji.github.io/7/">7</a></li>
                     <li class="active"><a
-                            href="../8/">8</a></li>
+                            href="https://metajiji.github.io/8/">8</a></li>
                     <li class=""><a
-                            href="../9/">9</a></li>
+                            href="https://metajiji.github.io/9/">9</a></li>
                     <li class=""><a
-                            href="../10/">10</a></li>
+                            href="https://metajiji.github.io/10/">10</a></li>
                     <li class=""><a
-                            href="../11/">11</a></li>
+                            href="https://metajiji.github.io/11/">11</a></li>
                     <li class=""><a
-                            href="../12/">12</a></li>
+                            href="https://metajiji.github.io/12/">12</a></li>
                     <li class=""><a
-                            href="../13/">13</a></li>
+                            href="https://metajiji.github.io/13/">13</a></li>
                     <li class=""><a
-                            href="../14/">14</a></li>
+                            href="https://metajiji.github.io/14/">14</a></li>
                     <li class=""><a
-                            href="../15/">15</a></li>
+                            href="https://metajiji.github.io/15/">15</a></li>
                     <li class=""><a
-                            href="../16/">16</a></li>
+                            href="https://metajiji.github.io/16/">16</a></li>
                     <li class=""><a
-                            href="../17/">17</a></li>
+                            href="https://metajiji.github.io/17/">17</a></li>
                     <li class=""><a
-                            href="../18/">18</a></li>
+                            href="https://metajiji.github.io/18/">18</a></li>
                     <li class=""><a
-                            href="../19/">19</a></li>
+                            href="https://metajiji.github.io/19/">19</a></li>
                     <li class=""><a
-                            href="../20/">20</a></li>
+                            href="https://metajiji.github.io/20/">20</a></li>
                     <li class=""><a
-                            href="../21/">21</a></li>
+                            href="https://metajiji.github.io/21/">21</a></li>
                 <li class="next"><a
-                        href="../9/">&raquo;</a></li>
+                        href="https://metajiji.github.io/9/">&raquo;</a></li>
         </ul>
         </div>
         <div class="col-sm-3" id="sidebar">
@@ -225,9 +225,9 @@ INFO: Number of array is default <span class="m">0</span><span class="p">;</span
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
-    <li class="list-group-item"><a href="../blog/fedora-chromium-firefox-flashplayer/">Fedora 25 install adobe flashplayer</a></li>
-    <li class="list-group-item"><a href="../blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
-    <li class="list-group-item"><a href="../blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
+    <li class="list-group-item"><a href="https://metajiji.github.io/blog/fedora-chromium-firefox-flashplayer/">Fedora 25 install adobe flashplayer</a></li>
+    <li class="list-group-item"><a href="https://metajiji.github.io/blog/atlassian-crowd-jni-native-lib/">Atlassian crowd apache tomcat jni native lib</a></li>
+    <li class="list-group-item"><a href="https://metajiji.github.io/blog/atlassian-crowd-systemd/">Atlassian crowd systemd unit</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -237,67 +237,67 @@ INFO: Number of array is default <span class="m">0</span><span class="p">;</span
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4>
   <ul class="list-group" id="categories">
     <li class="list-group-item">
-      <a href="../category/atlassian/"><i class="fa fa-folder-open fa-lg"></i>Atlassian</a>
+      <a href="https://metajiji.github.io/category/atlassian/"><i class="fa fa-folder-open fa-lg"></i>Atlassian</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/bash/"><i class="fa fa-folder-open fa-lg"></i>Bash</a>
+      <a href="https://metajiji.github.io/category/bash/"><i class="fa fa-folder-open fa-lg"></i>Bash</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/bat-cmd/"><i class="fa fa-folder-open fa-lg"></i>Bat-cmd</a>
+      <a href="https://metajiji.github.io/category/bat-cmd/"><i class="fa fa-folder-open fa-lg"></i>Bat-cmd</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/bind/"><i class="fa fa-folder-open fa-lg"></i>Bind</a>
+      <a href="https://metajiji.github.io/category/bind/"><i class="fa fa-folder-open fa-lg"></i>Bind</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/blog/"><i class="fa fa-folder-open fa-lg"></i>Blog</a>
+      <a href="https://metajiji.github.io/category/blog/"><i class="fa fa-folder-open fa-lg"></i>Blog</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/centos/"><i class="fa fa-folder-open fa-lg"></i>CentOS</a>
+      <a href="https://metajiji.github.io/category/centos/"><i class="fa fa-folder-open fa-lg"></i>CentOS</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/docker/"><i class="fa fa-folder-open fa-lg"></i>Docker</a>
+      <a href="https://metajiji.github.io/category/docker/"><i class="fa fa-folder-open fa-lg"></i>Docker</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/fedora/"><i class="fa fa-folder-open fa-lg"></i>Fedora</a>
+      <a href="https://metajiji.github.io/category/fedora/"><i class="fa fa-folder-open fa-lg"></i>Fedora</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/freebsd/"><i class="fa fa-folder-open fa-lg"></i>FreeBSD</a>
+      <a href="https://metajiji.github.io/category/freebsd/"><i class="fa fa-folder-open fa-lg"></i>FreeBSD</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/gitlab/"><i class="fa fa-folder-open fa-lg"></i>Gitlab</a>
+      <a href="https://metajiji.github.io/category/gitlab/"><i class="fa fa-folder-open fa-lg"></i>Gitlab</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/hardware/"><i class="fa fa-folder-open fa-lg"></i>Hardware</a>
+      <a href="https://metajiji.github.io/category/hardware/"><i class="fa fa-folder-open fa-lg"></i>Hardware</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/javascript/"><i class="fa fa-folder-open fa-lg"></i>JavaScript</a>
+      <a href="https://metajiji.github.io/category/javascript/"><i class="fa fa-folder-open fa-lg"></i>JavaScript</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/linux/"><i class="fa fa-folder-open fa-lg"></i>Linux</a>
+      <a href="https://metajiji.github.io/category/linux/"><i class="fa fa-folder-open fa-lg"></i>Linux</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/macosx/"><i class="fa fa-folder-open fa-lg"></i>MacOSX</a>
+      <a href="https://metajiji.github.io/category/macosx/"><i class="fa fa-folder-open fa-lg"></i>MacOSX</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/mikrotik/"><i class="fa fa-folder-open fa-lg"></i>Mikrotik</a>
+      <a href="https://metajiji.github.io/category/mikrotik/"><i class="fa fa-folder-open fa-lg"></i>Mikrotik</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/postgresql/"><i class="fa fa-folder-open fa-lg"></i>PostgreSQL</a>
+      <a href="https://metajiji.github.io/category/postgresql/"><i class="fa fa-folder-open fa-lg"></i>PostgreSQL</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/ubuntu/"><i class="fa fa-folder-open fa-lg"></i>Ubuntu</a>
+      <a href="https://metajiji.github.io/category/ubuntu/"><i class="fa fa-folder-open fa-lg"></i>Ubuntu</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/vcs/"><i class="fa fa-folder-open fa-lg"></i>VCS</a>
+      <a href="https://metajiji.github.io/category/vcs/"><i class="fa fa-folder-open fa-lg"></i>VCS</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/windows/"><i class="fa fa-folder-open fa-lg"></i>Windows</a>
+      <a href="https://metajiji.github.io/category/windows/"><i class="fa fa-folder-open fa-lg"></i>Windows</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/zabbix/"><i class="fa fa-folder-open fa-lg"></i>Zabbix</a>
+      <a href="https://metajiji.github.io/category/zabbix/"><i class="fa fa-folder-open fa-lg"></i>Zabbix</a>
     </li>
     <li class="list-group-item">
-      <a href="../category/zimbra/"><i class="fa fa-folder-open fa-lg"></i>Zimbra</a>
+      <a href="https://metajiji.github.io/category/zimbra/"><i class="fa fa-folder-open fa-lg"></i>Zimbra</a>
     </li>
   </ul>
 </li>
@@ -324,13 +324,13 @@ INFO: Number of array is default <span class="m">0</span><span class="p">;</span
       </div>
    </div>
 </footer>
-<script src="../theme/js/jquery.min.js"></script>
+<script src="https://metajiji.github.io/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../theme/js/bootstrap.min.js"></script>
+<script src="https://metajiji.github.io/theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="../theme/js/respond.min.js"></script>
+<script src="https://metajiji.github.io/theme/js/respond.min.js"></script>
 
 
     <!-- Disqus -->
