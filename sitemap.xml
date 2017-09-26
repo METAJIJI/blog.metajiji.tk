@@ -4,2604 +4,2604 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-<loc>http://blog.metajiji.tk/</loc>
-<lastmod>2017-09-26T07:21:47-00:00</lastmod>
+<loc>https://metajiji.github.io/</loc>
+<lastmod>2017-09-26T07:32:07-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/about/</loc>
+<loc>https://metajiji.github.io/about/</loc>
 <lastmod>2016-10-05T13:23:35+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/fedora-chromium-firefox-flashplayer/</loc>
+<loc>https://metajiji.github.io/blog/fedora-chromium-firefox-flashplayer/</loc>
 <lastmod>2017-10-05T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/atlassian-crowd-jni-native-lib/</loc>
+<loc>https://metajiji.github.io/blog/atlassian-crowd-jni-native-lib/</loc>
 <lastmod>2017-07-03T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/atlassian-crowd-systemd/</loc>
+<loc>https://metajiji.github.io/blog/atlassian-crowd-systemd/</loc>
 <lastmod>2017-07-03T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/flash-player-chrome-incognito/</loc>
+<loc>https://metajiji.github.io/blog/flash-player-chrome-incognito/</loc>
 <lastmod>2017-06-08T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/fedora-nvidia-driver/</loc>
+<loc>https://metajiji.github.io/blog/fedora-nvidia-driver/</loc>
 <lastmod>2017-05-08T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/centos7-elrepo-kernel-latest-stable/</loc>
+<loc>https://metajiji.github.io/blog/centos7-elrepo-kernel-latest-stable/</loc>
 <lastmod>2017-05-06T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/confluence-cron-delete-backups/</loc>
+<loc>https://metajiji.github.io/blog/confluence-cron-delete-backups/</loc>
 <lastmod>2017-03-20T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/gitlab-smtp-not-work/</loc>
+<loc>https://metajiji.github.io/blog/gitlab-smtp-not-work/</loc>
 <lastmod>2017-03-20T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/linux-enable-ip-forwarding/</loc>
+<loc>https://metajiji.github.io/blog/linux-enable-ip-forwarding/</loc>
 <lastmod>2017-03-20T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/openssl_for_check_services/</loc>
+<loc>https://metajiji.github.io/blog/openssl_for_check_services/</loc>
 <lastmod>2017-03-16T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/centos7-rh-python35-python/</loc>
+<loc>https://metajiji.github.io/blog/centos7-rh-python35-python/</loc>
 <lastmod>2017-03-13T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/centos7-rh-sclo-git/</loc>
+<loc>https://metajiji.github.io/blog/centos7-rh-sclo-git/</loc>
 <lastmod>2017-03-13T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/git_submodule-update/</loc>
+<loc>https://metajiji.github.io/blog/git_submodule-update/</loc>
 <lastmod>2016-12-10T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/docker-tmpfs-systemd/</loc>
+<loc>https://metajiji.github.io/blog/docker-tmpfs-systemd/</loc>
 <lastmod>2016-11-28T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/lightbox-markdown-pelican/</loc>
+<loc>https://metajiji.github.io/blog/lightbox-markdown-pelican/</loc>
 <lastmod>2016-10-21T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/screen-cheatsheet/</loc>
+<loc>https://metajiji.github.io/blog/screen-cheatsheet/</loc>
 <lastmod>2016-10-16T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/blog-moved/</loc>
+<loc>https://metajiji.github.io/blog/blog-moved/</loc>
 <lastmod>2016-10-09T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/zabbix-in-linux/</loc>
+<loc>https://metajiji.github.io/blog/zabbix-in-linux/</loc>
 <lastmod>2016-05-03T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/centos-7-broken-nfsdcltrack/</loc>
+<loc>https://metajiji.github.io/blog/centos-7-broken-nfsdcltrack/</loc>
 <lastmod>2016-04-27T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/centos-6-install-python-27/</loc>
+<loc>https://metajiji.github.io/blog/centos-6-install-python-27/</loc>
 <lastmod>2016-03-24T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/zimbra-reject-self-domain/</loc>
+<loc>https://metajiji.github.io/blog/zimbra-reject-self-domain/</loc>
 <lastmod>2016-02-11T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/postgresql-mysql-create-database-and-user/</loc>
+<loc>https://metajiji.github.io/blog/postgresql-mysql-create-database-and-user/</loc>
 <lastmod>2016-01-15T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-add-architecture-i386-ia32-libs/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-add-architecture-i386-ia32-libs/</loc>
 <lastmod>2015-12-30T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-prevent-open-thunderbird-mailto-links/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-prevent-open-thunderbird-mailto-links/</loc>
 <lastmod>2015-12-18T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/centos7-lxc/</loc>
+<loc>https://metajiji.github.io/blog/centos7-lxc/</loc>
 <lastmod>2016-10-14T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/zimbra-google-chrome-45-fix/</loc>
+<loc>https://metajiji.github.io/blog/zimbra-google-chrome-45-fix/</loc>
 <lastmod>2015-09-29T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/run-x-applications-without-dm-nodm/</loc>
+<loc>https://metajiji.github.io/blog/run-x-applications-without-dm-nodm/</loc>
 <lastmod>2015-08-27T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-1404-lts-php5-fpm-reload/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-1404-lts-php5-fpm-reload/</loc>
 <lastmod>2015-08-04T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-motd-ssh/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-motd-ssh/</loc>
 <lastmod>2015-08-03T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/compact-home-powerful-server,minicase,noctua/</loc>
+<loc>https://metajiji.github.io/blog/compact-home-powerful-server,minicase,noctua/</loc>
 <lastmod>2016-10-13T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/os-x-mavericks-windows-7-ubuntu-1404/</loc>
+<loc>https://metajiji.github.io/blog/os-x-mavericks-windows-7-ubuntu-1404/</loc>
 <lastmod>2015-07-24T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-1404-dash-boost/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-1404-dash-boost/</loc>
 <lastmod>2015-07-24T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/seagate-1tb-st31000528as-720012/</loc>
+<loc>https://metajiji.github.io/blog/seagate-1tb-st31000528as-720012/</loc>
 <lastmod>2015-07-03T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-1404-rhythmbox-indicator-sound/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-1404-rhythmbox-indicator-sound/</loc>
 <lastmod>2015-06-15T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/zabbix-nginx-status/</loc>
+<loc>https://metajiji.github.io/blog/zabbix-nginx-status/</loc>
 <lastmod>2015-05-31T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/markdown-midnight-commander/</loc>
+<loc>https://metajiji.github.io/blog/markdown-midnight-commander/</loc>
 <lastmod>2015-03-17T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/zabbix-supervisord/</loc>
+<loc>https://metajiji.github.io/blog/zabbix-supervisord/</loc>
 <lastmod>2015-03-17T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/zabbix-lsi-megaraid/</loc>
+<loc>https://metajiji.github.io/blog/zabbix-lsi-megaraid/</loc>
 <lastmod>2015-03-16T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/find-all-hardlinks/</loc>
+<loc>https://metajiji.github.io/blog/find-all-hardlinks/</loc>
 <lastmod>2015-01-16T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/zabbix-tcp-connections/</loc>
+<loc>https://metajiji.github.io/blog/zabbix-tcp-connections/</loc>
 <lastmod>2015-01-06T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/taskhost-exe-thread-exit-cpu-high-usage/</loc>
+<loc>https://metajiji.github.io/blog/taskhost-exe-thread-exit-cpu-high-usage/</loc>
 <lastmod>2014-12-23T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/mac-os-hardware-compatible-table/</loc>
+<loc>https://metajiji.github.io/blog/mac-os-hardware-compatible-table/</loc>
 <lastmod>2014-11-18T00:00:00+06:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/postgresql-create-database-and-user/</loc>
+<loc>https://metajiji.github.io/blog/postgresql-create-database-and-user/</loc>
 <lastmod>2014-10-07T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/indent-expand-unexpand-alignment/</loc>
+<loc>https://metajiji.github.io/blog/indent-expand-unexpand-alignment/</loc>
 <lastmod>2014-08-28T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/inverted-tail-head/</loc>
+<loc>https://metajiji.github.io/blog/inverted-tail-head/</loc>
 <lastmod>2014-08-28T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/wireshark-ubuntu/</loc>
+<loc>https://metajiji.github.io/blog/wireshark-ubuntu/</loc>
 <lastmod>2014-07-30T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/mikrotik-wpa2-eap-wds-mesh/</loc>
+<loc>https://metajiji.github.io/blog/mikrotik-wpa2-eap-wds-mesh/</loc>
 <lastmod>2014-07-11T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/marc-sql-1.5.4-mysql-5.x/</loc>
+<loc>https://metajiji.github.io/blog/marc-sql-1.5.4-mysql-5.x/</loc>
 <lastmod>2014-07-04T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/windows-cli-ntp-cmd-bat/</loc>
+<loc>https://metajiji.github.io/blog/windows-cli-ntp-cmd-bat/</loc>
 <lastmod>2014-06-27T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-1404-windows-zip-fix-codepage/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-1404-windows-zip-fix-codepage/</loc>
 <lastmod>2014-06-20T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/zimbra-sendasdistlist/</loc>
+<loc>https://metajiji.github.io/blog/zimbra-sendasdistlist/</loc>
 <lastmod>2014-06-11T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/remmina-rdp-windows/</loc>
+<loc>https://metajiji.github.io/blog/remmina-rdp-windows/</loc>
 <lastmod>2014-06-08T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/auto-create-dir-var-run-php5-fpm/</loc>
+<loc>https://metajiji.github.io/blog/auto-create-dir-var-run-php5-fpm/</loc>
 <lastmod>2014-10-15T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-fix-all-grub-bugs-in-one-script/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-fix-all-grub-bugs-in-one-script/</loc>
 <lastmod>2014-05-09T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-1204-samba-bridge/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-1204-samba-bridge/</loc>
 <lastmod>2014-05-05T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/grub_hidden_timeout-no-longer-supported/</loc>
+<loc>https://metajiji.github.io/blog/grub_hidden_timeout-no-longer-supported/</loc>
 <lastmod>2014-04-30T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-grub2-recordfail/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-grub2-recordfail/</loc>
 <lastmod>2014-04-08T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/flock-crontab/</loc>
+<loc>https://metajiji.github.io/blog/flock-crontab/</loc>
 <lastmod>2014-04-05T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/putty-non-printable-tab-and-space/</loc>
+<loc>https://metajiji.github.io/blog/putty-non-printable-tab-and-space/</loc>
 <lastmod>2014-03-23T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/generate-ssl-certificates/</loc>
+<loc>https://metajiji.github.io/blog/generate-ssl-certificates/</loc>
 <lastmod>2013-10-09T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/freebsd-9x-fix-bsd-tar/</loc>
+<loc>https://metajiji.github.io/blog/freebsd-9x-fix-bsd-tar/</loc>
 <lastmod>2013-09-17T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/jnl-bind-named-named-journalprint/</loc>
+<loc>https://metajiji.github.io/blog/jnl-bind-named-named-journalprint/</loc>
 <lastmod>2013-09-17T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-1204-transmission-samba/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-1204-transmission-samba/</loc>
 <lastmod>2013-09-16T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/sh-md5-script-for-delete-duplicates/</loc>
+<loc>https://metajiji.github.io/blog/sh-md5-script-for-delete-duplicates/</loc>
 <lastmod>2013-08-26T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-1204-samba/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-1204-samba/</loc>
 <lastmod>2013-08-25T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/freebsd-dos2unix-unix2dos-bom/</loc>
+<loc>https://metajiji.github.io/blog/freebsd-dos2unix-unix2dos-bom/</loc>
 <lastmod>2013-08-03T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/freebsd-isc-dhcpd-dhcpdleases/</loc>
+<loc>https://metajiji.github.io/blog/freebsd-isc-dhcpd-dhcpdleases/</loc>
 <lastmod>2013-06-19T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/windows-7-internet-connectivity/</loc>
+<loc>https://metajiji.github.io/blog/windows-7-internet-connectivity/</loc>
 <lastmod>2013-06-06T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/hex-to-string-cmd-bat-function/</loc>
+<loc>https://metajiji.github.io/blog/hex-to-string-cmd-bat-function/</loc>
 <lastmod>2013-05-11T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/create-shorcut-cmd-bat-in-windows/</loc>
+<loc>https://metajiji.github.io/blog/create-shorcut-cmd-bat-in-windows/</loc>
 <lastmod>2013-04-09T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/log-rotation-named-bind/</loc>
+<loc>https://metajiji.github.io/blog/log-rotation-named-bind/</loc>
 <lastmod>2013-04-09T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/asterisk-wav-to-alaw-ulaw-gsm-sox/</loc>
+<loc>https://metajiji.github.io/blog/asterisk-wav-to-alaw-ulaw-gsm-sox/</loc>
 <lastmod>2013-03-22T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/squid-rejik-ipcad-free-sa-nginx/</loc>
+<loc>https://metajiji.github.io/blog/squid-rejik-ipcad-free-sa-nginx/</loc>
 <lastmod>2013-03-21T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/freebsd-chroot-sftp-chroot-ssh/</loc>
+<loc>https://metajiji.github.io/blog/freebsd-chroot-sftp-chroot-ssh/</loc>
 <lastmod>2013-03-14T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/microsoft-office-starter-2010-file-associations/</loc>
+<loc>https://metajiji.github.io/blog/microsoft-office-starter-2010-file-associations/</loc>
 <lastmod>2013-03-10T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/windows-skype-disable-ad/</loc>
+<loc>https://metajiji.github.io/blog/windows-skype-disable-ad/</loc>
 <lastmod>2013-02-20T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-gnome-terminal-enable-system-beep/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-gnome-terminal-enable-system-beep/</loc>
 <lastmod>2013-01-30T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/linux-ubuntu-swap-to-file/</loc>
+<loc>https://metajiji.github.io/blog/linux-ubuntu-swap-to-file/</loc>
 <lastmod>2012-12-27T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/freebsd_asterisk-18-snmp-zabbix/</loc>
+<loc>https://metajiji.github.io/blog/freebsd_asterisk-18-snmp-zabbix/</loc>
 <lastmod>2012-12-26T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/freebsd-git-gitweb-nginx-fcgiwrap/</loc>
+<loc>https://metajiji.github.io/blog/freebsd-git-gitweb-nginx-fcgiwrap/</loc>
 <lastmod>2012-12-21T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/freebsd-virtualbox-autostart-vm-on-boot/</loc>
+<loc>https://metajiji.github.io/blog/freebsd-virtualbox-autostart-vm-on-boot/</loc>
 <lastmod>2012-12-18T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/logging-in-isc-dhcp-server-freebsd/</loc>
+<loc>https://metajiji.github.io/blog/logging-in-isc-dhcp-server-freebsd/</loc>
 <lastmod>2012-12-12T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/windows-migrate-to-hardware-raid/</loc>
+<loc>https://metajiji.github.io/blog/windows-migrate-to-hardware-raid/</loc>
 <lastmod>2012-10-14T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-system-vnc/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-system-vnc/</loc>
 <lastmod>2012-09-27T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ddos-nginx-linux/</loc>
+<loc>https://metajiji.github.io/blog/ddos-nginx-linux/</loc>
 <lastmod>2012-09-08T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/rdp-windows-easy-print-driver/</loc>
+<loc>https://metajiji.github.io/blog/rdp-windows-easy-print-driver/</loc>
 <lastmod>2012-08-31T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/KIASUO-1252-windows-server-x64-corflags-exe/</loc>
+<loc>https://metajiji.github.io/blog/KIASUO-1252-windows-server-x64-corflags-exe/</loc>
 <lastmod>2012-08-29T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-dns-suffix_etc-nsswitch.conf/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-dns-suffix_etc-nsswitch.conf/</loc>
 <lastmod>2012-08-27T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/freebsd4-migrate-to-virtualbox/</loc>
+<loc>https://metajiji.github.io/blog/freebsd4-migrate-to-virtualbox/</loc>
 <lastmod>2012-06-08T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-midnight-commander/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-midnight-commander/</loc>
 <lastmod>2012-05-30T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/custom-user-fonts-in-ubuntu-linux/</loc>
+<loc>https://metajiji.github.io/blog/custom-user-fonts-in-ubuntu-linux/</loc>
 <lastmod>2012-05-09T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/disable-ipv6-ubuntu/</loc>
+<loc>https://metajiji.github.io/blog/disable-ipv6-ubuntu/</loc>
 <lastmod>2012-05-06T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/javascript-formatted-date/</loc>
+<loc>https://metajiji.github.io/blog/javascript-formatted-date/</loc>
 <lastmod>2012-04-06T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/freebsd-90-gpt-gmirror/</loc>
+<loc>https://metajiji.github.io/blog/freebsd-90-gpt-gmirror/</loc>
 <lastmod>2012-04-04T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/sed-dos2unix-unix2dos/</loc>
+<loc>https://metajiji.github.io/blog/sed-dos2unix-unix2dos/</loc>
 <lastmod>2012-02-26T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/freebsd-pw/</loc>
+<loc>https://metajiji.github.io/blog/freebsd-pw/</loc>
 <lastmod>2012-02-08T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/windows-hdd2hdd-gparted-dd/</loc>
+<loc>https://metajiji.github.io/blog/windows-hdd2hdd-gparted-dd/</loc>
 <lastmod>2012-02-08T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/grub-ubuntu/</loc>
+<loc>https://metajiji.github.io/blog/grub-ubuntu/</loc>
 <lastmod>2012-02-05T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/freebsd-tcp-timewait/</loc>
+<loc>https://metajiji.github.io/blog/freebsd-tcp-timewait/</loc>
 <lastmod>2012-01-30T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/jupiter-ubuntu-1110/</loc>
+<loc>https://metajiji.github.io/blog/jupiter-ubuntu-1110/</loc>
 <lastmod>2011-12-25T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/qutim-02-ubuntu-1110/</loc>
+<loc>https://metajiji.github.io/blog/qutim-02-ubuntu-1110/</loc>
 <lastmod>2011-12-24T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/grub-linux-intel-915-1024x600/</loc>
+<loc>https://metajiji.github.io/blog/grub-linux-intel-915-1024x600/</loc>
 <lastmod>2011-12-23T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/freebsd-linux-external-ip/</loc>
+<loc>https://metajiji.github.io/blog/freebsd-linux-external-ip/</loc>
 <lastmod>2011-12-22T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-usb-hdd-ntfs/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-usb-hdd-ntfs/</loc>
 <lastmod>2011-12-15T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/blog/ubuntu-man/</loc>
+<loc>https://metajiji.github.io/blog/ubuntu-man/</loc>
 <lastmod>2011-11-12T00:00:00+07:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/atlassian/</loc>
+<loc>https://metajiji.github.io/category/atlassian/</loc>
 <lastmod>2017-07-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/bash/</loc>
+<loc>https://metajiji.github.io/category/bash/</loc>
 <lastmod>2017-03-16T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/bat-cmd/</loc>
+<loc>https://metajiji.github.io/category/bat-cmd/</loc>
 <lastmod>2013-05-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/bind/</loc>
+<loc>https://metajiji.github.io/category/bind/</loc>
 <lastmod>2013-09-17T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/blog/</loc>
+<loc>https://metajiji.github.io/category/blog/</loc>
 <lastmod>2016-10-21T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/centos/</loc>
+<loc>https://metajiji.github.io/category/centos/</loc>
 <lastmod>2017-05-06T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/docker/</loc>
+<loc>https://metajiji.github.io/category/docker/</loc>
 <lastmod>2016-11-28T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/fedora/</loc>
+<loc>https://metajiji.github.io/category/fedora/</loc>
 <lastmod>2017-10-05T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/freebsd/</loc>
+<loc>https://metajiji.github.io/category/freebsd/</loc>
 <lastmod>2013-09-17T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/gitlab/</loc>
+<loc>https://metajiji.github.io/category/gitlab/</loc>
 <lastmod>2017-03-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/hardware/</loc>
+<loc>https://metajiji.github.io/category/hardware/</loc>
 <lastmod>2016-10-13T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/javascript/</loc>
+<loc>https://metajiji.github.io/category/javascript/</loc>
 <lastmod>2012-04-06T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/linux/</loc>
+<loc>https://metajiji.github.io/category/linux/</loc>
 <lastmod>2017-03-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/macosx/</loc>
+<loc>https://metajiji.github.io/category/macosx/</loc>
 <lastmod>2015-07-24T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/mikrotik/</loc>
+<loc>https://metajiji.github.io/category/mikrotik/</loc>
 <lastmod>2014-07-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/postgresql/</loc>
+<loc>https://metajiji.github.io/category/postgresql/</loc>
 <lastmod>2014-10-07T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/ubuntu/</loc>
+<loc>https://metajiji.github.io/category/ubuntu/</loc>
 <lastmod>2015-12-30T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/vcs/</loc>
+<loc>https://metajiji.github.io/category/vcs/</loc>
 <lastmod>2016-12-10T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/windows/</loc>
+<loc>https://metajiji.github.io/category/windows/</loc>
 <lastmod>2014-12-23T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/zabbix/</loc>
+<loc>https://metajiji.github.io/category/zabbix/</loc>
 <lastmod>2016-05-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/category/zimbra/</loc>
+<loc>https://metajiji.github.io/category/zimbra/</loc>
 <lastmod>2016-02-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/self-domain/</loc>
+<loc>https://metajiji.github.io/tag/self-domain/</loc>
 <lastmod>2016-02-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/newsyslog/</loc>
+<loc>https://metajiji.github.io/tag/newsyslog/</loc>
 <lastmod>2013-04-09T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/pw/</loc>
+<loc>https://metajiji.github.io/tag/pw/</loc>
 <lastmod>2012-02-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/office/</loc>
+<loc>https://metajiji.github.io/tag/office/</loc>
 <lastmod>2013-03-10T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/restore/</loc>
+<loc>https://metajiji.github.io/tag/restore/</loc>
 <lastmod>2012-06-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/tcp/</loc>
+<loc>https://metajiji.github.io/tag/tcp/</loc>
 <lastmod>2015-01-06T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/lsi/</loc>
+<loc>https://metajiji.github.io/tag/lsi/</loc>
 <lastmod>2015-03-16T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/unexpand/</loc>
+<loc>https://metajiji.github.io/tag/unexpand/</loc>
 <lastmod>2014-08-28T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/i386/</loc>
+<loc>https://metajiji.github.io/tag/i386/</loc>
 <lastmod>2015-12-30T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/aibs/</loc>
+<loc>https://metajiji.github.io/tag/aibs/</loc>
 <lastmod>2014-07-04T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/ngx_http_stub_status_module/</loc>
+<loc>https://metajiji.github.io/tag/ngx_http_stub_status_module/</loc>
 <lastmod>2015-05-31T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/add-architecture/</loc>
+<loc>https://metajiji.github.io/tag/add-architecture/</loc>
 <lastmod>2015-12-30T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/timewait/</loc>
+<loc>https://metajiji.github.io/tag/timewait/</loc>
 <lastmod>2012-01-30T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/alignment/</loc>
+<loc>https://metajiji.github.io/tag/alignment/</loc>
 <lastmod>2014-08-28T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/jnl/</loc>
+<loc>https://metajiji.github.io/tag/jnl/</loc>
 <lastmod>2013-09-17T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/compact/</loc>
+<loc>https://metajiji.github.io/tag/compact/</loc>
 <lastmod>2016-10-13T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/gparted/</loc>
+<loc>https://metajiji.github.io/tag/gparted/</loc>
 <lastmod>2012-02-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/systemd/</loc>
+<loc>https://metajiji.github.io/tag/systemd/</loc>
 <lastmod>2017-07-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/inverse/</loc>
+<loc>https://metajiji.github.io/tag/inverse/</loc>
 <lastmod>2014-08-28T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/fcgiwrap/</loc>
+<loc>https://metajiji.github.io/tag/fcgiwrap/</loc>
 <lastmod>2012-12-21T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/fix/</loc>
+<loc>https://metajiji.github.io/tag/fix/</loc>
 <lastmod>2016-05-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/flash/</loc>
+<loc>https://metajiji.github.io/tag/flash/</loc>
 <lastmod>2017-06-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/asterisk/</loc>
+<loc>https://metajiji.github.io/tag/asterisk/</loc>
 <lastmod>2013-03-22T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/grub/</loc>
+<loc>https://metajiji.github.io/tag/grub/</loc>
 <lastmod>2014-05-09T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/blog/</loc>
+<loc>https://metajiji.github.io/tag/blog/</loc>
 <lastmod>2016-10-21T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/grub2/</loc>
+<loc>https://metajiji.github.io/tag/grub2/</loc>
 <lastmod>2014-04-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/tail/</loc>
+<loc>https://metajiji.github.io/tag/tail/</loc>
 <lastmod>2014-08-28T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/create-user/</loc>
+<loc>https://metajiji.github.io/tag/create-user/</loc>
 <lastmod>2016-01-15T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/dos-866/</loc>
+<loc>https://metajiji.github.io/tag/dos-866/</loc>
 <lastmod>2014-06-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/speaker/</loc>
+<loc>https://metajiji.github.io/tag/speaker/</loc>
 <lastmod>2013-01-30T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/codepage/</loc>
+<loc>https://metajiji.github.io/tag/codepage/</loc>
 <lastmod>2014-06-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/sendasdistlist/</loc>
+<loc>https://metajiji.github.io/tag/sendasdistlist/</loc>
 <lastmod>2014-06-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/groupmod/</loc>
+<loc>https://metajiji.github.io/tag/groupmod/</loc>
 <lastmod>2012-02-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/gitweb/</loc>
+<loc>https://metajiji.github.io/tag/gitweb/</loc>
 <lastmod>2012-12-21T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/supervisord/</loc>
+<loc>https://metajiji.github.io/tag/supervisord/</loc>
 <lastmod>2015-03-17T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/python/</loc>
+<loc>https://metajiji.github.io/tag/python/</loc>
 <lastmod>2017-03-13T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/dd/</loc>
+<loc>https://metajiji.github.io/tag/dd/</loc>
 <lastmod>2012-02-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/adobe-flash/</loc>
+<loc>https://metajiji.github.io/tag/adobe-flash/</loc>
 <lastmod>2017-06-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/xdg-open/</loc>
+<loc>https://metajiji.github.io/tag/xdg-open/</loc>
 <lastmod>2015-12-18T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/bat/</loc>
+<loc>https://metajiji.github.io/tag/bat/</loc>
 <lastmod>2014-06-27T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/ssl/</loc>
+<loc>https://metajiji.github.io/tag/ssl/</loc>
 <lastmod>2017-03-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/ssh/</loc>
+<loc>https://metajiji.github.io/tag/ssh/</loc>
 <lastmod>2015-08-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/putty/</loc>
+<loc>https://metajiji.github.io/tag/putty/</loc>
 <lastmod>2014-03-23T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/free-sa/</loc>
+<loc>https://metajiji.github.io/tag/free-sa/</loc>
 <lastmod>2013-03-21T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/python3/</loc>
+<loc>https://metajiji.github.io/tag/python3/</loc>
 <lastmod>2017-03-13T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/distlist/</loc>
+<loc>https://metajiji.github.io/tag/distlist/</loc>
 <lastmod>2014-06-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/log-rotation/</loc>
+<loc>https://metajiji.github.io/tag/log-rotation/</loc>
 <lastmod>2013-04-09T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/nfsdcltrack/</loc>
+<loc>https://metajiji.github.io/tag/nfsdcltrack/</loc>
 <lastmod>2016-04-27T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/zimbra/</loc>
+<loc>https://metajiji.github.io/tag/zimbra/</loc>
 <lastmod>2016-02-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/mc/</loc>
+<loc>https://metajiji.github.io/tag/mc/</loc>
 <lastmod>2012-05-30T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/transmission/</loc>
+<loc>https://metajiji.github.io/tag/transmission/</loc>
 <lastmod>2013-09-16T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/tcp-time-wait/</loc>
+<loc>https://metajiji.github.io/tag/tcp-time-wait/</loc>
 <lastmod>2012-01-30T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/gitlab/</loc>
+<loc>https://metajiji.github.io/tag/gitlab/</loc>
 <lastmod>2017-03-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/list/</loc>
+<loc>https://metajiji.github.io/tag/list/</loc>
 <lastmod>2014-06-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/system-beep/</loc>
+<loc>https://metajiji.github.io/tag/system-beep/</loc>
 <lastmod>2013-01-30T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/reload/</loc>
+<loc>https://metajiji.github.io/tag/reload/</loc>
 <lastmod>2015-08-04T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/zabbix/</loc>
+<loc>https://metajiji.github.io/tag/zabbix/</loc>
 <lastmod>2016-05-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/d-bus/</loc>
+<loc>https://metajiji.github.io/tag/d-bus/</loc>
 <lastmod>2015-06-15T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/architecture/</loc>
+<loc>https://metajiji.github.io/tag/architecture/</loc>
 <lastmod>2015-12-30T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/centos-7/</loc>
+<loc>https://metajiji.github.io/tag/centos-7/</loc>
 <lastmod>2017-03-13T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/easy-print-driver/</loc>
+<loc>https://metajiji.github.io/tag/easy-print-driver/</loc>
 <lastmod>2012-08-31T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/rejik/</loc>
+<loc>https://metajiji.github.io/tag/rejik/</loc>
 <lastmod>2013-03-21T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/kernel/</loc>
+<loc>https://metajiji.github.io/tag/kernel/</loc>
 <lastmod>2017-05-06T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/cmd/</loc>
+<loc>https://metajiji.github.io/tag/cmd/</loc>
 <lastmod>2014-06-27T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/bsd-tar/</loc>
+<loc>https://metajiji.github.io/tag/bsd-tar/</loc>
 <lastmod>2013-09-17T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/centos/</loc>
+<loc>https://metajiji.github.io/tag/centos/</loc>
 <lastmod>2017-07-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/checksumm/</loc>
+<loc>https://metajiji.github.io/tag/checksumm/</loc>
 <lastmod>2013-08-26T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/send-as-dist-list/</loc>
+<loc>https://metajiji.github.io/tag/send-as-dist-list/</loc>
 <lastmod>2014-06-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/mysql/</loc>
+<loc>https://metajiji.github.io/tag/mysql/</loc>
 <lastmod>2016-01-15T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/crontab/</loc>
+<loc>https://metajiji.github.io/tag/crontab/</loc>
 <lastmod>2014-04-05T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/inverted/</loc>
+<loc>https://metajiji.github.io/tag/inverted/</loc>
 <lastmod>2014-08-28T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/cron/</loc>
+<loc>https://metajiji.github.io/tag/cron/</loc>
 <lastmod>2017-03-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/sed/</loc>
+<loc>https://metajiji.github.io/tag/sed/</loc>
 <lastmod>2013-08-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/xdg-mime/</loc>
+<loc>https://metajiji.github.io/tag/xdg-mime/</loc>
 <lastmod>2015-12-18T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/delete-duplicates/</loc>
+<loc>https://metajiji.github.io/tag/delete-duplicates/</loc>
 <lastmod>2013-08-26T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/vnc/</loc>
+<loc>https://metajiji.github.io/tag/vnc/</loc>
 <lastmod>2012-09-27T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/flock/</loc>
+<loc>https://metajiji.github.io/tag/flock/</loc>
 <lastmod>2014-04-05T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/space/</loc>
+<loc>https://metajiji.github.io/tag/space/</loc>
 <lastmod>2014-03-23T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/iptables/</loc>
+<loc>https://metajiji.github.io/tag/iptables/</loc>
 <lastmod>2012-09-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/rpm/</loc>
+<loc>https://metajiji.github.io/tag/rpm/</loc>
 <lastmod>2016-10-14T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/dump/</loc>
+<loc>https://metajiji.github.io/tag/dump/</loc>
 <lastmod>2012-06-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/ia32-libs/</loc>
+<loc>https://metajiji.github.io/tag/ia32-libs/</loc>
 <lastmod>2015-12-30T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/dhcp-leases/</loc>
+<loc>https://metajiji.github.io/tag/dhcp-leases/</loc>
 <lastmod>2013-06-19T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/1251/</loc>
+<loc>https://metajiji.github.io/tag/1251/</loc>
 <lastmod>2014-06-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/certificates/</loc>
+<loc>https://metajiji.github.io/tag/certificates/</loc>
 <lastmod>2017-03-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/os-x/</loc>
+<loc>https://metajiji.github.io/tag/os-x/</loc>
 <lastmod>2015-07-24T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/awk/</loc>
+<loc>https://metajiji.github.io/tag/awk/</loc>
 <lastmod>2013-08-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/syn-flood/</loc>
+<loc>https://metajiji.github.io/tag/syn-flood/</loc>
 <lastmod>2012-09-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/wireshark/</loc>
+<loc>https://metajiji.github.io/tag/wireshark/</loc>
 <lastmod>2014-07-30T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/ubuntu-custom-fonts/</loc>
+<loc>https://metajiji.github.io/tag/ubuntu-custom-fonts/</loc>
 <lastmod>2012-05-09T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/ntp/</loc>
+<loc>https://metajiji.github.io/tag/ntp/</loc>
 <lastmod>2014-06-27T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/screen/</loc>
+<loc>https://metajiji.github.io/tag/screen/</loc>
 <lastmod>2016-10-16T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/javascript/</loc>
+<loc>https://metajiji.github.io/tag/javascript/</loc>
 <lastmod>2012-04-06T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/mikrotik/</loc>
+<loc>https://metajiji.github.io/tag/mikrotik/</loc>
 <lastmod>2014-07-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/samba/</loc>
+<loc>https://metajiji.github.io/tag/samba/</loc>
 <lastmod>2014-05-05T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/x-server/</loc>
+<loc>https://metajiji.github.io/tag/x-server/</loc>
 <lastmod>2015-08-27T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/create-database/</loc>
+<loc>https://metajiji.github.io/tag/create-database/</loc>
 <lastmod>2016-01-15T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/ubuntu/</loc>
+<loc>https://metajiji.github.io/tag/ubuntu/</loc>
 <lastmod>2017-07-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/htpc/</loc>
+<loc>https://metajiji.github.io/tag/htpc/</loc>
 <lastmod>2016-10-13T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/bash/</loc>
+<loc>https://metajiji.github.io/tag/bash/</loc>
 <lastmod>2017-03-16T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/midnight-commander/</loc>
+<loc>https://metajiji.github.io/tag/midnight-commander/</loc>
 <lastmod>2015-03-17T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/google-chrome/</loc>
+<loc>https://metajiji.github.io/tag/google-chrome/</loc>
 <lastmod>2017-06-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/postgresql/</loc>
+<loc>https://metajiji.github.io/tag/postgresql/</loc>
 <lastmod>2016-01-15T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/rdp/</loc>
+<loc>https://metajiji.github.io/tag/rdp/</loc>
 <lastmod>2014-06-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/indicator-sound/</loc>
+<loc>https://metajiji.github.io/tag/indicator-sound/</loc>
 <lastmod>2015-06-15T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/lightbox/</loc>
+<loc>https://metajiji.github.io/tag/lightbox/</loc>
 <lastmod>2016-10-21T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/openssl/</loc>
+<loc>https://metajiji.github.io/tag/openssl/</loc>
 <lastmod>2017-03-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/tasknostexe/</loc>
+<loc>https://metajiji.github.io/tag/tasknostexe/</loc>
 <lastmod>2014-12-23T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/disable-spam/</loc>
+<loc>https://metajiji.github.io/tag/disable-spam/</loc>
 <lastmod>2013-02-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/wds/</loc>
+<loc>https://metajiji.github.io/tag/wds/</loc>
 <lastmod>2014-07-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/wpa2-eap/</loc>
+<loc>https://metajiji.github.io/tag/wpa2-eap/</loc>
 <lastmod>2014-07-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/threat/</loc>
+<loc>https://metajiji.github.io/tag/threat/</loc>
 <lastmod>2014-12-23T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/internet-connectivity/</loc>
+<loc>https://metajiji.github.io/tag/internet-connectivity/</loc>
 <lastmod>2013-06-06T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/cp1251/</loc>
+<loc>https://metajiji.github.io/tag/cp1251/</loc>
 <lastmod>2014-06-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/pelican/</loc>
+<loc>https://metajiji.github.io/tag/pelican/</loc>
 <lastmod>2016-10-21T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/named/</loc>
+<loc>https://metajiji.github.io/tag/named/</loc>
 <lastmod>2013-09-17T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/markdown/</loc>
+<loc>https://metajiji.github.io/tag/markdown/</loc>
 <lastmod>2016-10-21T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/firefox/</loc>
+<loc>https://metajiji.github.io/tag/firefox/</loc>
 <lastmod>2017-10-05T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/docker-systemd-tmpfs/</loc>
+<loc>https://metajiji.github.io/tag/docker-systemd-tmpfs/</loc>
 <lastmod>2016-11-28T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/snmp/</loc>
+<loc>https://metajiji.github.io/tag/snmp/</loc>
 <lastmod>2012-12-26T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/ca/</loc>
+<loc>https://metajiji.github.io/tag/ca/</loc>
 <lastmod>2017-03-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/powerful/</loc>
+<loc>https://metajiji.github.io/tag/powerful/</loc>
 <lastmod>2016-10-13T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/file-associations/</loc>
+<loc>https://metajiji.github.io/tag/file-associations/</loc>
 <lastmod>2013-03-10T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/hex-to-string/</loc>
+<loc>https://metajiji.github.io/tag/hex-to-string/</loc>
 <lastmod>2013-05-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/ipcad/</loc>
+<loc>https://metajiji.github.io/tag/ipcad/</loc>
 <lastmod>2013-03-21T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/shortcut/</loc>
+<loc>https://metajiji.github.io/tag/shortcut/</loc>
 <lastmod>2013-04-09T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/tcp-connections/</loc>
+<loc>https://metajiji.github.io/tag/tcp-connections/</loc>
 <lastmod>2015-01-06T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/linux/</loc>
+<loc>https://metajiji.github.io/tag/linux/</loc>
 <lastmod>2017-10-05T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/supervisor/</loc>
+<loc>https://metajiji.github.io/tag/supervisor/</loc>
 <lastmod>2015-03-17T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/chromium/</loc>
+<loc>https://metajiji.github.io/tag/chromium/</loc>
 <lastmod>2017-10-05T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/virtualbox/</loc>
+<loc>https://metajiji.github.io/tag/virtualbox/</loc>
 <lastmod>2012-12-18T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/ip_forwaring/</loc>
+<loc>https://metajiji.github.io/tag/ip_forwaring/</loc>
 <lastmod>2017-03-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/git/</loc>
+<loc>https://metajiji.github.io/tag/git/</loc>
 <lastmod>2017-03-13T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/isc-dhcp-server/</loc>
+<loc>https://metajiji.github.io/tag/isc-dhcp-server/</loc>
 <lastmod>2012-12-12T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/silent/</loc>
+<loc>https://metajiji.github.io/tag/silent/</loc>
 <lastmod>2016-10-13T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/zip/</loc>
+<loc>https://metajiji.github.io/tag/zip/</loc>
 <lastmod>2014-06-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/spam/</loc>
+<loc>https://metajiji.github.io/tag/spam/</loc>
 <lastmod>2016-02-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/chrome/</loc>
+<loc>https://metajiji.github.io/tag/chrome/</loc>
 <lastmod>2015-09-29T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/hardlinks/</loc>
+<loc>https://metajiji.github.io/tag/hardlinks/</loc>
 <lastmod>2015-01-16T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/hex/</loc>
+<loc>https://metajiji.github.io/tag/hex/</loc>
 <lastmod>2013-05-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/perl/</loc>
+<loc>https://metajiji.github.io/tag/perl/</loc>
 <lastmod>2013-08-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/block-ad/</loc>
+<loc>https://metajiji.github.io/tag/block-ad/</loc>
 <lastmod>2013-02-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/ipv6/</loc>
+<loc>https://metajiji.github.io/tag/ipv6/</loc>
 <lastmod>2012-05-06T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/gpt/</loc>
+<loc>https://metajiji.github.io/tag/gpt/</loc>
 <lastmod>2015-07-24T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/squid/</loc>
+<loc>https://metajiji.github.io/tag/squid/</loc>
 <lastmod>2013-03-21T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/php5-fpm/</loc>
+<loc>https://metajiji.github.io/tag/php5-fpm/</loc>
 <lastmod>2015-08-04T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/kiasuo/</loc>
+<loc>https://metajiji.github.io/tag/kiasuo/</loc>
 <lastmod>2012-08-29T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/swap/</loc>
+<loc>https://metajiji.github.io/tag/swap/</loc>
 <lastmod>2012-12-27T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/head/</loc>
+<loc>https://metajiji.github.io/tag/head/</loc>
 <lastmod>2014-08-28T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/certificate/</loc>
+<loc>https://metajiji.github.io/tag/certificate/</loc>
 <lastmod>2013-10-09T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/non-printable-characters/</loc>
+<loc>https://metajiji.github.io/tag/non-printable-characters/</loc>
 <lastmod>2014-03-23T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/windows-x64/</loc>
+<loc>https://metajiji.github.io/tag/windows-x64/</loc>
 <lastmod>2012-08-29T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/upstart/</loc>
+<loc>https://metajiji.github.io/tag/upstart/</loc>
 <lastmod>2014-10-15T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/atlassian/</loc>
+<loc>https://metajiji.github.io/tag/atlassian/</loc>
 <lastmod>2017-07-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/mark-sql/</loc>
+<loc>https://metajiji.github.io/tag/mark-sql/</loc>
 <lastmod>2014-07-04T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/indent/</loc>
+<loc>https://metajiji.github.io/tag/indent/</loc>
 <lastmod>2014-08-28T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/logging/</loc>
+<loc>https://metajiji.github.io/tag/logging/</loc>
 <lastmod>2013-04-09T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/ruby/</loc>
+<loc>https://metajiji.github.io/tag/ruby/</loc>
 <lastmod>2017-03-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/bug/</loc>
+<loc>https://metajiji.github.io/tag/bug/</loc>
 <lastmod>2015-09-29T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/dpkg/</loc>
+<loc>https://metajiji.github.io/tag/dpkg/</loc>
 <lastmod>2015-12-30T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/windows-1251/</loc>
+<loc>https://metajiji.github.io/tag/windows-1251/</loc>
 <lastmod>2014-06-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/connections/</loc>
+<loc>https://metajiji.github.io/tag/connections/</loc>
 <lastmod>2015-01-06T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/unix2dos/</loc>
+<loc>https://metajiji.github.io/tag/unix2dos/</loc>
 <lastmod>2013-08-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/remmina/</loc>
+<loc>https://metajiji.github.io/tag/remmina/</loc>
 <lastmod>2014-06-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/php-fpm/</loc>
+<loc>https://metajiji.github.io/tag/php-fpm/</loc>
 <lastmod>2015-08-04T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/swap-to-file/</loc>
+<loc>https://metajiji.github.io/tag/swap-to-file/</loc>
 <lastmod>2012-12-27T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/url-file/</loc>
+<loc>https://metajiji.github.io/tag/url-file/</loc>
 <lastmod>2013-04-09T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/sftponly/</loc>
+<loc>https://metajiji.github.io/tag/sftponly/</loc>
 <lastmod>2013-03-14T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/hdd/</loc>
+<loc>https://metajiji.github.io/tag/hdd/</loc>
 <lastmod>2015-07-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/python35/</loc>
+<loc>https://metajiji.github.io/tag/python35/</loc>
 <lastmod>2017-03-13T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/error/</loc>
+<loc>https://metajiji.github.io/tag/error/</loc>
 <lastmod>2013-06-06T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/jupiter/</loc>
+<loc>https://metajiji.github.io/tag/jupiter/</loc>
 <lastmod>2011-12-25T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/mail-to-links/</loc>
+<loc>https://metajiji.github.io/tag/mail-to-links/</loc>
 <lastmod>2015-12-18T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/feebsd/</loc>
+<loc>https://metajiji.github.io/tag/feebsd/</loc>
 <lastmod>2012-12-12T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/chrome-45/</loc>
+<loc>https://metajiji.github.io/tag/chrome-45/</loc>
 <lastmod>2015-09-29T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/marc-sql/</loc>
+<loc>https://metajiji.github.io/tag/marc-sql/</loc>
 <lastmod>2014-07-04T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/bridge/</loc>
+<loc>https://metajiji.github.io/tag/bridge/</loc>
 <lastmod>2014-05-05T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/assoc/</loc>
+<loc>https://metajiji.github.io/tag/assoc/</loc>
 <lastmod>2013-03-10T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/motd/</loc>
+<loc>https://metajiji.github.io/tag/motd/</loc>
 <lastmod>2015-08-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/tab/</loc>
+<loc>https://metajiji.github.io/tag/tab/</loc>
 <lastmod>2014-03-23T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/tar/</loc>
+<loc>https://metajiji.github.io/tag/tar/</loc>
 <lastmod>2013-09-17T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/xdg-mail/</loc>
+<loc>https://metajiji.github.io/tag/xdg-mail/</loc>
 <lastmod>2015-12-18T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/python-27/</loc>
+<loc>https://metajiji.github.io/tag/python-27/</loc>
 <lastmod>2016-03-24T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/smtp/</loc>
+<loc>https://metajiji.github.io/tag/smtp/</loc>
 <lastmod>2017-03-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/taskhost/</loc>
+<loc>https://metajiji.github.io/tag/taskhost/</loc>
 <lastmod>2014-12-23T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/dash/</loc>
+<loc>https://metajiji.github.io/tag/dash/</loc>
 <lastmod>2015-07-24T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/ip-route-blackhole/</loc>
+<loc>https://metajiji.github.io/tag/ip-route-blackhole/</loc>
 <lastmod>2012-09-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/ddos/</loc>
+<loc>https://metajiji.github.io/tag/ddos/</loc>
 <lastmod>2012-09-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/megaraid/</loc>
+<loc>https://metajiji.github.io/tag/megaraid/</loc>
 <lastmod>2015-03-16T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/skype/</loc>
+<loc>https://metajiji.github.io/tag/skype/</loc>
 <lastmod>2013-02-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/qutim/</loc>
+<loc>https://metajiji.github.io/tag/qutim/</loc>
 <lastmod>2011-12-24T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/serial/</loc>
+<loc>https://metajiji.github.io/tag/serial/</loc>
 <lastmod>2015-07-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/rhythmbox/</loc>
+<loc>https://metajiji.github.io/tag/rhythmbox/</loc>
 <lastmod>2015-06-15T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/isc-dhcpd/</loc>
+<loc>https://metajiji.github.io/tag/isc-dhcpd/</loc>
 <lastmod>2013-06-19T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/string/</loc>
+<loc>https://metajiji.github.io/tag/string/</loc>
 <lastmod>2013-05-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/stub_status/</loc>
+<loc>https://metajiji.github.io/tag/stub_status/</loc>
 <lastmod>2015-05-31T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/chroot/</loc>
+<loc>https://metajiji.github.io/tag/chroot/</loc>
 <lastmod>2013-03-14T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/monitoring/</loc>
+<loc>https://metajiji.github.io/tag/monitoring/</loc>
 <lastmod>2015-03-16T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/recovery/</loc>
+<loc>https://metajiji.github.io/tag/recovery/</loc>
 <lastmod>2015-07-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/fonts/</loc>
+<loc>https://metajiji.github.io/tag/fonts/</loc>
 <lastmod>2012-05-09T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/mac-os/</loc>
+<loc>https://metajiji.github.io/tag/mac-os/</loc>
 <lastmod>2014-11-18T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/nsswitchconf/</loc>
+<loc>https://metajiji.github.io/tag/nsswitchconf/</loc>
 <lastmod>2012-08-27T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/content-filter/</loc>
+<loc>https://metajiji.github.io/tag/content-filter/</loc>
 <lastmod>2013-03-21T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/gmirror/</loc>
+<loc>https://metajiji.github.io/tag/gmirror/</loc>
 <lastmod>2012-04-04T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/unity/</loc>
+<loc>https://metajiji.github.io/tag/unity/</loc>
 <lastmod>2015-07-24T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/cheatsheet/</loc>
+<loc>https://metajiji.github.io/tag/cheatsheet/</loc>
 <lastmod>2016-10-16T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/utf-8/</loc>
+<loc>https://metajiji.github.io/tag/utf-8/</loc>
 <lastmod>2014-06-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/cp866/</loc>
+<loc>https://metajiji.github.io/tag/cp866/</loc>
 <lastmod>2014-06-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/bom/</loc>
+<loc>https://metajiji.github.io/tag/bom/</loc>
 <lastmod>2013-08-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/720012/</loc>
+<loc>https://metajiji.github.io/tag/720012/</loc>
 <lastmod>2015-07-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/windows-server/</loc>
+<loc>https://metajiji.github.io/tag/windows-server/</loc>
 <lastmod>2012-08-29T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/raid/</loc>
+<loc>https://metajiji.github.io/tag/raid/</loc>
 <lastmod>2012-10-14T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/wav-to-alaw-ulaw-gsm-sox/</loc>
+<loc>https://metajiji.github.io/tag/wav-to-alaw-ulaw-gsm-sox/</loc>
 <lastmod>2013-03-22T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/nodm/</loc>
+<loc>https://metajiji.github.io/tag/nodm/</loc>
 <lastmod>2015-08-27T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/utf8/</loc>
+<loc>https://metajiji.github.io/tag/utf8/</loc>
 <lastmod>2014-06-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/problems/</loc>
+<loc>https://metajiji.github.io/tag/problems/</loc>
 <lastmod>2016-05-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/seagate/</loc>
+<loc>https://metajiji.github.io/tag/seagate/</loc>
 <lastmod>2015-07-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/confluence/</loc>
+<loc>https://metajiji.github.io/tag/confluence/</loc>
 <lastmod>2017-03-20T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/hardware/</loc>
+<loc>https://metajiji.github.io/tag/hardware/</loc>
 <lastmod>2014-11-18T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/mesh/</loc>
+<loc>https://metajiji.github.io/tag/mesh/</loc>
 <lastmod>2014-07-11T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/lxc/</loc>
+<loc>https://metajiji.github.io/tag/lxc/</loc>
 <lastmod>2016-10-14T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/recordfail/</loc>
+<loc>https://metajiji.github.io/tag/recordfail/</loc>
 <lastmod>2014-04-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/xorg/</loc>
+<loc>https://metajiji.github.io/tag/xorg/</loc>
 <lastmod>2015-08-27T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/networkmanager/</loc>
+<loc>https://metajiji.github.io/tag/networkmanager/</loc>
 <lastmod>2012-08-27T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/date/</loc>
+<loc>https://metajiji.github.io/tag/date/</loc>
 <lastmod>2012-04-06T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/dos2unix/</loc>
+<loc>https://metajiji.github.io/tag/dos2unix/</loc>
 <lastmod>2013-08-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/dumpcap/</loc>
+<loc>https://metajiji.github.io/tag/dumpcap/</loc>
 <lastmod>2014-07-30T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/expand/</loc>
+<loc>https://metajiji.github.io/tag/expand/</loc>
 <lastmod>2014-08-28T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/fedora/</loc>
+<loc>https://metajiji.github.io/tag/fedora/</loc>
 <lastmod>2017-10-05T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/nginx/</loc>
+<loc>https://metajiji.github.io/tag/nginx/</loc>
 <lastmod>2015-05-31T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/windows/</loc>
+<loc>https://metajiji.github.io/tag/windows/</loc>
 <lastmod>2015-07-24T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/bind/</loc>
+<loc>https://metajiji.github.io/tag/bind/</loc>
 <lastmod>2013-09-17T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/dns-suffix/</loc>
+<loc>https://metajiji.github.io/tag/dns-suffix/</loc>
 <lastmod>2012-08-27T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/thunderbird/</loc>
+<loc>https://metajiji.github.io/tag/thunderbird/</loc>
 <lastmod>2015-12-18T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/crowd/</loc>
+<loc>https://metajiji.github.io/tag/crowd/</loc>
 <lastmod>2017-07-03T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/sftp/</loc>
+<loc>https://metajiji.github.io/tag/sftp/</loc>
 <lastmod>2013-03-14T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/journalprint/</loc>
+<loc>https://metajiji.github.io/tag/journalprint/</loc>
 <lastmod>2013-09-17T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/status/</loc>
+<loc>https://metajiji.github.io/tag/status/</loc>
 <lastmod>2015-05-31T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/freebsd/</loc>
+<loc>https://metajiji.github.io/tag/freebsd/</loc>
 <lastmod>2015-01-16T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/nvidia/</loc>
+<loc>https://metajiji.github.io/tag/nvidia/</loc>
 <lastmod>2017-05-08T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/home-server/</loc>
+<loc>https://metajiji.github.io/tag/home-server/</loc>
 <lastmod>2016-10-13T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/flashplayer/</loc>
+<loc>https://metajiji.github.io/tag/flashplayer/</loc>
 <lastmod>2017-10-05T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/usermod/</loc>
+<loc>https://metajiji.github.io/tag/usermod/</loc>
 <lastmod>2014-07-30T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
-<loc>http://blog.metajiji.tk/tag/high-cpu-usage/</loc>
+<loc>https://metajiji.github.io/tag/high-cpu-usage/</loc>
 <lastmod>2014-12-23T00:00:00+05:32</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
